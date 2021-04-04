@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,7 +16,7 @@ interface Props {
 export const Router = (props: Props) => {
   const theme = useTheme();
   return (
-    <View style={{ backgroundColor: theme.bgColor }}>
+    <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName={props.initial}
@@ -48,3 +48,9 @@ export const Router = (props: Props) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});
