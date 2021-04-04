@@ -1,6 +1,6 @@
 {
   "name": "react-native-rnx",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BerthX libs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -49,6 +49,9 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.9.4",
+    "@react-navigation/stack": "^5.14.4",
     "@release-it/conventional-changelog": "^2.0.0",
     "@types/jest": "^26.0.0",
     "@types/react": "^16.9.19",
@@ -64,12 +67,23 @@
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-builder-bob": "^",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-reanimated": "^2.1.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "^3.0.0",
     "release-it": "^14.2.2",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "@react-navigation/native": "*", 
+    "react-native-reanimated": "*", 
+    "react-native-gesture-handler": "*", 
+    "react-native-screens": "*", 
+    "react-native-safe-area-context": "*", 
+    "@react-native-community/masked-view": "*", 
+    "@react-navigation/stack": "*"
   },
   "jest": {
     "preset": "react-native",
