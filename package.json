@@ -36,13 +36,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/berthx/react-native-rnx",
+  "repository": "https://github.com/charlyBerthet/react-native-rnx",
   "author": "BerthX <contact@berthx.io> (https://berthx.io)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/berthx/react-native-rnx/issues"
+    "url": "https://github.com/charlyBerthet/react-native-rnx/issues"
   },
-  "homepage": "https://github.com/berthx/react-native-rnx#readme",
+  "homepage": "https://github.com/charlyBerthet/react-native-rnx#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
