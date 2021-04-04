@@ -1,6 +1,6 @@
 {
   "name": "react-native-rnx",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "BerthX libs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -77,12 +77,12 @@
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "@react-navigation/native": "*", 
-    "react-native-reanimated": "*", 
-    "react-native-gesture-handler": "*", 
-    "react-native-screens": "*", 
-    "react-native-safe-area-context": "*", 
-    "@react-native-community/masked-view": "*", 
+    "@react-navigation/native": "*",
+    "react-native-reanimated": "*",
+    "react-native-gesture-handler": "*",
+    "react-native-screens": "*",
+    "react-native-safe-area-context": "*",
+    "@react-native-community/masked-view": "*",
     "@react-navigation/stack": "*"
   },
   "jest": {
