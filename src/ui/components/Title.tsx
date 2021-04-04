@@ -21,9 +21,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     fontWeight: '700',
-    marginTop: 5,
+    marginTop: 20,
     marginHorizontal: 20,
-    maxWidth: 300,
-    alignSelf: 'center',
   },
 });
