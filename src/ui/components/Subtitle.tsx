@@ -7,7 +7,7 @@ interface Props {
   children: string;
 }
 
-export const Title = (props: Props) => {
+export const Subtitle = (props: Props) => {
   const theme = useTheme();
   return (
     <Text style={[styles.root, { color: theme.txtColor }]}>
@@ -18,12 +18,10 @@ export const Title = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 25,
+    fontSize: 14,
     textAlign: 'center',
-    fontWeight: '700',
-    marginTop: 5,
+    fontWeight: '500',
+    marginTop: 20,
     marginHorizontal: 20,
-    maxWidth: 300,
-    alignSelf: 'center',
   },
 });
