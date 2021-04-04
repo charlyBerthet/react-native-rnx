@@ -1,8 +1,8 @@
 import type Theme from '../models/Theme';
 
-const darkTheme: Theme = {
-  bgColor: '#000',
-  txtColor: '#fff',
+const lightTheme: Theme = {
+  bgColor: '#fff',
+  txtColor: '#222',
 };
 
-export default darkTheme;
+export default lightTheme;
