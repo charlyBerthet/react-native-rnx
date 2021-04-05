@@ -7,11 +7,10 @@ export const initLocalization = (_resources: { [lng: string]: any }) => {
   const resources: Resource = {};
   for (const resLng in _resources) {
     resources[resLng] = {
-      common: _resources[resLng].file,
+      common: _resources[resLng],
     };
   }
-  console.log('initLocalization locale:', locale);
-  console.log('initLocalization resources:', resources);
+
   i18next.use(initReactI18next).init({
     interpolation: { escapeValue: false },
     lng: locale,
