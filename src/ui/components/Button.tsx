@@ -13,7 +13,7 @@ interface Props extends CommonViewProps {
   important?: boolean;
 }
 
-const Component = (props: Props) => {
+export const Button = (props: Props) => {
   const theme = useTheme();
   return (
     <TouchableOpacity
@@ -97,5 +97,3 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
-
-export default Component;
