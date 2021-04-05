@@ -55,9 +55,9 @@ export const Button = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    paddingVertical: 10,
+    paddingVertical: 12,
     paddingHorizontal: 40,
-    borderRadius: 7,
+    borderRadius: 5,
 
     shadowColor: '#000',
     shadowOffset: {
@@ -94,5 +94,6 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '500',
     textAlign: 'center',
+    marginBottom: -2,
   },
 });

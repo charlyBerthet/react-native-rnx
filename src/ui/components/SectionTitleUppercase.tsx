@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text as RNText, StyleSheet } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 import type CommonTextProps from '../models/CommonTextProps';
 import useTheme from '../../theme/hooks/useTheme';
 
@@ -7,18 +7,21 @@ interface Props extends CommonTextProps {
   children: string | string[];
 }
 
-export const Text = (props: Props) => {
+export const Title = (props: Props) => {
   const theme = useTheme();
   return (
-    <RNText style={[styles.root, { color: theme.txtColor }, props.style]}>
+    <Text style={[styles.root, { color: theme.txtColor }, props.style]}>
       {props.children}
-    </RNText>
+    </Text>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: '700',
+    marginTop: 20,
+    marginHorizontal: 20,
   },
 });
