@@ -19,7 +19,6 @@ export const SectionTitleUppercase = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     fontSize: 10,
-    textAlign: 'center',
     fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: 1,
