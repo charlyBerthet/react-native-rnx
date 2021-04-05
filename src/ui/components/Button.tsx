@@ -56,8 +56,8 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     paddingVertical: 15,
-    paddingHorizontal: 25,
-    borderRadius: 10,
+    paddingHorizontal: 35,
+    borderRadius: 7,
 
     shadowColor: '#000',
     shadowOffset: {
@@ -94,6 +94,5 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '500',
     textAlign: 'center',
-    marginTop: 4,
   },
 });
