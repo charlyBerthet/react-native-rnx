@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 5,
+    minWidth: 350,
 
     shadowColor: '#000',
     shadowOffset: {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   title: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',
   },

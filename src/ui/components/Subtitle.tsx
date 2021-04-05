@@ -18,7 +18,7 @@ export const Subtitle = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     fontWeight: '500',
     marginTop: 5,
