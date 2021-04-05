@@ -81,18 +81,20 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   detail: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '400',
+    marginTop: 3,
   },
   subdetail: {
     fontSize: 10,
     fontWeight: '700',
     opacity: 0.7,
-    marginVertical: 6,
+    marginVertical: 8,
   },
   btns: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 3,
   },
   btn: {
     paddingVertical: 6,
