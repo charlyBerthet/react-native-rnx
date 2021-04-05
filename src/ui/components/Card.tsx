@@ -105,5 +105,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 85,
+    marginLeft: 10,
   },
 });
