@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-const useLocalization = () => {
+export const useLocalization = () => {
   const { t, i18n } = useTranslation('common');
 
   const localize = t;
