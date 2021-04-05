@@ -43,7 +43,7 @@ export const Card = (props: Props) => {
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.btn]}>
+          <TouchableOpacity style={[styles.btn, styles.btnRight]}>
             <Text
               style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
             >
@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     borderRadius: 4,
   },
+  btnRight: {
+    paddingRight: 5,
+  },
   btnLabel: {
     fontSize: 10,
     fontWeight: '700',
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
   image: {
     width: 85,
     height: 85,
-    marginLeft: 5,
+    marginLeft: 10,
     marginRight: -5,
   },
 });

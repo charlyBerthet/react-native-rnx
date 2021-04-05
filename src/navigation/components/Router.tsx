@@ -1,16 +1,20 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import type Screen from '../models/Screen';
 import useTheme from '../../theme/hooks/useTheme';
+import { Stack } from './Stack';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 interface Props {
-  routes: Screen[];
-  initial?: string;
+  tabs: {
+    screens: Screen[];
+    initial?: string;
+    name: string;
+  }[];
 }
 
 export const Router = (props: Props) => {
@@ -18,32 +22,28 @@ export const Router = (props: Props) => {
   return (
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName={props.initial}
-          screenOptions={{
-            headerTintColor: theme.txtColor,
-            headerStyle: {
-              backgroundColor: theme.bgColor,
-              shadowRadius: 0,
-              shadowOffset: {
-                height: 0,
-                width: 0,
-              },
-            },
-            headerTitle: '',
-          }}
-        >
-          {props.routes.map((s) => (
-            <Stack.Screen
-              key={s.name}
-              name={s.name}
-              component={s.component}
-              options={{
-                headerShown: s.isHeaderVisible,
-              }}
-            />
-          ))}
-        </Stack.Navigator>
+        {props.tabs.length > 1 ? ( // Multiple tabs, show bottom bar
+          <Tab.Navigator>
+            {props.tabs.map((s) => (
+              <Tab.Screen
+                key={s.name}
+                name={s.name}
+                component={(stackProps) => (
+                  <Stack
+                    screens={s.screens}
+                    initial={s.initial}
+                    {...stackProps}
+                  />
+                )}
+              />
+            ))}
+          </Tab.Navigator>
+        ) : props.tabs.length === 1 ? ( // One tab, don't show bottom bar
+          <Stack
+            screens={props.tabs[0].screens}
+            initial={props.tabs[0].initial}
+          />
+        ) : undefined}
       </NavigationContainer>
     </View>
   );
