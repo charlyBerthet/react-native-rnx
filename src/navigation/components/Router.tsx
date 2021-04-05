@@ -11,20 +11,27 @@ const Tab = createBottomTabNavigator();
 
 interface Props {
   tabs: {
-    screens: Screen[];
-    initial?: string;
-    name: string;
-  }[];
+    [name: string]: {
+      screens: Screen[];
+      initial?: string;
+    };
+  };
 }
 
 export const Router = (props: Props) => {
   const theme = useTheme();
+
+  const tabs = Object.keys(props.tabs).map((name) => ({
+    name,
+    ...props.tabs[name],
+  }));
+
   return (
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer>
-        {props.tabs.length > 1 ? ( // Multiple tabs, show bottom bar
+        {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator>
-            {props.tabs.map((s) => (
+            {tabs.map((s) => (
               <Tab.Screen
                 key={s.name}
                 name={s.name}
@@ -38,11 +45,8 @@ export const Router = (props: Props) => {
               />
             ))}
           </Tab.Navigator>
-        ) : props.tabs.length === 1 ? ( // One tab, don't show bottom bar
-          <Stack
-            screens={props.tabs[0].screens}
-            initial={props.tabs[0].initial}
-          />
+        ) : tabs.length === 1 ? ( // One tab, don't show bottom bar
+          <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
         ) : undefined}
       </NavigationContainer>
     </View>
