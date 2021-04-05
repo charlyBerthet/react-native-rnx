@@ -23,5 +23,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: 1,
     marginBottom: 10,
+    marginLeft: 20,
   },
 });
