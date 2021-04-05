@@ -51,7 +51,7 @@ export const Card = (props: Props) => {
           </TouchableOpacity>
         </View>
       </View>
-      <Image source={props.image} style={styles.image} />
+      <Image source={props.image} style={styles.image} resizeMode="contain" />
     </TouchableOpacity>
   );
 };
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   btn: {
-    paddingVertical: 10,
+    paddingVertical: 6,
     paddingHorizontal: 25,
     borderRadius: 4,
   },
