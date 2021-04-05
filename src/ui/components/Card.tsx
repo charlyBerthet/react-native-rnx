@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 3,
+    marginBottom: -3,
   },
   btn: {
     paddingVertical: 6,
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
   image: {
     width: 85,
     height: 85,
-    marginLeft: 10,
-    marginRight: -15,
+    marginLeft: 5,
+    marginRight: -5,
   },
 });
