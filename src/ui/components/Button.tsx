@@ -55,8 +55,8 @@ export const Button = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    paddingVertical: 15,
-    paddingHorizontal: 35,
+    paddingVertical: 10,
+    paddingHorizontal: 40,
     borderRadius: 7,
 
     shadowColor: '#000',
