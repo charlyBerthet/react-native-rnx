@@ -29,7 +29,8 @@
     "release": "release-it",
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods"
+    "bootstrap": "yarn example && yarn && yarn pods",
+    "release1": "git add . && git commit -am 'fix(ui): fix ui' && yarn release"
   },
   "keywords": [
     "react-native",
