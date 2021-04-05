@@ -7,7 +7,7 @@ interface Props extends CommonTextProps {
   children: string | string[];
 }
 
-export const Title = (props: Props) => {
+export const SectionTitleUppercase = (props: Props) => {
   const theme = useTheme();
   return (
     <Text style={[styles.root, { color: theme.txtColor }, props.style]}>
@@ -18,10 +18,10 @@ export const Title = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 25,
+    fontSize: 10,
     textAlign: 'center',
     fontWeight: '700',
-    marginTop: 20,
-    marginHorizontal: 20,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
 });

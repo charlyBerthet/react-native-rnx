@@ -18,12 +18,12 @@ export const Subtitle = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     fontWeight: '500',
     marginTop: 5,
     marginHorizontal: 20,
-    maxWidth: 300,
+    maxWidth: 250,
     alignSelf: 'center',
   },
 });

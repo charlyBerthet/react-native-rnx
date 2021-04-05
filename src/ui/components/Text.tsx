@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text as RNText, StyleSheet } from 'react-native';
 import type CommonTextProps from '../models/CommonTextProps';
 import useTheme from '../../theme/hooks/useTheme';
 
@@ -7,21 +7,18 @@ interface Props extends CommonTextProps {
   children: string | string[];
 }
 
-export const SectionTitleUppercase = (props: Props) => {
+export const Text = (props: Props) => {
   const theme = useTheme();
   return (
-    <Text style={[styles.root, { color: theme.txtColor }, props.style]}>
+    <RNText style={[styles.root, { color: theme.txtColor }, props.style]}>
       {props.children}
-    </Text>
+    </RNText>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 10,
-    textAlign: 'center',
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
