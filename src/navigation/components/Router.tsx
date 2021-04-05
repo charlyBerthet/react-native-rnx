@@ -11,7 +11,7 @@ const _Tab = createBottomTabNavigator();
 interface TabProps {
   name: string;
   title?: string;
-  children: typeof Stack;
+  component: typeof Stack;
 }
 
 export const Tab = (props: TabProps) => {
@@ -19,7 +19,7 @@ export const Tab = (props: TabProps) => {
     <_Tab.Screen
       key={props.name}
       name={props.name}
-      component={props.children}
+      component={props.component}
       options={{
         title: props.title || props.name,
       }}
