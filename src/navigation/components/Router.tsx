@@ -28,7 +28,7 @@ export const Tab = (props: TabProps) => {
 };
 
 interface Props {
-  children: typeof Tab[];
+  children: JSX.Element[];
 }
 
 export const Router = (props: Props) => {

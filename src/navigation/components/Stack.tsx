@@ -20,7 +20,7 @@ export const Screen = (props: ScreenModel) => {
 };
 
 interface Props {
-  children: typeof Screen | typeof Screen[];
+  children: JSX.Element | JSX.Element[];
   initial?: string;
 }
 
