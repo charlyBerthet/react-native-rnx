@@ -25,6 +25,12 @@ export const Router = (props: Props) => {
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
     ...props.tabs[name],
+    component: () => (
+      <Stack
+        screens={props.tabs[name].screens}
+        initial={props.tabs[name].initial}
+      />
+    ),
   }));
 
   return (
@@ -36,9 +42,7 @@ export const Router = (props: Props) => {
               <Tab.Screen
                 key={s.name}
                 name={s.name}
-                component={() => (
-                  <Stack screens={s.screens} initial={s.initial} />
-                )}
+                component={s.component}
                 options={{
                   title: s.title || s.name,
                 }}
