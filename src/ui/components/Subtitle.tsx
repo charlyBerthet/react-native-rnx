@@ -4,7 +4,7 @@ import type CommonTextProps from '../models/CommonTextProps';
 import useTheme from '../../theme/hooks/useTheme';
 
 interface Props extends CommonTextProps {
-  children: string;
+  children: string | string[];
 }
 
 export const Subtitle = (props: Props) => {

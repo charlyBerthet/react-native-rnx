@@ -10,9 +10,11 @@ export const initLocalization = (_resources: { [lng: string]: any }) => {
       common: _resources[resLng].file,
     };
   }
+  console.log('initLocalization locale:', locale);
+  console.log('initLocalization resources:', resources);
   i18next.use(initReactI18next).init({
-    interpolation: { escapeValue: false }, // React already does escaping
-    lng: locale, // language to use
+    interpolation: { escapeValue: false },
+    lng: locale,
     fallbackLng: 'en',
     resources,
   });
