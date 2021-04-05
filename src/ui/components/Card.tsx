@@ -59,7 +59,7 @@ export const Card = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     paddingVertical: 15,
-    paddingHorizontal: 25,
+    paddingHorizontal: 20,
     borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: {
@@ -109,5 +109,6 @@ const styles = StyleSheet.create({
     width: 85,
     height: 85,
     marginLeft: 10,
+    marginRight: -15,
   },
 });
