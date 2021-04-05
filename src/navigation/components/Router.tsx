@@ -35,12 +35,8 @@ export const Router = (props: Props) => {
               <Tab.Screen
                 key={s.name}
                 name={s.name}
-                component={(stackProps) => (
-                  <Stack
-                    screens={s.screens}
-                    initial={s.initial}
-                    {...stackProps}
-                  />
+                component={() => (
+                  <Stack screens={s.screens} initial={s.initial} />
                 )}
               />
             ))}
