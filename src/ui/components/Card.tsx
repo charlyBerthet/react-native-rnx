@@ -8,12 +8,13 @@ interface Props extends CommonViewProps, CardModel {}
 
 export const Card = (props: Props) => {
   const theme = useTheme();
+  const primaryColor = props.primaryColor || theme.primaryColor;
   return (
     <TouchableOpacity
       style={[
         styles.root,
         {
-          backgroundColor: theme.primaryColor,
+          backgroundColor: primaryColor,
         },
         props.style,
       ]}
@@ -38,7 +39,7 @@ export const Card = (props: Props) => {
               { backgroundColor: theme.txtColorOnPrimaryColor },
             ]}
           >
-            <Text style={[styles.btnLabel, { color: theme.primaryColor }]}>
+            <Text style={[styles.btnLabel, { color: primaryColor }]}>
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>

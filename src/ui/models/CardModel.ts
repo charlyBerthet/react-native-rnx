@@ -7,4 +7,5 @@ export interface CardModel {
   primaryButtonLabel: string;
   secondaryButtonLabel: string;
   image: ImageSourcePropType;
+  primaryColor?: string;
 }
