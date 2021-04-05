@@ -22,5 +22,7 @@ export const Section = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-  root: {},
+  root: {
+    marginTop: 20,
+  },
 });

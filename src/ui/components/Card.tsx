@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import type { CardModel } from '../models/CardModel';
@@ -19,43 +19,48 @@ export const Card = (props: Props) => {
       ]}
       activeOpacity={0.9}
     >
-      <Text style={[styles.title, { color: theme.txtColorOnPrimaryColor }]}>
-        {props.title}
-      </Text>
-      <Text style={[styles.detail, { color: theme.txtColorOnPrimaryColor }]}>
-        {props.detail}
-      </Text>
-      <Text style={[styles.subdetail, { color: theme.txtColorOnPrimaryColor }]}>
-        {props.subdetail}
-      </Text>
-      <View style={styles.btns}>
-        <TouchableOpacity
-          style={[
-            styles.btn,
-            { backgroundColor: theme.txtColorOnPrimaryColor },
-          ]}
+      <View style={styles.mainContainer}>
+        <Text style={[styles.title, { color: theme.txtColorOnPrimaryColor }]}>
+          {props.title}
+        </Text>
+        <Text style={[styles.detail, { color: theme.txtColorOnPrimaryColor }]}>
+          {props.detail}
+        </Text>
+        <Text
+          style={[styles.subdetail, { color: theme.txtColorOnPrimaryColor }]}
         >
-          <Text style={[styles.btnLabel, { color: theme.primaryColor }]}>
-            {props.primaryButtonLabel}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn]}>
-          <Text
-            style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
+          {props.subdetail}
+        </Text>
+        <View style={styles.btns}>
+          <TouchableOpacity
+            style={[
+              styles.btn,
+              { backgroundColor: theme.txtColorOnPrimaryColor },
+            ]}
           >
-            {props.secondaryButtonLabel}
-          </Text>
-        </TouchableOpacity>
+            <Text style={[styles.btnLabel, { color: theme.primaryColor }]}>
+              {props.primaryButtonLabel}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.btn]}>
+            <Text
+              style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
+            >
+              {props.secondaryButtonLabel}
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
+      <Image source={props.image} style={styles.image} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   root: {
-    paddingVertical: 8,
-    paddingHorizontal: 8,
-    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -65,6 +70,11 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginVertical: 5,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+  mainContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 16,
@@ -78,19 +88,22 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '700',
     opacity: 0.7,
-    marginVertical: 3,
+    marginVertical: 6,
   },
   btns: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   btn: {
-    paddingVertical: 5,
-    paddingHorizontal: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 25,
     borderRadius: 4,
   },
   btnLabel: {
     fontSize: 10,
     fontWeight: '700',
+  },
+  image: {
+    width: 85,
   },
 });
