@@ -18,10 +18,10 @@ export const Title = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 25,
+    fontSize: 27,
     textAlign: 'center',
     fontWeight: '700',
-    marginTop: 20,
+    marginTop: 30,
     marginHorizontal: 20,
   },
 });
