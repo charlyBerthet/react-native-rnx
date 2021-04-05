@@ -14,6 +14,7 @@ interface Props {
     [name: string]: {
       screens: Screen[];
       initial?: string;
+      title?: string;
     };
   };
 }
@@ -38,6 +39,9 @@ export const Router = (props: Props) => {
                 component={() => (
                   <Stack screens={s.screens} initial={s.initial} />
                 )}
+                options={{
+                  title: s.title || s.name,
+                }}
               />
             ))}
           </Tab.Navigator>
