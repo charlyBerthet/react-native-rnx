@@ -58,8 +58,8 @@ export const Card = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 25,
     borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: {
