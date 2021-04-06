@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginBottom: 10,
+    fontSize: 12,
   },
 });

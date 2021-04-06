@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   value: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: '700',
     textAlign: 'center',
   },
   label: {
     marginTop: 4,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
     textAlign: 'center',
     maxWidth: 100,
