@@ -7,3 +7,5 @@ export * from './components/Section';
 export * from './components/Card';
 export * from './components/ScrollableScreen';
 export * from './components/Link';
+export * from './components/Metric';
+export * from './components/MetricList';
