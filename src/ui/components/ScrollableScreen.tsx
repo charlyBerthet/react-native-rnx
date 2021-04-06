@@ -1,6 +1,12 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 
 import { Title } from './Title';
 import { Subtitle } from './Subtitle';
@@ -13,20 +19,20 @@ interface Props {
 
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
+  const [isTitleVisibleInHeader, setIsTitleVisibleInHeader] = useState(false);
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: props.title,
+      title: isTitleVisibleInHeader ? props.title : '',
     });
-  }, [props.title, navigation]);
+  }, [props.title, navigation, isTitleVisibleInHeader]);
+
+  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    setIsTitleVisibleInHeader(event.nativeEvent.contentOffset.y > 40);
+  };
 
   return (
-    <ScrollView
-      // scrollEventThrottle
-      // onScrollToTop={() => console.log('onScrollToTop')}
-      // onScroll={() => console.log('onScroll')}
-      stickyHeaderIndices={[0]}
-    >
+    <ScrollView scrollEventThrottle={5} onScroll={onScroll}>
       <Title>{props.title}</Title>
       <SafeAreaView style={styles.root}>
         <Subtitle>{props.subtitle}</Subtitle>
