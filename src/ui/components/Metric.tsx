@@ -28,16 +28,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   value: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '700',
     textAlign: 'center',
   },
   label: {
-    marginTop: 10,
+    marginTop: 4,
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
-    maxWidth: 150,
+    maxWidth: 100,
     alignSelf: 'center',
   },
 });
