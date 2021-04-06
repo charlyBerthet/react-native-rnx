@@ -49,13 +49,13 @@ export const Router = (props: Props) => {
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
             screenOptions={({ route }) => ({
-              tabBarIcon: ({ color }) => {
+              tabBarIcon: ({ color, focused }) => {
                 return (
                   <Icon
                     name={props.tabs[route.name].iconName}
                     size={21}
                     color={color}
-                    solid={false}
+                    solid={focused}
                   />
                 );
               },
