@@ -26,8 +26,12 @@ export const ScrollableScreen = (props: Props) => {
       title: isTitleVisibleInHeader ? props.title : '',
     });
   }, [props.title, navigation, isTitleVisibleInHeader]);
-
+  console.log('isTitleVisibleInHeader', isTitleVisibleInHeader);
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    console.log(
+      'event.nativeEvent.contentOffset.y',
+      event.nativeEvent.contentOffset.y
+    );
     setIsTitleVisibleInHeader(event.nativeEvent.contentOffset.y > 40);
   };
 
