@@ -3,40 +3,55 @@ import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import type Screen from '../models/Screen';
+import { Stack } from './Stack';
 import useTheme from '../../theme/hooks/useTheme';
-import type { Stack } from './Stack';
 
-const _Tab = createBottomTabNavigator();
-
-interface TabProps {
-  name: string;
-  title?: string;
-  component: typeof Stack;
-}
-
-export const Tab = (props: TabProps) => {
-  return (
-    <_Tab.Screen
-      key={props.name}
-      name={props.name}
-      component={props.component}
-      options={{
-        title: props.title || props.name,
-      }}
-    />
-  );
-};
+const Tab = createBottomTabNavigator();
 
 interface Props {
-  children: JSX.Element[];
+  tabs: {
+    [name: string]: {
+      screens: Screen[];
+      initial?: string;
+      title?: string;
+    };
+  };
 }
 
 export const Router = (props: Props) => {
   const theme = useTheme();
+
+  const tabs = Object.keys(props.tabs).map((name) => ({
+    name,
+    ...props.tabs[name],
+    component: () => (
+      <Stack
+        screens={props.tabs[name].screens}
+        initial={props.tabs[name].initial}
+      />
+    ),
+  }));
+
   return (
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer>
-        <_Tab.Navigator>{props.children}</_Tab.Navigator>
+        {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
+          <Tab.Navigator>
+            {tabs.map((s) => (
+              <Tab.Screen
+                key={s.name}
+                name={s.name}
+                component={s.component}
+                options={{
+                  title: s.title || s.name,
+                }}
+              />
+            ))}
+          </Tab.Navigator>
+        ) : tabs.length === 1 ? ( // One tab, don't show bottom bar
+          <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
+        ) : undefined}
       </NavigationContainer>
     </View>
   );

@@ -2,25 +2,12 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import useTheme from '../../theme/hooks/useTheme';
-import type ScreenModel from '../models/Screen';
+import type Screen from '../models/Screen';
 
 const _Stack = createStackNavigator();
 
-export const Screen = (props: ScreenModel) => {
-  return (
-    <_Stack.Screen
-      key={props.name}
-      name={props.name}
-      component={props.component}
-      options={{
-        headerShown: props.isHeaderVisible,
-      }}
-    />
-  );
-};
-
 interface Props {
-  children: JSX.Element | JSX.Element[];
+  screens: Screen[];
   initial?: string;
 }
 
@@ -42,7 +29,16 @@ export const Stack = (props: Props) => {
         headerTitle: '',
       }}
     >
-      {props.children}
+      {props.screens.map((s) => (
+        <_Stack.Screen
+          key={s.name}
+          name={s.name}
+          component={s.component}
+          options={{
+            headerShown: s.isHeaderVisible,
+          }}
+        />
+      ))}
     </_Stack.Navigator>
   );
 };
