@@ -61,7 +61,7 @@ export const Router = (props: Props) => {
               },
               headerTintColor: theme.txtColor,
               headerTitleStyle: {
-                fontWeight: '700',
+                fontWeight: '900',
                 fontSize: 14,
               },
             })}
