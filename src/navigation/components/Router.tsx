@@ -53,7 +53,7 @@ export const Router = (props: Props) => {
                 return (
                   <Icon
                     name={props.tabs[route.name].iconName}
-                    size={19}
+                    size={21}
                     color={color}
                   />
                 );
