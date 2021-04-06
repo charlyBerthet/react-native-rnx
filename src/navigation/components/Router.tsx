@@ -37,8 +37,13 @@ export const Router = (props: Props) => {
           <Tab.Navigator
             screenOptions={({ route }) => ({
               tabBarIcon: ({ color }) => {
-                console.log('---test', route);
-                return <Icon name={'facebook'} size={12} color={color} />;
+                return (
+                  <Icon
+                    name={props.tabs[route.name].iconName}
+                    size={19}
+                    color={color}
+                  />
+                );
               },
             })}
             tabBarOptions={{
