@@ -53,8 +53,8 @@ export const ScrollableScreen = (props: Props) => {
 
   return (
     <ScrollView scrollEventThrottle={5} onScroll={onScroll}>
-      <Title>{props.title}</Title>
       <SafeAreaView style={styles.root}>
+        <Title>{props.title}</Title>
         <Subtitle>{props.subtitle}</Subtitle>
         {props.children}
       </SafeAreaView>

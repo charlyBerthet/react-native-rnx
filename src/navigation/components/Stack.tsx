@@ -23,7 +23,7 @@ export const Stack = (props: Props) => {
           fontSize: 15,
         },
         headerStyle: {
-          backgroundColor: theme.bgColor,
+          backgroundColor: 'red', //theme.bgColor,
           shadowRadius: 0,
           shadowOffset: {
             height: 0,

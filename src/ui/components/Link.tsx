@@ -25,11 +25,11 @@ export const Link = (props: Props) => {
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 4,
-    paddingHorizontal: 8,
+    paddingHorizontal: 15,
   },
   title: {
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '500',
     textAlign: 'center',
   },
 });
