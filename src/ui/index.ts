@@ -5,3 +5,4 @@ export * from './components/SectionTitleUppercase';
 export * from './components/Title';
 export * from './components/Section';
 export * from './components/Card';
+export * from './components/ScrollableScreen';
