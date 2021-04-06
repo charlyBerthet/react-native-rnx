@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
