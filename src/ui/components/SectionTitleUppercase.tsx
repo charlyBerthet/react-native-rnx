@@ -6,6 +6,8 @@ import useTheme from '../../theme/hooks/useTheme';
 interface Props extends CommonTextProps {
   children: string | string[];
   noMargin?: boolean;
+  centered?: boolean;
+  primary?: boolean;
 }
 
 export const SectionTitleUppercase = (props: Props) => {
@@ -14,8 +16,9 @@ export const SectionTitleUppercase = (props: Props) => {
     <Text
       style={[
         styles.root,
-        { color: theme.txtColor },
+        { color: props.primary ? theme.primaryColor : theme.txtColor },
         props.noMargin && styles.noMargin,
+        props.centered && styles.centered,
         props.style,
       ]}
     >
@@ -34,6 +37,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   noMargin: {
-    margin: 0,
+    marginLeft: 0,
+    marginBottom: 0,
+  },
+  centered: {
+    textAlign: 'center',
   },
 });
