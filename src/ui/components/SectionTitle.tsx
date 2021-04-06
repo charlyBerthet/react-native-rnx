@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import type CommonTextProps from '../models/CommonTextProps';
+import { Text } from './Text';
 
 interface Props extends CommonTextProps {
   children: string | string[];
@@ -12,6 +13,6 @@ export const SectionTitle = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 19,
+    fontSize: 16,
   },
 });

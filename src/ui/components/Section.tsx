@@ -22,7 +22,9 @@ export const Section = (props: Props) => {
       ) : (
         <SectionTitle>{props.title}</SectionTitle>
       )}
-      {!!props.subtitle && <Text>{props.subtitle}</Text>}
+      {!!props.subtitle && (
+        <Text style={styles.subtitle}>{props.subtitle}</Text>
+      )}
       {props.cards.map((card, idx) => (
         <Card key={idx} {...card} />
       ))}
@@ -33,5 +35,8 @@ export const Section = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     marginTop: 25,
+  },
+  subtitle: {
+    marginBottom: 10,
   },
 });
