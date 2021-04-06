@@ -17,7 +17,7 @@ export const SectionTitleUppercase = (props: Props) => {
       style={[
         styles.root,
         { color: props.primary ? theme.primaryColor : theme.txtColor },
-        props.noMargin && styles.noMargin,
+        (props.noMargin || props.centered) && styles.noMargin,
         props.centered && styles.centered,
         props.style,
       ]}
