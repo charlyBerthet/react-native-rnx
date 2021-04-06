@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
-  SafeAreaView,
+  View,
   ScrollView,
   StyleSheet,
   NativeSyntheticEvent,
@@ -53,11 +53,11 @@ export const ScrollableScreen = (props: Props) => {
 
   return (
     <ScrollView scrollEventThrottle={5} onScroll={onScroll}>
-      <SafeAreaView style={styles.root}>
+      <View style={styles.root}>
         <Title>{props.title}</Title>
         <Subtitle>{props.subtitle}</Subtitle>
         {props.children}
-      </SafeAreaView>
+      </View>
     </ScrollView>
   );
 };
