@@ -16,6 +16,8 @@ interface Props {
       screens: Screen[];
       initial?: string;
       title?: string;
+      iconName: string;
+      iconSize?: number;
     };
   };
 }
@@ -33,13 +35,14 @@ export const Router = (props: Props) => {
       <NavigationContainer>
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
-            screenOptions={() => ({
-              tabBarIcon: ({ color, size }) => {
-                return <Icon name={'facebook'} size={size} color={color} />;
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color }) => {
+                console.log('---test', route);
+                return <Icon name={'facebook'} size={12} color={color} />;
               },
             })}
             tabBarOptions={{
-              activeTintColor: 'tomato',
+              activeTintColor: theme.primaryColor,
               inactiveTintColor: 'gray',
             }}
           >
