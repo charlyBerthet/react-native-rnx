@@ -22,11 +22,13 @@ export const ScrollableScreen = (props: Props) => {
 
   return (
     <ScrollView
-      onScrollToTop={() => console.log('onScrollToTop')}
-      onScroll={() => console.log('onScroll')}
+      // scrollEventThrottle
+      // onScrollToTop={() => console.log('onScrollToTop')}
+      // onScroll={() => console.log('onScroll')}
+      stickyHeaderIndices={[0]}
     >
+      <Title>{props.title}</Title>
       <SafeAreaView style={styles.root}>
-        <Title>{props.title}</Title>
         <Subtitle>{props.subtitle}</Subtitle>
         {props.children}
       </SafeAreaView>
