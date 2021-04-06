@@ -13,6 +13,6 @@ export const SectionTitle = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    fontSize: 16,
+    fontSize: 18,
   },
 });
