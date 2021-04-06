@@ -1,5 +1,5 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, TextStyle } from 'react-native';
 
 export default interface CommonViewProps {
-  style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
+  style?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
 }
