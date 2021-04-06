@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
@@ -31,7 +32,17 @@ export const Router = (props: Props) => {
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer>
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
-          <Tab.Navigator>
+          <Tab.Navigator
+            screenOptions={() => ({
+              tabBarIcon: ({ color, size }) => {
+                return <Icon name={'facebook'} size={size} color={color} />;
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: 'tomato',
+              inactiveTintColor: 'gray',
+            }}
+          >
             {tabs.map((s) => (
               <Tab.Screen
                 key={s.name}
