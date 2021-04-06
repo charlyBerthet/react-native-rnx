@@ -10,11 +10,16 @@ import {
 
 import { Title } from './Title';
 import { Subtitle } from './Subtitle';
+import { Link } from './Link';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
   title: string;
   subtitle: string;
+  headerRightButton?: {
+    title: string;
+    navigateTo: string;
+  };
 }
 
 export const ScrollableScreen = (props: Props) => {
@@ -24,8 +29,23 @@ export const ScrollableScreen = (props: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
+      headerRight: props.headerRightButton
+        ? () => (
+            <Link
+              title={props.headerRightButton!!.title}
+              onPress={() =>
+                navigation.navigate(props.headerRightButton!!.navigateTo)
+              }
+            />
+          )
+        : undefined,
     });
-  }, [props.title, navigation, isTitleVisibleInHeader]);
+  }, [
+    props.title,
+    navigation,
+    isTitleVisibleInHeader,
+    props.headerRightButton,
+  ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     setIsTitleVisibleInHeader(event.nativeEvent.contentOffset.y > 10);

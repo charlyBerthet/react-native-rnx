@@ -39,7 +39,7 @@ export const Stack = (props: Props) => {
           name={s.name}
           component={s.component}
           options={{
-            headerShown: s.isHeaderVisible,
+            headerShown: true,
           }}
         />
       ))}
