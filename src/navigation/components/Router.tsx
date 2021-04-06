@@ -25,12 +25,6 @@ export const Router = (props: Props) => {
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
     ...props.tabs[name],
-    component: () => (
-      <Stack
-        screens={props.tabs[name].screens}
-        initial={props.tabs[name].initial}
-      />
-    ),
   }));
 
   return (
@@ -42,11 +36,18 @@ export const Router = (props: Props) => {
               <Tab.Screen
                 key={s.name}
                 name={s.name}
-                component={s.component}
                 options={{
                   title: s.title || s.name,
                 }}
-              />
+              >
+                {(stackProps) => (
+                  <Stack
+                    {...stackProps}
+                    screens={s.screens}
+                    initial={s.initial}
+                  />
+                )}
+              </Tab.Screen>
             ))}
           </Tab.Navigator>
         ) : tabs.length === 1 ? ( // One tab, don't show bottom bar
