@@ -23,7 +23,7 @@ export const ScrollableScreen = (props: Props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: isTitleVisibleInHeader ? props.title : '',
+      headerTitle: isTitleVisibleInHeader ? props.title : '',
     });
   }, [props.title, navigation, isTitleVisibleInHeader]);
 
