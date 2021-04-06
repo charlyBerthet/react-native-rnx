@@ -59,6 +59,11 @@ export const Router = (props: Props) => {
                   />
                 );
               },
+              headerTintColor: theme.txtColor,
+              headerTitleStyle: {
+                fontWeight: '700',
+                fontSize: 14,
+              },
             })}
             tabBarOptions={{
               activeTintColor: theme.primaryColor,
