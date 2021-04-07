@@ -1,20 +1,34 @@
 import * as React from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
+import type Screen from '../models/Screen';
 import { Stack } from './Stack';
-import { TabNavigator, TabModel } from './TabNavigator';
 import useTheme from '../../theme/hooks/useTheme';
+import { useCurrentRouteName } from '../hooks/useCurrentRouteName';
+
+const Tab = createBottomTabNavigator();
 
 interface Props {
   tabs: {
-    [name: string]: TabModel;
+    [name: string]: {
+      screens: Screen[];
+      initial?: string;
+      title?: string;
+      iconName: string;
+      iconSize?: number;
+    };
   };
 }
 
 export const Router = (props: Props) => {
   const theme = useTheme();
+  const routeName = useCurrentRouteName();
   const isDarkTheme = useColorScheme() === 'dark';
+
+  console.log('routeName', routeName);
 
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
@@ -37,7 +51,42 @@ export const Router = (props: Props) => {
         }}
       >
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
-          <TabNavigator tabs={props.tabs} />
+          <Tab.Navigator
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color }) => {
+                return (
+                  <Icon
+                    name={props.tabs[route.name].iconName}
+                    size={21}
+                    color={color}
+                    solid={true}
+                  />
+                );
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: theme.primaryColor,
+              inactiveTintColor: 'gray',
+            }}
+          >
+            {tabs.map((s) => (
+              <Tab.Screen
+                key={s.name}
+                name={s.name}
+                options={{
+                  title: s.title || s.name,
+                }}
+              >
+                {(stackProps) => (
+                  <Stack
+                    {...stackProps}
+                    screens={s.screens}
+                    initial={s.initial}
+                  />
+                )}
+              </Tab.Screen>
+            ))}
+          </Tab.Navigator>
         ) : tabs.length === 1 ? ( // One tab, don't show bottom bar
           <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
         ) : undefined}
