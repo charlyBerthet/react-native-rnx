@@ -33,7 +33,7 @@ export const Row = (props: Props) => {
         <Text style={styles.title}>{props.title}</Text>
         <Text style={styles.subtitle}>{props.subtitle}</Text>
       </View>
-      <View>
+      <View style={styles.rightContainer}>
         <Text style={styles.rightLabel}>{props.rightLabel}</Text>
         <Text style={styles.rightLabelCaption}>{props.rightLabelCaption}</Text>
       </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 6,
+    paddingVertical: 7,
     paddingHorizontal: 10,
   },
   rootBorderTop: {
@@ -60,17 +60,20 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   subtitle: {
-    marginTop: 6,
+    marginTop: 3,
     fontSize: 14,
     fontWeight: '700',
   },
   rightLabel: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
   },
   rightLabelCaption: {
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
+  },
+  rightContainer: {
+    alignItems: 'flex-end',
   },
 });
