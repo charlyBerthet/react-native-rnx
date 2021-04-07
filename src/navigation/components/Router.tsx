@@ -94,7 +94,7 @@ export const Router = (props: Props) => {
               </Tab.Screen>
             ))}
           </Tab.Navigator>
-        ) : tabs.length === 1 ? ( // One tab, don't show bottom bar
+        ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
           <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
         ) : undefined}
       </NavigationContainer>
