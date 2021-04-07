@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
+import { getRouteNameFromState } from '../services/GetRouteNameFromState';
 import useTheme from '../../theme/hooks/useTheme';
 
 const Tab = createBottomTabNavigator();
@@ -49,7 +50,12 @@ export const Router = (props: Props) => {
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
             screenOptions={(_tabNavProps) => {
-              console.log('test', _tabNavProps.route);
+              console.log(
+                'test',
+                _tabNavProps.route
+                  ? getRouteNameFromState((_tabNavProps.route as any).state)
+                  : undefined
+              );
               return {
                 tabBarIcon: ({ color }) => {
                   return (
