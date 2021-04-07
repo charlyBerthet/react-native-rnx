@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 7,
   },
   detail: {
     flex: 1,
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
   },
   switch: {
     paddingLeft: 12,
-    marginRight: -10,
     paddingVertical: 3,
   },
 });

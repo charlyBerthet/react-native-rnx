@@ -19,8 +19,8 @@ export const CardBg = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    paddingVertical: 7,
-    paddingHorizontal: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 8,
     borderRadius: 10,
     overflow: 'hidden',
   },
