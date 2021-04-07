@@ -49,7 +49,7 @@ export const Router = (props: Props) => {
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
             screenOptions={(_tabNavProps) => {
-              console.log('test', _tabNavProps.navigation);
+              console.log('test', _tabNavProps.route);
               return {
                 tabBarIcon: ({ color }) => {
                   return (
