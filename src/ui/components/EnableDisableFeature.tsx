@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   switch: {
-    paddingHorizontal: 8,
+    paddingLeft: 12,
+    marginRight: -10,
     paddingVertical: 3,
   },
 });
