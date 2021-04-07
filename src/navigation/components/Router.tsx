@@ -48,18 +48,21 @@ export const Router = (props: Props) => {
       >
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color }) => {
-                return (
-                  <Icon
-                    name={props.tabs[route.name].iconName}
-                    size={21}
-                    color={color}
-                    solid={true}
-                  />
-                );
-              },
-            })}
+            screenOptions={({ route }) => {
+              console.log('route', route.name);
+              return {
+                tabBarIcon: ({ color }) => {
+                  return (
+                    <Icon
+                      name={props.tabs[route.name].iconName}
+                      size={21}
+                      color={color}
+                      solid={true}
+                    />
+                  );
+                },
+              };
+            }}
             tabBarOptions={{
               activeTintColor: theme.primaryColor,
               inactiveTintColor: 'gray',
