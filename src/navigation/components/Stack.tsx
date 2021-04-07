@@ -30,6 +30,11 @@ export const Stack = (props: Props) => {
             width: 0,
           },
         },
+        headerBackTitleStyle: {
+          color: theme.primaryColor,
+          fontSize: 14,
+          fontWeight: '500',
+        },
         headerTitle: '',
       }}
     >

@@ -57,6 +57,7 @@ export const ScrollableScreen = (props: Props) => {
         <Title>{props.title}</Title>
         <Subtitle>{props.subtitle}</Subtitle>
         {props.children}
+        <View style={styles.bottomSpacer} />
       </View>
     </ScrollView>
   );
@@ -65,5 +66,9 @@ export const ScrollableScreen = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     marginHorizontal: 20,
+  },
+  bottomSpacer: {
+    width: 10,
+    height: 50,
   },
 });
