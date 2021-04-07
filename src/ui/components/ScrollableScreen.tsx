@@ -28,7 +28,6 @@ export const ScrollableScreen = (props: Props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      tabBarVisible: false,
       headerTitle: isTitleVisibleInHeader ? props.title : '',
       headerRight: props.headerRightButton
         ? () => (
