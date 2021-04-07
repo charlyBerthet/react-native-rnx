@@ -8,7 +8,7 @@ interface Props extends CommonTextProps {
 }
 
 export const SectionTitle = (props: Props) => {
-  return <Text style={styles.root}>{props.children}</Text>;
+  return <Text style={[styles.root, props.style]}>{props.children}</Text>;
 };
 
 const styles = StyleSheet.create({

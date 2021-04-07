@@ -10,7 +10,7 @@ interface Props extends CommonViewProps {
 export const CardBg = (props: Props) => {
   const theme = useTheme();
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, props.style]}>
       <View style={[styles.bg, { backgroundColor: theme.primaryColor }]} />
       {props.children}
     </View>
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 20,
     borderRadius: 10,
+    overflow: 'hidden',
   },
   bg: {
     position: 'absolute',
@@ -29,6 +30,6 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    opacity: 0.8,
+    opacity: 0.14,
   },
 });

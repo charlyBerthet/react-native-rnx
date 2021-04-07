@@ -13,7 +13,7 @@ interface Props extends CommonViewProps {
 export const EnableDisableFeature = (props: Props) => {
   const theme = useTheme();
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, props.style]}>
       <Text style={styles.detail}>{props.label}</Text>
       <Switch
         trackColor={{ false: theme.txtColor, true: theme.primaryColor }}
