@@ -10,3 +10,5 @@ export * from './components/Link';
 export * from './components/Metric';
 export * from './components/MetricList';
 export * from './components/SectionTitle';
+export * from './components/EnableDisableFeature';
+export * from './components/CardBg';
