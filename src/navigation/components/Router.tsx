@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
 import useTheme from '../../theme/hooks/useTheme';
-import { useCurrentRouteName } from '../hooks/useCurrentRouteName';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,10 +24,7 @@ interface Props {
 
 export const Router = (props: Props) => {
   const theme = useTheme();
-  const routeName = useCurrentRouteName();
   const isDarkTheme = useColorScheme() === 'dark';
-
-  console.log('routeName', routeName);
 
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
@@ -52,18 +48,21 @@ export const Router = (props: Props) => {
       >
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color }) => {
-                return (
-                  <Icon
-                    name={props.tabs[route.name].iconName}
-                    size={21}
-                    color={color}
-                    solid={true}
-                  />
-                );
-              },
-            })}
+            screenOptions={(_tabNavProps) => {
+              console.log('test', _tabNavProps.navigation);
+              return {
+                tabBarIcon: ({ color }) => {
+                  return (
+                    <Icon
+                      name={props.tabs[_tabNavProps.route.name].iconName}
+                      size={21}
+                      color={color}
+                      solid={true}
+                    />
+                  );
+                },
+              };
+            }}
             tabBarOptions={{
               activeTintColor: theme.primaryColor,
               inactiveTintColor: 'gray',
