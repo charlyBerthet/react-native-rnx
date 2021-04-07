@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
   switch: {
     paddingLeft: 12,
-    marginRight: -10,
+    marginRight: -11,
     paddingVertical: 3,
   },
 });
