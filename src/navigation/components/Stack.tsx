@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import useTheme from '../../theme/hooks/useTheme';
@@ -37,7 +38,12 @@ export const Stack = (props: Props) => {
           fontWeight: '500',
         },
         headerBackImage: () => (
-          <Icon name={'chevron-left'} size={21} color={theme.primaryColor} />
+          <Icon
+            style={styles.backBtnIcon}
+            name={'chevron-left'}
+            size={21}
+            color={theme.primaryColor}
+          />
         ),
         headerTitle: '',
       }}
@@ -55,3 +61,10 @@ export const Stack = (props: Props) => {
     </_Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  backBtnIcon: {
+    paddingLeft: 10,
+    paddingRight: 4,
+  },
+});
