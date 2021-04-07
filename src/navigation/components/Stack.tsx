@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import useTheme from '../../theme/hooks/useTheme';
 import type Screen from '../models/Screen';
@@ -35,6 +36,9 @@ export const Stack = (props: Props) => {
           fontSize: 14,
           fontWeight: '500',
         },
+        headerBackImage: () => (
+          <Icon name={'chevron-left'} size={21} color={theme.primaryColor} />
+        ),
         headerTitle: '',
       }}
     >
