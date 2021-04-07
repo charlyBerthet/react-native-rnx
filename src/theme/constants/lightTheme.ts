@@ -6,6 +6,7 @@ const lightTheme: Theme = {
   primaryColor: '#0D8060',
   secondaryColor: '#EA7575',
   txtColorOnPrimaryColor: '#fff',
+  borderColor: '#ddd',
 };
 
 export default lightTheme;

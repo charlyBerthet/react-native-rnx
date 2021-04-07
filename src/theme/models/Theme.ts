@@ -4,4 +4,5 @@ export default interface Theme {
   primaryColor: string;
   secondaryColor: string;
   txtColorOnPrimaryColor: string;
+  borderColor: string;
 }
