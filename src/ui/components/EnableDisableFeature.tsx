@@ -16,9 +16,8 @@ export const EnableDisableFeature = (props: Props) => {
     <View style={[styles.root, props.style]}>
       <Text style={styles.detail}>{props.label}</Text>
       <Switch
-        trackColor={{ false: theme.txtColor, true: theme.primaryColor }}
-        thumbColor={props.isEnabled ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
+        trackColor={{ false: 'gray', true: theme.primaryColor }}
+        thumbColor={'white'}
         onValueChange={props.onChange}
         value={props.isEnabled}
         style={styles.switch}
@@ -35,6 +34,8 @@ const styles = StyleSheet.create({
   },
   detail: {
     flex: 1,
+    fontSize: 12,
+    fontWeight: '500',
   },
   switch: {
     paddingHorizontal: 8,
