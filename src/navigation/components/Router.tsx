@@ -31,8 +31,6 @@ export const Router = (props: Props) => {
     ...props.tabs[name],
   }));
 
-  const isTabBarVisible = true;
-
   return (
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       <NavigationContainer
@@ -50,22 +48,18 @@ export const Router = (props: Props) => {
       >
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
-            screenOptions={(_props) => {
-              console.log('>>>', _props.route.name);
-              return {
-                tabBarVisible: isTabBarVisible,
-                tabBarIcon: ({ color }) => {
-                  return (
-                    <Icon
-                      name={props.tabs[_props.route.name].iconName}
-                      size={21}
-                      color={color}
-                      solid={true}
-                    />
-                  );
-                },
-              };
-            }}
+            screenOptions={({ route }) => ({
+              tabBarIcon: ({ color }) => {
+                return (
+                  <Icon
+                    name={props.tabs[route.name].iconName}
+                    size={21}
+                    color={color}
+                    solid={true}
+                  />
+                );
+              },
+            })}
             tabBarOptions={{
               activeTintColor: theme.primaryColor,
               inactiveTintColor: 'gray',
