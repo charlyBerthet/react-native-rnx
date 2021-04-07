@@ -49,7 +49,7 @@ export const Router = (props: Props) => {
           },
         }}
       >
-        {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
+        {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
           <Tab.Navigator
             screenOptions={(_tabNavProps) => {
               const routeName = getFocusedRouteNameFromRoute(
