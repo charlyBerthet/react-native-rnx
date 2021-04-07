@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  NavigationContainer,
+  getFocusedRouteNameFromRoute,
+} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -52,7 +55,7 @@ export const Router = (props: Props) => {
               console.log(
                 'test',
                 _tabNavProps.route
-                  ? (_tabNavProps.route as any).getFocusedRouteNameFromRoute()
+                  ? getFocusedRouteNameFromRoute(_tabNavProps.route)
                   : undefined
               );
               return {
