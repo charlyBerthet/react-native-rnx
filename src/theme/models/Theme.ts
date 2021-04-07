@@ -3,6 +3,7 @@ export default interface Theme {
   txtColor: string;
   primaryColor: string;
   secondaryColor: string;
+  thirdColor: string;
   txtColorOnPrimaryColor: string;
   borderColor: string;
 }
