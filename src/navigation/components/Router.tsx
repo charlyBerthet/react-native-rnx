@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet, useColorScheme } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
@@ -25,11 +25,16 @@ interface Props {
 export const Router = (props: Props) => {
   const theme = useTheme();
   const isDarkTheme = useColorScheme() === 'dark';
+  const route = useRoute();
+
+  console.log('>>>', route.name);
 
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
     ...props.tabs[name],
   }));
+
+  const isTabBarVisible = true;
 
   return (
     <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
@@ -48,11 +53,12 @@ export const Router = (props: Props) => {
       >
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
-            screenOptions={({ route }) => ({
+            screenOptions={(_props) => ({
+              tabBarVisible: isTabBarVisible,
               tabBarIcon: ({ color }) => {
                 return (
                   <Icon
-                    name={props.tabs[route.name].iconName}
+                    name={props.tabs[_props.route.name].iconName}
                     size={21}
                     color={color}
                     solid={true}
