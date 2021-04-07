@@ -5,10 +5,15 @@ import { Text } from './Text';
 
 interface Props extends CommonTextProps {
   children: string | string[];
+  primary?: boolean;
 }
 
 export const SectionTitle = (props: Props) => {
-  return <Text style={[styles.root, props.style]}>{props.children}</Text>;
+  return (
+    <Text style={[styles.root, props.style]} primary={props.primary}>
+      {props.children}
+    </Text>
+  );
 };
 
 const styles = StyleSheet.create({

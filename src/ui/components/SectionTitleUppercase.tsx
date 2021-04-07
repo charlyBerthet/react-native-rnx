@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import type CommonTextProps from '../models/CommonTextProps';
-import useTheme from '../../theme/hooks/useTheme';
+import { Text } from './Text';
 
 interface Props extends CommonTextProps {
   children: string | string[];
@@ -11,17 +11,16 @@ interface Props extends CommonTextProps {
 }
 
 export const SectionTitleUppercase = (props: Props) => {
-  const theme = useTheme();
   return (
     <Text
       style={[
         styles.root,
-        { color: props.primary ? theme.primaryColor : theme.txtColor },
         (props.noMargin || props.centered) && styles.noMargin,
         props.centered && styles.centered,
         props.primary && styles.primary,
         props.style,
       ]}
+      primary={props.primary}
     >
       {props.children}
     </Text>

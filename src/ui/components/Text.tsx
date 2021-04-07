@@ -5,12 +5,19 @@ import useTheme from '../../theme/hooks/useTheme';
 
 interface Props extends CommonTextProps {
   children: string | string[];
+  primary?: boolean;
 }
 
 export const Text = (props: Props) => {
   const theme = useTheme();
   return (
-    <RNText style={[styles.root, { color: theme.txtColor }, props.style]}>
+    <RNText
+      style={[
+        styles.root,
+        { color: props.primary ? theme.primaryTxtColor : theme.txtColor },
+        props.style,
+      ]}
+    >
       {props.children}
     </RNText>
   );
