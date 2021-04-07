@@ -17,7 +17,7 @@ interface Props {
   tabs: {
     [name: string]: {
       screens: Screen[];
-      initial?: string;
+      initial: string;
       title?: string;
       iconName: string;
       iconSize?: number;
@@ -52,13 +52,13 @@ export const Router = (props: Props) => {
         {tabs.length > 1 ? ( // Multiple tabs, show bottom bar
           <Tab.Navigator
             screenOptions={(_tabNavProps) => {
-              console.log(
-                'test',
+              const routeName = getFocusedRouteNameFromRoute(
                 _tabNavProps.route
-                  ? getFocusedRouteNameFromRoute(_tabNavProps.route)
-                  : undefined
               );
               return {
+                tabBarVisible:
+                  !routeName ||
+                  routeName === props.tabs[_tabNavProps.route.name].initial,
                 tabBarIcon: ({ color }) => {
                   return (
                     <Icon
