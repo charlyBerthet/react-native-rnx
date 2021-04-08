@@ -15,7 +15,7 @@ export const Link = (props: Props) => {
       onPress={props.onPress}
       style={[styles.container, props.style]}
     >
-      <Text style={[styles.title, { color: theme.primaryColor }]}>
+      <Text style={[styles.title, { color: theme.primaryTxtColor }]}>
         {props.title}
       </Text>
     </TouchableOpacity>

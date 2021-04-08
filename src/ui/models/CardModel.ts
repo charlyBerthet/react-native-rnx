@@ -8,4 +8,6 @@ export interface CardModel {
   secondaryButtonLabel: string;
   image: ImageSourcePropType;
   primaryColor?: string;
+  onPrimaryButtonPress?: () => void;
+  onSecondaryButtonPress?: () => void;
 }
