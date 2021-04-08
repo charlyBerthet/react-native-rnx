@@ -14,3 +14,4 @@ export * from './components/EnableDisableFeature';
 export * from './components/CardBg';
 export * from './components/Row';
 export * from './components/Table';
+export * from './models/CardModel';
