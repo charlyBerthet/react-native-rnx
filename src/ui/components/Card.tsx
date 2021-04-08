@@ -11,6 +11,7 @@ export const Card = (props: Props) => {
   const primaryColor = props.primaryColor || theme.primaryColor;
   return (
     <TouchableOpacity
+      onPress={props.onPrimaryButtonPress}
       style={[
         styles.root,
         {
@@ -34,6 +35,7 @@ export const Card = (props: Props) => {
         </Text>
         <View style={styles.btns}>
           <TouchableOpacity
+            onPress={props.onPrimaryButtonPress}
             style={[
               styles.btn,
               { backgroundColor: theme.txtColorOnPrimaryColor },
@@ -43,7 +45,10 @@ export const Card = (props: Props) => {
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.btn, styles.btnRight]}>
+          <TouchableOpacity
+            onPress={props.onSecondaryButtonPress}
+            style={[styles.btn, styles.btnRight]}
+          >
             <Text
               style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
             >
