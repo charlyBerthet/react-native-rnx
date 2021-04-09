@@ -21,6 +21,8 @@ export const Countdown = (props: Props) => {
     ((now - startsAt) / (endsAt - startsAt)) * 100
   );
 
+  console.log('---', startsAt, now, endsAt);
+
   return (
     <View style={[styles.root, props.style]}>
       <View style={[styles.txtContainer]}>
