@@ -18,6 +18,7 @@ export const Countdown = (props: Props) => {
   const { startsAt, endsAt } = props;
 
   useEffect(() => {
+    setNow(Date.now());
     const sub = setInterval(() => setNow(Date.now()), 250);
     return () => {
       clearInterval(sub);
