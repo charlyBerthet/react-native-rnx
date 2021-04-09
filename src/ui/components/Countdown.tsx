@@ -28,7 +28,7 @@ export const Countdown = (props: Props) => {
           {props.timeSpentLabel}
         </Text>
         <Text style={[styles.title, { color: theme.txtColor }]}>
-          {stringifyTimeMS(startsAt - now)}
+          {stringifyTimeMS(now - startsAt)}
         </Text>
         <Text style={[styles.timeSpentPercentage, { color: theme.txtColor }]}>
           {`${props.timeSpentPercentageLabel} ${addZero(timeSpentPercentage)}%`}
@@ -41,6 +41,9 @@ export const Countdown = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 250,
   },
   txtContainer: {
     alignItems: 'center',
