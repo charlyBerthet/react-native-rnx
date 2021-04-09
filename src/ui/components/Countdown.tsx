@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -13,9 +13,16 @@ interface Props extends CommonViewProps {
 }
 
 export const Countdown = (props: Props) => {
+  const [now, setNow] = useState(0);
   const theme = useTheme();
-  const now = Date.now();
   const { startsAt, endsAt } = props;
+
+  useEffect(() => {
+    const sub = setInterval(() => setNow(Date.now()), 250);
+    return () => {
+      clearInterval(sub);
+    };
+  }, []);
 
   const timeSpentPercentage = Math.round(
     ((now - startsAt) / (endsAt - startsAt)) * 100
