@@ -1,0 +1,61 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { useTheme } from '../../theme';
+import type CommonViewProps from '../models/CommonViewProps';
+import { Text } from './Text';
+import { stringifyTimeMS, addZero } from '../../utils';
+
+interface Props extends CommonViewProps {
+  startsAt: number;
+  endsAt: number;
+  timeSpentLabel: string;
+  timeSpentPercentageLabel: string;
+}
+
+export const Countdown = (props: Props) => {
+  const theme = useTheme();
+  const now = Date.now();
+  const { startsAt, endsAt } = props;
+
+  const timeSpentPercentage = Math.round(
+    ((now - startsAt) / (endsAt - startsAt)) * 100
+  );
+
+  return (
+    <View style={[styles.root, props.style]}>
+      <View style={[styles.txtContainer]}>
+        <Text style={[styles.timeSpent, { color: theme.txtColor }]}>
+          {props.timeSpentLabel}
+        </Text>
+        <Text style={[styles.title, { color: theme.txtColor }]}>
+          {stringifyTimeMS(startsAt - now)}
+        </Text>
+        <Text style={[styles.timeSpentPercentage, { color: theme.txtColor }]}>
+          {`${props.timeSpentPercentageLabel} ${addZero(timeSpentPercentage)}%`}
+        </Text>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  root: {
+    alignSelf: 'center',
+  },
+  txtContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  timeSpent: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  timeSpentPercentage: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+});
