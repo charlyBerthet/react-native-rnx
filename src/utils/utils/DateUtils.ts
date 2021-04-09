@@ -1,9 +1,18 @@
 import { addZero } from './StringUtils';
 
 export const stringifyTimeMS = (durationMs: number) => {
-  const seconds = Math.floor((durationMs / 1000) % 60),
-    minutes = Math.floor((durationMs / (1000 * 60)) % 60),
-    hours = Math.floor((durationMs / (1000 * 60 * 60)) % 24);
-  console.log('---', durationMs, seconds, minutes, hours, addZero(hours));
-  return `${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`;
+  const hours = durationMs / (1000 * 60 * 60);
+  const absoluteHours = Math.floor(hours);
+
+  //Get remainder from hours and convert to minutes
+  const minutes = (hours - absoluteHours) * 60;
+  const absoluteMinutes = Math.floor(minutes);
+
+  //Get remainder from minutes and convert to seconds
+  const seconds = (minutes - absoluteMinutes) * 60;
+  const absoluteSeconds = Math.floor(seconds);
+
+  return `${addZero(absoluteHours)}:${addZero(absoluteMinutes)}:${addZero(
+    absoluteSeconds
+  )}`;
 };
