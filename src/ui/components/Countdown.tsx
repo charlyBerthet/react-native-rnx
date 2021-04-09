@@ -62,8 +62,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   title: {
-    fontSize: 26,
+    fontSize: 30,
     fontWeight: '700',
+    textAlign: 'center',
+    minWidth: 80,
   },
   timeSpentPercentage: {
     fontSize: 14,
