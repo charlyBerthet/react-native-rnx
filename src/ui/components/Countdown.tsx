@@ -13,9 +13,9 @@ interface Props extends CommonViewProps {
   timeSpentPercentageLabel: string;
 }
 
-const CIRCLE_STROKE_SIZE = 15;
+const CIRCLE_STROKE_SIZE = 13;
 const CIRCLE_RADIUS = 40;
-const SIZE = Math.min(Dimensions.get('window').width - 20, 290);
+const SIZE = Math.min(Dimensions.get('window').width - 20, 330);
 
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
