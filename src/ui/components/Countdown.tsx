@@ -70,7 +70,8 @@ export const Countdown = (props: Props) => {
             timeSpentPercentage,
             circleRadius
           )} Z`}
-          fill={theme.primaryColor}
+          stroke={theme.primaryColor}
+          strokeWidth="10"
         />
       </Svg>
       <View style={[styles.txtContainer]}>
