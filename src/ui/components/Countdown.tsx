@@ -119,16 +119,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   timeSpentPercentage: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
   },
   hoursLeft: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '500',
     opacity: 0.7,
+    marginTop: 6,
   },
   daysLeft: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: '500',
     opacity: 0.7,
   },
