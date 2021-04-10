@@ -38,9 +38,9 @@ export const Countdown = (props: Props) => {
         <Circle
           cx="50"
           cy="50"
-          r="50"
+          r="45"
           stroke={theme.primaryColor}
-          strokeWidth="12"
+          strokeWidth="10"
           opacity="0.15"
         />
       </Svg>
