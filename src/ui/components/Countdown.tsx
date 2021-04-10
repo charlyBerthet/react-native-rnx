@@ -13,7 +13,7 @@ interface Props extends CommonViewProps {
   timeSpentPercentageLabel: string;
 }
 
-const SIZE = Math.min(Dimensions.get('window').width - 40, 350);
+const SIZE = Math.min(Dimensions.get('window').width - 40, 250);
 
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
