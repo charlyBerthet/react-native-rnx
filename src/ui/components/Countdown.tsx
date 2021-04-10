@@ -36,6 +36,8 @@ export const Countdown = (props: Props) => {
   const circleCirconf = 2 * Math.PI * circleRadius;
   const circleDashOffset = circleCirconf * (1 - timeSpentPercentage / 100);
 
+  console.log('>>>', circleRadius, circleCirconf, circleDashOffset);
+
   return (
     <View style={[styles.root, props.style]}>
       <Svg height="100%" width="100%" viewBox="0 0 100 100" style={styles.svg}>
@@ -53,7 +55,8 @@ export const Countdown = (props: Props) => {
           r={circleRadius}
           stroke={theme.primaryColor}
           strokeWidth="10"
-          strokeDasharray={`${circleCirconf} ${circleDashOffset}`}
+          strokeDasharray={circleCirconf}
+          strokeDashoffset={circleDashOffset}
         />
       </Svg>
       <View style={[styles.txtContainer]}>
