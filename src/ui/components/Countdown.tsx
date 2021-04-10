@@ -13,7 +13,8 @@ interface Props extends CommonViewProps {
   timeSpentPercentageLabel: string;
 }
 
-const SIZE = Math.min(Dimensions.get('window').width - 40, 250);
+const CIRCLE_STROKE_SIZE = 15;
+const SIZE = Math.min(Dimensions.get('window').width - 20, 250);
 
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
@@ -44,7 +45,7 @@ export const Countdown = (props: Props) => {
           cy="50"
           r={circleRadius}
           stroke={theme.primaryColor}
-          strokeWidth="10"
+          strokeWidth={CIRCLE_STROKE_SIZE}
           opacity="0.15"
         />
       </Svg>
@@ -59,7 +60,7 @@ export const Countdown = (props: Props) => {
           cy="50"
           r={circleRadius}
           stroke={theme.primaryColor}
-          strokeWidth="10"
+          strokeWidth={CIRCLE_STROKE_SIZE}
           strokeDasharray={circleCirconf}
           strokeDashoffset={circleDashOffset}
         />
