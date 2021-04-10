@@ -16,3 +16,15 @@ export const stringifyTimeMS = (durationMs: number) => {
     absoluteSeconds
   )}`;
 };
+
+export const hoursLeft = (fromDate: number, toDate: number) => {
+  const durationMs = toDate - fromDate;
+  const hours = durationMs / (1000 * 60 * 60);
+  return Math.floor(hours);
+};
+
+export const daysLeft = (fromDate: number, toDate: number) => {
+  const durationMs = toDate - fromDate;
+  const hours = durationMs / (1000 * 60 * 60);
+  return Math.floor(hours / 24);
+};

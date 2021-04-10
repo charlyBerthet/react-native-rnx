@@ -4,13 +4,15 @@ import Svg, { Circle } from 'react-native-svg';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
-import { stringifyTimeMS, addZero } from '../../utils';
+import { stringifyTimeMS, addZero, hoursLeft, daysLeft } from '../../utils';
 
 interface Props extends CommonViewProps {
   startsAt: number;
   endsAt: number;
   timeSpentLabel: string;
-  timeSpentPercentageLabel: string;
+  localizeTimeSpentPercentage: (percentage: string) => string;
+  localizeHoursLeft: (hoursLeft: number) => string;
+  localizeDaysLeft: (daysSpent: number, daysTotal: number) => string;
 }
 
 const CIRCLE_STROKE_SIZE = 10;
@@ -74,7 +76,16 @@ export const Countdown = (props: Props) => {
           {stringifyTimeMS(now - startsAt)}
         </Text>
         <Text style={[styles.timeSpentPercentage, { color: theme.txtColor }]}>
-          {`${props.timeSpentPercentageLabel} ${addZero(timeSpentPercentage)}%`}
+          {props.localizeTimeSpentPercentage(addZero(timeSpentPercentage))}
+        </Text>
+        <Text style={[styles.hoursLeft, { color: theme.txtColor }]}>
+          {props.localizeHoursLeft(hoursLeft(now, endsAt))}
+        </Text>
+        <Text style={[styles.daysLeft, { color: theme.txtColor }]}>
+          {props.localizeDaysLeft(
+            daysLeft(startsAt, now),
+            daysLeft(startsAt, endsAt)
+          )}
         </Text>
       </View>
     </View>
@@ -108,7 +119,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   timeSpentPercentage: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
+  },
+  hoursLeft: {
+    fontSize: 12,
+    fontWeight: '500',
+    opacity: 0.7,
+  },
+  daysLeft: {
+    fontSize: 10,
+    fontWeight: '500',
+    opacity: 0.7,
   },
 });
