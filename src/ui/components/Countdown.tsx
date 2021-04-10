@@ -40,8 +40,8 @@ export const Countdown = (props: Props) => {
           cy="50"
           r="50"
           stroke={theme.primaryColor}
-          strokeWidth="5"
-          opacity="0.2"
+          strokeWidth="10"
+          opacity="0.15"
         />
       </Svg>
       <View style={[styles.txtContainer]}>
