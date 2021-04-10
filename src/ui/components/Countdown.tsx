@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -12,6 +12,8 @@ interface Props extends CommonViewProps {
   timeSpentLabel: string;
   timeSpentPercentageLabel: string;
 }
+
+const SIZE = Math.min(Dimensions.get('window').width - 40, 350);
 
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
@@ -62,7 +64,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 250,
+    height: SIZE,
+    width: SIZE,
   },
   svg: {
     position: 'absolute',
