@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: '700',
   },
   timeSpentPercentage: {
