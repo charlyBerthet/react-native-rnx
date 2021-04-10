@@ -129,8 +129,10 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   daysLeft: {
-    fontSize: 12,
+    fontSize: 10,
     fontWeight: '500',
     opacity: 0.7,
+    marginTop: 2,
+    marginBottom: -25,
   },
 });
