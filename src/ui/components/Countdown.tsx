@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
+import Svg, { Circle } from 'react-native-svg';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
@@ -31,6 +32,9 @@ export const Countdown = (props: Props) => {
 
   return (
     <View style={[styles.root, props.style]}>
+      <Svg height="50%" width="50%" viewBox="0 0 100 100" style={styles.svg}>
+        <Circle cx="50" cy="50" r="45" stroke="blue" strokeWidth="2.5" />
+      </Svg>
       <View style={[styles.txtContainer]}>
         <Text style={[styles.timeSpent, { color: theme.txtColor }]}>
           {props.timeSpentLabel}
@@ -53,6 +57,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 250,
   },
+  svg: {
+    position: 'absolute',
+  },
   txtContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -64,8 +71,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: '700',
-    textAlign: 'center',
-    minWidth: 80,
   },
   timeSpentPercentage: {
     fontSize: 14,
