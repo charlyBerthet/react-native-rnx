@@ -57,6 +57,7 @@ export const Countdown = (props: Props) => {
           strokeWidth="10"
           strokeDasharray={circleCirconf}
           strokeDashoffset={circleDashOffset}
+          transform="rotate(-90deg)"
         />
       </Svg>
       <View style={[styles.txtContainer]}>
