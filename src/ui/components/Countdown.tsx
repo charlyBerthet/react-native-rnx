@@ -14,7 +14,8 @@ interface Props extends CommonViewProps {
 }
 
 const CIRCLE_STROKE_SIZE = 15;
-const SIZE = Math.min(Dimensions.get('window').width - 20, 250);
+const CIRCLE_RADIUS = 40;
+const SIZE = Math.min(Dimensions.get('window').width - 20, 290);
 
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
@@ -33,7 +34,7 @@ export const Countdown = (props: Props) => {
     ((now - startsAt) / (endsAt - startsAt)) * 100
   );
 
-  const circleRadius = 45;
+  const circleRadius = CIRCLE_RADIUS;
   const circleCirconf = 2 * Math.PI * circleRadius;
   const circleDashOffset = circleCirconf * (1 - timeSpentPercentage / 100);
 
