@@ -36,8 +36,6 @@ export const Countdown = (props: Props) => {
   const circleCirconf = 2 * Math.PI * circleRadius;
   const circleDashOffset = circleCirconf * (1 - timeSpentPercentage / 100);
 
-  console.log('>>>', circleRadius, circleCirconf, circleDashOffset);
-
   return (
     <View style={[styles.root, props.style]}>
       <Svg height="100%" width="100%" viewBox="0 0 100 100" style={styles.svg}>
@@ -49,6 +47,13 @@ export const Countdown = (props: Props) => {
           strokeWidth="10"
           opacity="0.15"
         />
+      </Svg>
+      <Svg
+        height="100%"
+        width="100%"
+        viewBox="0 0 100 100"
+        style={[styles.svg, styles.svgProgress]}
+      >
         <Circle
           cx="50"
           cy="50"
@@ -57,7 +62,6 @@ export const Countdown = (props: Props) => {
           strokeWidth="10"
           strokeDasharray={circleCirconf}
           strokeDashoffset={circleDashOffset}
-          rotation="2"
         />
       </Svg>
       <View style={[styles.txtContainer]}>
@@ -85,6 +89,9 @@ const styles = StyleSheet.create({
   },
   svg: {
     position: 'absolute',
+  },
+  svgProgress: {
+    transform: [{ rotate: '-90deg' }],
   },
   txtContainer: {
     alignItems: 'center',
