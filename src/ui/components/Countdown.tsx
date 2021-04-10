@@ -32,8 +32,15 @@ export const Countdown = (props: Props) => {
 
   return (
     <View style={[styles.root, props.style]}>
-      <Svg height="50%" width="50%" viewBox="0 0 100 100" style={styles.svg}>
-        <Circle cx="50" cy="50" r="45" stroke="blue" strokeWidth="2.5" />
+      <Svg height="100%" width="100%" viewBox="0 0 100 100" style={styles.svg}>
+        <Circle
+          cx="50"
+          cy="50"
+          r="50"
+          stroke={theme.primaryColor}
+          strokeWidth="5"
+          opacity="0.2"
+        />
       </Svg>
       <View style={[styles.txtContainer]}>
         <Text style={[styles.timeSpent, { color: theme.txtColor }]}>
