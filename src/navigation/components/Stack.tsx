@@ -23,7 +23,7 @@ export const Stack = (props: Props) => {
         headerTitleStyle: {
           fontWeight: '900',
           fontSize: 15,
-          paddingTop: 20,
+          paddingTop: 23,
         },
         headerStyle: {
           backgroundColor: theme.bgColor,
