@@ -6,6 +6,8 @@ import {
   StyleSheet,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 
 import { Title } from './Title';
@@ -24,7 +26,7 @@ interface Props {
     title: string;
     navigateTo: string;
   };
-  headerBackground?: JSX.Element;
+  headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
 }
 
 export const ScrollableScreen = (props: Props) => {
