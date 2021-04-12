@@ -36,9 +36,13 @@ export function createStateProvider<T>(
             partialUpdate = { ...partialUpdate, ...action.value };
             break;
         }
-        const newState = {
-          ...reducer({ ...accState, ...partialUpdate }, action),
-        };
+        if (!!reducer) {
+          // const newState = {
+          //   ...reducer({ ...accState, ...partialUpdate }, action),
+          // };
+          console.log('l');
+        }
+        const newState = { ...accState, ...partialUpdate };
         console.log(
           '[RNX][StateProvider.dispatch] <-- stateAfter',
           JSON.stringify(newState)
