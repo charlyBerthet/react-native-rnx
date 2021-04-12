@@ -11,10 +11,12 @@ interface Props extends CommonViewProps {
   disabled?: boolean;
   rightArrow?: boolean;
   important?: boolean;
+  type?: 'outline' | 'normal';
 }
 
 export const Button = (props: Props) => {
   const theme = useTheme();
+  const btnType = props.type || 'normal';
   return (
     <TouchableOpacity
       disabled={props.disabled}
@@ -23,7 +25,9 @@ export const Button = (props: Props) => {
         styles.container,
         props.full && styles.containerFull,
         props.disabled && styles.containerDisabled,
-        { backgroundColor: theme.primaryColor },
+        btnType === 'normal' && { backgroundColor: theme.primaryColor },
+        btnType === 'outline' && { borderColor: theme.primaryColor },
+        btnType === 'outline' && styles.containerOutline,
         props.style,
       ]}
     >
@@ -31,7 +35,12 @@ export const Button = (props: Props) => {
         style={[
           styles.title,
           props.important && styles.titleImportant,
-          { color: theme.txtColorOnPrimaryColor },
+          {
+            color:
+              btnType === 'normal'
+                ? theme.txtColorOnPrimaryColor
+                : theme.primaryTxtColor,
+          },
         ]}
       >
         {props.title}
@@ -43,7 +52,15 @@ export const Button = (props: Props) => {
       )}
       {props.subtitle && (
         <Text
-          style={[styles.subtitle, { color: theme.txtColorOnPrimaryColor }]}
+          style={[
+            styles.subtitle,
+            {
+              color:
+                btnType === 'normal'
+                  ? theme.txtColorOnPrimaryColor
+                  : theme.primaryTxtColor,
+            },
+          ]}
         >
           {props.subtitle}
         </Text>
@@ -68,6 +85,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  containerOutline: {
+    borderWidth: 1,
+    shadowOpacity: 0,
+    elevation: 0,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
   },
   containerDisabled: {
     opacity: 0.7,
