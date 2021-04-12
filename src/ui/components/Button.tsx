@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   containerSmall: {
     paddingVertical: 5,
     paddingHorizontal: 10,
+    minWidth: 0,
   },
   containerDisabled: {
     opacity: 0.7,
