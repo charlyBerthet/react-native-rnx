@@ -27,6 +27,7 @@ interface Props {
     navigateTo: string;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
+  headerLowDown?: boolean;
 }
 
 export const ScrollableScreen = (props: Props) => {
@@ -36,6 +37,11 @@ export const ScrollableScreen = (props: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
+      headerTitleStyle: {
+        fontWeight: '900',
+        fontSize: props.headerLowDown ? 13 : 15,
+        paddingTop: props.headerLowDown ? 23 : undefined,
+      },
       headerLeft: props.headerLeftButton
         ? () => (
             <Link
@@ -65,6 +71,7 @@ export const ScrollableScreen = (props: Props) => {
     props.headerRightButton,
     props.headerLeftButton,
     props.headerBackground,
+    props.headerLowDown,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
