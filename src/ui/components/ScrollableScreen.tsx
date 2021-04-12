@@ -24,6 +24,7 @@ interface Props {
     title: string;
     navigateTo: string;
   };
+  headerBackground?: JSX.Element;
 }
 
 export const ScrollableScreen = (props: Props) => {
@@ -43,6 +44,7 @@ export const ScrollableScreen = (props: Props) => {
             />
           )
         : undefined,
+      headerBackground: props.headerBackground,
       headerRight: props.headerRightButton
         ? () => (
             <Link
@@ -60,6 +62,7 @@ export const ScrollableScreen = (props: Props) => {
     isTitleVisibleInHeader,
     props.headerRightButton,
     props.headerLeftButton,
+    props.headerBackground,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {

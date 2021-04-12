@@ -37,7 +37,6 @@ export const Stack = (props: Props) => {
           fontSize: 14,
           fontWeight: '500',
         },
-        headerTransparent: true,
         headerBackImage: () => (
           <Icon
             style={styles.backBtnIcon}
