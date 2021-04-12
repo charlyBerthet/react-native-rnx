@@ -36,13 +36,9 @@ export function createStateProvider<T>(
             partialUpdate = { ...partialUpdate, ...action.value };
             break;
         }
-        if (!!reducer) {
-          // const newState = {
-          //   ...reducer({ ...accState, ...partialUpdate }, action),
-          // };
-          console.log('l');
-        }
-        const newState = { ...accState, ...partialUpdate };
+        const newState = {
+          ...reducer({ ...accState, ...partialUpdate }, action),
+        };
         console.log(
           '[RNX][StateProvider.dispatch] <-- stateAfter',
           JSON.stringify(newState)
@@ -70,7 +66,6 @@ export function useGlobalState<T>() {
   };
 
   const setGlobalState = (partial: Partial<T>) => {
-    console.log('------>>>setGlobalState', JSON.stringify(partial));
     dispatch({ type: 'set', value: partial });
   };
 
