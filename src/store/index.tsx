@@ -46,7 +46,7 @@ export function createStateProvider<T>(
     );
   };
 
-  return { StateProvider, Store };
+  return StateProvider;
 }
 
 export function useState<T>() {
