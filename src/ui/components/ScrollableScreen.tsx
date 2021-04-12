@@ -38,7 +38,7 @@ export const ScrollableScreen = (props: Props) => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
       headerStyle: {
-        height: 220,
+        height: props.headerLowDown ? 170 : undefined,
       },
       headerTitleStyle: {
         fontWeight: '900',
