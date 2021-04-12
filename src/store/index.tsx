@@ -10,6 +10,7 @@ export function createStateProvider<T>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T
 ) {
+  console.log('[RNX] createStateProvider');
   interface Context {
     state: T;
     dispatch: Dispatch<{ type: string; value: any }>;
@@ -24,9 +25,9 @@ export function createStateProvider<T>(
   const StateProvider = ({ children }: StateProviderProps) => {
     const [state, dispatch] = useReducer(
       (accState: T, action: { type: string; value: any }) => {
-        console.log('[StateProvider.dispatch] action', action);
+        console.log('[RNX][StateProvider.dispatch] --> action', action);
         console.log(
-          '[StateProvider.dispatch] stateBefore',
+          '[RNX][StateProvider.dispatch] stateBefore',
           JSON.stringify(accState)
         );
         let partialUpdate: Partial<T> = {};
@@ -39,7 +40,7 @@ export function createStateProvider<T>(
           ...reducer({ ...accState, ...partialUpdate }, action),
         };
         console.log(
-          '[StateProvider.dispatch] stateAfter',
+          '[RNX][StateProvider.dispatch] <-- stateAfter',
           JSON.stringify(newState)
         );
         return newState;
