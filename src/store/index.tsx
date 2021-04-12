@@ -26,11 +26,10 @@ export function createStateProvider<T>(
       (accState: T, action: { type: string; value: any }) => {
         console.log('StateProvider.dispatch action', action);
         console.log('StateProvider.dispatch stateBefore', accState);
-        const partialUpdate: Partial<T> = {};
+        let partialUpdate: Partial<T> = {};
         switch (action.type) {
           case 'set':
-            (partialUpdate as any)[action.value.propertyKey] =
-              action.value.newValue;
+            partialUpdate = { ...partialUpdate, ...action.value };
             break;
         }
         const newState = {
@@ -49,7 +48,7 @@ export function createStateProvider<T>(
   return StateProvider;
 }
 
-export function useState<T>() {
+export function useGlobalState<T>() {
   if (!Store) {
     throw 'Please initialize Store first using createStateProvider';
   }
@@ -59,9 +58,9 @@ export function useState<T>() {
     dispatch({ type: actionType, value: actionValue });
   };
 
-  const setStateValue = (propertyKey: keyof T, newValue: any) => {
-    dispatch({ type: 'set', value: { propertyKey, newValue } });
+  const setGlobalState = (partial: Partial<T>) => {
+    dispatch({ type: 'set', value: partial });
   };
 
-  return { state: state as T, dispatch: _dispatch, setStateValue };
+  return { state: state as T, dispatch: _dispatch, setGlobalState };
 }
