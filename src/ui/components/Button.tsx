@@ -12,6 +12,7 @@ interface Props extends CommonViewProps {
   rightArrow?: boolean;
   important?: boolean;
   type?: 'outline' | 'normal';
+  small?: boolean;
 }
 
 export const Button = (props: Props) => {
@@ -28,12 +29,14 @@ export const Button = (props: Props) => {
         btnType === 'normal' && { backgroundColor: theme.primaryColor },
         btnType === 'outline' && { borderColor: theme.primaryColor },
         btnType === 'outline' && styles.containerOutline,
+        props.small && styles.containerSmall,
         props.style,
       ]}
     >
       <Text
         style={[
           styles.title,
+          props.small && styles.titleSmall,
           props.important && styles.titleImportant,
           {
             color:
@@ -95,6 +98,10 @@ const styles = StyleSheet.create({
       height: 0,
     },
   },
+  containerSmall: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
   containerDisabled: {
     opacity: 0.7,
   },
@@ -105,6 +112,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: '700',
+    textAlign: 'center',
+  },
+  titleSmall: {
+    fontSize: 14,
+    fontWeight: '500',
     textAlign: 'center',
   },
   titleImportant: {
