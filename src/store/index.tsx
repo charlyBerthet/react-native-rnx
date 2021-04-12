@@ -24,8 +24,11 @@ export function createStateProvider<T>(
   const StateProvider = ({ children }: StateProviderProps) => {
     const [state, dispatch] = useReducer(
       (accState: T, action: { type: string; value: any }) => {
-        console.log('StateProvider.dispatch action', action);
-        console.log('StateProvider.dispatch stateBefore', accState);
+        console.log('[StateProvider.dispatch] action', action);
+        console.log(
+          '[StateProvider.dispatch] stateBefore',
+          JSON.stringify(accState)
+        );
         let partialUpdate: Partial<T> = {};
         switch (action.type) {
           case 'set':
@@ -35,7 +38,10 @@ export function createStateProvider<T>(
         const newState = {
           ...reducer({ ...accState, ...partialUpdate }, action),
         };
-        console.log('StateProvider.dispatch stateAfter', newState);
+        console.log(
+          '[StateProvider.dispatch] stateAfter',
+          JSON.stringify(newState)
+        );
         return newState;
       },
       initial
