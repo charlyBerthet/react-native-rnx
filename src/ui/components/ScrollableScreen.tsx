@@ -45,6 +45,7 @@ export const ScrollableScreen = (props: Props) => {
       headerLeft: props.headerLeftButton
         ? () => (
             <Link
+              style={props.headerLowDown && styles.headerButtonLowDown}
               title={props.headerLeftButton!!.title}
               onPress={() =>
                 navigation.navigate(props.headerLeftButton!!.navigateTo)
@@ -56,6 +57,7 @@ export const ScrollableScreen = (props: Props) => {
       headerRight: props.headerRightButton
         ? () => (
             <Link
+              style={props.headerLowDown && styles.headerButtonLowDown}
               title={props.headerRightButton!!.title}
               onPress={() =>
                 navigation.navigate(props.headerRightButton!!.navigateTo)
@@ -97,5 +99,8 @@ const styles = StyleSheet.create({
   bottomSpacer: {
     width: 10,
     height: 50,
+  },
+  headerButtonLowDown: {
+    marginTop: 23,
   },
 });
