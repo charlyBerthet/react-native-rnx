@@ -31,6 +31,7 @@ export const Stack = (props: Props) => {
             height: 0,
             width: 0,
           },
+          paddingTop: 40,
         },
         headerBackTitleStyle: {
           color: theme.primaryColor,
