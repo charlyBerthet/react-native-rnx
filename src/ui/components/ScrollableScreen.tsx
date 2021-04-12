@@ -38,12 +38,12 @@ export const ScrollableScreen = (props: Props) => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
       headerStyle: {
-        height: props.headerLowDown ? 130 : undefined,
+        height: props.headerLowDown ? 110 : undefined,
       },
       headerTitleStyle: {
         fontWeight: '900',
         fontSize: 15,
-        paddingTop: props.headerLowDown ? 23 : undefined,
+        paddingTop: props.headerLowDown ? 30 : undefined,
       },
       headerLeft: props.headerLeftButton
         ? () => (
@@ -104,6 +104,6 @@ const styles = StyleSheet.create({
     height: 50,
   },
   headerButtonLowDown: {
-    marginTop: 23,
+    marginTop: 30,
   },
 });
