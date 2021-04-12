@@ -62,5 +62,5 @@ export function useGlobalState<T>() {
     dispatch({ type: 'set', value: partial });
   };
 
-  return { state: state as T, dispatch: _dispatch, setGlobalState };
+  return { globalState: state as T, dispatch: _dispatch, setGlobalState };
 }
