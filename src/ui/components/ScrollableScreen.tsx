@@ -20,6 +20,10 @@ interface Props {
     title: string;
     navigateTo: string;
   };
+  headerLeftButton?: {
+    title: string;
+    navigateTo: string;
+  };
 }
 
 export const ScrollableScreen = (props: Props) => {
@@ -29,6 +33,16 @@ export const ScrollableScreen = (props: Props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
+      headerLeft: props.headerLeftButton
+        ? () => (
+            <Link
+              title={props.headerLeftButton!!.title}
+              onPress={() =>
+                navigation.navigate(props.headerLeftButton!!.navigateTo)
+              }
+            />
+          )
+        : undefined,
       headerRight: props.headerRightButton
         ? () => (
             <Link
@@ -45,6 +59,7 @@ export const ScrollableScreen = (props: Props) => {
     navigation,
     isTitleVisibleInHeader,
     props.headerRightButton,
+    props.headerLeftButton,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
