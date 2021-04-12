@@ -30,6 +30,8 @@ interface Props {
   headerLowDown?: boolean;
 }
 
+const LOW_DOWN_MARGIN_TOP = 35;
+
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
   const [isTitleVisibleInHeader, setIsTitleVisibleInHeader] = useState(false);
@@ -38,12 +40,12 @@ export const ScrollableScreen = (props: Props) => {
     navigation.setOptions({
       headerTitle: isTitleVisibleInHeader ? props.title : '',
       headerStyle: {
-        height: props.headerLowDown ? 110 : undefined,
+        height: props.headerLowDown ? 100 : undefined,
       },
       headerTitleStyle: {
         fontWeight: '900',
         fontSize: 15,
-        paddingTop: props.headerLowDown ? 30 : undefined,
+        paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
       headerLeft: props.headerLeftButton
         ? () => (
@@ -104,6 +106,6 @@ const styles = StyleSheet.create({
     height: 50,
   },
   headerButtonLowDown: {
-    marginTop: 30,
+    marginTop: LOW_DOWN_MARGIN_TOP,
   },
 });
