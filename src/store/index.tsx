@@ -65,6 +65,7 @@ export function useGlobalState<T>() {
   };
 
   const setGlobalState = (partial: Partial<T>) => {
+    console.log('------>>>setGlobalState', JSON.stringify(partial));
     dispatch({ type: 'set', value: partial });
   };
 
