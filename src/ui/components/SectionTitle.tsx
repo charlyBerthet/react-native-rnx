@@ -6,11 +6,16 @@ import { Text } from './Text';
 interface Props extends CommonTextProps {
   children: string | string[];
   primary?: boolean;
+  secondary?: boolean;
 }
 
 export const SectionTitle = (props: Props) => {
   return (
-    <Text style={[styles.root, props.style]} primary={props.primary}>
+    <Text
+      style={[styles.root, props.style]}
+      primary={props.primary && !props.secondary}
+      secondary={props.secondary}
+    >
       {props.children}
     </Text>
   );

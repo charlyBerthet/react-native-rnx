@@ -8,6 +8,7 @@ interface Props extends CommonTextProps {
   noMargin?: boolean;
   centered?: boolean;
   primary?: boolean;
+  secondary?: boolean;
 }
 
 export const SectionTitleUppercase = (props: Props) => {
@@ -20,7 +21,8 @@ export const SectionTitleUppercase = (props: Props) => {
         props.primary && styles.primary,
         props.style,
       ]}
-      primary={props.primary}
+      primary={props.primary && !props.secondary}
+      secondary={props.secondary}
     >
       {props.children}
     </Text>
