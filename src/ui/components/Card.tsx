@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { useTheme } from '../../theme';
+import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import type { CardModel } from '../models/CardModel';
 
@@ -8,14 +8,14 @@ interface Props extends CommonViewProps, CardModel {}
 
 export const Card = (props: Props) => {
   const theme = useTheme();
-  const primaryColor = props.primaryColor || theme.primaryColor;
+  const mainColors = useMainColors(props.secondaryColor);
   return (
     <TouchableOpacity
       onPress={props.onPrimaryButtonPress}
       style={[
         styles.root,
         {
-          backgroundColor: primaryColor,
+          backgroundColor: mainColors.bg,
         },
         props.style,
       ]}
@@ -41,7 +41,7 @@ export const Card = (props: Props) => {
               { backgroundColor: theme.txtColorOnPrimaryColor },
             ]}
           >
-            <Text style={[styles.btnLabel, { color: primaryColor }]}>
+            <Text style={[styles.btnLabel, { color: mainColors.txt }]}>
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>

@@ -1,24 +1,22 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { useTheme } from '../../theme';
+import { useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
   title: string;
   onPress?: () => void;
-  color?: string;
+  secondary?: boolean;
 }
 
 export const Link = (props: Props) => {
-  const theme = useTheme();
+  const mainColors = useMainColors(props.secondary);
   return (
     <TouchableOpacity
       onPress={props.onPress}
       style={[styles.container, props.style]}
     >
-      <Text
-        style={[styles.title, { color: props.color || theme.primaryTxtColor }]}
-      >
+      <Text style={[styles.title, { color: mainColors.txt }]}>
         {props.title}
       </Text>
     </TouchableOpacity>

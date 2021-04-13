@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
-import { useTheme } from '../../theme';
+import { useTheme, useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
@@ -13,13 +13,12 @@ interface Props extends CommonViewProps {
   important?: boolean;
   type?: 'outline' | 'normal';
   small?: boolean;
-  color?: string;
+  secondary?: boolean;
 }
 
 export const Button = (props: Props) => {
   const theme = useTheme();
-  const bgColor = props.color || theme.primaryColor;
-  const txtColor = props.color || theme.primaryTxtColor;
+  const mainColors = useMainColors(props.secondary);
   const btnType = props.type || 'normal';
   return (
     <TouchableOpacity
@@ -29,8 +28,8 @@ export const Button = (props: Props) => {
         styles.container,
         props.full && styles.containerFull,
         props.disabled && styles.containerDisabled,
-        btnType === 'normal' && { backgroundColor: bgColor },
-        btnType === 'outline' && { borderColor: bgColor },
+        btnType === 'normal' && { backgroundColor: mainColors.bg },
+        btnType === 'outline' && { borderColor: mainColors.bg },
         btnType === 'outline' && styles.containerOutline,
         props.small && styles.containerSmall,
         props.style,
@@ -43,7 +42,9 @@ export const Button = (props: Props) => {
           props.important && styles.titleImportant,
           {
             color:
-              btnType === 'normal' ? theme.txtColorOnPrimaryColor : txtColor,
+              btnType === 'normal'
+                ? theme.txtColorOnPrimaryColor
+                : mainColors.txt,
           },
         ]}
       >
@@ -60,7 +61,9 @@ export const Button = (props: Props) => {
             styles.subtitle,
             {
               color:
-                btnType === 'normal' ? theme.txtColorOnPrimaryColor : txtColor,
+                btnType === 'normal'
+                  ? theme.txtColorOnPrimaryColor
+                  : mainColors.txt,
             },
           ]}
         >

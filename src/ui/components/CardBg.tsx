@@ -1,17 +1,18 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useTheme } from '../../theme';
+import { useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
   children: JSX.Element | JSX.Element[];
+  secondary?: boolean;
 }
 
 export const CardBg = (props: Props) => {
-  const theme = useTheme();
+  const mainColors = useMainColors(props.secondary);
   return (
     <View style={[styles.root, props.style]}>
-      <View style={[styles.bg, { backgroundColor: theme.primaryColor }]} />
+      <View style={[styles.bg, { backgroundColor: mainColors.bg }]} />
       {props.children}
     </View>
   );
