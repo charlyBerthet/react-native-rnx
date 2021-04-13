@@ -6,6 +6,7 @@ import type CommonViewProps from '../models/CommonViewProps';
 interface Props extends CommonViewProps {
   title: string;
   onPress?: () => void;
+  color?: string;
 }
 
 export const Link = (props: Props) => {
@@ -15,7 +16,9 @@ export const Link = (props: Props) => {
       onPress={props.onPress}
       style={[styles.container, props.style]}
     >
-      <Text style={[styles.title, { color: theme.primaryTxtColor }]}>
+      <Text
+        style={[styles.title, { color: props.color || theme.primaryTxtColor }]}
+      >
         {props.title}
       </Text>
     </TouchableOpacity>

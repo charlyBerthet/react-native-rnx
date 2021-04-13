@@ -13,10 +13,13 @@ interface Props extends CommonViewProps {
   important?: boolean;
   type?: 'outline' | 'normal';
   small?: boolean;
+  color?: string;
 }
 
 export const Button = (props: Props) => {
   const theme = useTheme();
+  const bgColor = props.color || theme.primaryColor;
+  const txtColor = props.color || theme.primaryTxtColor;
   const btnType = props.type || 'normal';
   return (
     <TouchableOpacity
@@ -26,8 +29,8 @@ export const Button = (props: Props) => {
         styles.container,
         props.full && styles.containerFull,
         props.disabled && styles.containerDisabled,
-        btnType === 'normal' && { backgroundColor: theme.primaryColor },
-        btnType === 'outline' && { borderColor: theme.primaryColor },
+        btnType === 'normal' && { backgroundColor: bgColor },
+        btnType === 'outline' && { borderColor: bgColor },
         btnType === 'outline' && styles.containerOutline,
         props.small && styles.containerSmall,
         props.style,
@@ -40,9 +43,7 @@ export const Button = (props: Props) => {
           props.important && styles.titleImportant,
           {
             color:
-              btnType === 'normal'
-                ? theme.txtColorOnPrimaryColor
-                : theme.primaryTxtColor,
+              btnType === 'normal' ? theme.txtColorOnPrimaryColor : txtColor,
           },
         ]}
       >
@@ -59,9 +60,7 @@ export const Button = (props: Props) => {
             styles.subtitle,
             {
               color:
-                btnType === 'normal'
-                  ? theme.txtColorOnPrimaryColor
-                  : theme.primaryTxtColor,
+                btnType === 'normal' ? theme.txtColorOnPrimaryColor : txtColor,
             },
           ]}
         >

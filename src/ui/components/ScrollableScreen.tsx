@@ -21,10 +21,12 @@ interface Props {
   headerRightButton?: {
     title: string;
     navigateTo: string;
+    color?: string;
   };
   headerLeftButton?: {
     title: string;
     navigateTo: string;
+    color?: string;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
@@ -55,6 +57,7 @@ export const ScrollableScreen = (props: Props) => {
               onPress={() =>
                 navigation.navigate(props.headerLeftButton!!.navigateTo)
               }
+              color={props.headerLeftButton!!.color}
             />
           )
         : undefined,
@@ -67,6 +70,7 @@ export const ScrollableScreen = (props: Props) => {
               onPress={() =>
                 navigation.navigate(props.headerRightButton!!.navigateTo)
               }
+              color={props.headerRightButton!!.color}
             />
           )
         : undefined,
