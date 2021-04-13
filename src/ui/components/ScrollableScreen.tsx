@@ -15,7 +15,12 @@ import { Subtitle } from './Subtitle';
 import { Link } from './Link';
 
 interface Props {
-  children: JSX.Element | (JSX.Element | undefined)[] | undefined;
+  children:
+    | JSX.Element
+    | (JSX.Element | undefined | false | null)[]
+    | undefined
+    | false
+    | null;
   title: string;
   subtitle: string;
   headerRightButton?: {
