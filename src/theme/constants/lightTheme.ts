@@ -6,7 +6,7 @@ const lightTheme: Theme = {
   primaryTxtColor: '#055640',
   primaryColor: '#0D8060',
   secondaryColor: '#EA7575',
-  secondaryTxtColor: '#EA7575',
+  secondaryTxtColor: '#d35454',
   thirdColor: '#0694FF',
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#ddd',
