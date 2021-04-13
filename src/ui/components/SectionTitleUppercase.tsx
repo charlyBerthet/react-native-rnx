@@ -18,7 +18,7 @@ export const SectionTitleUppercase = (props: Props) => {
         styles.root,
         (props.noMargin || props.centered) && styles.noMargin,
         props.centered && styles.centered,
-        props.primary && styles.primary,
+        (props.primary || props.secondary) && styles.main,
         props.style,
       ]}
       primary={props.primary && !props.secondary}
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   centered: {
     textAlign: 'center',
   },
-  primary: {
+  main: {
     fontSize: 14,
   },
 });
