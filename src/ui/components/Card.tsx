@@ -41,7 +41,7 @@ export const Card = (props: Props) => {
               { backgroundColor: theme.txtColorOnPrimaryColor },
             ]}
           >
-            <Text style={[styles.btnLabel, { color: mainColors.txt }]}>
+            <Text style={[styles.btnLabel, { color: mainColors.bg }]}>
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>
