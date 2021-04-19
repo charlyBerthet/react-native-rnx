@@ -88,7 +88,7 @@ export function createStateProvider<T>(
         );
       };
 
-      return StateProvider;
+      return { Element: StateProvider };
     });
   });
 }
