@@ -16,7 +16,8 @@ let Store: React.Context<any>;
 export function createStateProvider<T>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T,
-  persist: (keyof T)[]
+  persist: (keyof T)[],
+  onInitialized: () => void
 ) {
   console.log(
     '[RNX] createStateProvider, will persist keys',
@@ -67,6 +68,7 @@ export function createStateProvider<T>(
             break;
           case '__initStateFromStorage__':
             partialUpdate = { ...partialUpdate, ...action.value };
+            onInitialized();
             break;
         }
         const newState = {
