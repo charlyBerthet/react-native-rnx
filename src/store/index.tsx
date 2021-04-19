@@ -14,7 +14,7 @@ export function createStateProvider<T>(
 ): Promise<{ Element: ({ children }: StateProviderProps) => JSX.Element }> {
   console.log(
     '[RNX] createStateProvider, will persist keys',
-    persist.join('/')
+    JSON.stringify(persist)
   );
   interface Context {
     state: T;
@@ -36,16 +36,28 @@ export function createStateProvider<T>(
         persitableData[keyOfT] = data[keyOfT];
       }
     });
+    console.log(
+      '[RNX] createStateProvider, _setToStorage value',
+      JSON.stringify(persitableData)
+    );
     return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(persitableData));
   };
 
   // Get saved data
   return _getFromStorage().then((savedData) => {
+    console.log(
+      '[RNX] createStateProvider, _getFromStorage value',
+      JSON.stringify(savedData)
+    );
     // Merge it with desired initial data
     const initialStateMerged = {
       ...initial,
       ...savedData,
     };
+    console.log(
+      '[RNX] createStateProvider, initialStateMerged value',
+      JSON.stringify(initialStateMerged)
+    );
     // Save merged data to storage
     return _setToStorage(initialStateMerged).then(() => {
       // Create provider
