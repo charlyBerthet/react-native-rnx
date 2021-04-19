@@ -4,8 +4,10 @@ import React, {
   Dispatch,
   useContext,
   useEffect,
+  useState,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SplashScreen from './SplashScreen';
 
 interface StateProviderProps {
   children: JSX.Element | JSX.Element[];
@@ -16,8 +18,7 @@ let Store: React.Context<any>;
 export function createStateProvider<T>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T,
-  persist: (keyof T)[],
-  onInitialized: () => void
+  persist: (keyof T)[]
 ) {
   console.log(
     '[RNX] createStateProvider, will persist keys',
@@ -54,6 +55,7 @@ export function createStateProvider<T>(
   Store = createContext(initialContext);
 
   const StateProvider = ({ children }: StateProviderProps) => {
+    const [isInit, setIsInit] = useState(false);
     const [state, dispatch] = useReducer(
       (accState: T, action: { type: string; value: any }) => {
         console.log('[RNX][StateProvider.dispatch] --> action', action);
@@ -68,7 +70,6 @@ export function createStateProvider<T>(
             break;
           case '__initStateFromStorage__':
             partialUpdate = { ...partialUpdate, ...action.value };
-            onInitialized();
             break;
         }
         const newState = {
@@ -87,8 +88,14 @@ export function createStateProvider<T>(
     useEffect(() => {
       _getFromStorage().then((savedState) => {
         dispatch({ type: '__initStateFromStorage__', value: savedState });
+        console.log('[RNX] createStateProvider init');
+        setIsInit(true);
       });
     }, []);
+
+    if (!isInit) {
+      return <SplashScreen />;
+    }
 
     return (
       <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
