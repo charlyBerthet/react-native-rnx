@@ -93,12 +93,10 @@ export function createStateProvider<T>(
       });
     }, []);
 
-    if (!isInit) {
-      return <SplashScreen />;
-    }
-
     return (
-      <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
+      <Store.Provider value={{ state, dispatch }}>
+        {isInit ? children : <SplashScreen />}
+      </Store.Provider>
     );
   };
 
