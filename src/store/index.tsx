@@ -1,4 +1,10 @@
-import React, { useReducer, createContext, Dispatch, useContext } from 'react';
+import React, {
+  useReducer,
+  createContext,
+  Dispatch,
+  useContext,
+  useEffect,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface StateProviderProps {
@@ -11,7 +17,7 @@ export function createStateProvider<T>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T,
   persist: (keyof T)[]
-): Promise<{ Element: ({ children }: StateProviderProps) => JSX.Element }> {
+) {
   console.log(
     '[RNX] createStateProvider, will persist keys',
     JSON.stringify(persist)
@@ -36,73 +42,58 @@ export function createStateProvider<T>(
         persitableData[keyOfT] = data[keyOfT];
       }
     });
-    console.log(
-      '[RNX] createStateProvider, _setToStorage value',
-      JSON.stringify(persitableData)
-    );
     return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(persitableData));
   };
 
-  // Get saved data
-  return _getFromStorage().then((savedData) => {
-    console.log(
-      '[RNX] createStateProvider, _getFromStorage value',
-      JSON.stringify(savedData)
-    );
-    // Merge it with desired initial data
-    const initialStateMerged = {
-      ...initial,
-      ...savedData,
-    };
-    console.log(
-      '[RNX] createStateProvider, initialStateMerged value',
-      JSON.stringify(initialStateMerged)
-    );
-    // Save merged data to storage
-    return _setToStorage(initialStateMerged).then(() => {
-      // Create provider
-      const initialContext: Context = {
-        state: initialStateMerged,
-        dispatch: () => {},
-      };
-      Store = createContext(initialContext);
+  // Create provider
+  const initialContext: Context = {
+    state: initial,
+    dispatch: () => {},
+  };
+  Store = createContext(initialContext);
 
-      const StateProvider = ({ children }: StateProviderProps) => {
-        const [state, dispatch] = useReducer(
-          (accState: T, action: { type: string; value: any }) => {
-            console.log('[RNX][StateProvider.dispatch] --> action', action);
-            console.log(
-              '[RNX][StateProvider.dispatch] stateBefore',
-              JSON.stringify(accState)
-            );
-            let partialUpdate: Partial<T> = {};
-            switch (action.type) {
-              case 'set':
-                partialUpdate = { ...partialUpdate, ...action.value };
-                break;
-            }
-            const newState = {
-              ...reducer({ ...accState, ...partialUpdate }, action),
-            };
-            _setToStorage(newState);
-            console.log(
-              '[RNX][StateProvider.dispatch] <-- stateAfter',
-              JSON.stringify(newState)
-            );
-            return newState;
-          },
-          initial
+  const StateProvider = ({ children }: StateProviderProps) => {
+    const [state, dispatch] = useReducer(
+      (accState: T, action: { type: string; value: any }) => {
+        console.log('[RNX][StateProvider.dispatch] --> action', action);
+        console.log(
+          '[RNX][StateProvider.dispatch] stateBefore',
+          JSON.stringify(accState)
         );
-        return (
-          <Store.Provider value={{ state, dispatch }}>
-            {children}
-          </Store.Provider>
+        let partialUpdate: Partial<T> = {};
+        switch (action.type) {
+          case 'set':
+            partialUpdate = { ...partialUpdate, ...action.value };
+            break;
+          case '__initStateFromStorage__':
+            partialUpdate = { ...partialUpdate, ...action.value };
+            break;
+        }
+        const newState = {
+          ...reducer({ ...accState, ...partialUpdate }, action),
+        };
+        _setToStorage(newState);
+        console.log(
+          '[RNX][StateProvider.dispatch] <-- stateAfter',
+          JSON.stringify(newState)
         );
-      };
+        return newState;
+      },
+      initial
+    );
 
-      return { Element: StateProvider };
-    });
-  });
+    useEffect(() => {
+      _getFromStorage().then((savedState) => {
+        dispatch({ type: '__initStateFromStorage__', value: savedState });
+      });
+    }, []);
+
+    return (
+      <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
+    );
+  };
+
+  return { Element: StateProvider };
 }
 
 export function useGlobalState<T>() {
