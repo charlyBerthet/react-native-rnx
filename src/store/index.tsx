@@ -11,7 +11,7 @@ export function createStateProvider<T>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T,
   persist: (keyof T)[]
-) {
+): Promise<{ Element: ({ children }: StateProviderProps) => JSX.Element }> {
   console.log(
     '[RNX] createStateProvider, will persist keys',
     persist.join('/')
