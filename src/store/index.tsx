@@ -1,4 +1,5 @@
 import React, { useReducer, createContext, Dispatch, useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface StateProviderProps {
   children: JSX.Element | JSX.Element[];
@@ -8,51 +9,88 @@ let Store: React.Context<any>;
 
 export function createStateProvider<T>(
   initial: T,
-  reducer: (state: T, action: { type: string; value: any }) => T
+  reducer: (state: T, action: { type: string; value: any }) => T,
+  persist: (keyof T)[]
 ) {
-  console.log('[RNX] createStateProvider');
+  console.log(
+    '[RNX] createStateProvider, will persist keys',
+    persist.join('/')
+  );
   interface Context {
     state: T;
     dispatch: Dispatch<{ type: string; value: any }>;
   }
 
-  const initialContext: Context = {
-    state: initial,
-    dispatch: () => {},
-  };
-  Store = createContext(initialContext);
-
-  const StateProvider = ({ children }: StateProviderProps) => {
-    const [state, dispatch] = useReducer(
-      (accState: T, action: { type: string; value: any }) => {
-        console.log('[RNX][StateProvider.dispatch] --> action', action);
-        console.log(
-          '[RNX][StateProvider.dispatch] stateBefore',
-          JSON.stringify(accState)
-        );
-        let partialUpdate: Partial<T> = {};
-        switch (action.type) {
-          case 'set':
-            partialUpdate = { ...partialUpdate, ...action.value };
-            break;
-        }
-        const newState = {
-          ...reducer({ ...accState, ...partialUpdate }, action),
-        };
-        console.log(
-          '[RNX][StateProvider.dispatch] <-- stateAfter',
-          JSON.stringify(newState)
-        );
-        return newState;
-      },
-      initial
+  // Handle saved data to local storage of phone
+  const STORAGE_KEY = '@rnx_storage';
+  const _getFromStorage = () =>
+    AsyncStorage.getItem(STORAGE_KEY).then(
+      (d) => JSON.parse(d || '{}') as Partial<T>
     );
-    return (
-      <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
-    );
+  // Save to storage only keys that match @persist param
+  const _setToStorage = (data: Partial<T>) => {
+    const persitableData: Partial<T> = {};
+    Object.keys(data).forEach((key) => {
+      const keyOfT = key as keyof T;
+      if (persist.includes(keyOfT)) {
+        persitableData[keyOfT] = data[keyOfT];
+      }
+    });
+    return AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(persitableData));
   };
 
-  return StateProvider;
+  // Get saved data
+  return _getFromStorage().then((savedData) => {
+    // Merge it with desired initial data
+    const initialStateMerged = {
+      ...initial,
+      ...savedData,
+    };
+    // Save merged data to storage
+    return _setToStorage(initialStateMerged).then(() => {
+      // Create provider
+      const initialContext: Context = {
+        state: initialStateMerged,
+        dispatch: () => {},
+      };
+      Store = createContext(initialContext);
+
+      const StateProvider = ({ children }: StateProviderProps) => {
+        const [state, dispatch] = useReducer(
+          (accState: T, action: { type: string; value: any }) => {
+            console.log('[RNX][StateProvider.dispatch] --> action', action);
+            console.log(
+              '[RNX][StateProvider.dispatch] stateBefore',
+              JSON.stringify(accState)
+            );
+            let partialUpdate: Partial<T> = {};
+            switch (action.type) {
+              case 'set':
+                partialUpdate = { ...partialUpdate, ...action.value };
+                break;
+            }
+            const newState = {
+              ...reducer({ ...accState, ...partialUpdate }, action),
+            };
+            _setToStorage(newState);
+            console.log(
+              '[RNX][StateProvider.dispatch] <-- stateAfter',
+              JSON.stringify(newState)
+            );
+            return newState;
+          },
+          initial
+        );
+        return (
+          <Store.Provider value={{ state, dispatch }}>
+            {children}
+          </Store.Provider>
+        );
+      };
+
+      return StateProvider;
+    });
+  });
 }
 
 export function useGlobalState<T>() {
