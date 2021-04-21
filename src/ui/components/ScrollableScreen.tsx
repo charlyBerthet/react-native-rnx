@@ -25,12 +25,14 @@ interface Props {
   subtitle: string;
   headerRightButton?: {
     title: string;
-    navigateTo: string;
+    navigateTo?: string;
+    onPress?: () => void;
     secondary?: boolean;
   };
   headerLeftButton?: {
     title: string;
-    navigateTo: string;
+    navigateTo?: string;
+    onPress?: () => void;
     secondary?: boolean;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
@@ -59,9 +61,14 @@ export const ScrollableScreen = (props: Props) => {
             <Link
               style={props.headerLowDown && styles.headerButtonLowDown}
               title={props.headerLeftButton!!.title}
-              onPress={() =>
-                navigation.navigate(props.headerLeftButton!!.navigateTo)
-              }
+              onPress={() => {
+                if (props.headerLeftButton!!.navigateTo) {
+                  navigation.navigate(props.headerLeftButton!!.navigateTo);
+                }
+                if (props.headerLeftButton!!.onPress) {
+                  props.headerLeftButton!!.onPress();
+                }
+              }}
               secondary={props.headerLeftButton!!.secondary}
             />
           )
@@ -72,9 +79,14 @@ export const ScrollableScreen = (props: Props) => {
             <Link
               style={props.headerLowDown && styles.headerButtonLowDown}
               title={props.headerRightButton!!.title}
-              onPress={() =>
-                navigation.navigate(props.headerRightButton!!.navigateTo)
-              }
+              onPress={() => {
+                if (props.headerRightButton!!.navigateTo) {
+                  navigation.navigate(props.headerRightButton!!.navigateTo);
+                }
+                if (props.headerRightButton!!.onPress) {
+                  props.headerRightButton!!.onPress();
+                }
+              }}
               secondary={props.headerRightButton!!.secondary}
             />
           )
