@@ -4,7 +4,7 @@ import Svg, { Circle } from 'react-native-svg';
 import { useTheme, useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
-import { stringifyTimeMS, hoursLeft, daysLeft } from '../../utils';
+import { stringifyTimeMS, hoursDiff, daysDiff } from '../../utils';
 
 interface Props extends CommonViewProps {
   startsAt: number;
@@ -81,12 +81,12 @@ export const Countdown = (props: Props) => {
           {props.localizeTimeSpentPercentage(timeSpentPercentage + '')}
         </Text>
         <Text style={[styles.hoursLeft, { color: theme.txtColor }]}>
-          {props.localizeHoursLeft(hoursLeft(now, endsAt))}
+          {props.localizeHoursLeft(hoursDiff(now, endsAt))}
         </Text>
         <Text style={[styles.daysLeft, { color: theme.txtColor }]}>
           {props.localizeDaysLeft(
-            daysLeft(startsAt, now),
-            daysLeft(startsAt, endsAt)
+            daysDiff(startsAt, now),
+            daysDiff(startsAt, endsAt)
           )}
         </Text>
       </View>
