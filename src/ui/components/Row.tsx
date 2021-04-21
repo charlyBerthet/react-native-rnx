@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from './Text';
 import { useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -9,6 +9,7 @@ export interface RowModel {
   subtitle: string;
   rightLabel: string;
   rightLabelCaption: string;
+  onPress?: () => void;
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -29,14 +30,22 @@ export const Row = (props: Props) => {
         props.style,
       ]}
     >
-      <View>
-        <Text style={styles.title}>{props.title}</Text>
-        <Text style={styles.subtitle}>{props.subtitle}</Text>
-      </View>
-      <View style={styles.rightContainer}>
-        <Text style={styles.rightLabel}>{props.rightLabel}</Text>
-        <Text style={styles.rightLabelCaption}>{props.rightLabelCaption}</Text>
-      </View>
+      <TouchableOpacity
+        style={styles.subRoot}
+        onPress={props.onPress}
+        activeOpacity={props.onPress ? 0.8 : 1}
+      >
+        <View>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.subtitle}>{props.subtitle}</Text>
+        </View>
+        <View style={styles.rightContainer}>
+          <Text style={styles.rightLabel}>{props.rightLabel}</Text>
+          <Text style={styles.rightLabelCaption}>
+            {props.rightLabelCaption}
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -48,6 +57,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 7,
     paddingHorizontal: 10,
+  },
+  subRoot: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   rootBorderTop: {
     borderTopWidth: 0.5,
