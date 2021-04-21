@@ -52,9 +52,6 @@ export const Row = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     paddingVertical: 7,
     paddingHorizontal: 10,
   },
