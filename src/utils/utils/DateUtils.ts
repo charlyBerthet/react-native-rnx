@@ -28,3 +28,7 @@ export const daysDiff = (fromDate: number, toDate: number) => {
   const hours = durationMs / (1000 * 60 * 60);
   return Math.floor(hours / 24);
 };
+export const hoursToDays = (hours: number) => Math.round(hours / 24);
+export const msToDays = (ms: number) => Math.round(ms / 1000 / 60 / 60 / 24);
+export const msToHours = (ms: number) => Math.round(ms / 1000 / 60 / 60);
+export const hoursToMs = (hours: number) => hours * 60 * 60 * 1000;
