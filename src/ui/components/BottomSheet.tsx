@@ -9,7 +9,7 @@ export interface BottomSheetActionsRef {
 }
 
 export const BottomSheet = () => {
-  const snapPoints = [450, 0];
+  const snapPoints = ['100%', 0];
   const [sheetProps, setSheetProps] = useState<any>();
   const sheetRef = useRef<RNBottomSheet | undefined>();
 
@@ -20,7 +20,7 @@ export const BottomSheet = () => {
 
   const hide = () => {
     setSheetProps(undefined);
-    sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
+    sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1] as any);
   };
 
   return (
@@ -33,7 +33,7 @@ export const BottomSheet = () => {
         });
       }}
       snapPoints={snapPoints}
-      initialSnap={snapPoints[snapPoints.length - 1]}
+      initialSnap={snapPoints[snapPoints.length - 1] as any}
       borderRadius={10}
       renderContent={() => sheetProps && <BottomSheetOptions {...sheetProps} />}
     />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Text } from './Text';
 import type CommonViewProps from '../models/CommonViewProps';
 import { useTheme } from '../../theme';
@@ -29,6 +29,6 @@ const styles = StyleSheet.create({
   root: {
     paddingVertical: 7,
     paddingHorizontal: 10,
-    height: 450,
+    height: Dimensions.get('window').height,
   },
 });
