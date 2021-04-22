@@ -35,7 +35,7 @@ export const BottomSheet = () => {
       snapPoints={snapPoints}
       initialSnap={snapPoints[snapPoints.length - 1]}
       borderRadius={10}
-      renderContent={() => <BottomSheetOptions {...sheetProps} />}
+      renderContent={() => sheetProps && <BottomSheetOptions {...sheetProps} />}
     />
   );
 };
