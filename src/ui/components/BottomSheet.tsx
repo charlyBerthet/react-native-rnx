@@ -13,32 +13,39 @@ const snapPointHeight = 300;
 
 export const BottomSheet = () => {
   const snapPoints = [snapPointHeight, 0];
+  const [isVisible, setIsVisible] = useState(false);
   const [sheetProps, setSheetProps] = useState<any>();
   const sheetRef = useRef<RNBottomSheet | undefined>();
 
   const show = (props?: any) => {
     setSheetProps(props);
+    setIsVisible(true);
     sheetRef.current?.snapTo(0);
   };
 
   const hide = () => {
     setSheetProps(undefined);
+    setIsVisible(false);
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
   };
 
   return (
     <>
-      <TouchableOpacity
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-          backgroundColor: '#000',
-          opacity: 0.7,
-        }}
-      />
+      {isVisible && (
+        <TouchableOpacity
+          onPress={isVisible ? hide : show}
+          style={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            left: 0,
+            bottom: 0,
+            backgroundColor: '#000',
+            opacity: 0.7,
+          }}
+        />
+      )}
+
       <RNBottomSheet
         ref={(ref) => {
           sheetRef.current = ref || undefined;
