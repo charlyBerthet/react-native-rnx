@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import RNBottomSheet from 'reanimated-bottom-sheet';
-import { View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import { BottomSheetOptions } from './BottomSheetOptions';
 
@@ -27,27 +27,37 @@ export const BottomSheet = () => {
   };
 
   return (
-    <RNBottomSheet
-      ref={(ref) => {
-        sheetRef.current = ref || undefined;
-        setActionsSheetRef({
-          show,
-          hide,
-        });
-      }}
-      snapPoints={snapPoints}
-      initialSnap={snapPoints[snapPoints.length - 1]}
-      borderRadius={17}
-      enabledInnerScrolling={false}
-      enabledContentTapInteraction={false}
-      renderHeader={() => (
-        <View style={{ height: 500, backgroundColor: '#000', opacity: 0.7 }} />
-      )}
-      renderContent={() =>
-        sheetProps && (
-          <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
-        )
-      }
-    />
+    <>
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0,
+          backgroundColor: '#000',
+          opacity: 0.7,
+        }}
+      />
+      <RNBottomSheet
+        ref={(ref) => {
+          sheetRef.current = ref || undefined;
+          setActionsSheetRef({
+            show,
+            hide,
+          });
+        }}
+        snapPoints={snapPoints}
+        initialSnap={snapPoints[snapPoints.length - 1]}
+        borderRadius={17}
+        enabledInnerScrolling={false}
+        enabledContentTapInteraction={false}
+        renderContent={() =>
+          sheetProps && (
+            <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
+          )
+        }
+      />
+    </>
   );
 };
