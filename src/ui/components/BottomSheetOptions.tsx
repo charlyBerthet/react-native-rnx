@@ -47,21 +47,22 @@ const styles = StyleSheet.create({
   root: {},
   content: {
     marginTop: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     paddingVertical: 7,
     paddingHorizontal: 10,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: -2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
     elevation: 5,
   },
   btn: {
+    overflow: 'hidden',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
