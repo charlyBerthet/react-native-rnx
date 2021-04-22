@@ -24,9 +24,13 @@ export const BottomSheetOptions = (props: Props) => {
       >
         {props.options.map((opt, idx) => {
           return (
-            <TouchableOpacity key={idx} onPress={opt.onPress}>
+            <TouchableOpacity
+              style={styles.btn}
+              key={idx}
+              onPress={opt.onPress}
+            >
               <Text
-                style={[styles.btnTxt, { backgroundColor: theme.borderColor }]}
+                style={[styles.btnTxt, { backgroundColor: theme.bgColor }]}
                 primary
               >
                 {opt.text}
@@ -43,6 +47,8 @@ const styles = StyleSheet.create({
   root: {},
   content: {
     marginTop: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     paddingVertical: 7,
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -53,16 +59,25 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
+    elevation: 5,
+  },
+  btn: {
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
     elevation: 5,
   },
   btnTxt: {
-    paddingVertical: 7,
+    paddingVertical: 10,
     paddingHorizontal: 20,
     minWidth: 300,
     textAlign: 'center',
     fontSize: 20,
-    borderRadius: 10,
     marginVertical: 10,
   },
 });
