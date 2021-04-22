@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 6,
     elevation: 5,
+    paddingBottom: 30,
+    marginTop: 30,
   },
   btn: {
     borderRadius: 10,
@@ -80,11 +82,14 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginTop: 10,
+    marginBottom: 10,
+    marginHorizontal: 20,
   },
   message: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
     marginBottom: 10,
+    marginHorizontal: 20,
   },
 });
