@@ -9,7 +9,7 @@ export interface BottomSheetActionsRef {
   hide: () => void;
 }
 
-const snapPointHeight = Dimensions.get('window').height - 50;
+const snapPointHeight = Dimensions.get('window').height - 350;
 
 export const BottomSheet = () => {
   const snapPoints = [snapPointHeight, 0];
