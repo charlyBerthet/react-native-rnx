@@ -50,8 +50,14 @@ export const BottomSheet = () => {
         borderRadius={17}
         enabledInnerScrolling={false}
         enabledContentTapInteraction={false}
-        onCloseEnd={() => setIsVisible(false)}
-        onOpenStart={() => setIsVisible(true)}
+        onCloseEnd={() => {
+          console.log('onCloseEnd');
+          setIsVisible(false);
+        }}
+        onOpenEnd={() => {
+          console.log('onOpenEnd');
+          setIsVisible(true);
+        }}
         renderContent={() =>
           sheetProps && (
             <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
