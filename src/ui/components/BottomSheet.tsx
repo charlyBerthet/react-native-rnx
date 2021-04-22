@@ -36,7 +36,8 @@ export const BottomSheet = () => {
       }}
       snapPoints={snapPoints}
       initialSnap={snapPoints[snapPoints.length - 1]}
-      borderRadius={10}
+      borderRadius={17}
+      enabledInnerScrolling={false}
       enabledContentTapInteraction={false}
       renderContent={() =>
         sheetProps && (

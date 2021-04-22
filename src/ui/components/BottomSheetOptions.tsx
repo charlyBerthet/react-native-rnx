@@ -8,6 +8,7 @@ export interface BottomSheetOptionsProps {
   title: string;
   message: string;
   options: { text: string; onPress: () => void }[];
+  inline?: boolean;
 }
 
 interface Props extends CommonViewProps, BottomSheetOptionsProps {
@@ -25,18 +26,25 @@ export const BottomSheetOptions = (props: Props) => {
     >
       <Text style={styles.title}>{props.title}</Text>
       <Text style={styles.message}>{props.message}</Text>
-      {props.options.map((opt, idx) => {
-        return (
-          <TouchableOpacity style={styles.btn} key={idx} onPress={opt.onPress}>
-            <Text
-              style={[styles.btnTxt, { backgroundColor: theme.bgColor }]}
-              primary
+      <View style={[styles.btns, props.inline && styles.btnsInline]}>
+        {props.options.map((opt, idx) => {
+          return (
+            <TouchableOpacity
+              style={[
+                styles.btn,
+                props.inline && styles.btnInline,
+                { backgroundColor: theme.bgColor },
+              ]}
+              key={idx}
+              onPress={opt.onPress}
             >
-              {opt.text}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
+              <Text style={[styles.btnTxt]} primary>
+                {opt.text}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 };
@@ -58,6 +66,14 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
     marginTop: 30,
   },
+  btns: {
+    alignItems: 'center',
+  },
+  btnsInline: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   btn: {
     borderRadius: 10,
     shadowColor: '#000',
@@ -69,11 +85,22 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     marginVertical: 10,
-  },
-  btnTxt: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     minWidth: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnInline: {
+    marginHorizontal: 10,
+    minWidth: 0,
+    paddingVertical: 0,
+    paddingHorizontal: 0,
+    height: 80,
+    width: 80,
+    borderRadius: 80,
+  },
+  btnTxt: {
     textAlign: 'center',
     fontSize: 20,
   },
