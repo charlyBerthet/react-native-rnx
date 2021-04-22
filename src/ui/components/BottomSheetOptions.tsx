@@ -19,11 +19,11 @@ export const BottomSheetOptions = (props: Props) => {
   const { actionsref } = props;
 
   const show = useCallback(() => {
-    sheetRef?.current?.snapTo(450);
+    sheetRef?.current?.snapTo(0);
   }, []);
 
   const hide = useCallback(() => {
-    sheetRef?.current?.snapTo(0);
+    sheetRef?.current?.snapTo(2);
   }, []);
 
   useEffect(() => {
