@@ -5,6 +5,8 @@ import type CommonViewProps from '../models/CommonViewProps';
 import { useTheme } from '../../theme';
 
 export interface BottomSheetOptionsProps {
+  title: string;
+  message: string;
   options: { text: string; onPress: () => void }[];
 }
 
@@ -21,6 +23,8 @@ export const BottomSheetOptions = (props: Props) => {
         { backgroundColor: theme.bgColor, height: props.height },
       ]}
     >
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.message}>{props.message}</Text>
       {props.options.map((opt, idx) => {
         return (
           <TouchableOpacity style={styles.btn} key={idx} onPress={opt.onPress}>
@@ -70,5 +74,17 @@ const styles = StyleSheet.create({
     minWidth: 300,
     textAlign: 'center',
     fontSize: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  message: {
+    fontSize: 15,
+    fontWeight: '500',
+    textAlign: 'center',
+    marginBottom: 10,
   },
 });
