@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
   root: {
     paddingVertical: 7,
     paddingHorizontal: 10,
+    height: 450,
   },
 });
