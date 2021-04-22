@@ -37,7 +37,7 @@ export const BottomSheetOptions = (props: Props) => {
       initialSnap={0}
       borderRadius={10}
       onOpenStart={() => console.log('onOpen')}
-      onCloseEnd={() => console.log('onCloseEnd')}
+      onCloseEnd={() => console.log('onOpen')}
       renderContent={() => (
         <View style={[styles.root, props.style]}>
           <Text>TEST</Text>
