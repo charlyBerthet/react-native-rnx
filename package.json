@@ -1,6 +1,6 @@
 {
   "name": "react-native-rnx",
-  "version": "0.3.238",
+  "version": "0.3.239",
   "description": "BerthX libs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
