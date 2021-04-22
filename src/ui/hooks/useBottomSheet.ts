@@ -1,17 +1,16 @@
-import type BottomSheet from 'reanimated-bottom-sheet';
+import type { BottomSheetOptionsProps } from '../components/BottomSheetOptions';
+import type { BottomSheetActionsRef } from '../components/BottomSheet';
 
-let sheetRef: BottomSheet;
+let actionsRef: BottomSheetActionsRef | undefined;
 
-export const setSheetRef = (_sheetRef: BottomSheet) => (sheetRef = _sheetRef);
+export const setActionsSheetRef = (
+  _actionsRef: BottomSheetActionsRef | undefined
+) => (actionsRef = _actionsRef);
 
 export const useBottomSheet = () => {
-  const showBottomSheet = () => {
-    sheetRef.snapTo(0);
+  const showBottomSheetOptions = (props: BottomSheetOptionsProps) => {
+    actionsRef?.show(props);
   };
 
-  const showBottomSheetOptions = () => {
-    showBottomSheet();
-  };
-
-  return { showBottomSheetOptions };
+  return { setActionsSheetRef, showBottomSheetOptions };
 };

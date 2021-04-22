@@ -1,13 +1,28 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import 'react-native-reanimated';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text } from './Text';
 import type CommonViewProps from '../models/CommonViewProps';
+import { useTheme } from '../../theme';
 
-interface Props extends CommonViewProps {}
+export interface BottomSheetOptionsProps {
+  options: { text: string; onPress: () => void }[];
+}
+
+interface Props extends CommonViewProps, BottomSheetOptionsProps {}
 
 export const BottomSheetOptions = (props: Props) => {
-  console.log(props);
-  return <View style={styles.root} />;
+  const theme = useTheme();
+  return (
+    <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
+      {props.options.map((opt, idx) => {
+        return (
+          <TouchableOpacity key={idx} onPress={opt.onPress}>
+            <Text>{opt.text}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -15,6 +30,5 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 10,
     height: 450,
-    backgroundColor: 'red',
   },
 });
