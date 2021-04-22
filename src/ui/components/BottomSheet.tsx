@@ -9,8 +9,10 @@ export interface BottomSheetActionsRef {
   hide: () => void;
 }
 
+const snapPointHeight = Dimensions.get('window').height - 50;
+
 export const BottomSheet = () => {
-  const snapPoints = [Dimensions.get('window').height - 50, 0];
+  const snapPoints = [snapPointHeight, 0];
   const [sheetProps, setSheetProps] = useState<any>();
   const sheetRef = useRef<RNBottomSheet | undefined>();
 
