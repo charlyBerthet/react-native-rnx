@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import RNBottomSheet from 'reanimated-bottom-sheet';
+import { View } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import { BottomSheetOptions } from './BottomSheetOptions';
 
@@ -8,7 +9,7 @@ export interface BottomSheetActionsRef {
   hide: () => void;
 }
 
-const snapPointHeight = 250;
+const snapPointHeight = 300;
 
 export const BottomSheet = () => {
   const snapPoints = [snapPointHeight, 0];
@@ -39,6 +40,9 @@ export const BottomSheet = () => {
       borderRadius={17}
       enabledInnerScrolling={false}
       enabledContentTapInteraction={false}
+      renderHeader={() => (
+        <View style={{ height: 500, backgroundColor: '#000', opacity: 0.7 }} />
+      )}
       renderContent={() =>
         sheetProps && (
           <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />

@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnInline: {
-    marginHorizontal: 10,
+    marginHorizontal: 13,
     minWidth: 0,
     paddingVertical: 0,
     paddingHorizontal: 0,
-    height: 60,
-    width: 60,
+    height: 55,
+    width: 5,
     borderRadius: 10,
   },
   btnTxt: {
