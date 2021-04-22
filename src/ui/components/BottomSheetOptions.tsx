@@ -15,30 +15,34 @@ interface Props extends CommonViewProps, BottomSheetOptionsProps {
 export const BottomSheetOptions = (props: Props) => {
   const theme = useTheme();
   return (
-    <View
-      style={[
-        styles.root,
-        { backgroundColor: theme.bgColor, height: props.height },
-      ]}
-    >
-      {props.options.map((opt, idx) => {
-        return (
-          <TouchableOpacity key={idx} onPress={opt.onPress}>
-            <Text
-              style={[styles.btnTxt, { backgroundColor: theme.borderColor }]}
-              primary
-            >
-              {opt.text}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
+    <View style={[styles.root]}>
+      <View
+        style={[
+          styles.content,
+          { backgroundColor: theme.bgColor, height: props.height },
+        ]}
+      >
+        {props.options.map((opt, idx) => {
+          return (
+            <TouchableOpacity key={idx} onPress={opt.onPress}>
+              <Text
+                style={[styles.btnTxt, { backgroundColor: theme.borderColor }]}
+                primary
+              >
+                {opt.text}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  root: {
+  root: {},
+  content: {
+    marginTop: 10,
     paddingVertical: 7,
     paddingHorizontal: 10,
     alignItems: 'center',
@@ -58,5 +62,7 @@ const styles = StyleSheet.create({
     minWidth: 300,
     textAlign: 'center',
     fontSize: 20,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });

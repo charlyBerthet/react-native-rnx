@@ -12,5 +12,7 @@ export const useBottomSheet = () => {
     actionsRef?.show(props);
   };
 
-  return { setActionsSheetRef, showBottomSheetOptions };
+  const hideBottomSheet = () => actionsRef?.hide();
+
+  return { setActionsSheetRef, showBottomSheetOptions, hideBottomSheet };
 };
