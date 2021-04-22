@@ -34,7 +34,6 @@ export const BottomSheetOptions = (props: Props) => {
     <BottomSheet
       ref={sheetRef}
       snapPoints={[450, 300, 0]}
-      initialSnap={450}
       borderRadius={10}
       renderContent={() => (
         <View style={[styles.root, props.style]}>
