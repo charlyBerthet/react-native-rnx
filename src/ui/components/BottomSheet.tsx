@@ -23,8 +23,8 @@ export const BottomSheet = () => {
   };
 
   const hide = () => {
-    setSheetProps(undefined);
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
+    setSheetProps(undefined);
   };
 
   return (
@@ -50,12 +50,12 @@ export const BottomSheet = () => {
         borderRadius={17}
         enabledInnerScrolling={false}
         enabledContentTapInteraction={false}
-        onCloseEnd={() => {
-          console.log('onCloseEnd');
+        onCloseStart={() => {
+          console.log('onCloseStart');
           setIsVisible(false);
         }}
-        onOpenEnd={() => {
-          console.log('onOpenEnd');
+        onOpenStart={() => {
+          console.log('onOpenStart');
           setIsVisible(true);
         }}
         renderContent={() =>
