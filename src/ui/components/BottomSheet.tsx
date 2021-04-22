@@ -12,7 +12,7 @@ export const BottomSheet = () => {
       snapPoints={[450, 300, 0]}
       borderRadius={10}
       onOpenStart={() => console.log('onOpen')}
-      onCloseEnd={() => console.log('onOpen')}
+      onCloseEnd={() => console.log('onCloseEnd')}
       renderContent={() => (
         <View style={[styles.root]}>
           <Text>TEST</Text>
