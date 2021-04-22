@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { Dimensions } from 'react-native';
 import RNBottomSheet from 'reanimated-bottom-sheet';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import { BottomSheetOptions } from './BottomSheetOptions';
@@ -10,7 +9,7 @@ export interface BottomSheetActionsRef {
 }
 
 export const BottomSheet = () => {
-  const snapPoints = [Dimensions.get('window').height, 0];
+  const snapPoints = [450, 0];
   const [sheetProps, setSheetProps] = useState<any>();
   const sheetRef = useRef<RNBottomSheet | undefined>();
 
