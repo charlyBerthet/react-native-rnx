@@ -10,7 +10,6 @@ export const BottomSheet = () => {
     <RNBottomSheet
       ref={setSheetRef}
       snapPoints={[450, 300, 0]}
-      initialSnap={0}
       borderRadius={10}
       onOpenStart={() => console.log('onOpen')}
       onCloseEnd={() => console.log('onOpen')}
