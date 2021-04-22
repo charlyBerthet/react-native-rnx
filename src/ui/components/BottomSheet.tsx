@@ -20,11 +20,13 @@ export const BottomSheet = () => {
   const show = (props?: any) => {
     setSheetProps(props);
     sheetRef.current?.snapTo(0);
+    setIsVisible(true);
   };
 
   const hide = () => {
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
     setSheetProps(undefined);
+    setIsVisible(false);
   };
 
   return (
@@ -51,11 +53,9 @@ export const BottomSheet = () => {
         enabledInnerScrolling={false}
         enabledContentTapInteraction={false}
         onCloseStart={() => {
-          console.log('onCloseStart');
           setIsVisible(false);
         }}
-        onOpenStart={() => {
-          console.log('onOpenStart');
+        onOpenEnd={() => {
           setIsVisible(true);
         }}
         renderContent={() =>
