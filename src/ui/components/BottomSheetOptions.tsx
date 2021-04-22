@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 0,
     height: 55,
-    width: 5,
+    width: 55,
     borderRadius: 10,
   },
   btnTxt: {

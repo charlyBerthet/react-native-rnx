@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import RNBottomSheet from 'reanimated-bottom-sheet';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import { BottomSheetOptions } from './BottomSheetOptions';
 
@@ -19,13 +19,11 @@ export const BottomSheet = () => {
 
   const show = (props?: any) => {
     setSheetProps(props);
-    setIsVisible(true);
     sheetRef.current?.snapTo(0);
   };
 
   const hide = () => {
     setSheetProps(undefined);
-    setIsVisible(false);
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
   };
 
@@ -34,15 +32,8 @@ export const BottomSheet = () => {
       {isVisible && (
         <TouchableOpacity
           onPress={isVisible ? hide : show}
-          style={{
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            left: 0,
-            bottom: 0,
-            backgroundColor: '#000',
-            opacity: 0.7,
-          }}
+          style={styles.backdrop}
+          activeOpacity={0.9}
         />
       )}
 
@@ -59,6 +50,8 @@ export const BottomSheet = () => {
         borderRadius={17}
         enabledInnerScrolling={false}
         enabledContentTapInteraction={false}
+        onCloseEnd={() => setIsVisible(false)}
+        onOpenStart={() => setIsVisible(true)}
         renderContent={() =>
           sheetProps && (
             <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
@@ -68,3 +61,15 @@ export const BottomSheet = () => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  backdrop: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    backgroundColor: '#000',
+    opacity: 0.7,
+  },
+});
