@@ -57,12 +57,11 @@ const styles = StyleSheet.create({
       width: 0,
       height: -2,
     },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
     elevation: 5,
   },
   btn: {
-    overflow: 'hidden',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -72,6 +71,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    marginVertical: 10,
   },
   btnTxt: {
     paddingVertical: 10,
@@ -79,6 +79,5 @@ const styles = StyleSheet.create({
     minWidth: 300,
     textAlign: 'center',
     fontSize: 20,
-    marginVertical: 10,
   },
 });
