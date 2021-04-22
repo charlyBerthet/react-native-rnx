@@ -8,7 +8,7 @@ export interface BottomSheetActionsRef {
   hide: () => void;
 }
 
-const snapPointHeight = 350;
+const snapPointHeight = 250;
 
 export const BottomSheet = () => {
   const snapPoints = [snapPointHeight, 0];
