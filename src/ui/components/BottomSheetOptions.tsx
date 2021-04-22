@@ -24,7 +24,12 @@ export const BottomSheetOptions = (props: Props) => {
       {props.options.map((opt, idx) => {
         return (
           <TouchableOpacity key={idx} onPress={opt.onPress}>
-            <Text>{opt.text}</Text>
+            <Text
+              style={[styles.btnTxt, { backgroundColor: theme.borderColor }]}
+              primary
+            >
+              {opt.text}
+            </Text>
           </TouchableOpacity>
         );
       })}
@@ -46,5 +51,12 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+  },
+  btnTxt: {
+    paddingVertical: 7,
+    paddingHorizontal: 20,
+    minWidth: 300,
+    textAlign: 'center',
+    fontSize: 20,
   },
 });
