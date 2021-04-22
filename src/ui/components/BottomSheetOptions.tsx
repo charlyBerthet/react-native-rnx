@@ -96,9 +96,9 @@ const styles = StyleSheet.create({
     minWidth: 0,
     paddingVertical: 0,
     paddingHorizontal: 0,
-    height: 80,
-    width: 80,
-    borderRadius: 80,
+    height: 60,
+    width: 60,
+    borderRadius: 10,
   },
   btnTxt: {
     textAlign: 'center',
