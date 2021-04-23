@@ -43,6 +43,14 @@ export const Countdown = (props: Props) => {
   const circleDashOffset =
     circleCirconf * 1 - Math.min(timeSpentPercentage, 99.99) / 100;
 
+  console.log(
+    '----',
+    timeSpentPercentage,
+    Math.min(timeSpentPercentage, 99.99),
+    Math.min(timeSpentPercentage, 99.99) / 100,
+    1 - Math.min(timeSpentPercentage, 99.99) / 100
+  );
+
   return (
     <View style={[styles.root, props.style]}>
       <Svg height="100%" width="100%" viewBox="0 0 100 100" style={styles.svg}>
