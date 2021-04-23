@@ -34,10 +34,9 @@ export const Countdown = (props: Props) => {
     };
   }, []);
 
-  let timeSpentPercentage = Math.round(
+  const timeSpentPercentage = Math.round(
     ((now - startsAt) / (endsAt - startsAt)) * 100
   );
-  timeSpentPercentage = 20;
 
   const circleRadius = CIRCLE_RADIUS;
   const circleCirconf = 2 * Math.PI * circleRadius;
