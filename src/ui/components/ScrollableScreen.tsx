@@ -37,6 +37,7 @@ interface Props {
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
+  scrollViewRef?: (ref: ScrollView | undefined) => void;
 }
 
 const LOW_DOWN_MARGIN_TOP = 35;
@@ -107,7 +108,13 @@ export const ScrollableScreen = (props: Props) => {
   };
 
   return (
-    <ScrollView scrollEventThrottle={5} onScroll={onScroll}>
+    <ScrollView
+      scrollEventThrottle={5}
+      onScroll={onScroll}
+      ref={(ref) =>
+        props.scrollViewRef ? props.scrollViewRef(ref || undefined) : null
+      }
+    >
       <View style={styles.root}>
         <Title>{props.title}</Title>
         <Subtitle>{props.subtitle}</Subtitle>
