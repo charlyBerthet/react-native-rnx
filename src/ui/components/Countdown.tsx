@@ -41,8 +41,7 @@ export const Countdown = (props: Props) => {
 
   const circleRadius = CIRCLE_RADIUS;
   const circleCirconf = 2 * Math.PI * circleRadius;
-  const circleDashOffset =
-    circleCirconf * 1 - Math.min(timeSpentPercentage, 99.99) / 100;
+  const circleDashOffset = circleCirconf * 1 - timeSpentPercentage / 100;
 
   console.log(
     '----',
