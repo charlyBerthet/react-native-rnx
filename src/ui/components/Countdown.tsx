@@ -40,7 +40,8 @@ export const Countdown = (props: Props) => {
 
   const circleRadius = CIRCLE_RADIUS;
   const circleCirconf = 2 * Math.PI * circleRadius;
-  const circleDashOffset = circleCirconf * (1 - timeSpentPercentage / 100);
+  const circleDashOffset =
+    circleCirconf * Math.min(1 - timeSpentPercentage / 100, 1);
 
   return (
     <View style={[styles.root, props.style]}>
