@@ -48,7 +48,9 @@ export const Countdown = (props: Props) => {
     timeSpentPercentage,
     Math.min(timeSpentPercentage, 99.99),
     Math.min(timeSpentPercentage, 99.99) / 100,
-    1 - Math.min(timeSpentPercentage, 99.99) / 100
+    1 - Math.min(timeSpentPercentage, 99.99) / 100,
+    circleCirconf,
+    circleCirconf * 1 - timeSpentPercentage / 100
   );
 
   return (
