@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   title: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '700',
   },
   switch: {
