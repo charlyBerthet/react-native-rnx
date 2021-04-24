@@ -10,6 +10,7 @@ export interface RowModel {
   rightLabel: string;
   rightLabelCaption: string;
   onPress?: () => void;
+  onLongPress?: () => void;
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -33,6 +34,7 @@ export const Row = (props: Props) => {
       <TouchableOpacity
         style={styles.subRoot}
         onPress={props.onPress}
+        onLongPress={props.onLongPress}
         activeOpacity={props.onPress ? 0.8 : 1}
       >
         <View>
