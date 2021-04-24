@@ -10,6 +10,7 @@ const lightTheme: Theme = {
   thirdColor: '#0694FF',
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#ddd',
+  destructiveColor: '#ed0b0b',
 };
 
 export default lightTheme;

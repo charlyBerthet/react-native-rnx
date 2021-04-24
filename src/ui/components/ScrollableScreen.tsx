@@ -28,12 +28,14 @@ interface Props {
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
+    destructive?: boolean;
   };
   headerLeftButton?: {
     title: string;
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
+    destructive?: boolean;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
@@ -70,6 +72,7 @@ export const ScrollableScreen = (props: Props) => {
                   props.headerLeftButton!!.onPress();
                 }
               }}
+              destructive={props.headerLeftButton!!.destructive}
               secondary={props.headerLeftButton!!.secondary}
             />
           )
@@ -88,6 +91,7 @@ export const ScrollableScreen = (props: Props) => {
                   props.headerRightButton!!.onPress();
                 }
               }}
+              destructive={props.headerRightButton!!.destructive}
               secondary={props.headerRightButton!!.secondary}
             />
           )
