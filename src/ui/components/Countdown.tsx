@@ -86,7 +86,7 @@ export const Countdown = (props: Props) => {
         </Text>
         <Text style={[styles.daysLeft, { color: theme.txtColor }]}>
           {props.localizeDaysLeft(
-            daysDiff(startsAt, now),
+            daysDiff(startsAt, now, true),
             daysDiff(startsAt, endsAt)
           )}
         </Text>
