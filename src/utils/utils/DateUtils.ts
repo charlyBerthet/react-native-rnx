@@ -38,7 +38,7 @@ export const daysDiff = (
   return notRounded ? days : Math.floor(days);
 };
 export const hoursToDays = (hours: number) => Math.round(hours / 24);
-export const daysToHours = (days: number) => Math.round(days * 60);
+export const daysToHours = (days: number) => Math.round(days * 24);
 export const msToDays = (ms: number) => Math.round(ms / 1000 / 60 / 60 / 24);
 export const msToHours = (ms: number) => Math.round(ms / 1000 / 60 / 60);
 export const hoursToMs = (hours: number) => hours * 60 * 60 * 1000;
