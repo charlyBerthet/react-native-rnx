@@ -17,16 +17,25 @@ export const stringifyTimeMS = (durationMs: number) => {
   )}`;
 };
 
-export const hoursDiff = (fromDate: number, toDate: number) => {
+export const hoursDiff = (
+  fromDate: number,
+  toDate: number,
+  notRounded?: boolean
+) => {
   const durationMs = toDate - fromDate;
   const hours = durationMs / (1000 * 60 * 60);
-  return Math.floor(hours);
+  return notRounded ? hours : Math.floor(hours);
 };
 
-export const daysDiff = (fromDate: number, toDate: number) => {
+export const daysDiff = (
+  fromDate: number,
+  toDate: number,
+  notRounded?: boolean
+) => {
   const durationMs = toDate - fromDate;
   const hours = durationMs / (1000 * 60 * 60);
-  return Math.floor(hours / 24);
+  const days = hours / 24;
+  return notRounded ? days : Math.floor(days);
 };
 export const hoursToDays = (hours: number) => Math.round(hours / 24);
 export const msToDays = (ms: number) => Math.round(ms / 1000 / 60 / 60 / 24);
