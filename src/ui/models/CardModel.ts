@@ -10,4 +10,5 @@ export interface CardModel {
   onPrimaryButtonPress?: () => void;
   onSecondaryButtonPress?: () => void;
   secondaryColor?: boolean;
+  onLongPress?: () => void;
 }

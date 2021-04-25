@@ -12,6 +12,7 @@ export const Card = (props: Props) => {
   return (
     <TouchableOpacity
       onPress={props.onPrimaryButtonPress}
+      onLongPress={props.onLongPress}
       style={[
         styles.root,
         {
