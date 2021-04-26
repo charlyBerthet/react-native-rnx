@@ -3,8 +3,8 @@ import type Theme from '../models/Theme';
 const darkTheme: Theme = {
   bgColor: '#000',
   txtColor: '#fff',
-  primaryTxtColor: '#055640',
-  primaryColor: '#149e77',
+  primaryTxtColor: '#149e77',
+  primaryColor: '#0D8060',
   secondaryColor: '#EA7575',
   secondaryTxtColor: '#933636',
   thirdColor: '#0694FF',
