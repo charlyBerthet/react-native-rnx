@@ -58,11 +58,11 @@ export function createStateProvider<T>(
     const [isInit, setIsInit] = useState(false);
     const [state, dispatch] = useReducer(
       (accState: T, action: { type: string; value: any }) => {
-        console.log('[RNX][StateProvider.dispatch] --> action', action);
-        console.log(
-          '[RNX][StateProvider.dispatch] stateBefore',
-          JSON.stringify(accState)
-        );
+        // console.log('[RNX][StateProvider.dispatch] --> action', action);
+        // console.log(
+        //   '[RNX][StateProvider.dispatch] stateBefore',
+        //   JSON.stringify(accState)
+        // );
         let partialUpdate: Partial<T> = {};
         switch (action.type) {
           case 'set':
@@ -76,10 +76,10 @@ export function createStateProvider<T>(
           ...reducer({ ...accState, ...partialUpdate }, action),
         };
         _setToStorage(newState);
-        console.log(
-          '[RNX][StateProvider.dispatch] <-- stateAfter',
-          JSON.stringify(newState)
-        );
+        // console.log(
+        //   '[RNX][StateProvider.dispatch] <-- stateAfter',
+        //   JSON.stringify(newState)
+        // );
         return newState;
       },
       initial
