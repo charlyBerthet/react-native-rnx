@@ -6,6 +6,7 @@ import type CommonViewProps from '../models/CommonViewProps';
 interface Props extends CommonViewProps {
   children: JSX.Element | JSX.Element[];
   secondary?: boolean;
+  color?: string;
 }
 
 export const ColoredBg = (props: Props) => {
@@ -16,7 +17,7 @@ export const ColoredBg = (props: Props) => {
       <View
         style={[
           styles.bg,
-          { backgroundColor: mainColors.bg },
+          { backgroundColor: props.color || mainColors.bg },
           isDarkTheme && styles.bgDark,
         ]}
       />
