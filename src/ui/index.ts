@@ -15,5 +15,6 @@ export * from './components/CardBg';
 export * from './components/Row';
 export * from './components/Table';
 export * from './components/Countdown';
+export * from './components/ColoredBg';
 export * from './models/CardModel';
 export * from './hooks/useBottomSheet';

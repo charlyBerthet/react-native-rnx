@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { useMainColors } from '../../theme';
+import { StyleSheet } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
+import { ColoredBg } from './ColoredBg';
 
 interface Props extends CommonViewProps {
   children: JSX.Element | JSX.Element[];
@@ -9,12 +9,8 @@ interface Props extends CommonViewProps {
 }
 
 export const CardBg = (props: Props) => {
-  const mainColors = useMainColors(props.secondary);
   return (
-    <View style={[styles.root, props.style]}>
-      <View style={[styles.bg, { backgroundColor: mainColors.bg }]} />
-      {props.children}
-    </View>
+    <ColoredBg style={[styles.root, props.style]}>{props.children}</ColoredBg>
   );
 };
 
@@ -24,13 +20,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 10,
     overflow: 'hidden',
-  },
-  bg: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    opacity: 0.14,
   },
 });
