@@ -6,11 +6,16 @@ import { ColoredBg } from './ColoredBg';
 interface Props extends CommonViewProps {
   children: JSX.Element | (JSX.Element | false | undefined)[];
   secondary?: boolean;
+  color?: string;
 }
 
 export const CardBg = (props: Props) => {
   return (
-    <ColoredBg style={[styles.root, props.style]} secondary={props.secondary}>
+    <ColoredBg
+      style={[styles.root, props.style]}
+      secondary={props.secondary}
+      color={props.color}
+    >
       {props.children}
     </ColoredBg>
   );
