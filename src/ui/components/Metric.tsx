@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
 import { CardBg } from './CardBg';
-import { useTheme } from '../../theme';
 
 interface Props extends CommonViewProps {
   value: string;
@@ -12,16 +11,8 @@ interface Props extends CommonViewProps {
 }
 
 export const Metric = (props: Props) => {
-  const theme = useTheme();
   return (
-    <CardBg
-      style={[
-        styles.container,
-        { backgroundColor: theme.bgColor },
-        props.style,
-      ]}
-      color={'transparent'}
-    >
+    <CardBg style={[styles.container, props.style]}>
       <Text style={styles.value}>{props.value}</Text>
       <Text style={styles.title}>{props.title}</Text>
       {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
@@ -33,15 +24,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 2,
-    elevation: 2,
-    overflow: 'visible',
   },
   value: {
     textAlign: 'center',
