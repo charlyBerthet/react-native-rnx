@@ -22,7 +22,7 @@ export const Metric = (props: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
   },
   value: {
