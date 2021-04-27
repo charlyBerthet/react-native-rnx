@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
 import { CardBg } from './CardBg';
@@ -14,32 +14,22 @@ export const Metric = (props: Props) => {
   return (
     <CardBg style={[styles.container, props.style]}>
       <Text style={styles.value}>{props.value}</Text>
-      <View>
-        <Text style={styles.title}>{props.title}</Text>
-        {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
-      </View>
+      <Text style={styles.title}>{props.title}</Text>
+      {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
     </CardBg>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   value: {
-    textAlign: 'right',
+    textAlign: 'center',
     fontSize: 30,
     fontWeight: '700',
-    marginRight: 5,
-    marginTop: -6,
   },
-  title: {
-    fontWeight: '700',
-    fontSize: 12,
-  },
-  detail: {
-    fontSize: 10,
-  },
+  title: { textAlign: 'center', fontWeight: '700', fontSize: 12 },
+  detail: { textAlign: 'center', fontSize: 10 },
 });

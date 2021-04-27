@@ -4,7 +4,7 @@ import { useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | (JSX.Element | false | undefined)[];
   secondary?: boolean;
   color?: string;
 }

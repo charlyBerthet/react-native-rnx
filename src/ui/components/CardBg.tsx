@@ -4,7 +4,7 @@ import type CommonViewProps from '../models/CommonViewProps';
 import { ColoredBg } from './ColoredBg';
 
 interface Props extends CommonViewProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | (JSX.Element | false | undefined)[];
   secondary?: boolean;
 }
 
