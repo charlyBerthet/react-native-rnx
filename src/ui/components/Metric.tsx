@@ -35,9 +35,19 @@ const styles = StyleSheet.create({
   },
   value: {
     textAlign: 'left',
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: '700',
   },
-  title: { textAlign: 'left', fontWeight: '700', fontSize: 14 },
-  valueSuffix: { textAlign: 'left', fontSize: 12, opacity: 0.5, marginLeft: 5 },
+  title: {
+    textAlign: 'left',
+    fontWeight: '500',
+    fontSize: 14,
+    marginBottom: -3,
+  },
+  valueSuffix: {
+    textAlign: 'left',
+    fontSize: 12,
+    opacity: 0.75,
+    marginLeft: 4,
+  },
 });
