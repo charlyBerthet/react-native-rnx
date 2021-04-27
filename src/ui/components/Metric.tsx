@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     marginTop: 3,
   },
   detail: {
-    fontSize: 11,
+    fontSize: 12,
   },
 });
