@@ -26,5 +26,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+    overflow: 'hidden',
   },
 });
