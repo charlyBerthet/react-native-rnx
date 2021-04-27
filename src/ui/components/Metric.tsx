@@ -13,9 +13,9 @@ interface Props extends CommonViewProps {
 export const Metric = (props: Props) => {
   return (
     <CardBg style={[styles.container, props.style]}>
-      <Text style={styles.value}>{props.value}</Text>
       <Text style={styles.title}>{props.title}</Text>
-      {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
+      <Text style={styles.value}>{props.value}</Text>
+      {/* {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>} */}
     </CardBg>
   );
 };
@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   value: {
-    textAlign: 'center',
-    fontSize: 25,
+    textAlign: 'left',
+    fontSize: 35,
     fontWeight: '700',
   },
-  title: { textAlign: 'center', fontWeight: '700', fontSize: 14 },
-  detail: { textAlign: 'center', fontSize: 12 },
+  title: { textAlign: 'left', fontWeight: '700', fontSize: 14 },
+  detail: { textAlign: 'left', fontSize: 12 },
 });
