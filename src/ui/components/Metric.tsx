@@ -45,8 +45,7 @@ const styles = StyleSheet.create({
   },
   valueSuffix: {
     textAlign: 'left',
-    fontSize: 12,
-    opacity: 0.8,
+    fontSize: 10,
     marginLeft: 4,
     marginBottom: 6,
   },
