@@ -7,7 +7,7 @@ interface Props extends CommonViewProps {
   metrics: {
     value: string;
     title: string;
-    detail: string;
+    valueSuffix?: string;
   }[];
 }
 
@@ -20,7 +20,7 @@ export const MetricList = (props: Props) => {
           key={i}
           value={m.value}
           title={m.title}
-          detail={m.detail}
+          valueSuffix={m.valueSuffix}
         />
       ))}
     </View>
