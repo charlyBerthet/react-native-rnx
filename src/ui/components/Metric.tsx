@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: 30,
     fontWeight: '700',
-    marginRight: 3,
-    marginTop: -4,
+    marginRight: 5,
+    marginTop: -6,
   },
   title: {
     fontWeight: '700',
