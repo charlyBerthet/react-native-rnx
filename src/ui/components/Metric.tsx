@@ -1,43 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useTheme } from '../../theme';
+import { View, StyleSheet } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
+import { Text } from './Text';
+import { CardBg } from './CardBg';
 
 interface Props extends CommonViewProps {
   value: string;
-  label: string;
+  title: string;
+  detail?: string;
 }
 
 export const Metric = (props: Props) => {
-  const theme = useTheme();
   return (
-    <View style={[styles.container, props.style]}>
-      <Text style={[styles.value, { color: theme.txtColor }]}>
-        {props.value}
-      </Text>
-      <Text style={[styles.label, { color: theme.txtColor }]}>
-        {props.label}
-      </Text>
-    </View>
+    <CardBg style={[styles.container, props.style]}>
+      <Text style={styles.value}>{props.value}</Text>
+      <View>
+        <Text style={styles.title}>{props.title}</Text>
+        {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
+      </View>
+    </CardBg>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
     justifyContent: 'center',
   },
   value: {
-    fontSize: 26,
+    textAlign: 'right',
+    fontSize: 40,
     fontWeight: '700',
-    textAlign: 'center',
+    marginRight: 3,
   },
-  label: {
-    marginTop: 4,
-    fontSize: 12,
+  title: {
     fontWeight: '500',
-    textAlign: 'center',
-    maxWidth: 100,
-    alignSelf: 'center',
   },
+  detail: {},
 });

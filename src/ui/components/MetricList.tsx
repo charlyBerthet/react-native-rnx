@@ -6,7 +6,8 @@ import { Metric } from './Metric';
 interface Props extends CommonViewProps {
   metrics: {
     value: string;
-    label: string;
+    title: string;
+    detail: string;
   }[];
 }
 
@@ -14,7 +15,13 @@ export const MetricList = (props: Props) => {
   return (
     <View style={[styles.container, props.style]}>
       {props.metrics.map((m, i) => (
-        <Metric key={i} value={m.value} label={m.label} />
+        <Metric
+          style={styles.card}
+          key={i}
+          value={m.value}
+          title={m.title}
+          detail={m.detail}
+        />
       ))}
     </View>
   );
@@ -25,5 +32,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
+  },
+  card: {
+    marginHorizontal: 2,
   },
 });

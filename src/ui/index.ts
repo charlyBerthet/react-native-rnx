@@ -18,4 +18,3 @@ export * from './components/Countdown';
 export * from './components/ColoredBg';
 export * from './models/CardModel';
 export * from './hooks/useBottomSheet';
-export * from './components/MetricItemCard';
