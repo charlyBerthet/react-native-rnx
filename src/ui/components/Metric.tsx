@@ -1,8 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
-import { CardBg } from './CardBg';
 
 interface Props extends CommonViewProps {
   value: string;
@@ -12,11 +11,11 @@ interface Props extends CommonViewProps {
 
 export const Metric = (props: Props) => {
   return (
-    <CardBg style={[styles.container, props.style]}>
+    <View style={[styles.container, props.style]}>
       <Text style={styles.value}>{props.value}</Text>
       <Text style={styles.title}>{props.title}</Text>
       {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
-    </CardBg>
+    </View>
   );
 };
 
