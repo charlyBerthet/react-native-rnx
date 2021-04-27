@@ -35,5 +35,6 @@ const styles = StyleSheet.create({
   },
   card: {
     marginHorizontal: 2,
+    flex: 1,
   },
 });

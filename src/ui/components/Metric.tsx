@@ -30,12 +30,15 @@ const styles = StyleSheet.create({
   },
   value: {
     textAlign: 'right',
-    fontSize: 40,
+    fontSize: 35,
     fontWeight: '700',
     marginRight: 3,
   },
   title: {
-    fontWeight: '500',
+    fontWeight: '700',
+    fontSize: 16,
   },
-  detail: {},
+  detail: {
+    fontSize: 14,
+  },
 });
