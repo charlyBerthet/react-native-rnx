@@ -10,7 +10,9 @@ interface Props extends CommonViewProps {
 
 export const CardBg = (props: Props) => {
   return (
-    <ColoredBg style={[styles.root, props.style]}>{props.children}</ColoredBg>
+    <ColoredBg style={[styles.root, props.style]} secondary={props.secondary}>
+      {props.children}
+    </ColoredBg>
   );
 };
 
