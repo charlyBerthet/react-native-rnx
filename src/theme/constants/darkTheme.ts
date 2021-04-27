@@ -6,7 +6,7 @@ const darkTheme: Theme = {
   primaryTxtColor: '#149e77',
   primaryColor: '#0D8060',
   secondaryColor: '#EA7575',
-  secondaryTxtColor: '#933636',
+  secondaryTxtColor: '#f77b7b',
   thirdColor: '#0694FF',
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#666',
