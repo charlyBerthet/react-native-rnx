@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
   },
   title: {
     textAlign: 'left',
-    fontWeight: '500',
     fontSize: 14,
-    marginBottom: -3,
+    marginBottom: -1,
   },
   valueSuffix: {
     textAlign: 'left',
     fontSize: 12,
-    opacity: 0.75,
+    opacity: 0.8,
     marginLeft: 4,
+    marginBottom: 6,
   },
 });
