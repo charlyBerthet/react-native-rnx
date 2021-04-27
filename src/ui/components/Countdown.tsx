@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, useColorScheme } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { useTheme, useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -23,6 +23,7 @@ const SIZE = Math.min(Dimensions.get('window').width - 30, 310);
 export const Countdown = (props: Props) => {
   const [now, setNow] = useState(0);
   const theme = useTheme();
+  const isDarkTheme = useColorScheme() === 'dark';
   const mainColors = useMainColors(props.secondary);
   const { startsAt, endsAt } = props;
 
@@ -52,7 +53,7 @@ export const Countdown = (props: Props) => {
           r={circleRadius}
           stroke={mainColors.bg}
           strokeWidth={CIRCLE_STROKE_SIZE}
-          opacity="0.15"
+          opacity={isDarkTheme ? 0.4 : 0.15}
         />
       </Svg>
       <Svg
