@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
+import { CardBg } from './CardBg';
 
 interface Props extends CommonViewProps {
   value: string;
@@ -11,19 +12,29 @@ interface Props extends CommonViewProps {
 
 export const MetricItemCard = (props: Props) => {
   return (
-    <View style={[styles.container, props.style]}>
-      <Text>{props.value}</Text>
+    <CardBg style={[styles.container, props.style]}>
+      <Text style={styles.value}>{props.value}</Text>
       <View>
-        <Text>{props.title}</Text>
-        {!!props.detail && <Text>{props.detail}</Text>}
+        <Text style={styles.title}>{props.title}</Text>
+        {!!props.detail && <Text style={styles.detail}>{props.detail}</Text>}
       </View>
-    </View>
+    </CardBg>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
+  value: {
+    textAlign: 'right',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  title: {
+    fontWeight: '500',
+  },
+  detail: {},
 });
