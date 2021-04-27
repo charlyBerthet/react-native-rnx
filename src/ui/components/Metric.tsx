@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 14,
+    marginTop: 3,
   },
   detail: {
-    fontSize: 14,
+    fontSize: 11,
   },
 });

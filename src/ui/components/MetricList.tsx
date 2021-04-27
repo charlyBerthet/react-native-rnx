@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   card: {
-    marginHorizontal: 2,
+    marginHorizontal: 3,
     flex: 1,
   },
 });
