@@ -28,6 +28,7 @@ export const Row = (props: Props) => {
         props.hasBorderBottom && styles.rootBorderBottom,
         props.hasBorderTop && { borderTopColor: theme.borderColor },
         props.hasBorderBottom && { borderBottomColor: theme.borderColor },
+        { backgroundColor: theme.bgColor },
         props.style,
       ]}
     >
