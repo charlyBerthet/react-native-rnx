@@ -3,10 +3,11 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text } from './Text';
 import { ColoredBg } from './ColoredBg';
 import { useTheme } from '../../theme';
+import type CommonViewProps from '../models/CommonViewProps';
 
 type Value = any;
 
-interface Props {
+interface Props extends CommonViewProps {
   options: {
     label: string;
     value: Value;
@@ -18,7 +19,7 @@ interface Props {
 export const TabSelector = (props: Props) => {
   const theme = useTheme();
   return (
-    <ColoredBg style={[styles.root]}>
+    <ColoredBg style={[styles.root, props.style]}>
       {props.options.map((opt, idx) => {
         const isActive = opt.value === props.value;
         const isPreviousActive =
