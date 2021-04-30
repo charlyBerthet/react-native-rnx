@@ -42,3 +42,13 @@ export const daysToHours = (days: number) => Math.round(days * 24);
 export const msToDays = (ms: number) => Math.round(ms / 1000 / 60 / 60 / 24);
 export const msToHours = (ms: number) => Math.round(ms / 1000 / 60 / 60);
 export const hoursToMs = (hours: number) => hours * 60 * 60 * 1000;
+
+export const isSameDay = (a: number, b: number) => {
+  const dA = new Date(a);
+  const dB = new Date(b);
+  return (
+    dA.getDate() === dB.getDate() &&
+    dA.getMonth() === dB.getMonth() &&
+    dA.getFullYear() === dB.getFullYear()
+  );
+};
