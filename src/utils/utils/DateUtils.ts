@@ -53,6 +53,14 @@ export const isSameDay = (a: number, b: number) => {
   );
 };
 
+export const isSameMonth = (a: number, b: number) => {
+  const dA = new Date(a);
+  const dB = new Date(b);
+  return (
+    dA.getMonth() === dB.getMonth() && dA.getFullYear() === dB.getFullYear()
+  );
+};
+
 export const resetTime = (timestamp: number) => {
   const date = new Date(timestamp);
   date.setHours(0);
