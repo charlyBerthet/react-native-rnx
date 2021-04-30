@@ -39,9 +39,11 @@ export const daysDiff = (
 };
 export const hoursToDays = (hours: number) => Math.round(hours / 24);
 export const daysToHours = (days: number) => Math.round(days * 24);
-export const msToDays = (ms: number, rounded = true) => {
+export const msToDays = (ms: number, rounded = true, decimal = 0) => {
   const res = ms / 1000 / 60 / 60 / 24;
-  return rounded ? Math.round(res) : Math.round(res * 100) * 0.01;
+  return rounded
+    ? Math.round(res * Math.pow(10, decimal)) / Math.pow(10, decimal)
+    : res;
 };
 export const msToHours = (ms: number) => Math.round(ms / 1000 / 60 / 60);
 export const hoursToMs = (hours: number) => hours * 60 * 60 * 1000;
