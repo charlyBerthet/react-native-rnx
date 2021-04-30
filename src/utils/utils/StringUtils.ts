@@ -7,3 +7,10 @@ export const newUUID = () =>
       v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });
+
+export const stringifyNumber = (num: number, maxDecimals = 1) => {
+  if (Math.round(num) !== num) {
+    return num.toFixed(maxDecimals);
+  }
+  return num + '';
+};
