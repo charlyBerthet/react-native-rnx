@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-export const addZero = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+export const addZero = (n: number) => `${n}`.padStart(2, '0');
 
 export const newUUID = () =>
   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
