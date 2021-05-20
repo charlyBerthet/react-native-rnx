@@ -52,7 +52,16 @@ export const Button = (props: Props) => {
       </Text>
       {props.rightArrow && (
         <View style={styles.rightArrow}>
-          <Text>{'>'}</Text>
+          <Text
+            style={{
+              color:
+                btnType === 'normal'
+                  ? theme.txtColorOnPrimaryColor
+                  : mainColors.txt,
+            }}
+          >
+            {'>'}
+          </Text>
         </View>
       )}
       {props.subtitle && (
