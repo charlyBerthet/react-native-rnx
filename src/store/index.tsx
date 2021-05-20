@@ -15,11 +15,16 @@ interface StateProviderProps {
 
 let Store: React.Context<any>;
 
-export function createStateProvider<T>(
+interface BaseStore {
+  isPremium?: boolean;
+}
+
+export function createStateProvider<T extends BaseStore>(
   initial: T,
   reducer: (state: T, action: { type: string; value: any }) => T,
-  persist: (keyof T)[]
+  _persist: (keyof T)[]
 ) {
+  const persist = [..._persist.filter((p) => p !== 'isPremium'), 'isPremium'];
   console.log(
     '[RNX] createStateProvider, will persist keys',
     JSON.stringify(persist)
@@ -103,7 +108,7 @@ export function createStateProvider<T>(
   return { Element: StateProvider };
 }
 
-export function useGlobalState<T>() {
+export function useGlobalState<T extends BaseStore>() {
   if (!Store) {
     throw 'Please initialize Store first using createStateProvider';
   }

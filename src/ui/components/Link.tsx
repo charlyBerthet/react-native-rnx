@@ -8,6 +8,7 @@ interface Props extends CommonViewProps {
   onPress?: () => void;
   secondary?: boolean;
   destructive?: boolean;
+  disabled?: boolean;
 }
 
 export const Link = (props: Props) => {
@@ -17,6 +18,7 @@ export const Link = (props: Props) => {
     <TouchableOpacity
       onPress={props.onPress}
       style={[styles.container, props.style]}
+      disabled={props.disabled}
     >
       <Text
         style={[

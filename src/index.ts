@@ -4,3 +4,4 @@ export * from './ui';
 export * from './localization';
 export * from './utils';
 export * from './store';
+export * from './iap';
