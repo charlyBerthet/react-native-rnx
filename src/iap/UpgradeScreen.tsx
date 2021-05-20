@@ -106,7 +106,10 @@ export const UpgradeScreen = (props: Props) => {
   };
 
   useEffect(() => {
-    IAPService.getPriceForOneExport().then(setPrice);
+    setIsLoading(true);
+    IAPService.getPriceForOneExport()
+      .then(setPrice)
+      .then(() => setIsLoading(false));
   }, []);
 
   return (

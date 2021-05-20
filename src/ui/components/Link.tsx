@@ -17,7 +17,7 @@ export const Link = (props: Props) => {
   return (
     <TouchableOpacity
       onPress={props.onPress}
-      style={[styles.container, props.style]}
+      style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
       <Text
@@ -38,6 +38,9 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 4,
     paddingHorizontal: 15,
+  },
+  disabled: {
+    opacity: 0.5,
   },
   title: {
     fontSize: 14,
