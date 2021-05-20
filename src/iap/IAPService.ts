@@ -27,7 +27,7 @@ const initStore = async (): Promise<void | string> => {
   }
 };
 
-const hasPurchasedPremium = async () => {
+export const hasPurchasedPremium = async () => {
   await initStore();
   try {
     const purchases = await RNIap.getAvailablePurchases();
@@ -39,7 +39,7 @@ const hasPurchasedPremium = async () => {
   }
 };
 
-const requestPurchase = async (): Promise<
+export const requestPurchase = async (): Promise<
   RNIap.ProductPurchase | undefined
 > => {
   await initStore();
@@ -54,7 +54,9 @@ const requestPurchase = async (): Promise<
   }
 };
 
-const getProducts = async (productIds: string[]): Promise<RNIap.Product[]> => {
+export const getProducts = async (
+  productIds: string[]
+): Promise<RNIap.Product[]> => {
   await initStore();
   const products = await RNIap.getProducts(productIds);
   if (products && products.length) {
@@ -63,17 +65,10 @@ const getProducts = async (productIds: string[]): Promise<RNIap.Product[]> => {
   return [];
 };
 
-const getPriceForOneExport = async (): Promise<string | undefined> => {
+export const getPriceForOneExport = async (): Promise<string | undefined> => {
   const prods = await getProducts([PREMIUM_MONTHLY]);
   if (!prods || !prods.length) {
     return '$$';
   }
   return prods[0].localizedPrice;
-};
-
-export default {
-  hasPurchasedPremium,
-  requestPurchase,
-  getProducts,
-  getPriceForOneExport,
 };

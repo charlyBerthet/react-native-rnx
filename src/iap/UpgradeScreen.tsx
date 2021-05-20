@@ -17,13 +17,13 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { Pager, PagerProvider } from '@crowdlinker/react-native-pager';
-import useIsPremium from './useIsPremium';
+import { useIsPremium } from './useIsPremium';
 import { useLocalization } from '../localization';
 
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../theme';
 import { Link, Button } from '../ui';
-import IAPService from './IAPService';
+import * as IAPService from './IAPService';
 
 interface Props {
   route: {
@@ -36,7 +36,7 @@ interface Props {
   };
 }
 
-const Component = (props: Props) => {
+export const UpgradeScreen = (props: Props) => {
   const theme = useTheme();
   const { localize } = useLocalization();
   const navigation = useNavigation();
@@ -296,5 +296,3 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
-
-export default Component;

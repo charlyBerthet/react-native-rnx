@@ -1,6 +1,6 @@
 import { useGlobalState } from '../store';
 
-const useIsPremium = () => {
+export const useIsPremium = () => {
   const { globalState, setGlobalState } = useGlobalState<{
     isPremium: boolean;
   }>();
@@ -10,5 +10,3 @@ const useIsPremium = () => {
   };
   return { isPremium: globalState.isPremium, setIsPremium };
 };
-
-export default useIsPremium;
