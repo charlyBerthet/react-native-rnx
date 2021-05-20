@@ -11,6 +11,7 @@ export const askForUserFeedback = async (
     10
   );
   AsyncStorage.setItem('openCount', openCount + 1 + '');
+
   if (
     openCount === 1 ||
     openCount === 30 ||
