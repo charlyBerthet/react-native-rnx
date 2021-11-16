@@ -81,7 +81,6 @@ export const Router = (props: Props) => {
                     },
                     null,
                   ],
-                  showLabel: props.hideTabLabels ? false : true,
                 };
               }}
             >
@@ -90,7 +89,7 @@ export const Router = (props: Props) => {
                   key={s.name}
                   name={s.name}
                   options={{
-                    title: s.title || s.name,
+                    title: props.hideTabLabels ? undefined : s.title || s.name,
                   }}
                 >
                   {(stackProps) => (
