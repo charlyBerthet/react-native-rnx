@@ -13,6 +13,7 @@ import {
 import { Title } from './Title';
 import { Subtitle } from './Subtitle';
 import { Link } from './Link';
+import { Button } from 'react-native-rnx';
 
 interface Props {
   children:
@@ -24,14 +25,16 @@ interface Props {
   title: string;
   subtitle?: string;
   headerRightButton?: {
-    title: string;
+    title?: string;
+    icon?: string;
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
     destructive?: boolean;
   };
   headerLeftButton?: {
-    title: string;
+    title?: string;
+    icon?: string;
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
@@ -62,41 +65,69 @@ export const ScrollableScreen = (props: Props) => {
         paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
       headerLeft: props.headerLeftButton
-        ? () => (
-            <Link
-              style={props.headerLowDown && styles.headerButtonLowDown}
-              title={props.headerLeftButton!!.title}
-              onPress={() => {
-                if (props.headerLeftButton!!.navigateTo) {
-                  navigation.navigate(props.headerLeftButton!!.navigateTo);
-                }
-                if (props.headerLeftButton!!.onPress) {
-                  props.headerLeftButton!!.onPress();
-                }
-              }}
-              destructive={props.headerLeftButton!!.destructive}
-              secondary={props.headerLeftButton!!.secondary}
-            />
-          )
+        ? () =>
+            props.headerLeftButton!!.icon ? (
+              <Button
+                style={props.headerLowDown && styles.headerButtonLowDown}
+                icon={props.headerLeftButton!!.icon}
+                onPress={() => {
+                  if (props.headerLeftButton!!.navigateTo) {
+                    navigation.navigate(props.headerLeftButton!!.navigateTo);
+                  }
+                  if (props.headerLeftButton!!.onPress) {
+                    props.headerLeftButton!!.onPress();
+                  }
+                }}
+              />
+            ) : (
+              <Link
+                style={props.headerLowDown && styles.headerButtonLowDown}
+                title={props.headerLeftButton!!.title || ''}
+                onPress={() => {
+                  if (props.headerLeftButton!!.navigateTo) {
+                    navigation.navigate(props.headerLeftButton!!.navigateTo);
+                  }
+                  if (props.headerLeftButton!!.onPress) {
+                    props.headerLeftButton!!.onPress();
+                  }
+                }}
+                destructive={props.headerLeftButton!!.destructive}
+                secondary={props.headerLeftButton!!.secondary}
+              />
+            )
         : undefined,
       headerBackground: props.headerBackground,
       headerRight: props.headerRightButton
-        ? () => (
-            <Link
-              style={props.headerLowDown && styles.headerButtonLowDown}
-              title={props.headerRightButton!!.title}
-              onPress={() => {
-                if (props.headerRightButton!!.navigateTo) {
-                  navigation.navigate(props.headerRightButton!!.navigateTo);
-                }
-                if (props.headerRightButton!!.onPress) {
-                  props.headerRightButton!!.onPress();
-                }
-              }}
-              destructive={props.headerRightButton!!.destructive}
-              secondary={props.headerRightButton!!.secondary}
-            />
-          )
+        ? () =>
+            props.headerRightButton!!.icon ? (
+              <Button
+                style={props.headerLowDown && styles.headerButtonLowDown}
+                icon={props.headerRightButton!!.icon}
+                onPress={() => {
+                  if (props.headerRightButton!!.navigateTo) {
+                    navigation.navigate(props.headerRightButton!!.navigateTo);
+                  }
+                  if (props.headerRightButton!!.onPress) {
+                    props.headerRightButton!!.onPress();
+                  }
+                }}
+              />
+            ) : (
+              <Link
+                style={props.headerLowDown && styles.headerButtonLowDown}
+                title={props.headerRightButton!!.title || ''}
+                onPress={() => {
+                  if (props.headerRightButton!!.navigateTo) {
+                    navigation.navigate(props.headerRightButton!!.navigateTo);
+                  }
+                  if (props.headerRightButton!!.onPress) {
+                    props.headerRightButton!!.onPress();
+                  }
+                }}
+                destructive={props.headerRightButton!!.destructive}
+                secondary={props.headerRightButton!!.secondary}
+              />
+            )
         : undefined,
     });
   }, [

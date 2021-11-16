@@ -1,10 +1,12 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import { useTheme, useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
-  title: string;
+  title?: string;
+  icon?: string;
   subtitle?: string;
   onPress?: () => void;
   full?: boolean;
@@ -35,21 +37,33 @@ export const Button = (props: Props) => {
         props.style,
       ]}
     >
-      <Text
-        style={[
-          styles.title,
-          props.small && styles.titleSmall,
-          props.important && styles.titleImportant,
-          {
-            color:
-              btnType === 'normal'
-                ? theme.txtColorOnPrimaryColor
-                : mainColors.txt,
-          },
-        ]}
-      >
-        {props.title}
-      </Text>
+      {!!props.icon && (
+        <Icon
+          name={props.icon}
+          size={18}
+          color={
+            btnType === 'normal' ? theme.txtColorOnPrimaryColor : mainColors.txt
+          }
+          solid={true}
+        />
+      )}
+      {!!props.title && (
+        <Text
+          style={[
+            styles.title,
+            props.small && styles.titleSmall,
+            props.important && styles.titleImportant,
+            {
+              color:
+                btnType === 'normal'
+                  ? theme.txtColorOnPrimaryColor
+                  : mainColors.txt,
+            },
+          ]}
+        >
+          {props.title}
+        </Text>
+      )}
       {props.rightArrow && (
         <View style={styles.rightArrow}>
           <Text
