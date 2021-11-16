@@ -81,9 +81,7 @@ export const Router = (props: Props) => {
                     },
                     null,
                   ],
-                  tabBarOptions: {
-                    showLabel: props.hideTabLabels ? false : true,
-                  },
+                  showLabel: props.hideTabLabels ? false : true,
                 };
               }}
             >
