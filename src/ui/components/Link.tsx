@@ -1,10 +1,12 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
-  title: string;
+  title?: string;
+  icon?: string;
   onPress?: () => void;
   secondary?: boolean;
   destructive?: boolean;
@@ -20,16 +22,28 @@ export const Link = (props: Props) => {
       style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
-      <Text
-        style={[
-          styles.title,
-          {
-            color: props.destructive ? theme.destructiveColor : mainColors.txt,
-          },
-        ]}
-      >
-        {props.title}
-      </Text>
+      {!!props.icon && (
+        <Icon
+          name={props.icon}
+          size={18}
+          color={props.destructive ? theme.destructiveColor : mainColors.txt}
+          solid={true}
+        />
+      )}
+      {!!props.title && (
+        <Text
+          style={[
+            styles.title,
+            {
+              color: props.destructive
+                ? theme.destructiveColor
+                : mainColors.txt,
+            },
+          ]}
+        >
+          {props.title}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };
