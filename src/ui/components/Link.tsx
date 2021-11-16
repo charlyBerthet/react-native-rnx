@@ -29,7 +29,7 @@ export const Link = (props: Props) => {
       disabled={props.disabled}
     >
       {props.isLoading ? (
-        <ActivityIndicator size="large" color={theme.txtColor} />
+        <ActivityIndicator size="small" color={theme.txtColor} />
       ) : (
         !!props.icon && (
           <Icon
