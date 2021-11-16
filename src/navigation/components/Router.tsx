@@ -73,6 +73,7 @@ export const Router = (props: Props) => {
                       />
                     );
                   },
+                  tabBarShowLabel: props.hideTabLabels ? false : true,
                   tabBarActiveTintColor: theme.primaryColor,
                   tabBarInactiveTintColor: 'gray',
                   tabBarStyle: [
@@ -89,7 +90,7 @@ export const Router = (props: Props) => {
                   key={s.name}
                   name={s.name}
                   options={{
-                    title: props.hideTabLabels ? undefined : s.title || s.name,
+                    title: s.title || s.name,
                   }}
                 >
                   {(stackProps) => (
