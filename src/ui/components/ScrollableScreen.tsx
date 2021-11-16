@@ -30,6 +30,8 @@ interface Props {
     onPress?: () => void;
     secondary?: boolean;
     destructive?: boolean;
+    disabled?: boolean;
+    isLoading?: boolean;
   };
   headerLeftButton?: {
     title?: string;
@@ -38,6 +40,8 @@ interface Props {
     onPress?: () => void;
     secondary?: boolean;
     destructive?: boolean;
+    disabled?: boolean;
+    isLoading?: boolean;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
@@ -79,6 +83,8 @@ export const ScrollableScreen = (props: Props) => {
               }}
               destructive={props.headerLeftButton!!.destructive}
               secondary={props.headerLeftButton!!.secondary}
+              disabled={props.headerLeftButton!!.disabled}
+              isLoading={props.headerLeftButton!!.isLoading}
             />
           )
         : undefined,
@@ -99,6 +105,8 @@ export const ScrollableScreen = (props: Props) => {
               }}
               destructive={props.headerRightButton!!.destructive}
               secondary={props.headerRightButton!!.secondary}
+              disabled={props.headerRightButton!!.disabled}
+              isLoading={props.headerRightButton!!.isLoading}
             />
           )
         : undefined,

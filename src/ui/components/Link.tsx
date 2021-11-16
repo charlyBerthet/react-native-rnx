@@ -1,6 +1,11 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
@@ -11,6 +16,7 @@ interface Props extends CommonViewProps {
   secondary?: boolean;
   destructive?: boolean;
   disabled?: boolean;
+  isLoading?: boolean;
 }
 
 export const Link = (props: Props) => {
@@ -22,14 +28,18 @@ export const Link = (props: Props) => {
       style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
-      {!!props.icon && (
-        <Icon
-          name={props.icon}
-          size={18}
-          color={props.destructive ? theme.destructiveColor : mainColors.txt}
-          solid={true}
-          style={styles.icon}
-        />
+      {props.isLoading ? (
+        <ActivityIndicator size="large" color={theme.txtColor} />
+      ) : (
+        !!props.icon && (
+          <Icon
+            name={props.icon}
+            size={18}
+            color={props.destructive ? theme.destructiveColor : mainColors.txt}
+            solid={true}
+            style={styles.icon}
+          />
+        )
       )}
       {!!props.title && (
         <Text
