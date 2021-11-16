@@ -15,6 +15,7 @@ import { BottomSheet } from '../../ui/components/BottomSheet';
 const Tab = createBottomTabNavigator();
 
 interface Props {
+  hideTabLabels?: boolean;
   tabs: {
     [name: string]: {
       screens: Screen[];
@@ -58,6 +59,7 @@ export const Router = (props: Props) => {
                   _tabNavProps.route
                 );
                 return {
+                  headerShown: false,
                   tabBarVisible:
                     !routeName ||
                     routeName === props.tabs[_tabNavProps.route.name].initial,
@@ -79,6 +81,9 @@ export const Router = (props: Props) => {
                     },
                     null,
                   ],
+                  tabBarOptions: {
+                    showLabel: props.hideTabLabels ? false : true,
+                  },
                 };
               }}
             >
