@@ -28,6 +28,7 @@ export const Link = (props: Props) => {
           size={18}
           color={props.destructive ? theme.destructiveColor : mainColors.txt}
           solid={true}
+          style={styles.icon}
         />
       )}
       {!!props.title && (
@@ -60,5 +61,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
+  },
+  icon: {
+    paddingHorizontal: 4,
   },
 });
