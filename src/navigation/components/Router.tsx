@@ -71,11 +71,15 @@ export const Router = (props: Props) => {
                       />
                     );
                   },
+                  tabBarActiveTintColor: theme.primaryColor,
+                  tabBarInactiveTintColor: 'gray',
+                  tabBarStyle: [
+                    {
+                      display: 'flex',
+                    },
+                    null,
+                  ],
                 };
-              }}
-              tabBarOptions={{
-                activeTintColor: theme.primaryColor,
-                inactiveTintColor: 'gray',
               }}
             >
               {tabs.map((s) => (
