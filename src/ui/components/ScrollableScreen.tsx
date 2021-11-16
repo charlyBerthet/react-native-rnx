@@ -22,7 +22,7 @@ interface Props {
     | false
     | null;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   headerRightButton?: {
     title: string;
     navigateTo?: string;
@@ -124,7 +124,7 @@ export const ScrollableScreen = (props: Props) => {
     >
       <View style={styles.root}>
         {!props.forceTitleInHeader && <Title>{props.title}</Title>}
-        <Subtitle>{props.subtitle}</Subtitle>
+        {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
         {props.children}
         <View style={styles.bottomSpacer} />
       </View>
