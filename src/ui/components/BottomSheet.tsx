@@ -31,10 +31,14 @@ export const BottomSheet = () => {
   const hide = () => {
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
     setSheetProps(undefined);
+    setIsVisible(false);
+    _onHide();
+  };
+
+  const _onHide = () => {
     if (sheetOptionsRef.current?.onHide) {
       sheetOptionsRef.current?.onHide();
     }
-    setIsVisible(false);
     sheetOptionsRef.current = undefined;
   };
 
@@ -64,6 +68,7 @@ export const BottomSheet = () => {
         enabledContentTapInteraction={false}
         onCloseStart={() => {
           setIsVisible(false);
+          _onHide();
         }}
         onOpenEnd={() => {
           setIsVisible(true);
@@ -73,6 +78,7 @@ export const BottomSheet = () => {
             <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
           )
         }
+        enabledBottomInitialAnimation={true}
       />
     </>
   );
