@@ -90,7 +90,7 @@ export const Router = (props: Props) => {
                   key={s.name}
                   name={s.name}
                   options={{
-                    title: s.title || s.name,
+                    title: s.title || '',
                   }}
                 >
                   {(stackProps) => (
