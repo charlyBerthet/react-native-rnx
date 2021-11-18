@@ -19,7 +19,7 @@ export interface BottomSheetProps {
 }
 
 export const BottomSheet = () => {
-  const snapPoints = useMemo(() => ['75%'], []);
+  const snapPoints = useMemo(() => ['60%'], []);
   const [isVisible, setIsVisible] = useState(false);
   const [
     sheetOptionsProps,
