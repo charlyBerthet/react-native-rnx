@@ -67,16 +67,16 @@ export const Button = (props: Props) => {
       )}
       {props.rightArrow && (
         <View style={styles.rightArrow}>
-          <Text
-            style={{
-              color:
-                btnType === 'normal'
-                  ? theme.txtColorOnPrimaryColor
-                  : mainColors.txt,
-            }}
-          >
-            {'>'}
-          </Text>
+          <Icon
+            name="chevron-right"
+            size={18}
+            color={
+              btnType === 'normal'
+                ? theme.txtColorOnPrimaryColor
+                : mainColors.txt
+            }
+            solid={true}
+          />
         </View>
       )}
       {props.subtitle && (
