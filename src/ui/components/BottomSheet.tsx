@@ -2,7 +2,10 @@ import React, { useRef, useState } from 'react';
 import RNBottomSheet from 'reanimated-bottom-sheet';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
-import { BottomSheetOptions } from './BottomSheetOptions';
+import {
+  BottomSheetOptions,
+  BottomSheetOptionsProps,
+} from './BottomSheetOptions';
 
 export interface BottomSheetActionsRef {
   show: (props?: any) => void;
@@ -16,9 +19,11 @@ export const BottomSheet = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [sheetProps, setSheetProps] = useState<any>();
   const sheetRef = useRef<RNBottomSheet | undefined>();
+  const sheetOptionsRef = useRef<BottomSheetOptionsProps | undefined>();
 
   const show = (props?: any) => {
     setSheetProps(props);
+    sheetOptionsRef.current = props;
     sheetRef.current?.snapTo(0);
     setIsVisible(true);
   };
@@ -26,7 +31,11 @@ export const BottomSheet = () => {
   const hide = () => {
     sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
     setSheetProps(undefined);
+    if (sheetOptionsRef.current?.onHide) {
+      sheetOptionsRef.current?.onHide();
+    }
     setIsVisible(false);
+    sheetOptionsRef.current = undefined;
   };
 
   return (

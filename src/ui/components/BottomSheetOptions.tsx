@@ -7,9 +7,10 @@ import { useTheme } from '../../theme';
 export interface BottomSheetOptionsProps {
   title?: string;
   message?: string;
-  options: { text: string; onPress: () => void }[];
+  options?: { text: string; onPress: () => void }[];
   element?: () => JSX.Element;
   inline?: boolean;
+  onHide?: () => void;
 }
 
 interface Props extends CommonViewProps, BottomSheetOptionsProps {
@@ -28,25 +29,27 @@ export const BottomSheetOptions = (props: Props) => {
       {!!props.title && <Text style={styles.title}>{props.title}</Text>}
       {!!props.message && <Text style={styles.message}>{props.message}</Text>}
       {!!props.element && <props.element />}
-      <View style={[styles.btns, props.inline && styles.btnsInline]}>
-        {props.options.map((opt, idx) => {
-          return (
-            <TouchableOpacity
-              style={[
-                styles.btn,
-                props.inline && styles.btnInline,
-                { backgroundColor: theme.bgColor },
-              ]}
-              key={idx}
-              onPress={opt.onPress}
-            >
-              <Text style={[styles.btnTxt]} primary>
-                {opt.text}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      {!!props.options && (
+        <View style={[styles.btns, props.inline && styles.btnsInline]}>
+          {props.options.map((opt, idx) => {
+            return (
+              <TouchableOpacity
+                style={[
+                  styles.btn,
+                  props.inline && styles.btnInline,
+                  { backgroundColor: theme.bgColor },
+                ]}
+                key={idx}
+                onPress={opt.onPress}
+              >
+                <Text style={[styles.btnTxt]} primary>
+                  {opt.text}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      )}
     </View>
   );
 };
