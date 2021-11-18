@@ -45,6 +45,7 @@ export const Button = (props: Props) => {
             btnType === 'normal' ? theme.txtColorOnPrimaryColor : mainColors.txt
           }
           solid={true}
+          style={!!props.icon && styles.iconWithTitle}
         />
       )}
       {!!props.title && (
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
     borderRadius: 5,
     minWidth: 250,
-
+    flexDirection: 'row',
+    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -160,5 +162,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     marginBottom: -2,
+  },
+  iconWithTitle: {
+    marginRight: 10,
   },
 });
