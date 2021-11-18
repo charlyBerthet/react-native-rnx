@@ -21,7 +21,8 @@ interface Props {
     | undefined
     | false
     | null;
-  title: string;
+  title?: string;
+  titleElement?: string;
   subtitle?: string;
   headerRightButton?: {
     title?: string;
@@ -55,11 +56,14 @@ const LOW_DOWN_MARGIN_TOP = 35;
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
   const [isTitleVisibleInHeader, setIsTitleVisibleInHeader] = useState(false);
+  const forceTitleInHeader = !!props.forceTitleInHeader || !!props.titleElement;
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle:
-        props.forceTitleInHeader || isTitleVisibleInHeader ? props.title : '',
+        forceTitleInHeader || isTitleVisibleInHeader
+          ? props.title || props.titleElement
+          : '',
       headerStyle: {
         height: props.headerLowDown ? 110 : undefined,
       },
@@ -120,7 +124,8 @@ export const ScrollableScreen = (props: Props) => {
     props.headerLeftButton,
     props.headerBackground,
     props.headerLowDown,
-    props.forceTitleInHeader,
+    forceTitleInHeader,
+    props.titleElement,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -129,7 +134,7 @@ export const ScrollableScreen = (props: Props) => {
 
   const view = (
     <View style={[styles.root, props.noScroll && styles.rootNoScroll]}>
-      {!props.forceTitleInHeader && <Title>{props.title}</Title>}
+      {!forceTitleInHeader && !!props.title && <Title>{props.title}</Title>}
       {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
       {props.children}
       {!!props.noScroll && <View style={styles.bottomSpacer} />}
