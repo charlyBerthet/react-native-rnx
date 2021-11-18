@@ -47,6 +47,7 @@ interface Props {
   headerLowDown?: boolean;
   scrollViewRef?: (ref: ScrollView | undefined) => void;
   forceTitleInHeader?: boolean;
+  noScroll?: boolean;
 }
 
 const LOW_DOWN_MARGIN_TOP = 35;
@@ -126,7 +127,18 @@ export const ScrollableScreen = (props: Props) => {
     setIsTitleVisibleInHeader(event.nativeEvent.contentOffset.y > 10);
   };
 
-  return (
+  const view = (
+    <View style={[styles.root, props.noScroll && styles.rootNoScroll]}>
+      {!props.forceTitleInHeader && <Title>{props.title}</Title>}
+      {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
+      {props.children}
+      {!!props.noScroll && <View style={styles.bottomSpacer} />}
+    </View>
+  );
+
+  return props.noScroll ? (
+    view
+  ) : (
     <ScrollView
       scrollEventThrottle={5}
       onScroll={onScroll}
@@ -134,12 +146,7 @@ export const ScrollableScreen = (props: Props) => {
         props.scrollViewRef ? props.scrollViewRef(ref || undefined) : null
       }
     >
-      <View style={styles.root}>
-        {!props.forceTitleInHeader && <Title>{props.title}</Title>}
-        {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
-        {props.children}
-        <View style={styles.bottomSpacer} />
-      </View>
+      {view}
     </ScrollView>
   );
 };
@@ -147,6 +154,9 @@ export const ScrollableScreen = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     marginHorizontal: 20,
+  },
+  rootNoScroll: {
+    flex: 1,
   },
   bottomSpacer: {
     width: 10,
