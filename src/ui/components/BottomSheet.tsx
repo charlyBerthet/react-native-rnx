@@ -8,8 +8,8 @@ import {
 import RNBottomSheet from '@gorhom/bottom-sheet';
 
 export interface BottomSheetActionsRef {
-  showOptions: (props?: BottomSheetOptionsProps) => void;
-  show: (props?: BottomSheetProps) => void;
+  showOptions: (props: BottomSheetOptionsProps) => void;
+  show: (props: BottomSheetProps) => void;
   hide: () => void;
 }
 
@@ -28,12 +28,12 @@ export const BottomSheet = () => {
   const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
   const hideRef = useRef<() => void>();
 
-  const showOptions = (props?: BottomSheetOptionsProps) => {
+  const showOptions = (props: BottomSheetOptionsProps) => {
     setSheetOptionsProps(props);
     setIsVisible(true);
   };
 
-  const show = (props?: BottomSheetProps) => {
+  const show = (props: BottomSheetProps) => {
     setSheetProps(props);
     setIsVisible(true);
   };
@@ -73,13 +73,13 @@ export const BottomSheet = () => {
           if (ref) {
             hideRef.current = ref.close;
             setActionsSheetRef({
-              show: () => {
+              show: (props) => {
                 ref.expand();
-                show();
+                show(props);
               },
-              showOptions: () => {
+              showOptions: (props) => {
                 ref.expand();
-                showOptions();
+                showOptions(props);
               },
               hide: () => {
                 hide();
