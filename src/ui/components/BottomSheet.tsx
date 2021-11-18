@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
@@ -25,6 +25,7 @@ export const BottomSheet = () => {
     setSheetOptionsProps,
   ] = useState<BottomSheetOptionsProps>();
   const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
+  const hideRef = useRef<() => void>();
 
   const showOptions = (props?: BottomSheetOptionsProps) => {
     setSheetOptionsProps(props);
@@ -37,6 +38,13 @@ export const BottomSheet = () => {
   };
 
   const hide = () => {
+    if (hideRef.current) {
+      hideRef.current();
+    }
+    onHidden();
+  };
+
+  const onHidden = () => {
     setSheetProps(undefined);
     setSheetOptionsProps(undefined);
     setIsVisible(false);
@@ -59,6 +67,7 @@ export const BottomSheet = () => {
       <RNBottomSheet
         ref={(ref) => {
           if (ref) {
+            hideRef.current = ref.close;
             setActionsSheetRef({
               show: () => {
                 ref.expand();
@@ -69,7 +78,6 @@ export const BottomSheet = () => {
                 showOptions();
               },
               hide: () => {
-                ref.close();
                 hide();
               },
             });
@@ -78,7 +86,7 @@ export const BottomSheet = () => {
         index={-1}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
-        onClose={hide}
+        onClose={onHidden}
         enablePanDownToClose
       >
         <>
