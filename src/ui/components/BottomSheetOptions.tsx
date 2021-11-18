@@ -13,19 +13,12 @@ export interface BottomSheetOptionsProps {
   onHide?: () => void;
 }
 
-interface Props extends CommonViewProps, BottomSheetOptionsProps {
-  height: number;
-}
+interface Props extends CommonViewProps, BottomSheetOptionsProps {}
 
 export const BottomSheetOptions = (props: Props) => {
   const theme = useTheme();
   return (
-    <View
-      style={[
-        styles.root,
-        { backgroundColor: theme.bgColor, height: props.height },
-      ]}
-    >
+    <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       {!!props.title && <Text style={styles.title}>{props.title}</Text>}
       {!!props.message && <Text style={styles.message}>{props.message}</Text>}
       {!!props.element && <props.element />}
@@ -56,6 +49,7 @@ export const BottomSheetOptions = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingVertical: 7,

@@ -1,52 +1,56 @@
-import React, { useRef, useState } from 'react';
-import RNBottomSheet from 'reanimated-bottom-sheet';
+import React, { useCallback, useMemo, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
   BottomSheetOptions,
   BottomSheetOptionsProps,
 } from './BottomSheetOptions';
+import RNBottomSheet from '@gorhom/bottom-sheet';
 
 export interface BottomSheetActionsRef {
-  show: (props?: any) => void;
+  showOptions: (props?: BottomSheetOptionsProps) => void;
+  show: (props?: BottomSheetProps) => void;
   hide: () => void;
 }
 
-const snapPointHeight = 300;
+export interface BottomSheetProps {
+  element: () => JSX.Element;
+}
 
 export const BottomSheet = () => {
-  const snapPoints = [snapPointHeight, 0];
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
   const [isVisible, setIsVisible] = useState(false);
-  const [sheetProps, setSheetProps] = useState<any>();
-  const sheetRef = useRef<RNBottomSheet | undefined>();
-  const sheetOptionsRef = useRef<BottomSheetOptionsProps | undefined>();
+  const [
+    sheetOptionsProps,
+    setSheetOptionsProps,
+  ] = useState<BottomSheetOptionsProps>();
+  const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
 
-  const show = (props?: any) => {
+  const showOptions = (props?: BottomSheetOptionsProps) => {
+    setSheetOptionsProps(props);
+    setIsVisible(true);
+  };
+
+  const show = (props?: BottomSheetProps) => {
     setSheetProps(props);
-    sheetOptionsRef.current = props;
-    sheetRef.current?.snapTo(0);
     setIsVisible(true);
   };
 
   const hide = () => {
-    sheetRef.current?.snapTo(snapPoints[snapPoints.length - 1]);
     setSheetProps(undefined);
+    setSheetOptionsProps(undefined);
     setIsVisible(false);
-    _onHide();
   };
 
-  const _onHide = () => {
-    if (sheetOptionsRef.current?.onHide) {
-      sheetOptionsRef.current?.onHide();
-    }
-    sheetOptionsRef.current = undefined;
-  };
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   return (
     <>
       {isVisible && (
         <TouchableOpacity
-          onPress={isVisible ? hide : show}
+          onPress={isVisible ? hide : undefined}
           style={styles.backdrop}
           activeOpacity={0.65}
         />
@@ -54,32 +58,32 @@ export const BottomSheet = () => {
 
       <RNBottomSheet
         ref={(ref) => {
-          sheetRef.current = ref || undefined;
-          setActionsSheetRef({
-            show,
-            hide,
-          });
+          if (ref) {
+            setActionsSheetRef({
+              show: () => {
+                ref.expand();
+                show();
+              },
+              showOptions: () => {
+                ref.expand();
+                showOptions();
+              },
+              hide: () => {
+                ref.close();
+                hide();
+              },
+            });
+          }
         }}
+        index={1}
         snapPoints={snapPoints}
-        initialSnap={snapPoints[snapPoints.length - 1]}
-        borderRadius={17}
-        enabledGestureInteraction={true}
-        enabledInnerScrolling={false}
-        enabledContentTapInteraction={false}
-        onCloseStart={() => {
-          setIsVisible(false);
-          _onHide();
-        }}
-        onOpenEnd={() => {
-          setIsVisible(true);
-        }}
-        renderContent={() =>
-          sheetProps && (
-            <BottomSheetOptions {...sheetProps} height={snapPoints[0]} />
-          )
-        }
-        enabledBottomInitialAnimation={true}
-      />
+        onChange={handleSheetChanges}
+      >
+        <>
+          {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
+          {sheetProps?.element ? <sheetProps.element /> : undefined}
+        </>
+      </RNBottomSheet>
     </>
   );
 };

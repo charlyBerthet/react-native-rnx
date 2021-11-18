@@ -1,5 +1,8 @@
 import type { BottomSheetOptionsProps } from '../components/BottomSheetOptions';
-import type { BottomSheetActionsRef } from '../components/BottomSheet';
+import type {
+  BottomSheetActionsRef,
+  BottomSheetProps,
+} from '../components/BottomSheet';
 
 let actionsRef: BottomSheetActionsRef | undefined;
 
@@ -9,10 +12,14 @@ export const setActionsSheetRef = (
 
 export const useBottomSheet = () => {
   const showBottomSheetOptions = (props: BottomSheetOptionsProps) => {
+    actionsRef?.showOptions(props);
+  };
+
+  const show = (props: BottomSheetProps) => {
     actionsRef?.show(props);
   };
 
   const hideBottomSheet = () => actionsRef?.hide();
 
-  return { setActionsSheetRef, showBottomSheetOptions, hideBottomSheet };
+  return { setActionsSheetRef, showBottomSheetOptions, hideBottomSheet, show };
 };
