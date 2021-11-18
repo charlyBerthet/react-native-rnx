@@ -5,9 +5,10 @@ import type CommonViewProps from '../models/CommonViewProps';
 import { useTheme } from '../../theme';
 
 export interface BottomSheetOptionsProps {
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
   options: { text: string; onPress: () => void }[];
+  element?: () => JSX.Element;
   inline?: boolean;
 }
 
@@ -24,8 +25,9 @@ export const BottomSheetOptions = (props: Props) => {
         { backgroundColor: theme.bgColor, height: props.height },
       ]}
     >
-      <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.message}>{props.message}</Text>
+      {!!props.title && <Text style={styles.title}>{props.title}</Text>}
+      {!!props.message && <Text style={styles.message}>{props.message}</Text>}
+      {!!props.element && <props.element />}
       <View style={[styles.btns, props.inline && styles.btnsInline]}>
         {props.options.map((opt, idx) => {
           return (
