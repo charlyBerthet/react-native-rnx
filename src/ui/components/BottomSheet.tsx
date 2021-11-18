@@ -59,7 +59,7 @@ export const BottomSheet = () => {
         snapPoints={snapPoints}
         initialSnap={snapPoints[snapPoints.length - 1]}
         borderRadius={17}
-        enabledGestureInteraction={false}
+        enabledGestureInteraction={true}
         enabledInnerScrolling={false}
         enabledContentTapInteraction={false}
         onCloseStart={() => {
