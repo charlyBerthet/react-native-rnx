@@ -2,10 +2,10 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
-  BottomSheetOptions,
   BottomSheetOptionsProps,
+  BottomSheetOptions,
 } from './BottomSheetOptions';
-import RNBottomSheet from '@gorhom/bottom-sheet';
+import RNBottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 export interface BottomSheetActionsRef {
   showOptions: (props: BottomSheetOptionsProps) => void;
@@ -93,10 +93,12 @@ export const BottomSheet = () => {
         onClose={onHidden}
         enablePanDownToClose
       >
-        <>
-          {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
-          {sheetProps?.element ? <sheetProps.element /> : undefined}
-        </>
+        <BottomSheetScrollView>
+          <>
+            {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
+            {sheetProps?.element ? <sheetProps.element /> : undefined}
+          </>
+        </BottomSheetScrollView>
       </RNBottomSheet>
     </>
   );
