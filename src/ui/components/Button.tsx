@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     minWidth: 250,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
