@@ -22,7 +22,7 @@ interface Props {
     | false
     | null;
   title?: string;
-  titleElement?: JSX.Element;
+  titleElement?: () => JSX.Element;
   subtitle?: string;
   headerRightButton?: {
     title?: string;
