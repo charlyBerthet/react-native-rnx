@@ -48,7 +48,7 @@ export const BottomSheet = () => {
         <TouchableOpacity
           onPress={isVisible ? hide : show}
           style={styles.backdrop}
-          activeOpacity={0.9}
+          activeOpacity={0.65}
         />
       )}
 
