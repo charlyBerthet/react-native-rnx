@@ -15,6 +15,7 @@ export interface BottomSheetActionsRef {
 
 export interface BottomSheetProps {
   element: () => JSX.Element;
+  onHide?: () => void;
 }
 
 export const BottomSheet = () => {
@@ -45,6 +46,9 @@ export const BottomSheet = () => {
   };
 
   const onHidden = () => {
+    if (sheetProps && sheetProps.onHide) {
+      sheetProps.onHide();
+    }
     setSheetProps(undefined);
     setSheetOptionsProps(undefined);
     setIsVisible(false);
