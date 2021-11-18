@@ -5,12 +5,19 @@ import useTheme from '../../theme/hooks/useTheme';
 
 interface Props extends CommonTextProps {
   children: string | string[];
+  textAlign?: 'center' | 'left' | 'right';
 }
 
 export const Title = (props: Props) => {
   const theme = useTheme();
   return (
-    <Text style={[styles.root, { color: theme.txtColor }, props.style]}>
+    <Text
+      style={[
+        styles.root,
+        { color: theme.txtColor, textAlign: props.textAlign || 'center' },
+        props.style,
+      ]}
+    >
       {props.children}
     </Text>
   );
@@ -19,7 +26,6 @@ export const Title = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     fontSize: 27,
-    textAlign: 'center',
     fontWeight: '700',
     marginHorizontal: 20,
   },
