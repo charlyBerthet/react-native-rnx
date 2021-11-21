@@ -49,6 +49,7 @@ interface Props {
   scrollViewRef?: (ref: ScrollView | undefined) => void;
   forceTitleInHeader?: boolean;
   noScroll?: boolean;
+  rootNoMargin?: boolean;
 }
 
 const LOW_DOWN_MARGIN_TOP = 35;
@@ -133,7 +134,13 @@ export const ScrollableScreen = (props: Props) => {
   };
 
   const view = (
-    <View style={[styles.root, props.noScroll && styles.rootNoScroll]}>
+    <View
+      style={[
+        styles.root,
+        props.noScroll && styles.rootNoScroll,
+        props.rootNoMargin && styles.rootNoMargin,
+      ]}
+    >
       {!forceTitleInHeader && !!props.title && <Title>{props.title}</Title>}
       {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
       {props.children}
@@ -159,6 +166,9 @@ export const ScrollableScreen = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     marginHorizontal: 20,
+  },
+  rootNoMargin: {
+    marginHorizontal: 0,
   },
   rootNoScroll: {
     flex: 1,
