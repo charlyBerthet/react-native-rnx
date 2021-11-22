@@ -1,6 +1,12 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import { useTheme, useMainColors } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
@@ -16,6 +22,7 @@ interface Props extends CommonViewProps {
   type?: 'outline' | 'normal';
   small?: boolean;
   secondary?: boolean;
+  isLoading?: boolean;
 }
 
 export const Button = (props: Props) => {
@@ -77,6 +84,11 @@ export const Button = (props: Props) => {
             }
             solid={true}
           />
+        </View>
+      )}
+      {props.isLoading && (
+        <View style={styles.rightArrow}>
+          <ActivityIndicator color={mainColors.txt} size="small" />
         </View>
       )}
       {props.subtitle && (

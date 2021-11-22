@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
@@ -54,10 +54,6 @@ export const BottomSheet = () => {
     setIsVisible(false);
   };
 
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
   return (
     <>
       {isVisible && (
@@ -89,7 +85,6 @@ export const BottomSheet = () => {
         }}
         index={-1}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
         onClose={onHidden}
         enablePanDownToClose
       >
