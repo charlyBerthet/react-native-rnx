@@ -88,7 +88,14 @@ export const Button = (props: Props) => {
       )}
       {props.isLoading && (
         <View style={styles.rightArrow}>
-          <ActivityIndicator color={mainColors.txt} size="small" />
+          <ActivityIndicator
+            color={
+              btnType === 'normal'
+                ? theme.txtColorOnPrimaryColor
+                : mainColors.txt
+            }
+            size="small"
+          />
         </View>
       )}
       {props.subtitle && (
