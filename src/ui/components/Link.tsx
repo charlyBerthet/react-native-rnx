@@ -38,7 +38,7 @@ export const Link = (props: Props) => {
         !!props.icon && (
           <Icon
             name={props.icon}
-            size={18}
+            size={16}
             color={props.destructive ? theme.destructiveColor : mainColors.txt}
             solid={true}
             style={styles.icon}
