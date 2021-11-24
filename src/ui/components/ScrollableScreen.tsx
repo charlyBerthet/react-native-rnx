@@ -33,6 +33,7 @@ interface Props {
     destructive?: boolean;
     disabled?: boolean;
     isLoading?: boolean;
+    defaultTxtColor?: boolean;
   };
   headerLeftButton?: {
     title?: string;
@@ -43,6 +44,7 @@ interface Props {
     destructive?: boolean;
     disabled?: boolean;
     isLoading?: boolean;
+    defaultTxtColor?: boolean;
   };
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
@@ -87,6 +89,7 @@ export const ScrollableScreen = (props: Props) => {
                   props.headerLeftButton!!.onPress();
                 }
               }}
+              defaultTxtColor={props.headerLeftButton!!.defaultTxtColor}
               destructive={props.headerLeftButton!!.destructive}
               secondary={props.headerLeftButton!!.secondary}
               disabled={props.headerLeftButton!!.disabled}
@@ -109,6 +112,7 @@ export const ScrollableScreen = (props: Props) => {
                   props.headerRightButton!!.onPress();
                 }
               }}
+              defaultTxtColor={props.headerLeftButton!!.defaultTxtColor}
               destructive={props.headerRightButton!!.destructive}
               secondary={props.headerRightButton!!.secondary}
               disabled={props.headerRightButton!!.disabled}
