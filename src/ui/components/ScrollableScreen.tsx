@@ -112,7 +112,7 @@ export const ScrollableScreen = (props: Props) => {
                   props.headerRightButton!!.onPress();
                 }
               }}
-              defaultTxtColor={props.headerLeftButton!!.defaultTxtColor}
+              defaultTxtColor={props.headerRightButton!!.defaultTxtColor}
               destructive={props.headerRightButton!!.destructive}
               secondary={props.headerRightButton!!.secondary}
               disabled={props.headerRightButton!!.disabled}
