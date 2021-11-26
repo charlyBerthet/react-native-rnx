@@ -58,6 +58,12 @@ export const Router = (props: Props) => {
                 const routeName = getFocusedRouteNameFromRoute(
                   _tabNavProps.route
                 );
+                console.log(
+                  'Router.focusedRouteName',
+                  routeName,
+                  'initial for this tab',
+                  props.tabs[_tabNavProps.route.name].initial
+                );
                 return {
                   headerShown: false,
                   tabBarVisible:
