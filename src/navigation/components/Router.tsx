@@ -66,9 +66,9 @@ export const Router = (props: Props) => {
                 );
                 return {
                   headerShown: false,
-                  tabBarVisible:
-                    !routeName ||
-                    routeName === props.tabs[_tabNavProps.route.name].initial,
+                  tabBarVisible: false,
+                  // !routeName ||
+                  // routeName === props.tabs[_tabNavProps.route.name].initial,
                   tabBarIcon: ({ color }) => {
                     return (
                       <Icon
