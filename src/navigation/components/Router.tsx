@@ -66,9 +66,6 @@ export const Router = (props: Props) => {
                 );
                 return {
                   headerShown: false,
-                  tabBarVisible: false,
-                  // !routeName ||
-                  // routeName === props.tabs[_tabNavProps.route.name].initial,
                   tabBarIcon: ({ color }) => {
                     return (
                       <Icon
@@ -84,7 +81,12 @@ export const Router = (props: Props) => {
                   tabBarInactiveTintColor: 'gray',
                   tabBarStyle: [
                     {
-                      display: 'flex',
+                      display:
+                        !routeName ||
+                        routeName ===
+                          props.tabs[_tabNavProps.route.name].initial
+                          ? 'flex'
+                          : 'none',
                     },
                     null,
                   ],
