@@ -46,7 +46,7 @@ export const Row = (props: Props) => {
         {!!props.icon && (
           <Icon
             name={props.icon}
-            size={18}
+            size={16}
             color={theme.txtColor}
             solid={true}
             style={styles.leftIcon}
@@ -134,10 +134,12 @@ const styles = StyleSheet.create({
   },
   leftIcon: {
     opacity: 0.75,
-    marginRight: 10,
+    marginRight: 15,
+    marginLeft: 5,
   },
   switch: {
     marginLeft: 10,
+    transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }],
   },
   rightArrow: {
     marginLeft: 10,
