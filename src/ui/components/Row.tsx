@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   rightContainer: {
-    alignItems: 'flex-end',
     flexDirection: 'row',
+    alignItems: 'center',
   },
   leftIcon: {
     opacity: 0.75,
