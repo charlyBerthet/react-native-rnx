@@ -55,6 +55,7 @@ export const Stack = (props: Props) => {
           component={s.component}
           options={{
             headerShown: true,
+            headerBackTitle: s.name || s.title,
           }}
         />
       ))}
