@@ -139,8 +139,9 @@ const styles = StyleSheet.create({
   },
   rightLabelCaption: {
     marginTop: 5,
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '500',
+    opacity: 0.75,
   },
   rightLabelCaptionAlone: {
     marginTop: 0,
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   switch: {
-    marginLeft: 10,
+    marginLeft: 5,
     transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }],
   },
   rightArrow: {
