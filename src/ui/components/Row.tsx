@@ -70,7 +70,12 @@ export const Row = (props: Props) => {
               <Text style={styles.rightLabel}>{props.rightLabel}</Text>
             )}
             {!!props.rightLabelCaption && (
-              <Text style={styles.rightLabelCaption}>
+              <Text
+                style={[
+                  styles.rightLabelCaption,
+                  !props.rightLabel && styles.rightLabelCaptionAlone,
+                ]}
+              >
                 {props.rightLabelCaption}
               </Text>
             )}
@@ -136,6 +141,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontSize: 10,
     fontWeight: '500',
+  },
+  rightLabelCaptionAlone: {
+    marginTop: 0,
   },
   rightContainer: {
     flexDirection: 'row',
