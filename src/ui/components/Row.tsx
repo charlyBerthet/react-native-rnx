@@ -52,7 +52,7 @@ export const Row = (props: Props) => {
             style={styles.leftIcon}
           />
         )}
-        <View>
+        <View style={styles.txtWrapper}>
           <Text style={styles.title}>{props.title}</Text>
           {!!props.subtitle && (
             <Text style={styles.subtitle}>{props.subtitle}</Text>
@@ -100,13 +100,16 @@ const styles = StyleSheet.create({
   subRoot: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
   },
   rootBorderTop: {
     borderTopWidth: 0.5,
   },
   rootBorderBottom: {
     borderBottomWidth: 0.5,
+  },
+  txtWrapper: {
+    flex: 1,
   },
   title: {
     fontSize: 14,
