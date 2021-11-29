@@ -16,6 +16,7 @@ export interface RowModel {
   isEnabled?: boolean;
   onEnabledChange?: (isEnabled: boolean) => void;
   rightArrow?: boolean;
+  minHeight?: number;
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -38,7 +39,12 @@ export const Row = (props: Props) => {
       ]}
     >
       <TouchableOpacity
-        style={styles.subRoot}
+        style={[
+          styles.subRoot,
+          {
+            minHeight: props.minHeight,
+          },
+        ]}
         onPress={props.onPress}
         onLongPress={props.onLongPress}
         activeOpacity={props.onPress ? 0.8 : 1}
