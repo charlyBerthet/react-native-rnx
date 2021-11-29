@@ -17,6 +17,7 @@ export interface RowModel {
   onEnabledChange?: (isEnabled: boolean) => void;
   rightArrow?: boolean;
   minHeight?: number;
+  primary?: boolean;
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -53,15 +54,33 @@ export const Row = (props: Props) => {
           <Icon
             name={props.icon}
             size={16}
-            color={theme.txtColor}
+            color={props.primary ? theme.primaryColor : theme.txtColor}
             solid={true}
             style={styles.leftIcon}
           />
         )}
         <View style={styles.txtWrapper}>
-          <Text style={styles.title}>{props.title}</Text>
+          <Text
+            style={[
+              styles.title,
+              {
+                color: props.primary ? theme.primaryColor : theme.txtColor,
+              },
+            ]}
+          >
+            {props.title}
+          </Text>
           {!!props.subtitle && (
-            <Text style={styles.subtitle}>{props.subtitle}</Text>
+            <Text
+              style={[
+                styles.subtitle,
+                {
+                  color: props.primary ? theme.primaryColor : theme.txtColor,
+                },
+              ]}
+            >
+              {props.subtitle}
+            </Text>
           )}
         </View>
         <View style={styles.rightContainer}>
@@ -94,7 +113,7 @@ export const Row = (props: Props) => {
               <Icon
                 name="chevron-right"
                 size={15}
-                color={theme.txtColor}
+                color={props.primary ? theme.primaryColor : theme.txtColor}
                 solid={true}
               />
             </View>
