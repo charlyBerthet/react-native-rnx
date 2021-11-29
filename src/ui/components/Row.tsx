@@ -65,14 +65,16 @@ export const Row = (props: Props) => {
           )}
         </View>
         <View style={styles.rightContainer}>
-          {!!props.rightLabel && (
-            <Text style={styles.rightLabel}>{props.rightLabel}</Text>
-          )}
-          {!!props.rightLabelCaption && (
-            <Text style={styles.rightLabelCaption}>
-              {props.rightLabelCaption}
-            </Text>
-          )}
+          <View>
+            {!!props.rightLabel && (
+              <Text style={styles.rightLabel}>{props.rightLabel}</Text>
+            )}
+            {!!props.rightLabelCaption && (
+              <Text style={styles.rightLabelCaption}>
+                {props.rightLabelCaption}
+              </Text>
+            )}
+          </View>
           {props.isEnabled !== undefined && (
             <Switch
               trackColor={{ false: 'gray', true: theme.primaryColor }}
@@ -137,6 +139,7 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     alignItems: 'flex-end',
+    flexDirection: 'row',
   },
   leftIcon: {
     opacity: 0.75,
