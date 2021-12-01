@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    minWidth: 300,
   },
   btnInline: {
     marginHorizontal: 13,
