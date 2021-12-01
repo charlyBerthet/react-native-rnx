@@ -14,7 +14,7 @@ export interface BottomSheetActionsRef {
 }
 
 export interface BottomSheetProps {
-  element: () => JSX.Element;
+  element?: () => JSX.Element;
   onHide?: () => void;
   snapPoints?: (string | number)[];
 }
