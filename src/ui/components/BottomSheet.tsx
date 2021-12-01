@@ -17,6 +17,8 @@ export interface BottomSheetProps {
   element?: () => JSX.Element;
   onHide?: () => void;
   snapPoints?: (string | number)[];
+  disableScrollToClose?: boolean;
+  disableInternalScrollView?: boolean;
 }
 
 export const BottomSheet = () => {
@@ -28,7 +30,11 @@ export const BottomSheet = () => {
   ] = useState<BottomSheetOptionsProps>();
   const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
   const hideRef = useRef<() => void>();
-
+  const disableInternalScrollView =
+    sheetProps?.disableInternalScrollView ||
+    sheetOptionsProps?.disableInternalScrollView;
+  const disableScrollToClose =
+    sheetProps?.disableScrollToClose || sheetOptionsProps?.disableScrollToClose;
   const showOptions = (props: BottomSheetOptionsProps) => {
     setSheetOptionsProps(props);
     setIsVisible(true);
@@ -95,14 +101,23 @@ export const BottomSheet = () => {
           sheetProps?.snapPoints || sheetOptionsProps?.snapPoints || snapPoints
         }
         onClose={onHidden}
-        enablePanDownToClose
+        enablePanDownToClose={disableScrollToClose ? false : true}
       >
-        <BottomSheetScrollView>
+        {disableInternalScrollView ? (
           <>
             {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
             {sheetProps?.element ? <sheetProps.element /> : undefined}
           </>
-        </BottomSheetScrollView>
+        ) : (
+          <BottomSheetScrollView>
+            <>
+              {sheetOptionsProps && (
+                <BottomSheetOptions {...sheetOptionsProps} />
+              )}
+              {sheetProps?.element ? <sheetProps.element /> : undefined}
+            </>
+          </BottomSheetScrollView>
+        )}
       </RNBottomSheet>
     </>
   );
