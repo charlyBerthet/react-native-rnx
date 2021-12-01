@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    minWidth: 300,
   },
   btnsInline: {
     flexDirection: 'row',
@@ -84,7 +85,6 @@ const styles = StyleSheet.create({
   btn: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    minWidth: 300,
     alignItems: 'center',
     justifyContent: 'center',
   },
