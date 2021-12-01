@@ -8,7 +8,7 @@ import type { BottomSheetProps } from './BottomSheet';
 export interface BottomSheetOptionsProps extends BottomSheetProps {
   title?: string;
   message?: string;
-  options?: { text: string; onPress: () => void }[];
+  options?: { text: string; onPress: () => void; primary?: boolean }[];
   inline?: boolean;
 }
 
@@ -18,8 +18,16 @@ export const BottomSheetOptions = (props: Props) => {
   const theme = useTheme();
   return (
     <View style={[styles.root]}>
-      {!!props.title && <Text style={styles.title}>{props.title}</Text>}
-      {!!props.message && <Text style={styles.message}>{props.message}</Text>}
+      {!!props.title && (
+        <Text style={[styles.title, { backgroundColor: theme.bgColor }]}>
+          {props.title}
+        </Text>
+      )}
+      {!!props.message && (
+        <Text style={[styles.message, { backgroundColor: theme.bgColor }]}>
+          {props.message}
+        </Text>
+      )}
       {!!props.element && <props.element />}
       {!!props.options && (
         <View style={[styles.btns, props.inline && styles.btnsInline]}>
@@ -30,11 +38,13 @@ export const BottomSheetOptions = (props: Props) => {
                   styles.btn,
                   props.inline && styles.btnInline,
                   { backgroundColor: theme.bgColor },
+                  idx !== 0 && styles.btnBorderTop,
+                  idx !== 0 && { borderColor: theme.borderColor },
                 ]}
                 key={idx}
                 onPress={opt.onPress}
               >
-                <Text style={[styles.btnTxt]} primary>
+                <Text style={[styles.btnTxt]} primary={opt.primary}>
                   {opt.text}
                 </Text>
               </TouchableOpacity>
@@ -54,15 +64,7 @@ const styles = StyleSheet.create({
   },
   btns: {
     alignItems: 'center',
-  },
-  btnsInline: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 15,
-  },
-  btn: {
-    borderRadius: 10,
+    borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -71,7 +73,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginVertical: 10,
+  },
+  btnsInline: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+  },
+  btn: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     minWidth: 300,
@@ -105,5 +114,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
     marginHorizontal: 20,
+  },
+  btnBorderTop: {
+    borderTopWidth: 0.5,
   },
 });
