@@ -3,15 +3,13 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from './Text';
 import type CommonViewProps from '../models/CommonViewProps';
 import { useTheme } from '../../theme';
+import type { BottomSheetProps } from './BottomSheet';
 
-export interface BottomSheetOptionsProps {
+export interface BottomSheetOptionsProps extends BottomSheetProps {
   title?: string;
   message?: string;
   options?: { text: string; onPress: () => void }[];
-  element?: () => JSX.Element;
   inline?: boolean;
-  onHide?: () => void;
-  snapPoints?: string[];
 }
 
 interface Props extends CommonViewProps, BottomSheetOptionsProps {}

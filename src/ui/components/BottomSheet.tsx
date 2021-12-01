@@ -16,7 +16,7 @@ export interface BottomSheetActionsRef {
 export interface BottomSheetProps {
   element: () => JSX.Element;
   onHide?: () => void;
-  snapPoints?: string[];
+  snapPoints?: (string | number)[];
 }
 
 export const BottomSheet = () => {
@@ -66,6 +66,10 @@ export const BottomSheet = () => {
       )}
 
       <RNBottomSheet
+        backgroundStyle={
+          sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
+        }
+        handleHeight={sheetOptionsProps ? 0 : undefined}
         ref={(ref) => {
           if (ref) {
             hideRef.current = ref.close;
@@ -111,5 +115,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: '#000',
     opacity: 0.7,
+  },
+  sheetOptionsBgStyle: {
+    backgroundColor: 'transparent',
   },
 });
