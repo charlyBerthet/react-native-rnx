@@ -16,6 +16,7 @@ export interface BottomSheetActionsRef {
 export interface BottomSheetProps {
   element: () => JSX.Element;
   onHide?: () => void;
+  snapPoints?: string[];
 }
 
 export const BottomSheet = () => {
@@ -84,7 +85,9 @@ export const BottomSheet = () => {
           }
         }}
         index={-1}
-        snapPoints={snapPoints}
+        snapPoints={
+          sheetProps?.snapPoints || sheetOptionsProps?.snapPoints || snapPoints
+        }
         onClose={onHidden}
         enablePanDownToClose
       >
