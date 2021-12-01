@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   btns: {
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 8,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
