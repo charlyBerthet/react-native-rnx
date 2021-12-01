@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   btns: {
     alignItems: 'center',
     borderRadius: 5,
+    overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

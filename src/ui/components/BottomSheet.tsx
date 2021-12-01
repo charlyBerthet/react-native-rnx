@@ -69,7 +69,9 @@ export const BottomSheet = () => {
         backgroundStyle={
           sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
         }
-        handleHeight={sheetOptionsProps ? 0 : undefined}
+        handleStyle={
+          sheetOptionsProps ? styles.sheetOptionsHandleStyle : undefined
+        }
         ref={(ref) => {
           if (ref) {
             hideRef.current = ref.close;
@@ -118,5 +120,8 @@ const styles = StyleSheet.create({
   },
   sheetOptionsBgStyle: {
     backgroundColor: 'transparent',
+  },
+  sheetOptionsHandleStyle: {
+    display: 'none',
   },
 });
