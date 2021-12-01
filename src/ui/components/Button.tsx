@@ -23,6 +23,7 @@ interface Props extends CommonViewProps {
   small?: boolean;
   secondary?: boolean;
   isLoading?: boolean;
+  noElevation?: boolean;
 }
 
 export const Button = (props: Props) => {
@@ -41,6 +42,7 @@ export const Button = (props: Props) => {
         btnType === 'outline' && { borderColor: mainColors.bg },
         btnType === 'outline' && styles.containerOutline,
         props.small && styles.containerSmall,
+        props.noElevation && styles.containerNoElevation,
         props.style,
       ]}
     >
@@ -135,6 +137,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  containerNoElevation: {
+    shadowOpacity: 0,
+    elevation: 0,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
   },
   containerOutline: {
     borderWidth: 1,
