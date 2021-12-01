@@ -107,6 +107,8 @@ export const BottomSheet = () => {
         }
         onClose={onHidden}
         enablePanDownToClose={disableScrollToClose ? false : true}
+        enableContentPanningGesture={disableScrollToClose ? false : true}
+        enableHandlePanningGesture={disableScrollToClose ? false : true}
       >
         {disableInternalScrollView ? (
           <>
