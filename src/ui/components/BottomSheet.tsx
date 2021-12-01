@@ -46,9 +46,6 @@ export const BottomSheet = () => {
   };
 
   const hide = () => {
-    if (disableScrollToClose) {
-      return;
-    }
     if (hideRef.current) {
       hideRef.current();
     }
@@ -68,7 +65,7 @@ export const BottomSheet = () => {
     <>
       {isVisible && (
         <TouchableOpacity
-          onPress={isVisible ? hide : undefined}
+          onPress={isVisible && !disableScrollToClose ? hide : undefined}
           style={styles.backdrop}
           activeOpacity={0.65}
         />
