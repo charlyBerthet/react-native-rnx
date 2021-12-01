@@ -30,14 +30,19 @@ export const BottomSheetOptions = (props: Props) => {
       )}
       {!!props.element && <props.element />}
       {!!props.options && (
-        <View style={[styles.btns, props.inline && styles.btnsInline]}>
+        <View
+          style={[
+            styles.btns,
+            props.inline && styles.btnsInline,
+            { backgroundColor: theme.bgColor },
+          ]}
+        >
           {props.options.map((opt, idx) => {
             return (
               <TouchableOpacity
                 style={[
                   styles.btn,
                   props.inline && styles.btnInline,
-                  { backgroundColor: theme.bgColor },
                   idx !== 0 && styles.btnBorderTop,
                   idx !== 0 && { borderColor: theme.borderColor },
                 ]}
