@@ -42,6 +42,7 @@ export const BottomSheetOptions = (props: Props) => {
                   idx !== 0 && { borderColor: theme.borderColor },
                 ]}
                 key={idx}
+                activeOpacity={0.8}
                 onPress={opt.onPress}
               >
                 <Text style={[styles.btnTxt]} primary={opt.primary}>
