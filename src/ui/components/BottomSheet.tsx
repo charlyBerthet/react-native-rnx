@@ -46,7 +46,7 @@ export const BottomSheet = () => {
   };
 
   const hide = () => {
-    if (!disableScrollToClose) {
+    if (disableScrollToClose) {
       return;
     }
     if (hideRef.current) {
