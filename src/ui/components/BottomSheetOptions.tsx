@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     minWidth: 300,
+    alignSelf: 'center',
   },
   btnsInline: {
     flexDirection: 'row',
