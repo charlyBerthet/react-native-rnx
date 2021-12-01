@@ -79,7 +79,9 @@ export const BottomSheet = () => {
           sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
         }
         handleStyle={
-          sheetOptionsProps ? styles.sheetOptionsHandleStyle : undefined
+          sheetOptionsProps || disableScrollToClose
+            ? styles.sheetOptionsHandleStyle
+            : undefined
         }
         ref={(ref) => {
           if (ref) {
