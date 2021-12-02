@@ -27,6 +27,7 @@ interface Props {
   headerRightButtons?: {
     title?: string;
     icon?: string;
+    iconSolid?: boolean;
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
@@ -38,6 +39,7 @@ interface Props {
   headerLeftButton?: {
     title?: string;
     icon?: string;
+    iconSolid?: boolean;
     navigateTo?: string;
     onPress?: () => void;
     secondary?: boolean;
@@ -81,6 +83,7 @@ export const ScrollableScreen = (props: Props) => {
               style={props.headerLowDown && styles.headerButtonLowDown}
               title={props.headerLeftButton!!.title || ''}
               icon={props.headerLeftButton!!.icon}
+              iconSolid={props.headerLeftButton!!.iconSolid}
               onPress={() => {
                 if (props.headerLeftButton!!.navigateTo) {
                   navigation.navigate(props.headerLeftButton!!.navigateTo);
@@ -108,6 +111,7 @@ export const ScrollableScreen = (props: Props) => {
                     style={props.headerLowDown && styles.headerButtonLowDown}
                     title={btnProps.title}
                     icon={btnProps.icon}
+                    iconSolid={btnProps.iconSolid}
                     onPress={() => {
                       if (btnProps.navigateTo) {
                         navigation.navigate(btnProps.navigateTo);
@@ -193,4 +197,5 @@ const styles = StyleSheet.create({
   headerBtns: {
     flexDirection: 'row',
   },
+  headerButtonCompact: {},
 });

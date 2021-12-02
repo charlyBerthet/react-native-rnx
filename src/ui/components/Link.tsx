@@ -12,6 +12,7 @@ import type CommonViewProps from '../models/CommonViewProps';
 interface Props extends CommonViewProps {
   title?: string;
   icon?: string;
+  iconSolid?: boolean;
   onPress?: () => void;
   secondary?: boolean;
   destructive?: boolean;
@@ -47,7 +48,7 @@ export const Link = (props: Props) => {
                 ? theme.destructiveColor
                 : mainColors.txt
             }
-            solid={true}
+            solid={props.iconSolid === false ? false : true}
             style={styles.icon}
           />
         )
