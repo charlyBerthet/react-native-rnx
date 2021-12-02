@@ -159,7 +159,7 @@ export const ScrollableScreen = (props: Props) => {
   );
 
   return props.noScroll ? (
-    view
+    props.children
   ) : (
     <ScrollView
       scrollEventThrottle={5}
