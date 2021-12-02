@@ -159,7 +159,13 @@ export const ScrollableScreen = (props: Props) => {
   );
 
   return props.noScroll ? (
-    <View style={[styles.root, props.noScroll && styles.rootNoScroll]}>
+    <View
+      style={[
+        styles.root,
+        props.noScroll && styles.rootNoScroll,
+        props.rootNoMargin && styles.rootNoMargin,
+      ]}
+    >
       {props.children}
     </View>
   ) : (
