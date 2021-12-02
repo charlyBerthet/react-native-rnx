@@ -168,7 +168,6 @@ export const ScrollableScreen = (props: Props) => {
       {!forceTitleInHeader && !!props.title && <Title>{props.title}</Title>}
       {!!props.subtitle && <Subtitle>{props.subtitle}</Subtitle>}
       {props.children}
-      {!props.noScroll && <View style={styles.bottomSpacer} />}
     </View>
   );
 
@@ -196,10 +195,6 @@ const styles = StyleSheet.create({
   },
   rootNoScroll: {
     flex: 1,
-  },
-  bottomSpacer: {
-    width: 10,
-    height: 50,
   },
   headerButtonLowDown: {
     marginTop: LOW_DOWN_MARGIN_TOP,
