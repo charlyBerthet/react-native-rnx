@@ -101,7 +101,7 @@ export const ScrollableScreen = (props: Props) => {
       headerRight:
         props.headerRightButtons && props.headerRightButtons.length
           ? () => (
-              <>
+              <View style={styles.headerBtns}>
                 {props.headerRightButtons!.map((btnProps, idx) => (
                   <Link
                     key={idx}
@@ -123,7 +123,7 @@ export const ScrollableScreen = (props: Props) => {
                     isLoading={btnProps.isLoading}
                   />
                 ))}
-              </>
+              </View>
             )
           : undefined,
     });
@@ -189,5 +189,8 @@ const styles = StyleSheet.create({
   },
   headerButtonLowDown: {
     marginTop: LOW_DOWN_MARGIN_TOP,
+  },
+  headerBtns: {
+    flexDirection: 'row',
   },
 });
