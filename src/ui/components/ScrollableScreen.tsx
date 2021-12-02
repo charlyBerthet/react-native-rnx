@@ -35,6 +35,8 @@ interface Props {
     disabled?: boolean;
     isLoading?: boolean;
     defaultTxtColor?: boolean;
+    paddingRight?: number;
+    paddingLeft?: number;
   }[];
   headerLeftButton?: {
     title?: string;
@@ -80,7 +82,7 @@ export const ScrollableScreen = (props: Props) => {
       headerLeft: props.headerLeftButton
         ? () => (
             <Link
-              style={props.headerLowDown && styles.headerButtonLowDown}
+              style={[props.headerLowDown && styles.headerButtonLowDown]}
               title={props.headerLeftButton!!.title || ''}
               icon={props.headerLeftButton!!.icon}
               iconSolid={props.headerLeftButton!!.iconSolid}
@@ -108,7 +110,15 @@ export const ScrollableScreen = (props: Props) => {
                 {props.headerRightButtons!.map((btnProps, idx) => (
                   <Link
                     key={idx}
-                    style={props.headerLowDown && styles.headerButtonLowDown}
+                    style={[
+                      props.headerLowDown && styles.headerButtonLowDown,
+                      btnProps.paddingLeft !== undefined && {
+                        paddingLeft: btnProps.paddingLeft,
+                      },
+                      btnProps.paddingRight !== undefined && {
+                        paddingRight: btnProps.paddingRight,
+                      },
+                    ]}
                     title={btnProps.title}
                     icon={btnProps.icon}
                     iconSolid={btnProps.iconSolid}
