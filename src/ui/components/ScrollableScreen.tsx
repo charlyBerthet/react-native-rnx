@@ -24,7 +24,7 @@ interface Props {
   title?: string;
   titleElement?: () => JSX.Element;
   subtitle?: string;
-  headerRightButton?: {
+  headerRightButtons?: {
     title?: string;
     icon?: string;
     navigateTo?: string;
@@ -34,7 +34,7 @@ interface Props {
     disabled?: boolean;
     isLoading?: boolean;
     defaultTxtColor?: boolean;
-  };
+  }[];
   headerLeftButton?: {
     title?: string;
     icon?: string;
@@ -98,34 +98,40 @@ export const ScrollableScreen = (props: Props) => {
           )
         : undefined,
       headerBackground: props.headerBackground,
-      headerRight: props.headerRightButton
-        ? () => (
-            <Link
-              style={props.headerLowDown && styles.headerButtonLowDown}
-              title={props.headerRightButton!!.title}
-              icon={props.headerRightButton!!.icon}
-              onPress={() => {
-                if (props.headerRightButton!!.navigateTo) {
-                  navigation.navigate(props.headerRightButton!!.navigateTo);
-                }
-                if (props.headerRightButton!!.onPress) {
-                  props.headerRightButton!!.onPress();
-                }
-              }}
-              defaultTxtColor={props.headerRightButton!!.defaultTxtColor}
-              destructive={props.headerRightButton!!.destructive}
-              secondary={props.headerRightButton!!.secondary}
-              disabled={props.headerRightButton!!.disabled}
-              isLoading={props.headerRightButton!!.isLoading}
-            />
-          )
-        : undefined,
+      headerRight:
+        props.headerRightButtons && props.headerRightButtons.length
+          ? () => (
+              <>
+                {props.headerRightButtons!.map((btnProps, idx) => (
+                  <Link
+                    key={idx}
+                    style={props.headerLowDown && styles.headerButtonLowDown}
+                    title={btnProps.title}
+                    icon={btnProps.icon}
+                    onPress={() => {
+                      if (btnProps.navigateTo) {
+                        navigation.navigate(btnProps.navigateTo);
+                      }
+                      if (btnProps.onPress) {
+                        btnProps.onPress();
+                      }
+                    }}
+                    defaultTxtColor={btnProps.defaultTxtColor}
+                    destructive={btnProps.destructive}
+                    secondary={btnProps.secondary}
+                    disabled={btnProps.disabled}
+                    isLoading={btnProps.isLoading}
+                  />
+                ))}
+              </>
+            )
+          : undefined,
     });
   }, [
     props.title,
     navigation,
     isTitleVisibleInHeader,
-    props.headerRightButton,
+    props.headerRightButtons,
     props.headerLeftButton,
     props.headerBackground,
     props.headerLowDown,
