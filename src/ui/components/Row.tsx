@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     opacity: 0.75,
     marginRight: 15,
     marginLeft: 5,
+    minWidth: 20,
   },
   switch: {
     marginLeft: 5,
