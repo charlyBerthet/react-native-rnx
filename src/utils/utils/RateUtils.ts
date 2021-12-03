@@ -23,45 +23,48 @@ export const askForUserFeedback = async (
     openCount === 200 ||
     openCount === 400
   ) {
-    setTimeout(() => {
-      Alert.alert(
-        translate('rate.feelingTitle'),
-        translate('rate.feelingSubtitle'),
-        [
-          {
-            text: translate('global.no'),
-          },
-          {
-            text: translate('global.yes'),
-            onPress: () => {
-              Alert.alert(
-                translate('rate.askRateTitle'),
-                translate('rate.askRateSubtitle'),
-                [
-                  {
-                    text: translate('global.cancel'),
-                  },
-                  {
-                    text: translate('global.letsgo'),
-                    onPress: () => {
-                      Rate.rate(
-                        {
-                          AppleAppID: appleAppId,
-                          GooglePackageName: googlePackageName,
-                          preferInApp: false,
-                        },
-                        () => {
-                          /* no opt */
-                        }
-                      );
-                    },
-                  },
-                ]
-              );
+    setTimeout(
+      () => {
+        Alert.alert(
+          translate('rate.feelingTitle'),
+          translate('rate.feelingSubtitle'),
+          [
+            {
+              text: translate('global.no'),
             },
-          },
-        ]
-      );
-    }, 2000);
+            {
+              text: translate('global.yes'),
+              onPress: () => {
+                Alert.alert(
+                  translate('rate.askRateTitle'),
+                  translate('rate.askRateSubtitle'),
+                  [
+                    {
+                      text: translate('global.cancel'),
+                    },
+                    {
+                      text: translate('global.letsgo'),
+                      onPress: () => {
+                        Rate.rate(
+                          {
+                            AppleAppID: appleAppId,
+                            GooglePackageName: googlePackageName,
+                            preferInApp: false,
+                          },
+                          () => {
+                            /* no opt */
+                          }
+                        );
+                      },
+                    },
+                  ]
+                );
+              },
+            },
+          ]
+        );
+      },
+      forceRate ? 1 : 2000
+    );
   }
 };
