@@ -16,7 +16,7 @@ const initStore = async (): Promise<void | string> => {
     await RNIap.initConnection();
     // we make sure that "ghost" pending payment are removed
     // (ghost = failed pending payment that are still marked as pending in Google's native Vending module cache)
-    await RNIap.flushFailedPurchasesCachedAsPendingAndroid();
+    // await RNIap.flushFailedPurchasesCachedAsPendingAndroid();
     console.log('hasPurchasedPremium initStore end');
   } catch (e) {
     // exception can happen here if:
