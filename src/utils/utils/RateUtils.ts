@@ -5,13 +5,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const askForUserFeedback = async (
   appleAppId: string,
   translate: (key: string) => string,
+  forceRate?: boolean,
   googlePackageName?: string
 ) => {
-  const openCount = parseInt(
-    (await AsyncStorage.getItem('openCount')) || '0',
-    10
-  );
-  AsyncStorage.setItem('openCount', openCount + 1 + '');
+  const openCount = forceRate
+    ? 1
+    : parseInt((await AsyncStorage.getItem('openCount')) || '0', 10);
+
+  if (!forceRate) {
+    AsyncStorage.setItem('openCount', openCount + 1 + '');
+  }
 
   if (
     openCount === 1 ||
