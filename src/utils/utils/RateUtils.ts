@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const askForUserFeedback = async (
   appleAppId: string,
-  translate: (key: string) => string
+  translate: (key: string) => string,
+  googlePackageName?: string
 ) => {
   const openCount = parseInt(
     (await AsyncStorage.getItem('openCount')) || '0',
@@ -43,6 +44,7 @@ export const askForUserFeedback = async (
                       Rate.rate(
                         {
                           AppleAppID: appleAppId,
+                          GooglePackageName: googlePackageName,
                           preferInApp: false,
                         },
                         () => {
