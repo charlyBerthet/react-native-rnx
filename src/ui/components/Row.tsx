@@ -174,6 +174,8 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginLeft: 5,
     minWidth: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   switch: {
     marginLeft: 5,
