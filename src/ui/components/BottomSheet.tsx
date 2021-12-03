@@ -18,6 +18,7 @@ export interface BottomSheetProps {
   onHide?: () => void;
   snapPoints?: (string | number)[];
   disableScrollToClose?: boolean;
+  hideHandle?: boolean;
   disableInternalScrollView?: boolean;
 }
 
@@ -35,6 +36,7 @@ export const BottomSheet = () => {
     sheetOptionsProps?.disableInternalScrollView;
   const disableScrollToClose =
     sheetProps?.disableScrollToClose || sheetOptionsProps?.disableScrollToClose;
+  const hideHandle = sheetProps?.hideHandle || sheetOptionsProps?.hideHandle;
   const showOptions = (props: BottomSheetOptionsProps) => {
     setSheetOptionsProps(props);
     setIsVisible(true);
@@ -76,7 +78,7 @@ export const BottomSheet = () => {
           sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
         }
         handleStyle={
-          sheetOptionsProps || disableScrollToClose
+          sheetOptionsProps || disableScrollToClose || hideHandle
             ? styles.sheetOptionsHandleStyle
             : undefined
         }
