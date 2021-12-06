@@ -1,15 +1,25 @@
 import * as RNIap from 'react-native-iap';
 
-let PREMIUM_MONTHLY = '';
-const PREMIUM_PRODUCT_IDS = ['premiumv1', PREMIUM_MONTHLY];
+export interface IapSubscriptionBase {
+  id: string;
+  durationMonth: number;
+  freeTrialDaysDuration?: number;
+}
 
-export const initIAP = (premiumMonthlySku: string) => {
-  PREMIUM_MONTHLY = premiumMonthlySku;
+export interface IapSubscription extends IapSubscriptionBase {
+  price: number;
+  localizedPrice: string;
+}
+
+let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
+
+export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
+  PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
 };
 
 const initStore = async (): Promise<void | string> => {
   try {
-    if (!PREMIUM_MONTHLY) {
+    if (!PREMIUM_PRODUCT_LIST.length) {
       throw 'You need to call initIAP first';
     }
     console.log('hasPurchasedPremium initStore start');
@@ -29,19 +39,21 @@ export const hasPurchasedPremium = async () => {
   try {
     const purchases = await RNIap.getAvailablePurchases();
     console.log('hasPurchasedPremium purchases.length', purchases.length);
-    return !!purchases.find((p) => PREMIUM_PRODUCT_IDS.includes(p.productId));
+    return !!purchases.find(
+      (p) => PREMIUM_PRODUCT_LIST.filter((p2) => p.productId === p2.id).length
+    );
   } catch (e) {
     console.log('restore error', e);
     return Promise.reject();
   }
 };
 
-export const requestPurchase = async (): Promise<
-  RNIap.ProductPurchase | undefined
-> => {
+export const requestPurchase = async (
+  iapId: string
+): Promise<RNIap.ProductPurchase | undefined> => {
   await initStore();
   try {
-    const purchase = await RNIap.requestPurchase(PREMIUM_MONTHLY, false);
+    const purchase = await RNIap.requestPurchase(iapId, false);
     console.log('Purchases', purchase);
     await RNIap.finishTransaction(purchase, false);
     return;
@@ -51,21 +63,22 @@ export const requestPurchase = async (): Promise<
   }
 };
 
-export const getProducts = async (
+export const getIapSubscriptions = async (
   productIds: string[]
-): Promise<RNIap.Product[]> => {
+): Promise<IapSubscription[]> => {
   await initStore();
-  const products = await RNIap.getProducts(productIds);
+  const products = await RNIap.getSubscriptions(productIds);
   if (products && products.length) {
-    return products;
+    return products.map((p) => {
+      const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
+      return {
+        id: p.productId,
+        price: parseFloat(p.price),
+        localizedPrice: p.localizedPrice,
+        durationMonth: base?.durationMonth || 0,
+        freeTrialDaysDuration: base?.freeTrialDaysDuration,
+      };
+    });
   }
   return [];
-};
-
-export const getPriceForOneExport = async (): Promise<string | undefined> => {
-  const prods = await getProducts([PREMIUM_MONTHLY]);
-  if (!prods || !prods.length) {
-    return '$$';
-  }
-  return prods[0].localizedPrice;
 };
