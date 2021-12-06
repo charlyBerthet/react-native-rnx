@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 import { useBottomSheet } from 'react-native-rnx';
 import { UpgradeViewSheet } from './UpgradeView';
 
-export const usePremium = () => {
+export const useUpgrade = () => {
   const sheet = useBottomSheet();
 
   const upgrade = useCallback(() => {
@@ -16,5 +16,5 @@ export const usePremium = () => {
     });
   }, [sheet]);
 
-  return { upgrade };
+  return upgrade;
 };
