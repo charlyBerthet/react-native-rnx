@@ -63,11 +63,11 @@ export const requestPurchase = async (
   }
 };
 
-export const getIapSubscriptions = async (
-  productIds: string[]
-): Promise<IapSubscription[]> => {
+export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
   await initStore();
-  const products = await RNIap.getSubscriptions(productIds);
+  const products = await RNIap.getSubscriptions(
+    PREMIUM_PRODUCT_LIST.map((o) => o.id)
+  );
   if (products && products.length) {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
