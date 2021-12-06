@@ -98,7 +98,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
     if (selectedIap) {
       setIsLoadingPurchase(true);
       hasPurchasedPremium().then((hasPurchase) => {
-        if (hasPurchase) {
+        if (!hasPurchase) {
           setIsPremium(true);
           setIsLoadingPurchase(false);
           _success();
