@@ -97,28 +97,28 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
   const _subscribe = useCallback(() => {
     if (selectedIap) {
       setIsLoadingPurchase(true);
-      // hasPurchasedPremium().then((hasPurchase) => {
-      //   if (hasPurchase) {
-      //     setIsPremium(true);
-      //     setIsLoadingPurchase(false);
-      //     _success();
-      //   } else {
-      requestPurchase(selectedIap.id).then(() => {
-        hasPurchasedPremium().then((_hasPurchase) => {
-          setIsPremium(_hasPurchase);
+      hasPurchasedPremium().then((hasPurchase) => {
+        if (hasPurchase) {
+          setIsPremium(true);
           setIsLoadingPurchase(false);
-          if (_hasPurchase) {
-            _success();
-          } else {
-            Alert.alert(
-              localize('iap.purchaseerrortitle'),
-              localize('iap.purchaseerrormsg')
-            );
-          }
-        });
+          _success();
+        } else {
+          requestPurchase(selectedIap.id).then(() => {
+            hasPurchasedPremium().then((_hasPurchase) => {
+              setIsPremium(_hasPurchase);
+              setIsLoadingPurchase(false);
+              if (_hasPurchase) {
+                _success();
+              } else {
+                Alert.alert(
+                  localize('iap.purchaseerrortitle'),
+                  localize('iap.purchaseerrormsg')
+                );
+              }
+            });
+          });
+        }
       });
-      // }
-      // });
     }
   }, [setIsLoadingPurchase, selectedIap, localize, setIsPremium, _success]);
 
