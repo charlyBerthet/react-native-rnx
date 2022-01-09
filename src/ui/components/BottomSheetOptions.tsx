@@ -113,15 +113,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     textAlign: 'center',
-    marginTop: 10,
-    marginBottom: 10,
     marginHorizontal: 20,
   },
   message: {
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
-    marginBottom: 10,
     marginHorizontal: 20,
   },
   btnBorderTop: {
