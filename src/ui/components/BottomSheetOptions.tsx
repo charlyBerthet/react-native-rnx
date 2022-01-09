@@ -17,31 +17,16 @@ interface Props extends CommonViewProps, BottomSheetOptionsProps {}
 export const BottomSheetOptions = (props: Props) => {
   const theme = useTheme();
   return (
-    <View style={[styles.root]}>
-      {!!props.title && (
-        <Text style={[styles.title, { backgroundColor: theme.bgColor }]}>
-          {props.title}
-        </Text>
-      )}
+    <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
+      {!!props.title && <Text style={[styles.title]}>{props.title}</Text>}
       {!!props.message && (
-        <Text
-          style={[
-            styles.message,
-            { backgroundColor: theme.bgColor, borderColor: theme.borderColor },
-          ]}
-        >
+        <Text style={[styles.message, { borderColor: theme.borderColor }]}>
           {props.message}
         </Text>
       )}
       {!!props.element && <props.element />}
       {!!props.options && (
-        <View
-          style={[
-            styles.btns,
-            props.inline && styles.btnsInline,
-            { backgroundColor: theme.bgColor },
-          ]}
-        >
+        <View style={[styles.btns, props.inline && styles.btnsInline]}>
           {props.options.map((opt, idx) => {
             return (
               <TouchableOpacity
