@@ -52,11 +52,13 @@ export const BottomSheetOptions = (props: Props) => {
   );
 };
 
+const marginHorizontal = 10;
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingBottom: 30,
-    marginHorizontal: 10,
+    marginHorizontal: marginHorizontal,
     marginBottom: 20,
     borderRadius: 8,
     alignSelf: 'center',
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: Dimensions.get('window').width,
+    minWidth: Dimensions.get('window').width - marginHorizontal * 2,
   },
   btnInline: {
     marginHorizontal: 13,
