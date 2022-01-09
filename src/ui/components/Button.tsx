@@ -57,23 +57,40 @@ export const Button = (props: Props) => {
           style={!!props.icon && styles.iconWithTitle}
         />
       )}
-      {!!props.title && (
-        <Text
-          style={[
-            styles.title,
-            props.small && styles.titleSmall,
-            props.important && styles.titleImportant,
-            {
-              color:
-                btnType === 'normal'
-                  ? theme.txtColorOnPrimaryColor
-                  : mainColors.txt,
-            },
-          ]}
-        >
-          {props.title}
-        </Text>
-      )}
+      <View style={styles.titleWrapper}>
+        {!!props.title && (
+          <Text
+            style={[
+              styles.title,
+              props.small && styles.titleSmall,
+              props.important && styles.titleImportant,
+              {
+                color:
+                  btnType === 'normal'
+                    ? theme.txtColorOnPrimaryColor
+                    : mainColors.txt,
+              },
+            ]}
+          >
+            {props.title}
+          </Text>
+        )}
+        {props.subtitle && (
+          <Text
+            style={[
+              styles.subtitle,
+              {
+                color:
+                  btnType === 'normal'
+                    ? theme.txtColorOnPrimaryColor
+                    : mainColors.txt,
+              },
+            ]}
+          >
+            {props.subtitle}
+          </Text>
+        )}
+      </View>
       {props.rightArrow && (
         <View style={styles.rightArrow}>
           <Icon
@@ -99,21 +116,6 @@ export const Button = (props: Props) => {
             size="small"
           />
         </View>
-      )}
-      {props.subtitle && (
-        <Text
-          style={[
-            styles.subtitle,
-            {
-              color:
-                btnType === 'normal'
-                  ? theme.txtColorOnPrimaryColor
-                  : mainColors.txt,
-            },
-          ]}
-        >
-          {props.subtitle}
-        </Text>
       )}
     </TouchableOpacity>
   );
@@ -196,4 +198,5 @@ const styles = StyleSheet.create({
   iconWithTitle: {
     marginRight: 10,
   },
+  titleWrapper: {},
 });
