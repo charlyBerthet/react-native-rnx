@@ -24,7 +24,12 @@ export const BottomSheetOptions = (props: Props) => {
         </Text>
       )}
       {!!props.message && (
-        <Text style={[styles.message, { backgroundColor: theme.bgColor }]}>
+        <Text
+          style={[
+            styles.message,
+            { backgroundColor: theme.bgColor, borderColor: theme.borderColor },
+          ]}
+        >
           {props.message}
         </Text>
       )}
@@ -67,10 +72,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 30,
     marginTop: 30,
-  },
-  btns: {
-    alignItems: 'center',
     borderRadius: 8,
+    minWidth: 300,
+    alignSelf: 'center',
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: {
@@ -80,8 +84,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    minWidth: 300,
-    alignSelf: 'center',
+  },
+  btns: {
+    alignItems: 'center',
   },
   btnsInline: {
     flexDirection: 'row',
@@ -114,12 +119,16 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
     marginHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   message: {
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
     marginHorizontal: 20,
+    paddingBottom: 10,
+    borderTopWidth: 0.5,
   },
   btnBorderTop: {
     borderTopWidth: 0.5,
