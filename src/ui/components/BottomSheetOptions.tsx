@@ -17,7 +17,7 @@ interface Props extends CommonViewProps, BottomSheetOptionsProps {}
 export const BottomSheetOptions = (props: Props) => {
   const theme = useTheme();
   return (
-    <View style={[styles.root]}>
+    <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
       {!!props.title && (
         <Text style={[styles.title, { backgroundColor: theme.bgColor }]}>
           {props.title}
