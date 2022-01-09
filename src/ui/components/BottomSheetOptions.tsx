@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { Text } from './Text';
 import type CommonViewProps from '../models/CommonViewProps';
 import { useTheme } from '../../theme';
@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
   root: {
     flex: 1,
     paddingBottom: 30,
-    marginTop: 30,
+    marginHorizontal: 10,
+    marginBottom: 20,
     borderRadius: 8,
-    minWidth: 300,
     alignSelf: 'center',
     overflow: 'hidden',
     shadowColor: '#000',
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 300,
+    minWidth: Dimensions.get('window').width,
   },
   btnInline: {
     marginHorizontal: 13,
