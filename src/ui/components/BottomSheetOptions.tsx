@@ -57,10 +57,9 @@ const marginHorizontal = 10;
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    paddingBottom: 30,
     marginHorizontal: marginHorizontal,
-    marginBottom: 20,
-    borderRadius: 8,
+    marginBottom: 15,
+    borderRadius: 12,
     alignSelf: 'center',
     overflow: 'hidden',
     shadowColor: '#000',
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 20,
     paddingBottom: 10,
-    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
   },
   btnBorderTop: {
     borderTopWidth: 0.5,
