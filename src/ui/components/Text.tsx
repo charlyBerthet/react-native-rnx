@@ -5,7 +5,7 @@ import useTheme from '../../theme/hooks/useTheme';
 import useMainColors from '../../theme/hooks/useMainColors';
 
 interface Props extends CommonTextProps {
-  children: string | string[];
+  children: string | (string | JSX.Element)[] | JSX.Element;
   primary?: boolean;
   secondary?: boolean;
 }
