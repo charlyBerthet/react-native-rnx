@@ -58,7 +58,10 @@ export const useAskForUserFeedback = () => {
                                 preferInApp: false,
                               },
                               () => {
-                                setHasRatedTheApp(true);
+                                setTimeout(
+                                  () => setHasRatedTheApp(true),
+                                  10000
+                                );
                               }
                             );
                           },

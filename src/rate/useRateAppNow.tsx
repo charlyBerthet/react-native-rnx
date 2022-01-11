@@ -13,7 +13,7 @@ export const useRateAppNow = () => {
           preferInApp: false,
         },
         () => {
-          setHasRatedTheApp(true);
+          setTimeout(() => setHasRatedTheApp(true), 10000);
         }
       );
     },
