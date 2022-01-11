@@ -25,7 +25,11 @@ export function createStateProvider<T extends BaseStore>(
   reducer: (state: T, action: { type: string; value: any }) => T,
   _persist: (keyof T)[]
 ) {
-  const persist = [..._persist.filter((p) => p !== 'isPremium'), 'isPremium'];
+  const persist = [
+    ..._persist.filter((p) => p !== 'isPremium' && p !== 'hasRatedTheApp'),
+    'isPremium',
+    'hasRatedTheApp',
+  ];
   console.log(
     '[RNX] createStateProvider, will persist keys',
     JSON.stringify(persist)
