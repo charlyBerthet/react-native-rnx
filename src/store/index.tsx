@@ -17,6 +17,7 @@ let Store: React.Context<any>;
 
 interface BaseStore {
   isPremium?: boolean;
+  hasRatedTheApp?: boolean;
 }
 
 export function createStateProvider<T extends BaseStore>(
