@@ -1,6 +1,6 @@
 import Rate from 'react-native-rate';
 import { useCallback } from 'react';
-import { useHasRatedTheApp } from '.';
+import { useHasRatedTheApp } from './useHasRatedTheApp';
 
 export const useRateAppNow = () => {
   const { setHasRatedTheApp } = useHasRatedTheApp();

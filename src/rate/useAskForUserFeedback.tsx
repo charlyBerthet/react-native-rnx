@@ -3,7 +3,7 @@ import Rate from 'react-native-rate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback } from 'react';
 import { useLocalization } from 'react-native-rnx';
-import { useHasRatedTheApp } from '.';
+import { useHasRatedTheApp } from './useHasRatedTheApp';
 
 export const useAskForUserFeedback = () => {
   const { localize } = useLocalization();
