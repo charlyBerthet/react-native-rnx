@@ -12,9 +12,14 @@ export interface IapSubscription extends IapSubscriptionBase {
 }
 
 let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
+let onPurchaseSuccess: (() => void) | undefined;
 
-export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
+export const initIAP = (
+  premiumSubscriptionIds: IapSubscriptionBase[],
+  _onPurchaseSuccess?: () => void
+) => {
   PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
+  onPurchaseSuccess = _onPurchaseSuccess;
 };
 
 const initStore = async (): Promise<void | string> => {
@@ -48,15 +53,17 @@ export const hasPurchasedPremium = async () => {
   }
 };
 
-export const requestPurchase = async (
-  iapId: string
-): Promise<RNIap.ProductPurchase | undefined> => {
+export const requestPurchase = async (iapId: string): Promise<boolean> => {
   await initStore();
   try {
     const purchase = await RNIap.requestPurchase(iapId, false);
     console.log('Purchases', purchase);
     await RNIap.finishTransaction(purchase, false);
-    return;
+    const hasPurchased = await hasPurchasedPremium();
+    if (hasPurchased && onPurchaseSuccess) {
+      onPurchaseSuccess();
+    }
+    return hasPurchased;
   } catch (e) {
     console.log('requestPurchase error', e);
     return Promise.reject();
