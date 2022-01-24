@@ -14,68 +14,75 @@ export const useAskForUserFeedback = () => {
       forceRate?: boolean,
       googlePackageName?: string
     ) => {
-      const openCount = forceRate
-        ? 1
-        : parseInt((await AsyncStorage.getItem('openCount')) || '0', 10);
+      return new Promise(async (resolve) => {
+        const openCount = forceRate
+          ? 1
+          : parseInt((await AsyncStorage.getItem('openCount')) || '0', 10);
 
-      if (!forceRate) {
-        AsyncStorage.setItem('openCount', openCount + 1 + '');
-      }
+        if (!forceRate) {
+          AsyncStorage.setItem('openCount', openCount + 1 + '');
+        }
 
-      if (
-        openCount === 1 ||
-        openCount === 30 ||
-        openCount === 90 ||
-        openCount === 200 ||
-        openCount === 400
-      ) {
-        setTimeout(
-          () => {
-            Alert.alert(
-              localize('rate.feelingTitle'),
-              localize('rate.feelingSubtitle'),
-              [
-                {
-                  text: localize('global.no'),
-                },
-                {
-                  text: localize('global.yes'),
-                  onPress: () => {
-                    Alert.alert(
-                      localize('rate.askRateTitle'),
-                      localize('rate.askRateSubtitle'),
-                      [
-                        {
-                          text: localize('global.cancel'),
-                        },
-                        {
-                          text: localize('global.letsgo'),
-                          onPress: () => {
-                            Rate.rate(
-                              {
-                                AppleAppID: appleAppId,
-                                GooglePackageName: googlePackageName,
-                                preferInApp: false,
-                              },
-                              () => {
-                                setTimeout(
-                                  () => setHasRatedTheApp(true),
-                                  10000
-                                );
-                              }
-                            );
-                          },
-                        },
-                      ]
-                    );
+        if (
+          openCount === 1 ||
+          openCount === 30 ||
+          openCount === 90 ||
+          openCount === 200 ||
+          openCount === 400
+        ) {
+          setTimeout(
+            () => {
+              Alert.alert(
+                localize('rate.feelingTitle'),
+                localize('rate.feelingSubtitle'),
+                [
+                  {
+                    text: localize('global.no'),
+                    onPress: () => resolve(false),
                   },
-                },
-              ]
-            );
-          },
-          forceRate ? 1 : 2000
-        );
-      }
+                  {
+                    text: localize('global.yes'),
+                    onPress: () => {
+                      Alert.alert(
+                        localize('rate.askRateTitle'),
+                        localize('rate.askRateSubtitle'),
+                        [
+                          {
+                            text: localize('global.cancel'),
+                            onPress: () => resolve(false),
+                          },
+                          {
+                            text: localize('global.letsgo'),
+                            onPress: () => {
+                              Rate.rate(
+                                {
+                                  AppleAppID: appleAppId,
+                                  GooglePackageName: googlePackageName,
+                                  preferInApp: false,
+                                },
+                                () => {
+                                  setTimeout(
+                                    () => setHasRatedTheApp(true),
+                                    10000
+                                  );
+                                  resolve(true);
+                                }
+                              );
+                            },
+                          },
+                        ]
+                      );
+                    },
+                  },
+                ]
+              );
+            },
+            forceRate ? 1 : 2000
+          );
+        } else {
+          resolve(false);
+        }
+      });
     },
     [localize, setHasRatedTheApp]
   );
