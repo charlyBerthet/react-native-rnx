@@ -9,14 +9,21 @@ export interface IapSubscriptionBase {
 export interface IapSubscription extends IapSubscriptionBase {
   price: number;
   localizedPrice: string;
+  currency: string;
 }
 
 let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
-let onPurchaseSuccess: (() => void) | undefined;
+let onPurchaseSuccess:
+  | ((subscriptionId: string, value: number, currency: string) => void)
+  | undefined;
 
 export const initIAP = (
   premiumSubscriptionIds: IapSubscriptionBase[],
-  _onPurchaseSuccess?: () => void
+  _onPurchaseSuccess?: (
+    subscriptionId: string,
+    value: number,
+    currency: string
+  ) => void
 ) => {
   PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
   onPurchaseSuccess = _onPurchaseSuccess;
@@ -61,7 +68,11 @@ export const requestPurchase = async (iapId: string): Promise<boolean> => {
     await RNIap.finishTransaction(purchase, false);
     const hasPurchased = await hasPurchasedPremium();
     if (hasPurchased && onPurchaseSuccess) {
-      onPurchaseSuccess();
+      const products = await getIapSubscriptions();
+      const boughtProduct = products.find((p) => p.id === iapId);
+      if (boughtProduct) {
+        onPurchaseSuccess(iapId, boughtProduct.price, boughtProduct.currency);
+      }
     }
     return hasPurchased;
   } catch (e) {
@@ -84,6 +95,7 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
         localizedPrice: p.localizedPrice,
         durationMonth: base?.durationMonth || 0,
         freeTrialDaysDuration: base?.freeTrialDaysDuration,
+        currency: p.currency,
       };
     });
   }
