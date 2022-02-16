@@ -1,4 +1,4 @@
-import type Theme from '../models/Theme';
+import type { Theme } from '../models/Theme';
 
 const darkTheme: Theme = {
   bgColor: '#000',

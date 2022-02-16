@@ -1,6 +1,6 @@
 import defaultDarkTheme from '../constants/darkTheme';
 import defaultLightTheme from '../constants/lightTheme';
-import type Theme from '../models/Theme';
+import type { Theme } from '../models/Theme';
 
 let darkTheme = { ...defaultDarkTheme };
 let lightTheme = { ...defaultLightTheme };

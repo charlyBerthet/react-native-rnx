@@ -1,4 +1,4 @@
-export default interface Theme {
+export interface Theme {
   bgColor: string;
   txtColor: string;
   placeholderColor: string;
