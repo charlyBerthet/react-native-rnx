@@ -17,7 +17,7 @@ export const usePremiumGuard = () => {
       }
       Alert.alert(localize('iap.guardTitle'), localize('iap.guardMessage'), [
         {
-          text: localize('global.upgrade'),
+          text: localize('global.learnmore'),
           style: 'default',
           onPress: () => {
             upgrade();
