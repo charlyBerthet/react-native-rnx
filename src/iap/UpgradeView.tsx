@@ -8,6 +8,7 @@ import {
   View,
   Alert,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {
   useLocalization,
@@ -21,7 +22,6 @@ import {
   requestPurchase,
   useBottomSheet,
 } from 'react-native-rnx';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import LinearGradient from 'react-native-linear-gradient';
 
