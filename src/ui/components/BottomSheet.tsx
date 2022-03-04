@@ -1,8 +1,11 @@
 import React, { useMemo, useRef, useState } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
-import type { BottomSheetOptionsProps } from './BottomSheetOptions';
-import RNBottomSheet from '@gorhom/bottom-sheet';
+import {
+  BottomSheetOptionsProps,
+  BottomSheetOptions,
+} from './BottomSheetOptions';
+import RNBottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 export interface BottomSheetActionsRef {
   showOptions: (props: BottomSheetOptionsProps) => void;
@@ -28,9 +31,9 @@ export const BottomSheet = () => {
   ] = useState<BottomSheetOptionsProps>();
   const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
   const hideRef = useRef<() => void>();
-  // const disableInternalScrollView =
-  //   sheetProps?.disableInternalScrollView ||
-  //   sheetOptionsProps?.disableInternalScrollView;
+  const disableInternalScrollView =
+    sheetProps?.disableInternalScrollView ||
+    sheetOptionsProps?.disableInternalScrollView;
   const disableScrollToClose =
     sheetProps?.disableScrollToClose || sheetOptionsProps?.disableScrollToClose;
   const hideHandle = sheetProps?.hideHandle || sheetOptionsProps?.hideHandle;
@@ -101,12 +104,12 @@ export const BottomSheet = () => {
         snapPoints={
           sheetProps?.snapPoints || sheetOptionsProps?.snapPoints || snapPoints
         }
-        // onClose={onHidden}
-        // enablePanDownToClose={disableScrollToClose ? false : true}
-        // enableContentPanningGesture={disableScrollToClose ? false : true}
-        // enableHandlePanningGesture={disableScrollToClose ? false : true}
+        onClose={onHidden}
+        enablePanDownToClose={disableScrollToClose ? false : true}
+        enableContentPanningGesture={disableScrollToClose ? false : true}
+        enableHandlePanningGesture={disableScrollToClose ? false : true}
       >
-        {/* {disableInternalScrollView ? (
+        {disableInternalScrollView ? (
           <>
             {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
             {sheetProps?.element ? <sheetProps.element /> : undefined}
@@ -116,11 +119,11 @@ export const BottomSheet = () => {
             <>
               {sheetOptionsProps && (
                 <BottomSheetOptions {...sheetOptionsProps} />
-              )} */}
-        {sheetProps?.element ? <sheetProps.element /> : undefined}
-        {/* </>
-          </BottomSheetScrollView> */}
-        {/* )} */}
+              )}
+              {sheetProps?.element ? <sheetProps.element /> : undefined}
+            </>
+          </BottomSheetScrollView>
+        )}
       </RNBottomSheet>
     </>
   );
