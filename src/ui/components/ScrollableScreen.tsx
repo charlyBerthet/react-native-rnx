@@ -56,6 +56,12 @@ interface Props {
   forceTitleInHeader?: boolean;
   noScroll?: boolean;
   rootNoMargin?: boolean;
+  keyboardShouldPersistTaps?:
+    | boolean
+    | 'always'
+    | 'never'
+    | 'handled'
+    | undefined;
 }
 
 const LOW_DOWN_MARGIN_TOP = 35;
@@ -177,6 +183,7 @@ export const ScrollableScreen = (props: Props) => {
     <ScrollView
       scrollEventThrottle={5}
       onScroll={onScroll}
+      keyboardShouldPersistTaps={props.keyboardShouldPersistTaps}
       ref={(ref) =>
         props.scrollViewRef ? props.scrollViewRef(ref || undefined) : null
       }
