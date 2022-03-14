@@ -166,6 +166,10 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
         </View>
         <View style={styles.featuresContainer}>
           <LinearGradient
+            colors={['rgba(0, 0, 0, 0.9)', 'transparent']}
+            style={styles.featuresBackdropTop}
+          />
+          <LinearGradient
             colors={['transparent', 'rgba(0, 0, 0, 0.9)']}
             style={styles.featuresBackdrop}
           />
@@ -444,6 +448,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     transform: [{ scale: 0.8 }],
+  },
+  featuresBackdropTop: {
+    position: 'absolute',
+    bottom: -30,
+    left: 0,
+    right: 0,
+    top: -50,
   },
   featuresBackdrop: {
     position: 'absolute',
