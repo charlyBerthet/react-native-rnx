@@ -141,6 +141,10 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
         resizeMode="cover"
       />
       <View style={styles.content}>
+        <LinearGradient
+          colors={['rgba(0, 0, 0, 0.9)', 'transparent']}
+          style={styles.featuresBackdropTop}
+        />
         <View style={styles.topnav}>
           <View style={styles.topnavLeft}>
             <TouchableOpacity style={[styles.topnavBtn]} onPress={_close}>
@@ -165,10 +169,6 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
           </View>
         </View>
         <View style={styles.featuresContainer}>
-          <LinearGradient
-            colors={['rgba(0, 0, 0, 0.9)', 'transparent']}
-            style={styles.featuresBackdropTop}
-          />
           <LinearGradient
             colors={['transparent', 'rgba(0, 0, 0, 0.9)']}
             style={styles.featuresBackdrop}
@@ -451,10 +451,10 @@ const styles = StyleSheet.create({
   },
   featuresBackdropTop: {
     position: 'absolute',
-    bottom: -30,
     left: 0,
     right: 0,
-    top: -50,
+    top: -10,
+    height: 150,
   },
   featuresBackdrop: {
     position: 'absolute',
