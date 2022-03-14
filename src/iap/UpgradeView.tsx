@@ -142,7 +142,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
       />
       <View style={styles.content}>
         <LinearGradient
-          colors={['rgba(0, 0, 0, 0.9)', 'transparent']}
+          colors={['rgba(0, 0, 0, 0.6)', 'transparent']}
           style={styles.featuresBackdropTop}
         />
         <View style={styles.topnav}>
@@ -347,6 +347,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
+    overflow: 'hidden',
   },
   content: {
     position: 'absolute',
@@ -453,7 +454,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: -10,
+    top: -50,
     height: 150,
   },
   featuresBackdrop: {
