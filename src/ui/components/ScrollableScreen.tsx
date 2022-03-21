@@ -55,6 +55,7 @@ interface Props {
   scrollViewRef?: (ref: ScrollView | undefined) => void;
   forceTitleInHeader?: boolean;
   noScroll?: boolean;
+  noFlex?: boolean;
   rootNoMargin?: boolean;
   keyboardShouldPersistTaps?:
     | boolean
@@ -168,6 +169,7 @@ export const ScrollableScreen = (props: Props) => {
       style={[
         styles.root,
         props.noScroll && styles.rootNoScroll,
+        props.noFlex && styles.rootNoFlex,
         props.rootNoMargin && styles.rootNoMargin,
       ]}
     >
@@ -202,6 +204,9 @@ const styles = StyleSheet.create({
   },
   rootNoScroll: {
     flex: 1,
+  },
+  rootNoFlex: {
+    flex: 0,
   },
   headerButtonLowDown: {
     marginTop: LOW_DOWN_MARGIN_TOP,
