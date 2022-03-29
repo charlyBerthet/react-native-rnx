@@ -13,7 +13,7 @@ export const useAskForUserFeedback = () => {
       appleAppId: string,
       forceRate?: boolean,
       googlePackageName?: string
-    ) => {
+    ): Promise<'accepted' | 'rejected' | 'skipped'> => {
       return new Promise(async (resolve) => {
         const openCount = forceRate
           ? 1
@@ -38,7 +38,7 @@ export const useAskForUserFeedback = () => {
                 [
                   {
                     text: localize('global.no'),
-                    onPress: () => resolve(false),
+                    onPress: () => resolve('rejected'),
                   },
                   {
                     text: localize('global.yes'),
@@ -49,7 +49,7 @@ export const useAskForUserFeedback = () => {
                         [
                           {
                             text: localize('global.cancel'),
-                            onPress: () => resolve(false),
+                            onPress: () => resolve('rejected'),
                           },
                           {
                             text: localize('global.letsgo'),
@@ -65,7 +65,7 @@ export const useAskForUserFeedback = () => {
                                     () => setHasRatedTheApp(true),
                                     10000
                                   );
-                                  resolve(true);
+                                  resolve('accepted');
                                 }
                               );
                             },
@@ -80,7 +80,7 @@ export const useAskForUserFeedback = () => {
             forceRate ? 1 : 2000
           );
         } else {
-          resolve(false);
+          resolve('skipped');
         }
       });
     },
