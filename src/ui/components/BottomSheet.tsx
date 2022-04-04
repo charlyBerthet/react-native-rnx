@@ -6,6 +6,7 @@ import {
   BottomSheetOptions,
 } from './BottomSheetOptions';
 import RNBottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { useTheme } from '../../theme';
 
 export interface BottomSheetActionsRef {
   showOptions: (props: BottomSheetOptionsProps) => void;
@@ -41,6 +42,7 @@ export const BottomSheet = () => {
     setSheetOptionsProps(props);
     setIsVisible(true);
   };
+  const theme = useTheme();
 
   const show = (props: BottomSheetProps) => {
     setSheetProps(props);
@@ -75,7 +77,11 @@ export const BottomSheet = () => {
 
       <RNBottomSheet
         backgroundStyle={
-          sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
+          sheetOptionsProps
+            ? styles.sheetOptionsBgStyle
+            : {
+                backgroundColor: theme.bgColor,
+              }
         }
         handleStyle={
           sheetOptionsProps || disableScrollToClose || hideHandle
