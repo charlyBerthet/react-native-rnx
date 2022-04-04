@@ -56,6 +56,7 @@ interface Props {
   forceTitleInHeader?: boolean;
   noScroll?: boolean;
   noFlex?: boolean;
+  flexOne?: boolean;
   rootNoMargin?: boolean;
   keyboardShouldPersistTaps?:
     | boolean
@@ -170,6 +171,7 @@ export const ScrollableScreen = (props: Props) => {
         styles.root,
         props.noScroll && styles.rootNoScroll,
         props.noFlex && styles.rootNoFlex,
+        props.flexOne && styles.rootFlexOne,
         props.rootNoMargin && styles.rootNoMargin,
       ]}
     >
@@ -207,6 +209,9 @@ const styles = StyleSheet.create({
   },
   rootNoFlex: {
     flex: 0,
+  },
+  rootFlexOne: {
+    flex: 1,
   },
   headerButtonLowDown: {
     marginTop: LOW_DOWN_MARGIN_TOP,
