@@ -70,7 +70,12 @@ export const BottomSheet = () => {
       {isVisible && (
         <TouchableOpacity
           onPress={isVisible && !disableScrollToClose ? hide : undefined}
-          style={styles.backdrop}
+          style={[
+            styles.backdrop,
+            {
+              backgroundColor: theme.txtColor,
+            },
+          ]}
           activeOpacity={0.65}
         />
       )}
@@ -142,7 +147,6 @@ const styles = StyleSheet.create({
     right: 0,
     left: 0,
     bottom: 0,
-    backgroundColor: '#000',
     opacity: 0.7,
   },
   sheetOptionsBgStyle: {
