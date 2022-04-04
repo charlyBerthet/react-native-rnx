@@ -191,6 +191,7 @@ export const ScrollableScreen = (props: Props) => {
       ref={(ref) =>
         props.scrollViewRef ? props.scrollViewRef(ref || undefined) : null
       }
+      style={[props.flexOne && styles.rootFlexOne]}
     >
       {view}
     </ScrollView>
