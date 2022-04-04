@@ -11,7 +11,7 @@ export const usePremiumGuard = () => {
   const { localize } = useLocalization();
 
   const continueIfPremium = useCallback(() => {
-    return new Promise<void>((resolve) => {
+    return new Promise<void>((resolve, reject) => {
       if (isPremium) {
         return resolve();
       }
@@ -21,11 +21,15 @@ export const usePremiumGuard = () => {
           style: 'default',
           onPress: () => {
             upgrade();
+            return reject();
           },
         },
         {
           text: localize('global.cancel'),
           style: 'cancel',
+          onPress: () => {
+            return reject();
+          },
         },
       ]);
     });
