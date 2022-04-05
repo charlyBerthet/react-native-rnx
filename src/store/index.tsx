@@ -5,6 +5,7 @@ import React, {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from './SplashScreen';
@@ -119,13 +120,19 @@ export function useGlobalState<T extends BaseStore>() {
   }
   const { state, dispatch } = useContext(Store);
 
-  const _dispatch = (actionType: string, actionValue: any) => {
-    dispatch({ type: actionType, value: actionValue });
-  };
+  const _dispatch = useCallback(
+    (actionType: string, actionValue: any) => {
+      dispatch({ type: actionType, value: actionValue });
+    },
+    [dispatch]
+  );
 
-  const setGlobalState = (partial: Partial<T>) => {
-    dispatch({ type: 'set', value: partial });
-  };
+  const setGlobalState = useCallback(
+    (partial: Partial<T>) => {
+      dispatch({ type: 'set', value: partial });
+    },
+    [dispatch]
+  );
 
   return { globalState: state as T, dispatch: _dispatch, setGlobalState };
 }
