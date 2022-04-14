@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export const useLocalization = () => {
@@ -6,7 +7,11 @@ export const useLocalization = () => {
   const localize = t;
   const setLanguage = i18n.changeLanguage;
 
-  return { localize, setLanguage };
+  const getAvailableLanguages = useCallback(() => {
+    return i18n.languages;
+  }, [i18n]);
+
+  return { localize, setLanguage, getAvailableLanguages };
 };
 
 export default useLocalization;
