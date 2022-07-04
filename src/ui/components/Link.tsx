@@ -5,6 +5,8 @@ import {
   Text,
   StyleSheet,
   ActivityIndicator,
+  StyleProp,
+  ViewStyle
 } from 'react-native';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -19,6 +21,7 @@ interface Props extends CommonViewProps {
   defaultTxtColor?: boolean;
   disabled?: boolean;
   isLoading?: boolean;
+  titleStyle?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
 }
 
 export const Link = (props: Props) => {
@@ -64,6 +67,7 @@ export const Link = (props: Props) => {
                 ? theme.destructiveColor
                 : mainColors.txt,
             },
+            props.titleStyle
           ]}
         >
           {props.title}
