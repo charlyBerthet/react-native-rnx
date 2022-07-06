@@ -1,5 +1,6 @@
 export interface Theme {
   bgColor: string;
+  grayBgColor: string;
   txtColor: string;
   placeholderColor: string;
   primaryColor: string;
