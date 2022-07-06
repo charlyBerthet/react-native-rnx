@@ -446,7 +446,8 @@ const styles = StyleSheet.create({
   disclaimer: {
     paddingHorizontal: 20,
     textAlign: 'center',
-    fontSize: 11,
+    fontSize: 10,
+    lineHeight: 12,
     marginTop: 10,
     marginBottom: 5,
   },
@@ -486,7 +487,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '900',
     fontSize: 16,
-    marginBottom: 5,
+    marginBottom: 8,
   },
   featuresTxt: {
     shadowColor: '#000',
@@ -497,9 +498,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     color: 'white',
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 14,
-    lineHeight: 18,
+    lineHeight: 20,
     marginLeft: 5,
   },
   topnav: {
@@ -526,12 +527,12 @@ const styles = StyleSheet.create({
     fontWeight: '900',
   },
   topnavBtn: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingVertical: 5,
   },
   topnavBtnTxt: {
     color: 'white',
-    fontWeight: '900',
+    fontWeight: '700',
   },
   topnavLeft: {
     position: 'absolute',
