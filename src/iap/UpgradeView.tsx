@@ -447,9 +447,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     textAlign: 'center',
     fontSize: 10,
-    lineHeight: 12,
-    marginTop: 10,
-    marginBottom: 5,
+    lineHeight: 11,
+    marginTop: 5,
+    marginBottom: 0,
   },
   policies: {
     flexDirection: 'row',
