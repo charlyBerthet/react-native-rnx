@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
   },
   disclaimer: {
     paddingHorizontal: 20,
-    textAlign: 'justify',
+    textAlign: 'center',
     fontSize: 11,
     marginTop: 10,
     marginBottom: 5,
