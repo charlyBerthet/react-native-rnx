@@ -134,6 +134,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
     Linking.openURL('https://berthx.io/policy/');
   }, []);
 
+  console.log('[rnx] UpgradeView render');
   return (
     <View style={[styles.root, { height: screenHeight }]}>
       <Image
@@ -552,6 +553,7 @@ const styles = StyleSheet.create({
 
 export const UpgradeViewSheet = () => {
   const sheet = useBottomSheet();
+  console.log('[rnx] UpgradeViewSheet render');
   return (
     <Component
       screenHeight={Dimensions.get('window').height - 50}
