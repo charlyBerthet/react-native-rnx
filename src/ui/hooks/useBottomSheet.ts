@@ -3,6 +3,7 @@ import type {
   BottomSheetActionsRef,
   BottomSheetProps,
 } from '../components/BottomSheet';
+import { useCallback } from 'react';
 
 let actionsRef: BottomSheetActionsRef | undefined;
 
@@ -11,15 +12,18 @@ export const setActionsSheetRef = (
 ) => (actionsRef = _actionsRef);
 
 export const useBottomSheet = () => {
-  const showBottomSheetOptions = (props: BottomSheetOptionsProps) => {
-    actionsRef?.showOptions(props);
-  };
+  const showBottomSheetOptions = useCallback(
+    (props: BottomSheetOptionsProps) => {
+      actionsRef?.showOptions(props);
+    },
+    []
+  );
 
-  const show = (props: BottomSheetProps) => {
+  const show = useCallback((props: BottomSheetProps) => {
     actionsRef?.show(props);
-  };
+  }, []);
 
-  const hideBottomSheet = () => actionsRef?.hide();
+  const hideBottomSheet = useCallback(() => actionsRef?.hide(), []);
 
   return { setActionsSheetRef, showBottomSheetOptions, hideBottomSheet, show };
 };
