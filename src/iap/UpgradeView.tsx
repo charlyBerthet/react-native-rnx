@@ -70,6 +70,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
           if (onContinue) {
             onContinue();
           } else {
+            console.log('[rnx] UpgradeView close from _success');
             _close();
           }
         },
@@ -134,6 +135,16 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
     Linking.openURL('https://berthx.io/policy/');
   }, []);
 
+  const _skip = useCallback(() => {
+    console.log('[rnx] UpgradeView close from _skip');
+    _close();
+  }, [_close]);
+
+  const _tapClose = useCallback(() => {
+    console.log('[rnx] UpgradeView close from _tapClose');
+    _close();
+  }, [_close]);
+
   console.log('[rnx] UpgradeView render');
   return (
     <View style={[styles.root, { height: screenHeight }]}>
@@ -154,7 +165,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
         />
         <View style={styles.topnav}>
           <View style={styles.topnavLeft}>
-            <TouchableOpacity style={[styles.topnavBtn]} onPress={_close}>
+            <TouchableOpacity style={[styles.topnavBtn]} onPress={_tapClose}>
               <Icon name="times" color="white" size={18} />
             </TouchableOpacity>
           </View>
@@ -253,7 +264,7 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
           <Link
             style={styles.skip}
             title={localize('iap.skip')}
-            onPress={_close}
+            onPress={_skip}
           />
 
           <Text style={styles.disclaimer}>{localize('iap.disclaimer')}</Text>
