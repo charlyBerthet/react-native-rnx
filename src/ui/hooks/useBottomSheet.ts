@@ -25,5 +25,11 @@ export const useBottomSheet = () => {
 
   const hideBottomSheet = useCallback(() => actionsRef?.hide(), []);
 
-  return { setActionsSheetRef, showBottomSheetOptions, hideBottomSheet, show };
+  return {
+    setActionsSheetRef,
+    showBottomSheetOptions,
+    hideBottomSheet,
+    show,
+    showBottomSheet: show,
+  };
 };
