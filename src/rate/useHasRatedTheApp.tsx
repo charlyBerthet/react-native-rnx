@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useGlobalState } from '../store';
 
 export const useHasRatedTheApp = () => {
@@ -5,8 +6,12 @@ export const useHasRatedTheApp = () => {
     hasRatedTheApp: boolean;
   }>();
 
-  const setHasRatedTheApp = (hasRatedTheApp: boolean) => {
-    setGlobalState({ hasRatedTheApp });
-  };
+  const setHasRatedTheApp = useCallback(
+    (hasRatedTheApp: boolean) => {
+      setGlobalState({ hasRatedTheApp });
+    },
+    [setGlobalState]
+  );
+
   return { hasRatedTheApp: globalState.hasRatedTheApp, setHasRatedTheApp };
 };

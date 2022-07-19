@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useGlobalState } from '../store';
 
 export const useIsPremium = () => {
@@ -5,8 +6,12 @@ export const useIsPremium = () => {
     isPremium: boolean;
   }>();
 
-  const setIsPremium = (isPremium: boolean) => {
-    setGlobalState({ isPremium });
-  };
+  const setIsPremium = useCallback(
+    (isPremium: boolean) => {
+      setGlobalState({ isPremium });
+    },
+    [setGlobalState]
+  );
+
   return { isPremium: globalState.isPremium, setIsPremium };
 };
