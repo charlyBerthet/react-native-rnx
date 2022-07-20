@@ -168,17 +168,23 @@ export function useGlobalState<T extends BaseStore>() {
     [dispatch]
   );
 
-  const dispatchAction = useCallback(
-    (type: string, value: any) => {
-      dispatch({ type, value });
-    },
-    [dispatch]
-  );
-
   return {
     globalState: state as T,
     dispatch: _dispatch,
     setGlobalState,
-    dispatchAction,
   };
+}
+
+export function useDispatch<Action>() {
+  if (!Store) {
+    throw 'Please initialize Store first using createStateProvider';
+  }
+  const { dispatch } = useContext(Store);
+  const dispatchAction = useCallback(
+    (type: string, value: Action) => {
+      dispatch({ type, value });
+    },
+    [dispatch]
+  );
+  return dispatchAction;
 }
