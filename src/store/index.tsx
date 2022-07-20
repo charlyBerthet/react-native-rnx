@@ -138,11 +138,17 @@ export function createStateProvider<
         if (middleWare) {
           finalAction = await middleWare(state, action);
         }
-        console.log('RNX test dispatchMiddleware update ');
         dispatch(finalAction);
       },
       [dispatch, state]
     );
+
+    useEffect(() => {
+      console.log('TEST RNX dispatch ');
+    }, [dispatch]);
+    useEffect(() => {
+      console.log('TEST RNX state ');
+    }, [state]);
 
     return (
       <Store.Provider value={{ state, dispatch: dispatchMiddleware }}>
