@@ -146,6 +146,7 @@ export function createStateProvider<
         if (middleWare) {
           finalAction = await middleWare(stateRef.current, action);
         }
+        console.log('RNXTEST dispatch');
         dispatch(finalAction);
       },
       [dispatch]
