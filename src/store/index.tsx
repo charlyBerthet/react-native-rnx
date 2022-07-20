@@ -21,9 +21,20 @@ interface BaseStore {
   hasRatedTheApp?: boolean;
 }
 
-export function createStateProvider<T extends BaseStore>(
+enum BaseStoreActionsType {
+  'set' = 'set',
+  '__initStateFromStorage__' = '__initStateFromStorage__',
+}
+
+export function createStateProvider<
+  T extends BaseStore,
+  CustomActionType extends string
+>(
   initial: T,
-  reducer: (state: T, action: { type: string; value: any }) => T,
+  reducer: (
+    accState: T,
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => T,
   _persist: (keyof T)[]
 ) {
   const persist = [
@@ -37,7 +48,10 @@ export function createStateProvider<T extends BaseStore>(
   );
   interface Context {
     state: T;
-    dispatch: Dispatch<{ type: string; value: any }>;
+    dispatch: Dispatch<{
+      type: CustomActionType | BaseStoreActionsType;
+      value: any;
+    }>;
   }
 
   // Handle saved data to local storage of phone
@@ -68,29 +82,23 @@ export function createStateProvider<T extends BaseStore>(
   const StateProvider = ({ children }: StateProviderProps) => {
     const [isInit, setIsInit] = useState(false);
     const [state, dispatch] = useReducer(
-      (accState: T, action: { type: string; value: any }) => {
-        // console.log('[RNX][StateProvider.dispatch] --> action', action);
-        // console.log(
-        //   '[RNX][StateProvider.dispatch] stateBefore',
-        //   JSON.stringify(accState)
-        // );
-        let partialUpdate: Partial<T> = {};
+      (
+        accState: T,
+        action: { type: CustomActionType | BaseStoreActionsType; value: any }
+      ) => {
+        let partialUpdate: T = { ...accState };
         switch (action.type) {
-          case 'set':
+          case BaseStoreActionsType.set:
             partialUpdate = { ...partialUpdate, ...action.value };
             break;
-          case '__initStateFromStorage__':
+          case BaseStoreActionsType.__initStateFromStorage__:
             partialUpdate = { ...partialUpdate, ...action.value };
             break;
         }
         const newState = {
-          ...reducer({ ...accState, ...partialUpdate }, action),
+          ...reducer(partialUpdate, action),
         };
         _setToStorage(newState);
-        // console.log(
-        //   '[RNX][StateProvider.dispatch] <-- stateAfter',
-        //   JSON.stringify(newState)
-        // );
         return newState;
       },
       initial
@@ -98,7 +106,10 @@ export function createStateProvider<T extends BaseStore>(
 
     useEffect(() => {
       _getFromStorage().then((savedState) => {
-        dispatch({ type: '__initStateFromStorage__', value: savedState });
+        dispatch({
+          type: BaseStoreActionsType.__initStateFromStorage__,
+          value: savedState,
+        });
         console.log('[RNX] createStateProvider init');
         setIsInit(true);
       });
@@ -114,7 +125,10 @@ export function createStateProvider<T extends BaseStore>(
   return { Element: StateProvider };
 }
 
-export function useGlobalState<T extends BaseStore>() {
+export function useGlobalState<
+  T extends BaseStore,
+  CustomActionType extends string
+>() {
   if (!Store) {
     throw 'Please initialize Store first using createStateProvider';
   }
@@ -129,10 +143,22 @@ export function useGlobalState<T extends BaseStore>() {
 
   const setGlobalState = useCallback(
     (partial: Partial<T>) => {
-      dispatch({ type: 'set', value: partial });
+      dispatch({ type: BaseStoreActionsType.set, value: partial });
     },
     [dispatch]
   );
 
-  return { globalState: state as T, dispatch: _dispatch, setGlobalState };
+  const dispatchAction = useCallback(
+    (type: CustomActionType | BaseStoreActionsType, value: any) => {
+      dispatch({ type, value });
+    },
+    [dispatch]
+  );
+
+  return {
+    globalState: state as T,
+    dispatch: _dispatch,
+    setGlobalState,
+    dispatchAction,
+  };
 }
