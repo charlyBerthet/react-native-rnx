@@ -119,16 +119,19 @@ export function createStateProvider<
       });
     }, []);
 
-    const dispatchMiddleware = async (action: {
-      type: CustomActionType | BaseStoreActionsType;
-      value: any;
-    }) => {
-      let finalAction = action;
-      if (middleWare) {
-        finalAction = await middleWare(state, action);
-      }
-      dispatch(finalAction);
-    };
+    const dispatchMiddleware = useCallback(
+      async (action: {
+        type: CustomActionType | BaseStoreActionsType;
+        value: any;
+      }) => {
+        let finalAction = action;
+        if (middleWare) {
+          finalAction = await middleWare(state, action);
+        }
+        dispatch(finalAction);
+      },
+      [dispatch, state]
+    );
 
     return (
       <Store.Provider value={{ state, dispatch: dispatchMiddleware }}>
