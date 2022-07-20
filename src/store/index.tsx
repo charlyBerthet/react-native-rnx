@@ -101,6 +101,7 @@ export function createStateProvider<
         accState: T,
         action: { type: CustomActionType | BaseStoreActionsType; value: any }
       ) => {
+        console.log('RNXTEST reduce step1');
         let partialUpdate: T = { ...accState };
         switch (action.type) {
           case BaseStoreActionsType.set:
@@ -113,6 +114,7 @@ export function createStateProvider<
         const newState = {
           ...reducer(partialUpdate, action),
         };
+        console.log('RNXTEST reduce step2');
         _setToStorage(newState);
         return newState;
       },
@@ -146,7 +148,6 @@ export function createStateProvider<
         if (middleWare) {
           finalAction = await middleWare(stateRef.current, action);
         }
-        console.log('RNXTEST dispatch');
         dispatch(finalAction);
       },
       [dispatch]
