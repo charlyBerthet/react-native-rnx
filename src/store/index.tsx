@@ -125,10 +125,7 @@ export function createStateProvider<
   return { Element: StateProvider };
 }
 
-export function useGlobalState<
-  T extends BaseStore,
-  CustomActionType extends string
->() {
+export function useGlobalState<T extends BaseStore>() {
   if (!Store) {
     throw 'Please initialize Store first using createStateProvider';
   }
@@ -149,7 +146,7 @@ export function useGlobalState<
   );
 
   const dispatchAction = useCallback(
-    (type: CustomActionType | BaseStoreActionsType, value: any) => {
+    (type: string, value: any) => {
       dispatch({ type, value });
     },
     [dispatch]
