@@ -94,32 +94,30 @@ export function createStateProvider<
   };
   Store = createContext(initialContext);
 
+  const _internalReducer = (
+    accState: T,
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => {
+    console.log('[RNX] action', action.type);
+    let partialUpdate: T = { ...accState };
+    switch (action.type) {
+      case BaseStoreActionsType.set:
+        partialUpdate = { ...partialUpdate, ...action.value };
+        break;
+      case BaseStoreActionsType.__initStateFromStorage__:
+        partialUpdate = { ...partialUpdate, ...action.value };
+        break;
+    }
+    const newState = {
+      ...reducer(partialUpdate, action),
+    };
+    _setToStorage(newState);
+    return newState;
+  };
+
   const StateProvider = ({ children }: StateProviderProps) => {
     const [isInit, setIsInit] = useState(false);
-    const [state, dispatch] = useReducer(
-      (
-        accState: T,
-        action: { type: CustomActionType | BaseStoreActionsType; value: any }
-      ) => {
-        console.log('RNXTEST reduce step1');
-        let partialUpdate: T = { ...accState };
-        switch (action.type) {
-          case BaseStoreActionsType.set:
-            partialUpdate = { ...partialUpdate, ...action.value };
-            break;
-          case BaseStoreActionsType.__initStateFromStorage__:
-            partialUpdate = { ...partialUpdate, ...action.value };
-            break;
-        }
-        const newState = {
-          ...reducer(partialUpdate, action),
-        };
-        console.log('RNXTEST reduce step2');
-        _setToStorage(newState);
-        return newState;
-      },
-      initial
-    );
+    const [state, dispatch] = useReducer(_internalReducer, initial);
 
     useEffect(() => {
       _getFromStorage().then((savedState) => {
