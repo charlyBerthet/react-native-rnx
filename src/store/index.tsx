@@ -186,8 +186,8 @@ export function useDispatch<Action extends CommonAction>() {
   }
   const { dispatch } = useContext(Store);
   const dispatchAction = useCallback(
-    (type: string, value: Action) => {
-      dispatch({ type, value });
+    (action: Action) => {
+      dispatch(action);
     },
     [dispatch]
   );
