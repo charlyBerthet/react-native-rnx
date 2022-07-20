@@ -35,7 +35,11 @@ export function createStateProvider<
     accState: T,
     action: { type: CustomActionType | BaseStoreActionsType; value: any }
   ) => T,
-  _persist: (keyof T)[]
+  _persist: (keyof T)[],
+  middleWare?: (
+    accState: T,
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => Promise<{ type: CustomActionType | BaseStoreActionsType; value: any }>
 ) {
   const persist = [
     ..._persist.filter((p) => p !== 'isPremium' && p !== 'hasRatedTheApp'),
@@ -115,8 +119,19 @@ export function createStateProvider<
       });
     }, []);
 
+    const dispatchMiddleware = async (action: {
+      type: CustomActionType | BaseStoreActionsType;
+      value: any;
+    }) => {
+      let finalAction = action;
+      if (middleWare) {
+        finalAction = await middleWare(state, action);
+      }
+      dispatch(finalAction);
+    };
+
     return (
-      <Store.Provider value={{ state, dispatch }}>
+      <Store.Provider value={{ state, dispatch: dispatchMiddleware }}>
         {isInit ? children : <SplashScreen />}
       </Store.Provider>
     );
