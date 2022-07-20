@@ -138,6 +138,7 @@ export function createStateProvider<
         if (middleWare) {
           finalAction = await middleWare(state, action);
         }
+        console.log('RNX test dispatchMiddleware update ');
         dispatch(finalAction);
       },
       [dispatch, state]
