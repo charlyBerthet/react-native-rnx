@@ -21,7 +21,7 @@ interface BaseStore {
   hasRatedTheApp?: boolean;
 }
 
-enum BaseStoreActionsType {
+export enum BaseStoreActionsType {
   'set' = 'set',
   '__initStateFromStorage__' = '__initStateFromStorage__',
 }
