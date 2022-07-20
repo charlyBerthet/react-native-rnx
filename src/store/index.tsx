@@ -6,6 +6,7 @@ import React, {
   useEffect,
   useState,
   useCallback,
+  useRef,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from './SplashScreen';
@@ -129,6 +130,13 @@ export function createStateProvider<
       });
     }, []);
 
+    // Used by our dispatchMiddleware to avoid
+    // multiple update of the func
+    const stateRef = useRef(state);
+    useEffect(() => {
+      stateRef.current = state;
+    }, [state]);
+
     const dispatchMiddleware = useCallback(
       async (action: {
         type: CustomActionType | BaseStoreActionsType;
@@ -136,19 +144,12 @@ export function createStateProvider<
       }) => {
         let finalAction = action;
         if (middleWare) {
-          finalAction = await middleWare(state, action);
+          finalAction = await middleWare(stateRef.current, action);
         }
         dispatch(finalAction);
       },
-      [dispatch, state]
+      [dispatch]
     );
-
-    useEffect(() => {
-      console.log('TEST RNX dispatch ');
-    }, [dispatch]);
-    useEffect(() => {
-      console.log('TEST RNX state ');
-    }, [state]);
 
     return (
       <Store.Provider value={{ state, dispatch: dispatchMiddleware }}>
