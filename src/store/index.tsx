@@ -26,6 +26,11 @@ export enum BaseStoreActionsType {
   '__initStateFromStorage__' = '__initStateFromStorage__',
 }
 
+export interface BaseStoreAction {
+  type: BaseStoreActionsType;
+  value: any;
+}
+
 export function createStateProvider<
   T extends BaseStore,
   CustomActionType extends string
