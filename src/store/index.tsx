@@ -26,7 +26,12 @@ export enum BaseStoreActionsType {
   '__initStateFromStorage__' = '__initStateFromStorage__',
 }
 
-export interface BaseStoreAction {
+interface CommonAction {
+  type: string;
+  value: any;
+}
+
+export interface BaseStoreAction extends CommonAction {
   type: BaseStoreActionsType;
   value: any;
 }
@@ -175,7 +180,7 @@ export function useGlobalState<T extends BaseStore>() {
   };
 }
 
-export function useDispatch<Action>() {
+export function useDispatch<Action extends CommonAction>() {
   if (!Store) {
     throw 'Please initialize Store first using createStateProvider';
   }
