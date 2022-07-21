@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import useTheme from '../../theme/hooks/useTheme';
 import type Screen from '../models/Screen';
+import { useLocalization } from 'react-native-rnx';
 
 const _Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ interface Props {
 
 export const Stack = (props: Props) => {
   const theme = useTheme();
+  const { localize } = useLocalization();
   return (
     <_Stack.Navigator
       initialRouteName={props.initial}
@@ -45,6 +47,7 @@ export const Stack = (props: Props) => {
             color={theme.primaryColor}
           />
         ),
+        headerBackTitle: localize('global.back'),
         headerTitle: '',
       }}
     >
