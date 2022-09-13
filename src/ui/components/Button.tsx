@@ -74,6 +74,7 @@ export const Button = (props: Props) => {
                     ? theme.txtColorOnPrimaryColor
                     : mainColors.txt,
               },
+              !!props.titleFontSize && { fontSize: props.titleFontSize },
             ]}
           >
             {props.title}
@@ -89,7 +90,6 @@ export const Button = (props: Props) => {
                     ? theme.txtColorOnPrimaryColor
                     : mainColors.txt,
               },
-              !!props.titleFontSize && { fontSize: props.titleFontSize },
             ]}
           >
             {props.subtitle}
