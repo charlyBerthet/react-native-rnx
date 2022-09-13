@@ -24,6 +24,9 @@ interface Props extends CommonViewProps {
   secondary?: boolean;
   isLoading?: boolean;
   noElevation?: boolean;
+  iconSize?: number;
+  bgColor?: string;
+  titleFontSize?: number;
 }
 
 export const Button = (props: Props) => {
@@ -44,12 +47,13 @@ export const Button = (props: Props) => {
         props.small && styles.containerSmall,
         props.noElevation && styles.containerNoElevation,
         props.style,
+        !!props.bgColor && { backgroundColor: props.bgColor },
       ]}
     >
       {!!props.icon && (
         <Icon
           name={props.icon}
-          size={18}
+          size={props.iconSize || 18}
           color={
             btnType === 'normal' ? theme.txtColorOnPrimaryColor : mainColors.txt
           }
@@ -85,6 +89,7 @@ export const Button = (props: Props) => {
                     ? theme.txtColorOnPrimaryColor
                     : mainColors.txt,
               },
+              !!props.titleFontSize && { fontSize: props.titleFontSize },
             ]}
           >
             {props.subtitle}
@@ -184,7 +189,7 @@ const styles = StyleSheet.create({
   },
   rightArrow: {
     position: 'absolute',
-    right: 10,
+    right: 14,
     top: 0,
     bottom: 0,
     justifyContent: 'center',
