@@ -49,6 +49,7 @@ const initStore = async (): Promise<void | string> => {
 export const hasPurchasedPremium = async () => {
   await initStore();
   try {
+    console.log('hasPurchasedPremium getAvailablePurchases');
     const purchases = await RNIap.getAvailablePurchases();
     console.log('hasPurchasedPremium purchases.length', purchases.length);
     return !!purchases.find(
