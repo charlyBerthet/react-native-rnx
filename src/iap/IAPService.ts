@@ -3,7 +3,6 @@ import {
   initConnection,
   endConnection,
   getAvailablePurchases,
-  setup,
   requestSubscription,
   getSubscriptions,
   flushFailedPurchasesCachedAsPendingAndroid,
@@ -36,7 +35,7 @@ let onPurchaseError: (() => void) | undefined;
 export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
   PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
   console.log('[rnx] initIAP setup');
-  setup({ storekitMode: 'STOREKIT_HYBRID_MODE' });
+  // setup({ storekitMode: 'STOREKIT_HYBRID_MODE' });
   try {
     console.log('[rnx] initIAP initConnection');
     // Init connection to store
