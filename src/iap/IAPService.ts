@@ -11,6 +11,8 @@ import {
   PurchaseError,
   clearTransactionIOS,
   finishTransaction,
+  SubscriptionIOS,
+  SubscriptionAndroid,
 } from 'react-native-iap';
 
 export interface IapSubscriptionBase {
@@ -22,7 +24,6 @@ export interface IapSubscriptionBase {
 export interface IapSubscription extends IapSubscriptionBase {
   price: number;
   localizedPrice: string;
-  currency: string;
 }
 
 let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
@@ -189,14 +190,24 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
       // Use of (as any) as types are not corrects
-      console.log('TEST', p);
+      console.log('TEST', JSON.stringify(p));
+      if (Platform.OS === 'android') {
+        const platformProduct = p as SubscriptionAndroid;
+        return {
+          id: platformProduct.productId,
+          price: parseFloat(''),
+          localizedPrice: '',
+          durationMonth: base?.durationMonth || 0,
+          freeTrialDaysDuration: base?.freeTrialDaysDuration,
+        };
+      }
+      const platformProduct = p as SubscriptionIOS;
       return {
-        id: p.productId,
-        price: parseFloat((p as any).price),
-        localizedPrice: (p as any).localizedPrice,
+        id: platformProduct.productId,
+        price: parseFloat(platformProduct.price),
+        localizedPrice: platformProduct.localizedPrice,
         durationMonth: base?.durationMonth || 0,
         freeTrialDaysDuration: base?.freeTrialDaysDuration,
-        currency: (p as any).currency,
       };
     });
   }
