@@ -13,6 +13,7 @@ import {
   finishTransaction,
   SubscriptionIOS,
   SubscriptionAndroid,
+  SubscriptionPlatform,
 } from 'react-native-iap';
 
 export interface IapSubscriptionBase {
@@ -24,6 +25,7 @@ export interface IapSubscriptionBase {
 export interface IapSubscription extends IapSubscriptionBase {
   price: number;
   localizedPrice: string;
+  offerToken?: string;
 }
 
 let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
@@ -137,13 +139,21 @@ export const hasPurchasedPremium = async () => {
   }
 };
 
-export const requestPurchase = async (iapId: string): Promise<boolean> => {
+export const requestPurchase = async (
+  subscription: IapSubscription
+): Promise<boolean> => {
   checkInitGuard();
   try {
     console.log('[rnx] requestPurchase');
     await requestSubscription({
-      sku: iapId,
+      sku: subscription.id,
       andDangerouslyFinishTransactionAutomaticallyIOS: false,
+      // OfferToken will be only filled for android
+      ...(subscription.offerToken && {
+        subscriptionOffers: [
+          { sku: subscription.id, offerToken: subscription.offerToken },
+        ],
+      }),
     });
     console.log('[rnx] requestPurchase done');
     return new Promise<boolean>((resolve) => {
@@ -189,8 +199,9 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
   if (products && products.length) {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
-      // Use of (as any) as types are not corrects
-      if (Platform.OS === 'android') {
+
+      // Convert android sub
+      if (p.platform === SubscriptionPlatform.android) {
         const platformProduct = p as SubscriptionAndroid;
         const prices =
           platformProduct.subscriptionOfferDetails[0].pricingPhases.pricingPhaseList.find(
@@ -207,8 +218,11 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
           localizedPrice: prices.formattedPrice,
           durationMonth: base?.durationMonth || 0,
           freeTrialDaysDuration: base?.freeTrialDaysDuration,
+          offerToken: platformProduct.subscriptionOfferDetails[0].offerToken,
         };
       }
+
+      // Convert ios sub
       const platformProduct = p as SubscriptionIOS;
       return {
         id: platformProduct.productId,
