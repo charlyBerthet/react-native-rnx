@@ -1,4 +1,4 @@
-import type { EmitterSubscription } from 'react-native';
+import { EmitterSubscription, Platform } from 'react-native';
 import {
   initConnection,
   endConnection,
@@ -10,6 +10,7 @@ import {
   purchaseErrorListener,
   purchaseUpdatedListener,
   PurchaseError,
+  clearTransactionIOS,
   finishTransaction,
 } from 'react-native-iap';
 
@@ -38,12 +39,14 @@ export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
   setup({ storekitMode: 'STOREKIT_HYBRID_MODE' });
   try {
     console.log('[rnx] initIAP initConnection');
-    initConnection().then(() => {
-      // we make sure that "ghost" pending payment are removed
-      // (ghost = failed pending payment that are still marked as pending in Google's native Vending module cache)
-      console.log('[rnx] initIAP flushFailedPurchasesCachedAsPendingAndroid');
-      flushFailedPurchasesCachedAsPendingAndroid()
-        .catch((e) => {
+    // Init connection to store
+    initConnection().then(async () => {
+      // Clear pending transactions depending on devices
+      if (Platform.OS === 'android') {
+        // we make sure that "ghost" pending payment are removed
+        // (ghost = failed pending payment that are still marked as pending in Google's native Vending module cache)
+        console.log('[rnx] initIAP flushFailedPurchasesCachedAsPendingAndroid');
+        await flushFailedPurchasesCachedAsPendingAndroid().catch((e) => {
           console.log(
             '[rnx] initIAP flushFailedPurchasesCachedAsPendingAndroid error',
             e
@@ -51,42 +54,43 @@ export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
           // exception can happen here if:
           // - there are pending purchases that are still pending (we can't consume a pending purchase)
           // in any case, you might not want to do anything special with the error
-        })
-        .then(() => {
-          console.log('[rnx] initIAP listen purchaseUpdatedListener');
-          // Case purchase error
-          purchaseErrorSubscription = purchaseErrorListener(
-            (error: PurchaseError) => {
-              console.log(
-                '[rnx] IAP purchaseErrorListener triggered error',
-                error
-              );
-              onPurchaseError && onPurchaseError();
-            }
-          );
-          // Case purchase success
-          purchaseUpdatedSubscription = purchaseUpdatedListener(
-            async (purchase) => {
-              console.log(
-                '[rnx] IAP purchaseUpdatedListener triggered purchase',
-                purchase
-              );
-              await finishTransaction({ purchase, isConsumable: false });
-              if (
-                PREMIUM_PRODUCT_LIST.map((p) =>
-                  p.id.toLocaleLowerCase()
-                ).includes(purchase.productId.toLocaleLowerCase())
-              ) {
-                onPurchaseSuccess && onPurchaseSuccess(purchase.productId);
-              } else {
-                console.log(
-                  '[rnx] IAP purchaseUpdatedListener error, purchase product id does not match our list of products',
-                  purchase.productId
-                );
-              }
-            }
-          );
         });
+      } else if (Platform.OS === 'ios') {
+        console.log('[rnx] initIAP clearTransactionIOS');
+        await clearTransactionIOS();
+      }
+
+      // Start purchase listeners
+      console.log('[rnx] initIAP listen purchaseUpdatedListener');
+      // Case purchase error
+      purchaseErrorSubscription = purchaseErrorListener(
+        (error: PurchaseError) => {
+          console.log('[rnx] IAP purchaseErrorListener triggered error', error);
+          onPurchaseError && onPurchaseError();
+        }
+      );
+      // Case purchase success
+      purchaseUpdatedSubscription = purchaseUpdatedListener(
+        async (purchase) => {
+          console.log(
+            '[rnx] IAP purchaseUpdatedListener triggered purchase',
+            purchase
+          );
+          await finishTransaction({ purchase, isConsumable: false });
+          if (
+            PREMIUM_PRODUCT_LIST.map((p) => p.id.toLocaleLowerCase()).includes(
+              purchase.productId.toLocaleLowerCase()
+            )
+          ) {
+            onPurchaseSuccess && onPurchaseSuccess(purchase.productId);
+          } else {
+            console.log(
+              '[rnx] IAP purchaseUpdatedListener error, purchase product id does not match our list of products',
+              purchase.productId
+            );
+          }
+        }
+      );
     });
   } catch (e) {
     console.error('[rnx] initIAP error', e);
@@ -174,9 +178,11 @@ export const requestPurchase = async (iapId: string): Promise<boolean> => {
 
 export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
   checkInitGuard();
+  console.log('[rnx] getIapSubscriptions');
   const products = await getSubscriptions({
     skus: PREMIUM_PRODUCT_LIST.map((o) => o.id),
   });
+  console.log('[rnx] getIapSubscriptions products.length', products.length);
   if (products && products.length) {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
