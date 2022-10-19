@@ -1,4 +1,17 @@
-import * as RNIap from 'react-native-iap';
+import type { EmitterSubscription } from 'react-native';
+import {
+  initConnection,
+  endConnection,
+  getAvailablePurchases,
+  setup,
+  requestSubscription,
+  getSubscriptions,
+  flushFailedPurchasesCachedAsPendingAndroid,
+  purchaseErrorListener,
+  purchaseUpdatedListener,
+  PurchaseError,
+  finishTransaction,
+} from 'react-native-iap';
 
 export interface IapSubscriptionBase {
   id: string;
@@ -13,90 +26,168 @@ export interface IapSubscription extends IapSubscriptionBase {
 }
 
 let PREMIUM_PRODUCT_LIST: IapSubscriptionBase[] = [];
-let onPurchaseSuccess:
-  | ((subscriptionId: string, value: number, currency: string) => void)
-  | undefined;
 
-export const initIAP = (
-  premiumSubscriptionIds: IapSubscriptionBase[],
-  _onPurchaseSuccess?: (
-    subscriptionId: string,
-    value: number,
-    currency: string
-  ) => void
-) => {
+let purchaseUpdatedSubscription: EmitterSubscription | undefined;
+let purchaseErrorSubscription: EmitterSubscription | undefined;
+let onPurchaseSuccess: ((subscriptionId: string) => void) | undefined;
+let onPurchaseError: (() => void) | undefined;
+
+export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
   PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
-  onPurchaseSuccess = _onPurchaseSuccess;
+  console.log('[rnx] initIAP setup');
+  setup({ storekitMode: 'STOREKIT_HYBRID_MODE' });
+  try {
+    console.log('[rnx] initIAP initConnection');
+    initConnection().then(() => {
+      // we make sure that "ghost" pending payment are removed
+      // (ghost = failed pending payment that are still marked as pending in Google's native Vending module cache)
+      console.log('[rnx] initIAP flushFailedPurchasesCachedAsPendingAndroid');
+      flushFailedPurchasesCachedAsPendingAndroid()
+        .catch((e) => {
+          console.log(
+            '[rnx] initIAP flushFailedPurchasesCachedAsPendingAndroid error',
+            e
+          );
+          // exception can happen here if:
+          // - there are pending purchases that are still pending (we can't consume a pending purchase)
+          // in any case, you might not want to do anything special with the error
+        })
+        .then(() => {
+          console.log('[rnx] initIAP listen purchaseUpdatedListener');
+          // Case purchase error
+          purchaseErrorSubscription = purchaseErrorListener(
+            (error: PurchaseError) => {
+              console.log(
+                '[rnx] IAP purchaseErrorListener triggered error',
+                error
+              );
+              onPurchaseError && onPurchaseError();
+            }
+          );
+          // Case purchase success
+          purchaseUpdatedSubscription = purchaseUpdatedListener(
+            async (purchase) => {
+              console.log(
+                '[rnx] IAP purchaseUpdatedListener triggered purchase',
+                purchase
+              );
+              await finishTransaction({ purchase, isConsumable: false });
+              if (
+                PREMIUM_PRODUCT_LIST.map((p) =>
+                  p.id.toLocaleLowerCase()
+                ).includes(purchase.productId.toLocaleLowerCase())
+              ) {
+                onPurchaseSuccess && onPurchaseSuccess(purchase.productId);
+              } else {
+                console.log(
+                  '[rnx] IAP purchaseUpdatedListener error, purchase product id does not match our list of products',
+                  purchase.productId
+                );
+              }
+            }
+          );
+        });
+    });
+  } catch (e) {
+    console.error('[rnx] initIAP error', e);
+  }
 };
 
-const initStore = async (): Promise<void | string> => {
-  try {
-    if (!PREMIUM_PRODUCT_LIST.length) {
-      throw 'You need to call initIAP first';
-    }
-    console.log('hasPurchasedPremium initStore start');
-    await RNIap.initConnection();
-    console.log('hasPurchasedPremium initStore end');
-  } catch (e) {
-    // exception can happen here if:
-    // - there are pending purchases that are still pending (we can't consume a pending purchase)
-    // in any case, you might not want to do anything special with the error
-    console.log('initStore error', e);
-    return Promise.reject('initStore failed');
+export const closeIAP = () => {
+  console.log('[rnx] closeIAP endConnection');
+  if (purchaseUpdatedSubscription) {
+    purchaseUpdatedSubscription.remove();
+    purchaseUpdatedSubscription = undefined;
+  }
+  if (purchaseErrorSubscription) {
+    purchaseErrorSubscription.remove();
+    purchaseErrorSubscription = undefined;
+  }
+  endConnection();
+};
+
+const checkInitGuard = () => {
+  if (!PREMIUM_PRODUCT_LIST.length) {
+    throw '[rnx] You need to call initIAP first';
   }
 };
 
 export const hasPurchasedPremium = async () => {
-  await initStore();
+  checkInitGuard();
   try {
-    console.log('hasPurchasedPremium getAvailablePurchases');
-    const purchases = await RNIap.getAvailablePurchases();
-    console.log('hasPurchasedPremium purchases.length', purchases.length);
+    console.log('[rnx] hasPurchasedPremium getAvailablePurchases');
+    const purchases = await getAvailablePurchases();
+    console.log('[rnx] hasPurchasedPremium purchases.length', purchases.length);
     return !!purchases.find(
-      (p) => PREMIUM_PRODUCT_LIST.filter((p2) => p.productId === p2.id).length
+      (p) =>
+        PREMIUM_PRODUCT_LIST.filter(
+          (p2) => p.productId.toLocaleLowerCase() === p2.id.toLocaleLowerCase()
+        ).length
     );
   } catch (e) {
-    console.log('restore error', e);
+    console.log('[rnx] restore error', e);
     return Promise.reject();
   }
 };
 
 export const requestPurchase = async (iapId: string): Promise<boolean> => {
-  await initStore();
+  checkInitGuard();
   try {
-    const purchase = await RNIap.requestPurchase(iapId, false);
-    console.log('Purchases', purchase);
-    await RNIap.finishTransaction(purchase, false);
-    const hasPurchased = await hasPurchasedPremium();
-    if (hasPurchased && onPurchaseSuccess) {
-      const products = await getIapSubscriptions();
-      const boughtProduct = products.find((p) => p.id === iapId);
-      if (boughtProduct) {
-        onPurchaseSuccess(iapId, boughtProduct.price, boughtProduct.currency);
-      }
-    }
-    return hasPurchased;
+    console.log('[rnx] requestPurchase');
+    await requestSubscription({
+      sku: iapId,
+      andDangerouslyFinishTransactionAutomaticallyIOS: false,
+    });
+    console.log('[rnx] requestPurchase done');
+    return new Promise<boolean>((resolve) => {
+      onPurchaseSuccess = (sku) => {
+        console.log(
+          '[rnx] requestPurchase onPurchaseSuccess triggered for product',
+          sku
+        );
+        if (
+          PREMIUM_PRODUCT_LIST.map((p) => p.id.toLocaleLowerCase()).includes(
+            sku.toLocaleLowerCase()
+          )
+        ) {
+          console.log(
+            '[rnx] requestPurchase onPurchaseSuccess productId found. Purchase validated'
+          );
+          return resolve(true);
+        } else {
+          console.log(
+            '[rnx] requestPurchase onPurchaseSuccess productId not matching'
+          );
+          return resolve(false);
+        }
+      };
+      onPurchaseError = () => {
+        console.log('[rnx] requestPurchase onPurchaseError triggered');
+        return resolve(false);
+      };
+    });
   } catch (e) {
-    console.log('requestPurchase error', e);
+    console.log('[rnx] requestPurchase error', e);
     return Promise.reject();
   }
 };
 
 export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
-  await initStore();
-  const products = await RNIap.getSubscriptions(
-    PREMIUM_PRODUCT_LIST.map((o) => o.id)
-  );
+  checkInitGuard();
+  const products = await getSubscriptions({
+    skus: PREMIUM_PRODUCT_LIST.map((o) => o.id),
+  });
   if (products && products.length) {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
+      // Use of (as any) as types are not corrects
       return {
         id: p.productId,
-        price: parseFloat(p.price),
-        localizedPrice: p.localizedPrice,
+        price: parseFloat((p as any).price),
+        localizedPrice: (p as any).localizedPrice,
         durationMonth: base?.durationMonth || 0,
         freeTrialDaysDuration: base?.freeTrialDaysDuration,
-        currency: p.currency,
+        currency: (p as any).currency,
       };
     });
   }

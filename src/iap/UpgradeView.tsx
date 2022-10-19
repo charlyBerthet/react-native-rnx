@@ -47,7 +47,9 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
 
   useEffect(() => {
     getIapSubscriptions().then((list) => {
-      const usableList = list.filter((l) => l.durationMonth === 6);
+      const usableList = list.filter(
+        (l) => l.durationMonth === 1 || l.durationMonth === 12
+      );
       setIapList(usableList.sort((a, b) => a.price - b.price));
       setSelectedIap(
         usableList.find((p) => !!p.freeTrialDaysDuration) || usableList[0]
