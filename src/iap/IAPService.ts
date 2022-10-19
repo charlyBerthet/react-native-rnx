@@ -122,8 +122,7 @@ export const hasPurchasedPremium = async () => {
       '[rnx] hasPurchasedPremium purchases.length',
       purchases.length,
       'ids',
-      purchases.map((p) => p.productId),
-      purchases[0]
+      purchases.map((p) => p.productId)
     );
     return !!purchases.find(
       (p) =>
@@ -190,6 +189,7 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
       // Use of (as any) as types are not corrects
+      console.log('TEST', p);
       return {
         id: p.productId,
         price: parseFloat((p as any).price),
