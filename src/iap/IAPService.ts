@@ -122,7 +122,8 @@ export const hasPurchasedPremium = async () => {
       '[rnx] hasPurchasedPremium purchases.length',
       purchases.length,
       'ids',
-      purchases.map((p) => p.productId)
+      purchases.map((p) => p.productId),
+      purchases[0]
     );
     return !!purchases.find(
       (p) =>
