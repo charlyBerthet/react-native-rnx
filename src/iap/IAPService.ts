@@ -194,7 +194,7 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
         const platformProduct = p as SubscriptionAndroid;
         const prices =
           platformProduct.subscriptionOfferDetails[0].pricingPhases.pricingPhaseList.find(
-            (p) => p.formattedPrice.toLocaleLowerCase() !== 'free'
+            (_p) => _p.formattedPrice.toLocaleLowerCase() !== 'free'
           ) ||
           platformProduct.subscriptionOfferDetails[0].pricingPhases
             .pricingPhaseList[
