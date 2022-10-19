@@ -190,13 +190,21 @@ export const getIapSubscriptions = async (): Promise<IapSubscription[]> => {
     return products.map((p) => {
       const base = PREMIUM_PRODUCT_LIST.find((p2) => p2.id === p.productId);
       // Use of (as any) as types are not corrects
-      console.log('TEST', JSON.stringify(p));
       if (Platform.OS === 'android') {
         const platformProduct = p as SubscriptionAndroid;
+        const prices =
+          platformProduct.subscriptionOfferDetails[0].pricingPhases.pricingPhaseList.find(
+            (p) => p.formattedPrice.toLocaleLowerCase() !== 'free'
+          ) ||
+          platformProduct.subscriptionOfferDetails[0].pricingPhases
+            .pricingPhaseList[
+            platformProduct.subscriptionOfferDetails[0].pricingPhases
+              .pricingPhaseList.length - 1
+          ];
         return {
           id: platformProduct.productId,
-          price: parseFloat(''),
-          localizedPrice: '',
+          price: parseFloat(prices.priceAmountMicros) / 1000000,
+          localizedPrice: prices.formattedPrice,
           durationMonth: base?.durationMonth || 0,
           freeTrialDaysDuration: base?.freeTrialDaysDuration,
         };
