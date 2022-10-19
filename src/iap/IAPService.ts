@@ -34,8 +34,6 @@ let onPurchaseError: (() => void) | undefined;
 
 export const initIAP = (premiumSubscriptionIds: IapSubscriptionBase[]) => {
   PREMIUM_PRODUCT_LIST = premiumSubscriptionIds;
-  console.log('[rnx] initIAP setup');
-  // setup({ storekitMode: 'STOREKIT_HYBRID_MODE' });
   try {
     console.log('[rnx] initIAP initConnection');
     // Init connection to store
@@ -120,7 +118,12 @@ export const hasPurchasedPremium = async () => {
   try {
     console.log('[rnx] hasPurchasedPremium getAvailablePurchases');
     const purchases = await getAvailablePurchases();
-    console.log('[rnx] hasPurchasedPremium purchases.length', purchases.length);
+    console.log(
+      '[rnx] hasPurchasedPremium purchases.length',
+      purchases.length,
+      'ids',
+      purchases.map((p) => p.productId)
+    );
     return !!purchases.find(
       (p) =>
         PREMIUM_PRODUCT_LIST.filter(
