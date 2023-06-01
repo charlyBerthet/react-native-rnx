@@ -11,4 +11,5 @@ export interface Theme {
   txtColorOnPrimaryColor: string;
   borderColor: string;
   destructiveColor: string;
+  premiumColor: string;
 }
