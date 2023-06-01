@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   iconLeftMargin: {
-    marginLeft: 5,
-    marginRight: -3,
+    marginLeft: 3,
+    marginRight: -8,
   },
   icon: {
     paddingHorizontal: 4,
