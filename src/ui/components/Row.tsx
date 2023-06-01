@@ -18,6 +18,7 @@ export interface RowModel {
   rightArrow?: boolean;
   minHeight?: number;
   primary?: boolean;
+  rightElem?: JSX.Element;
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -108,6 +109,7 @@ export const Row = (props: Props) => {
               style={styles.switch}
             />
           )}
+          {props.rightElem}
           {props.rightArrow && (
             <View style={styles.rightArrow}>
               <Icon
