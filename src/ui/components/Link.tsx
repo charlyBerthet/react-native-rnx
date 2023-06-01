@@ -48,7 +48,6 @@ export const Link = (props: Props) => {
                   : mainColors.txt),
             },
             props.titleStyle,
-            props.isLoading || props.icon ? styles.titleRightMargin : undefined,
           ]}
         >
           {props.title}
@@ -56,7 +55,7 @@ export const Link = (props: Props) => {
       )}
       {props.isLoading ? (
         <ActivityIndicator
-          style={styles.icon}
+          style={[styles.icon, props.title ? styles.iconLeftMargin : undefined]}
           size="small"
           color={theme.txtColor}
         />
@@ -74,7 +73,10 @@ export const Link = (props: Props) => {
                 : mainColors.txt)
             }
             solid={props.iconSolid === false ? false : true}
-            style={styles.icon}
+            style={[
+              styles.icon,
+              props.title ? styles.iconLeftMargin : undefined,
+            ]}
           />
         )
       )}
@@ -99,8 +101,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
   },
-  titleRightMargin: {
-    marginRight: 5,
+  iconLeftMargin: {
+    marginLeft: 5,
+    marginRight: -3,
   },
   icon: {
     paddingHorizontal: 4,
