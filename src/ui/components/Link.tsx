@@ -34,6 +34,26 @@ export const Link = (props: Props) => {
       style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
+      {!!props.title && (
+        <Text
+          style={[
+            styles.title,
+            {
+              color:
+                props.txtColor ||
+                (props.defaultTxtColor
+                  ? theme.txtColor
+                  : props.destructive
+                  ? theme.destructiveColor
+                  : mainColors.txt),
+            },
+            props.titleStyle,
+            props.isLoading || props.icon ? styles.titleRightMargin : undefined,
+          ]}
+        >
+          {props.title}
+        </Text>
+      )}
       {props.isLoading ? (
         <ActivityIndicator
           style={styles.icon}
@@ -58,23 +78,6 @@ export const Link = (props: Props) => {
           />
         )
       )}
-      {!!props.title && (
-        <Text
-          style={[
-            styles.title,
-            {
-              color: props.defaultTxtColor
-                ? theme.txtColor
-                : props.destructive
-                ? theme.destructiveColor
-                : mainColors.txt,
-            },
-            props.titleStyle,
-          ]}
-        >
-          {props.title}
-        </Text>
-      )}
     </TouchableOpacity>
   );
 };
@@ -83,6 +86,10 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 4,
     paddingHorizontal: 15,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   disabled: {
     opacity: 0.5,
@@ -91,6 +98,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
+  },
+  titleRightMargin: {
+    marginRight: 10,
   },
   icon: {
     paddingHorizontal: 4,
