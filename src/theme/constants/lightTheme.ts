@@ -13,7 +13,7 @@ const lightTheme: Theme = {
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#ddd',
   destructiveColor: '#ed0b0b',
-  premiumColor: '#AF9151',
+  premiumColor: '#c19d55',
 };
 
 export default lightTheme;

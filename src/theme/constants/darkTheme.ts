@@ -13,7 +13,7 @@ const darkTheme: Theme = {
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#666',
   destructiveColor: '#ed0b0b',
-  premiumColor: '#AF9151',
+  premiumColor: '#c19d55',
 };
 
 export default darkTheme;
