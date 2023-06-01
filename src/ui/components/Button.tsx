@@ -27,6 +27,7 @@ interface Props extends CommonViewProps {
   iconSize?: number;
   bgColor?: string;
   titleFontSize?: number;
+  rightElem?: JSX.Element;
 }
 
 export const Button = (props: Props) => {
@@ -96,6 +97,7 @@ export const Button = (props: Props) => {
           </Text>
         )}
       </View>
+      {props.rightElem}
       {props.rightArrow && (
         <View style={styles.rightArrow}>
           <Icon
