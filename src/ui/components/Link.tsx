@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   titleRightMargin: {
-    marginRight: 10,
+    marginRight: 5,
   },
   icon: {
     paddingHorizontal: 4,
