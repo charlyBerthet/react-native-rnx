@@ -1,5 +1,16 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  BackHandler,
+  NativeEventSubscription,
+} from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
   BottomSheetOptionsProps,
@@ -38,32 +49,50 @@ export const BottomSheet = () => {
   const disableScrollToClose =
     sheetProps?.disableScrollToClose || sheetOptionsProps?.disableScrollToClose;
   const hideHandle = sheetProps?.hideHandle || sheetOptionsProps?.hideHandle;
-  const showOptions = (props: BottomSheetOptionsProps) => {
-    setSheetOptionsProps(props);
-    setIsVisible(true);
-  };
   const theme = useTheme();
 
-  const show = (props: BottomSheetProps) => {
+  const showOptions = useCallback((props: BottomSheetOptionsProps) => {
+    setSheetOptionsProps(props);
+    setIsVisible(true);
+  }, []);
+
+  const show = useCallback((props: BottomSheetProps) => {
     setSheetProps(props);
     setIsVisible(true);
-  };
+  }, []);
 
-  const hide = () => {
-    if (hideRef.current) {
-      hideRef.current();
-    }
-    onHidden();
-  };
-
-  const onHidden = () => {
+  const onHidden = useCallback(() => {
     if (sheetProps && sheetProps.onHide) {
       sheetProps.onHide();
     }
     setSheetProps(undefined);
     setSheetOptionsProps(undefined);
     setIsVisible(false);
-  };
+  }, [sheetProps]);
+
+  const hide = useCallback(() => {
+    if (hideRef.current) {
+      hideRef.current();
+    }
+    onHidden();
+  }, [onHidden]);
+
+  // Handle back button
+  const backHandlerRef = useRef<NativeEventSubscription>();
+  useEffect(() => {
+    if (backHandlerRef.current) {
+      backHandlerRef.current.remove();
+    }
+    if (isVisible) {
+      backHandlerRef.current = BackHandler.addEventListener(
+        'hardwareBackPress',
+        () => {
+          hide();
+          return true;
+        }
+      );
+    }
+  }, [isVisible, hide]);
 
   return (
     <>
