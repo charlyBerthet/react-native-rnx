@@ -80,16 +80,15 @@ export const Router = (props: Props) => {
                   tabBarShowLabel: props.hideTabLabels ? false : true,
                   tabBarActiveTintColor: theme.primaryColor,
                   tabBarInactiveTintColor: 'gray',
-                  tabBarStyle: [
-                    {
-                      display:
-                        !routeName ||
-                        routeName ===
-                          props.tabs[_tabNavProps.route.name].initial
-                          ? 'flex'
-                          : 'none',
-                    },
-                  ],
+                  tabBarStyle: {
+                    display:
+                      !routeName ||
+                      routeName === props.tabs[_tabNavProps.route.name].initial
+                        ? 'flex'
+                        : 'none',
+                    padding: 0,
+                    margin: 0,
+                  },
                 };
               }}
             >
