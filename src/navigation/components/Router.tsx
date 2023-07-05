@@ -16,6 +16,7 @@ const Tab = createBottomTabNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
+  extraView?: JSX.Element;
   tabs: {
     [name: string]: {
       screens: Screen[];
@@ -116,6 +117,7 @@ export const Router = (props: Props) => {
           ) : undefined}
         </NavigationContainer>
       </View>
+      {props.extraView}
       <BottomSheet />
     </>
   );
