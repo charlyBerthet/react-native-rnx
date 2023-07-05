@@ -91,6 +91,7 @@ export const Router = (props: Props) => {
                     marginBottom: props.extraBottomView
                       ? -bottomSafeArea
                       : undefined,
+                    shadowColor: 'transparent',
                   },
                 };
               }}
