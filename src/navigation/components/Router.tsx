@@ -86,8 +86,6 @@ export const Router = (props: Props) => {
                       routeName === props.tabs[_tabNavProps.route.name].initial
                         ? 'flex'
                         : 'none',
-                    padding: 0,
-                    margin: 0,
                   },
                 };
               }}
