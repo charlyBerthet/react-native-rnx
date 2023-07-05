@@ -6,6 +6,7 @@ import {
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
@@ -16,7 +17,7 @@ const Tab = createBottomTabNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
-  extraView?: JSX.Element;
+  extraBottomView?: JSX.Element;
   tabs: {
     [name: string]: {
       screens: Screen[];
@@ -31,6 +32,7 @@ interface Props {
 export const Router = (props: Props) => {
   const theme = useTheme();
   const isDarkTheme = useColorScheme() === 'dark';
+  const { bottom: bottomSafeArea } = useSafeAreaInsets();
 
   const tabs = Object.keys(props.tabs).map((name) => ({
     name,
@@ -86,7 +88,9 @@ export const Router = (props: Props) => {
                       routeName === props.tabs[_tabNavProps.route.name].initial
                         ? 'flex'
                         : 'none',
-                    marginBottom: -50,
+                    marginBottom: props.extraBottomView
+                      ? -bottomSafeArea
+                      : undefined,
                   },
                 };
               }}
@@ -114,7 +118,7 @@ export const Router = (props: Props) => {
           ) : undefined}
         </NavigationContainer>
       </View>
-      {props.extraView}
+      {props.extraBottomView}
       <BottomSheet />
     </>
   );
