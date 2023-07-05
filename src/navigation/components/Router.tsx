@@ -89,7 +89,10 @@ export const Router = (props: Props) => {
                           ? 'flex'
                           : 'none',
                     },
-                    null,
+                    {
+                      marginBottom: 0,
+                      paddingBottom: 0,
+                    },
                   ],
                 };
               }}
