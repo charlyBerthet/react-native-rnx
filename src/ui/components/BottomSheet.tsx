@@ -110,14 +110,13 @@ export const BottomSheet = () => {
       )}
 
       <RNBottomSheet
-        backgroundStyle={[
+        backgroundStyle={
           sheetOptionsProps
             ? styles.sheetOptionsBgStyle
             : {
                 backgroundColor: theme.bgColor,
-              },
-          { overflow: 'hidden' },
-        ]}
+              }
+        }
         handleStyle={
           sheetOptionsProps || disableScrollToClose || hideHandle
             ? styles.sheetOptionsHandleStyle
