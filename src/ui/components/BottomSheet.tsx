@@ -110,6 +110,7 @@ export const BottomSheet = () => {
       )}
 
       <RNBottomSheet
+        style={{ overflow: 'hidden' }}
         backgroundStyle={
           sheetOptionsProps
             ? styles.sheetOptionsBgStyle
