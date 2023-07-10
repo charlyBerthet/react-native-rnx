@@ -2,26 +2,13 @@ import { Alert } from 'react-native';
 import Rate from 'react-native-rate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback } from 'react';
-import { useLocalization } from 'react-native-rnx';
+import { useLocalization, useShouldAskForUserFeedback } from 'react-native-rnx';
 import { useHasRatedTheApp } from './useHasRatedTheApp';
 
 export const useAskForUserFeedback = () => {
   const { localize } = useLocalization();
   const { setHasRatedTheApp } = useHasRatedTheApp();
-
-  const shouldAskForUserFeedback = useCallback(async () => {
-    const openCount = parseInt(
-      (await AsyncStorage.getItem('openCount')) || '0',
-      10
-    );
-    return (
-      openCount === 1 ||
-      openCount === 30 ||
-      openCount === 90 ||
-      openCount === 200 ||
-      openCount === 400
-    );
-  }, []);
+  const shouldAskForUserFeedback = useShouldAskForUserFeedback();
 
   const askForUserFeedback = useCallback(
     async (
