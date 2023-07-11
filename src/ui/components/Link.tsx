@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   },
   iconRightMargin: {
     marginRight: 3,
+    marginLeft: -5,
   },
   icon: {
     paddingHorizontal: 4,
