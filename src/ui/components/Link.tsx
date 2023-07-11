@@ -15,6 +15,7 @@ interface Props extends CommonViewProps {
   title?: string;
   icon?: string;
   iconSolid?: boolean;
+  iconLeft?: boolean;
   onPress?: () => void;
   secondary?: boolean;
   destructive?: boolean;
@@ -34,6 +35,25 @@ export const Link = (props: Props) => {
       style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
+      {!!props.icon && props.iconLeft === true && (
+        <Icon
+          name={props.icon}
+          size={16}
+          color={
+            props.txtColor ||
+            (props.defaultTxtColor
+              ? theme.txtColor
+              : props.destructive
+              ? theme.destructiveColor
+              : mainColors.txt)
+          }
+          solid={props.iconSolid === false ? false : true}
+          style={[
+            styles.icon,
+            props.title ? styles.iconRightMargin : undefined,
+          ]}
+        />
+      )}
       {!!props.title && (
         <Text
           style={[
@@ -60,7 +80,8 @@ export const Link = (props: Props) => {
           color={theme.txtColor}
         />
       ) : (
-        !!props.icon && (
+        !!props.icon &&
+        props.iconLeft !== true && (
           <Icon
             name={props.icon}
             size={16}
@@ -104,6 +125,9 @@ const styles = StyleSheet.create({
   iconLeftMargin: {
     marginLeft: 3,
     marginRight: -8,
+  },
+  iconRightMargin: {
+    marginRight: 3,
   },
   icon: {
     paddingHorizontal: 4,
