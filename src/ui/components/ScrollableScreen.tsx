@@ -42,6 +42,7 @@ interface Props {
   headerLeftButton?: {
     title?: string;
     icon?: string;
+    iconLeft?: boolean;
     iconSolid?: boolean;
     navigateTo?: string;
     onPress?: () => void;
@@ -95,6 +96,7 @@ export const ScrollableScreen = (props: Props) => {
               style={[props.headerLowDown && styles.headerButtonLowDown]}
               title={props.headerLeftButton!!.title || ''}
               icon={props.headerLeftButton!!.icon}
+              iconLeft={props.headerLeftButton!!.iconLeft}
               iconSolid={props.headerLeftButton!!.iconSolid}
               onPress={() => {
                 if (props.headerLeftButton!!.navigateTo) {
