@@ -83,7 +83,7 @@ export const BottomSheet = () => {
     if (backHandlerRef.current) {
       backHandlerRef.current.remove();
     }
-    if (isVisible) {
+    if (isVisible && !disableScrollToClose) {
       backHandlerRef.current = BackHandler.addEventListener(
         'hardwareBackPress',
         () => {
@@ -92,7 +92,7 @@ export const BottomSheet = () => {
         }
       );
     }
-  }, [isVisible, hide]);
+  }, [isVisible, hide, disableScrollToClose]);
 
   return (
     <>
