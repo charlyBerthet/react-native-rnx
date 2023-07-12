@@ -83,11 +83,14 @@ export const BottomSheet = () => {
     if (backHandlerRef.current) {
       backHandlerRef.current.remove();
     }
-    if (isVisible && !disableScrollToClose) {
+    if (isVisible) {
       backHandlerRef.current = BackHandler.addEventListener(
         'hardwareBackPress',
         () => {
-          hide();
+          // if disableScrollToClose is true then we lock user on screen
+          if (!disableScrollToClose) {
+            hide();
+          }
           return true;
         }
       );
