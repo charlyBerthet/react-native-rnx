@@ -11,6 +11,8 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SplashScreen from './SplashScreen';
 
+const STORAGE_KEY = '@rnx_storage';
+
 interface StateProviderProps {
   children: JSX.Element | JSX.Element[];
 }
@@ -69,12 +71,6 @@ export function createStateProvider<
     }>;
   }
 
-  // Handle saved data to local storage of phone
-  const STORAGE_KEY = '@rnx_storage';
-  const _getFromStorage = () =>
-    AsyncStorage.getItem(STORAGE_KEY).then(
-      (d) => JSON.parse(d || '{}') as Partial<T>
-    );
   // Save to storage only keys that match @persist param
   const _setToStorage = (data: Partial<T>) => {
     const persitableData: Partial<T> = {};
@@ -120,7 +116,7 @@ export function createStateProvider<
     const [state, dispatch] = useReducer(_internalReducer, initial);
 
     useEffect(() => {
-      _getFromStorage().then((savedState) => {
+      getGlobalStateFromStorage<T>().then((savedState) => {
         dispatch({
           type: BaseStoreActionsType.__initStateFromStorage__,
           value: savedState,
@@ -200,4 +196,11 @@ export function useDispatch<Action extends CommonAction>() {
     [dispatch]
   );
   return dispatchAction;
+}
+
+// Handle saved data to local storage of phone
+export function getGlobalStateFromStorage<T extends BaseStore>() {
+  return AsyncStorage.getItem(STORAGE_KEY).then(
+    (d) => JSON.parse(d || '{}') as Partial<T>
+  );
 }
