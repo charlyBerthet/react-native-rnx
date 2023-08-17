@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     minWidth: 0,
   },
   containerDisabled: {
-    opacity: 0.7,
+    opacity: 0.5,
   },
   containerFull: {
     alignSelf: 'stretch',
