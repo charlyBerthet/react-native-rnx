@@ -122,7 +122,7 @@ export const ScrollableScreen = (props: Props) => {
       headerBackground: props.headerBackground,
       headerRight:
         props.headerRightElement ||
-        (props.headerRightButtons && props.headerRightButtons.length)
+        (props.headerRightButtons && props.headerRightButtons.length
           ? () => (
               <View style={styles.headerBtns}>
                 {props.headerRightButtons!.map((btnProps, idx) => (
@@ -158,7 +158,7 @@ export const ScrollableScreen = (props: Props) => {
                 ))}
               </View>
             )
-          : undefined,
+          : undefined),
     });
   }, [
     props.title,
