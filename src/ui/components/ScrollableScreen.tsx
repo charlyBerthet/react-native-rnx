@@ -199,6 +199,7 @@ export const ScrollableScreen = (props: Props) => {
   ) : (
     <ScrollView
       scrollEventThrottle={5}
+      scrollIndicatorInsets={{ right: 1 }}
       onScroll={onScroll}
       keyboardShouldPersistTaps={props.keyboardShouldPersistTaps}
       ref={(ref) =>
