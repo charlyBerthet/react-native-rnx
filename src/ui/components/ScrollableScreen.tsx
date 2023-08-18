@@ -92,7 +92,8 @@ export const ScrollableScreen = (props: Props) => {
         paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
       headerLeft:
-        props.headerLeftElement || props.headerLeftButton
+        props.headerLeftElement ||
+        (props.headerLeftButton
           ? () => (
               <Link
                 style={[props.headerLowDown && styles.headerButtonLowDown]}
@@ -116,7 +117,7 @@ export const ScrollableScreen = (props: Props) => {
                 isLoading={props.headerLeftButton!!.isLoading}
               />
             )
-          : undefined,
+          : undefined),
       headerBackground: props.headerBackground,
       headerRight:
         props.headerRightButtons && props.headerRightButtons.length
