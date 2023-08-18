@@ -53,6 +53,7 @@ interface Props {
     defaultTxtColor?: boolean;
     txtColor?: string;
   };
+  headerLeftElement?: () => JSX.Element;
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
   scrollViewRef?: (ref: ScrollView | undefined) => void;
@@ -90,31 +91,35 @@ export const ScrollableScreen = (props: Props) => {
         fontSize: 15,
         paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
-      headerLeft: props.headerLeftButton
-        ? () => (
-            <Link
-              style={[props.headerLowDown && styles.headerButtonLowDown]}
-              title={props.headerLeftButton!!.title || ''}
-              icon={props.headerLeftButton!!.icon}
-              iconLeft={props.headerLeftButton!!.iconLeft}
-              iconSolid={props.headerLeftButton!!.iconSolid}
-              onPress={() => {
-                if (props.headerLeftButton!!.navigateTo) {
-                  navigation.navigate(props.headerLeftButton!!.navigateTo);
-                }
-                if (props.headerLeftButton!!.onPress) {
-                  props.headerLeftButton!!.onPress();
-                }
-              }}
-              txtColor={props.headerLeftButton!!.txtColor}
-              defaultTxtColor={props.headerLeftButton!!.defaultTxtColor}
-              destructive={props.headerLeftButton!!.destructive}
-              secondary={props.headerLeftButton!!.secondary}
-              disabled={props.headerLeftButton!!.disabled}
-              isLoading={props.headerLeftButton!!.isLoading}
-            />
-          )
-        : undefined,
+      headerLeft:
+        props.headerLeftElement || props.headerLeftButton ? (
+          <>
+            {props.headerLeftElement}
+            {props.headerLeftButton && (
+              <Link
+                style={[props.headerLowDown && styles.headerButtonLowDown]}
+                title={props.headerLeftButton!!.title || ''}
+                icon={props.headerLeftButton!!.icon}
+                iconLeft={props.headerLeftButton!!.iconLeft}
+                iconSolid={props.headerLeftButton!!.iconSolid}
+                onPress={() => {
+                  if (props.headerLeftButton!!.navigateTo) {
+                    navigation.navigate(props.headerLeftButton!!.navigateTo);
+                  }
+                  if (props.headerLeftButton!!.onPress) {
+                    props.headerLeftButton!!.onPress();
+                  }
+                }}
+                txtColor={props.headerLeftButton!!.txtColor}
+                defaultTxtColor={props.headerLeftButton!!.defaultTxtColor}
+                destructive={props.headerLeftButton!!.destructive}
+                secondary={props.headerLeftButton!!.secondary}
+                disabled={props.headerLeftButton!!.disabled}
+                isLoading={props.headerLeftButton!!.isLoading}
+              />
+            )}
+          </>
+        ) : undefined,
       headerBackground: props.headerBackground,
       headerRight:
         props.headerRightButtons && props.headerRightButtons.length
@@ -165,6 +170,7 @@ export const ScrollableScreen = (props: Props) => {
     props.headerLowDown,
     forceTitleInHeader,
     props.titleElement,
+    props.headerLeftElement,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
