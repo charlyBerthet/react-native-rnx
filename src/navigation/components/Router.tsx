@@ -25,6 +25,7 @@ interface Props {
       title?: string;
       iconName: string;
       iconSize?: number;
+      customIcon?: () => JSX.Element;
     };
   };
 }
@@ -96,23 +97,26 @@ export const Router = (props: Props) => {
                 };
               }}
             >
-              {tabs.map((s) => (
-                <Tab.Screen
-                  key={s.name}
-                  name={s.name}
-                  options={{
-                    title: s.title || '',
-                  }}
-                >
-                  {(stackProps) => (
-                    <Stack
-                      {...stackProps}
-                      screens={s.screens}
-                      initial={s.initial}
-                    />
-                  )}
-                </Tab.Screen>
-              ))}
+              {tabs.map(
+                (s) =>
+                  s.customIcon || (
+                    <Tab.Screen
+                      key={s.name}
+                      name={s.name}
+                      options={{
+                        title: s.title || '',
+                      }}
+                    >
+                      {(stackProps) => (
+                        <Stack
+                          {...stackProps}
+                          screens={s.screens}
+                          initial={s.initial}
+                        />
+                      )}
+                    </Tab.Screen>
+                  )
+              )}
             </Tab.Navigator>
           ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
             <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
