@@ -80,7 +80,7 @@ export const Router = (props: Props) => {
                     );
                   },
                   tabBarShowLabel: props.hideTabLabels ? false : true,
-                  tabBarActiveTintColor: theme.primaryColor,
+                  tabBarActiveTintColor: theme.txtColor,
                   tabBarInactiveTintColor: 'gray',
                   tabBarStyle: {
                     display:
