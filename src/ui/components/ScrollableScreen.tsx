@@ -53,6 +53,7 @@ interface Props {
     defaultTxtColor?: boolean;
     txtColor?: string;
   };
+  headerRightElement?: () => JSX.Element;
   headerLeftElement?: () => JSX.Element;
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
   headerLowDown?: boolean;
@@ -120,7 +121,8 @@ export const ScrollableScreen = (props: Props) => {
           : undefined),
       headerBackground: props.headerBackground,
       headerRight:
-        props.headerRightButtons && props.headerRightButtons.length
+        props.headerRightElement ||
+        (props.headerRightButtons && props.headerRightButtons.length)
           ? () => (
               <View style={styles.headerBtns}>
                 {props.headerRightButtons!.map((btnProps, idx) => (
@@ -169,6 +171,7 @@ export const ScrollableScreen = (props: Props) => {
     forceTitleInHeader,
     props.titleElement,
     props.headerLeftElement,
+    props.headerRightElement,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
