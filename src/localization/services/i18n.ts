@@ -19,6 +19,7 @@ export const initLocalization = async (_resources: { [lng: string]: any }) => {
   }
 
   await i18next.use(initReactI18next).init({
+    compatibilityJSON: 'v3',
     interpolation: { escapeValue: false },
     lng: locale,
     fallbackLng: 'en',
