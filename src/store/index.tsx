@@ -94,7 +94,7 @@ export function createStateProvider<
     accState: T,
     action: { type: CustomActionType | BaseStoreActionsType; value: any }
   ) => {
-    console.log('[RNX] action', action.type);
+    console.log('[RNX] action:', action.type);
     let partialUpdate: T = { ...accState };
     switch (action.type) {
       case BaseStoreActionsType.set:
@@ -107,6 +107,7 @@ export function createStateProvider<
     const newState = {
       ...reducer(partialUpdate, action),
     };
+    console.log('[RNX] action:', action.type, 'newState:', newState);
     _setToStorage(newState);
     return newState;
   };
@@ -176,6 +177,8 @@ export function useGlobalState<T extends BaseStore>() {
     },
     [dispatch]
   );
+
+  console.log('[RNX] useGlobalState state:', state);
 
   return {
     globalState: state as T,
