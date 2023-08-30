@@ -147,8 +147,6 @@ export function createStateProvider<
       [dispatch]
     );
 
-    console.log('[RNX] StateProvider state.abTest', (state as any)?.abTest);
-
     return (
       <Store.Provider value={{ state, dispatch: dispatchMiddleware }}>
         {isInit ? children : <SplashScreen />}
@@ -178,7 +176,6 @@ export function useGlobalState<T extends BaseStore>() {
     },
     [dispatch]
   );
-  console.log('[RNX] useGlobalState state.abTest', state?.abTest);
 
   return {
     globalState: state as T,
