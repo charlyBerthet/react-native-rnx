@@ -39,10 +39,7 @@ export interface BaseStoreAction extends CommonAction {
   value: any;
 }
 
-export function createStateProvider<
-  T extends BaseStore,
-  CustomActionType extends string
->(
+export function createStateProvider<T extends BaseStore, CustomActionType>(
   initial: T,
   reducer: (
     accState: T,
