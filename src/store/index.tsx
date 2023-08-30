@@ -172,11 +172,11 @@ export function useGlobalState<T extends BaseStore>() {
 
   const setGlobalState = useCallback(
     (partial: Partial<T>) => {
-      console.log('[RNX] StateProvider.setGlobalState partial', partial);
       dispatch({ type: BaseStoreActionsType.set, value: partial });
     },
     [dispatch]
   );
+  console.log('[RNX] StateProvider.useGlobalState state.abTest', state?.abTest);
 
   return {
     globalState: state as T,
