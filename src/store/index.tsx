@@ -44,14 +44,11 @@ export function createStateProvider<
   CustomActionType extends string
 >(
   initial: T,
-  reducer: (
-    accState: T,
-    action: { type: CustomActionType | BaseStoreActionsType; value: any }
-  ) => T,
+  reducer: (accState: T, action: { type: CustomActionType; value: any }) => T,
   _persist: (keyof T)[],
   middleWare?: (
     accState: T,
-    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+    action: { type: CustomActionType; value: any }
   ) => Promise<{ type: CustomActionType | BaseStoreActionsType; value: any }>
 ) {
   const persist = [
@@ -105,7 +102,10 @@ export function createStateProvider<
         break;
     }
     const newState = {
-      ...reducer(partialUpdate, action),
+      ...reducer(
+        partialUpdate,
+        action as { type: CustomActionType; value: any }
+      ),
     };
     _setToStorage(newState);
     return newState;
@@ -140,7 +140,13 @@ export function createStateProvider<
       }) => {
         let finalAction = action;
         if (middleWare) {
-          finalAction = await middleWare(stateRef.current, action);
+          finalAction = await middleWare(
+            stateRef.current,
+            action as {
+              type: CustomActionType;
+              value: any;
+            }
+          );
         }
         dispatch(finalAction);
       },
