@@ -107,7 +107,12 @@ export function createStateProvider<
     const newState = {
       ...reducer(partialUpdate, action),
     };
-    console.log('[RNX] action:', action.type, 'newState:', newState);
+    console.log(
+      '[RNX] action:',
+      action.type,
+      'newState.abTest:',
+      (newState as any)?.abTest
+    );
     _setToStorage(newState);
     return newState;
   };
@@ -178,7 +183,7 @@ export function useGlobalState<T extends BaseStore>() {
     [dispatch]
   );
 
-  console.log('[RNX] useGlobalState state:', state);
+  console.log('[RNX] useGlobalState state.abTest:', state?.abTest);
 
   return {
     globalState: state as T,
