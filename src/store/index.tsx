@@ -114,7 +114,6 @@ export function createStateProvider<
   const StateProvider = ({ children }: StateProviderProps) => {
     const [isInit, setIsInit] = useState(false);
     const [state, dispatch] = useReducer(_internalReducer, initial);
-    console.log('[RNX] StateProvider state.abTest', (state as any)?.abTest);
 
     useEffect(() => {
       getGlobalStateFromStorage<T>().then((savedState) => {
@@ -173,6 +172,7 @@ export function useGlobalState<T extends BaseStore>() {
 
   const setGlobalState = useCallback(
     (partial: Partial<T>) => {
+      console.log('[RNX] StateProvider.setGlobalState partial', partial);
       dispatch({ type: BaseStoreActionsType.set, value: partial });
     },
     [dispatch]
