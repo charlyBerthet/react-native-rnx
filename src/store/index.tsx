@@ -39,17 +39,24 @@ export interface BaseStoreAction extends CommonAction {
   value: any;
 }
 
+type StandardEnum = {
+  [id: string]: string;
+};
+
 export function createStateProvider<
   T extends BaseStore,
-  CustomActionType extends string
+  CustomActionType extends StandardEnum
 >(
   initial: T,
-  reducer: (accState: T, action: { type: CustomActionType; value: any }) => T,
+  reducer: (
+    accState: T,
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => T,
   _persist: (keyof T)[],
   middleWare?: (
     accState: T,
-    action: { type: CustomActionType; value: any }
-  ) => Promise<{ type: CustomActionType; value: any }>
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => Promise<{ type: CustomActionType | BaseStoreActionsType; value: any }>
 ) {
   const persist = [
     ..._persist.filter((p) => p !== 'isPremium' && p !== 'hasRatedTheApp'),
@@ -89,7 +96,7 @@ export function createStateProvider<
 
   const _internalReducer = (
     accState: T,
-    action: { type: CustomActionType; value: any }
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
   ) => {
     console.log('[RNX] action:', action.type);
     let partialUpdate: T = { ...accState };
@@ -115,7 +122,7 @@ export function createStateProvider<
     useEffect(() => {
       getGlobalStateFromStorage<T>().then((savedState) => {
         dispatch({
-          type: BaseStoreActionsType.__initStateFromStorage__ as CustomActionType,
+          type: BaseStoreActionsType.__initStateFromStorage__,
           value: savedState,
         });
         console.log('[RNX] createStateProvider init');
@@ -131,7 +138,10 @@ export function createStateProvider<
     }, [state]);
 
     const dispatchMiddleware = useCallback(
-      async (action: { type: CustomActionType; value: any }) => {
+      async (action: {
+        type: CustomActionType | BaseStoreActionsType;
+        value: any;
+      }) => {
         let finalAction = action;
         if (middleWare) {
           finalAction = await middleWare(stateRef.current, action);
