@@ -41,7 +41,10 @@ export interface BaseStoreAction extends CommonAction {
 
 export function createStateProvider<T extends BaseStore, CustomActionType>(
   initial: T,
-  reducer: (accState: T, action: { type: CustomActionType; value: any }) => T,
+  reducer: (
+    accState: T,
+    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+  ) => T,
   _persist: (keyof T)[],
   middleWare?: (
     accState: T,
@@ -99,10 +102,7 @@ export function createStateProvider<T extends BaseStore, CustomActionType>(
         break;
     }
     const newState = {
-      ...reducer(
-        partialUpdate,
-        action as { type: CustomActionType; value: any }
-      ),
+      ...reducer(partialUpdate, action),
     };
     _setToStorage(newState);
     return newState;
