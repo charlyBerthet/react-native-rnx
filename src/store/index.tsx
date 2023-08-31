@@ -39,13 +39,13 @@ export interface BaseStoreAction extends CommonAction {
   value: any;
 }
 
-type StandardEnum = {
+export type StandardActionTypeEnum = {
   [id: string]: string;
 };
 
 export function createStateProvider<
   T extends BaseStore,
-  CustomActionType extends StandardEnum
+  CustomActionType extends StandardActionTypeEnum
 >(
   initial: T,
   reducer: (
