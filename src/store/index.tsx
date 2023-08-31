@@ -41,18 +41,15 @@ export interface BaseStoreAction extends CommonAction {
 
 export function createStateProvider<
   T extends BaseStore,
-  CustomActionType extends string
+  CustomActionType extends BaseStoreActionsType
 >(
   initial: T,
-  reducer: (
-    accState: T,
-    action: { type: CustomActionType | BaseStoreActionsType; value: any }
-  ) => T,
+  reducer: (accState: T, action: { type: CustomActionType; value: any }) => T,
   _persist: (keyof T)[],
   middleWare?: (
     accState: T,
-    action: { type: CustomActionType | BaseStoreActionsType; value: any }
-  ) => Promise<{ type: CustomActionType | BaseStoreActionsType; value: any }>
+    action: { type: CustomActionType; value: any }
+  ) => Promise<{ type: CustomActionType; value: any }>
 ) {
   const persist = [
     ..._persist.filter((p) => p !== 'isPremium' && p !== 'hasRatedTheApp'),
@@ -66,7 +63,7 @@ export function createStateProvider<
   interface Context {
     state: T;
     dispatch: Dispatch<{
-      type: CustomActionType | BaseStoreActionsType;
+      type: CustomActionType;
       value: any;
     }>;
   }
@@ -92,7 +89,7 @@ export function createStateProvider<
 
   const _internalReducer = (
     accState: T,
-    action: { type: CustomActionType | BaseStoreActionsType; value: any }
+    action: { type: CustomActionType; value: any }
   ) => {
     console.log('[RNX] action:', action.type);
     let partialUpdate: T = { ...accState };
@@ -118,7 +115,7 @@ export function createStateProvider<
     useEffect(() => {
       getGlobalStateFromStorage<T>().then((savedState) => {
         dispatch({
-          type: BaseStoreActionsType.__initStateFromStorage__,
+          type: BaseStoreActionsType.__initStateFromStorage__ as CustomActionType,
           value: savedState,
         });
         console.log('[RNX] createStateProvider init');
@@ -134,10 +131,7 @@ export function createStateProvider<
     }, [state]);
 
     const dispatchMiddleware = useCallback(
-      async (action: {
-        type: CustomActionType | BaseStoreActionsType;
-        value: any;
-      }) => {
+      async (action: { type: CustomActionType; value: any }) => {
         let finalAction = action;
         if (middleWare) {
           finalAction = await middleWare(stateRef.current, action);
