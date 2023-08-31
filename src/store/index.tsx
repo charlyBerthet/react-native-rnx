@@ -39,14 +39,7 @@ export interface BaseStoreAction extends CommonAction {
   value: any;
 }
 
-export type StandardActionTypeEnum = {
-  [id: string]: string;
-};
-
-export function createStateProvider<
-  T extends BaseStore,
-  CustomActionType extends StandardActionTypeEnum
->(
+export function createStateProvider<T extends BaseStore, CustomActionType>(
   initial: T,
   reducer: (
     accState: T,
