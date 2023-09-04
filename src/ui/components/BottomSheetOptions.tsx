@@ -24,7 +24,7 @@ export const BottomSheetOptions = (props: Props) => {
           {props.message}
         </Text>
       )}
-      {!!props.element && <props.element />}
+      {!!props.element && props.element}
       {!!props.options && (
         <View style={[styles.btns, props.inline && styles.btnsInline]}>
           {props.options.map((opt, idx) => {

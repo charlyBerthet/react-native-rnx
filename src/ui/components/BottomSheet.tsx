@@ -26,7 +26,7 @@ export interface BottomSheetActionsRef {
 }
 
 export interface BottomSheetProps {
-  element?: () => JSX.Element;
+  element?: JSX.Element;
   onHide?: () => void;
   snapPoints?: (string | number)[];
   disableScrollToClose?: boolean;
@@ -155,7 +155,7 @@ export const BottomSheet = () => {
         {disableInternalScrollView ? (
           <>
             {sheetOptionsProps && <BottomSheetOptions {...sheetOptionsProps} />}
-            {sheetProps?.element ? <sheetProps.element /> : undefined}
+            {sheetProps?.element ? sheetProps.element : undefined}
           </>
         ) : (
           <BottomSheetScrollView>
@@ -163,7 +163,7 @@ export const BottomSheet = () => {
               {sheetOptionsProps && (
                 <BottomSheetOptions {...sheetOptionsProps} />
               )}
-              {sheetProps?.element ? <sheetProps.element /> : undefined}
+              {sheetProps?.element ? sheetProps.element : undefined}
             </>
           </BottomSheetScrollView>
         )}

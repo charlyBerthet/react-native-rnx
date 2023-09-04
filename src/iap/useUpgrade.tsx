@@ -1,4 +1,4 @@
-import 'react';
+import React from 'react';
 import { useCallback } from 'react';
 import { Dimensions } from 'react-native';
 import { useBottomSheet } from 'react-native-rnx';
@@ -12,7 +12,7 @@ export const useUpgrade = () => {
     sheet.show({
       snapPoints: [height],
       hideHandle: true,
-      element: UpgradeViewSheet,
+      element: <UpgradeViewSheet />,
     });
   }, [sheet]);
 
