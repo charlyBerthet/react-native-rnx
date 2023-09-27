@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, StyleSheet, TouchableOpacity, Switch } from 'react-native';
 import { Text } from './Text';
 import { useTheme } from '../../theme';
@@ -20,6 +20,7 @@ export interface RowModel {
   primary?: boolean;
   primaryBg?: boolean;
   rightElem?: JSX.Element;
+  ref?: { current?: TouchableOpacity };
 }
 
 interface Props extends CommonViewProps, RowModel {
@@ -29,6 +30,16 @@ interface Props extends CommonViewProps, RowModel {
 
 export const Row = (props: Props) => {
   const theme = useTheme();
+
+  const _setRef = useCallback(
+    (ref: TouchableOpacity | undefined | null) => {
+      if (props.ref) {
+        props.ref.current = ref || undefined;
+      }
+    },
+    [props.ref]
+  );
+
   return (
     <View
       style={[
@@ -53,6 +64,7 @@ export const Row = (props: Props) => {
         onPress={props.onPress}
         onLongPress={props.onLongPress}
         activeOpacity={props.onPress ? 0.8 : 1}
+        ref={_setRef}
       >
         {!!props.icon && (
           <Icon
