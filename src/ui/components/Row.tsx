@@ -18,6 +18,7 @@ export interface RowModel {
   rightArrow?: boolean;
   minHeight?: number;
   primary?: boolean;
+  primaryBg?: boolean;
   rightElem?: JSX.Element;
 }
 
@@ -36,7 +37,9 @@ export const Row = (props: Props) => {
         props.hasBorderBottom && styles.rootBorderBottom,
         props.hasBorderTop && { borderTopColor: theme.borderColor },
         props.hasBorderBottom && { borderBottomColor: theme.borderColor },
-        { backgroundColor: theme.bgColor },
+        {
+          backgroundColor: props.primaryBg ? theme.primaryColor : theme.bgColor,
+        },
         props.style,
       ]}
     >
@@ -55,7 +58,13 @@ export const Row = (props: Props) => {
           <Icon
             name={props.icon}
             size={16}
-            color={props.primary ? theme.primaryColor : theme.txtColor}
+            color={
+              props.primaryBg
+                ? theme.txtColorOnPrimaryColor
+                : props.primary
+                ? theme.primaryColor
+                : theme.txtColor
+            }
             solid={true}
             style={styles.leftIcon}
           />
@@ -65,7 +74,11 @@ export const Row = (props: Props) => {
             style={[
               styles.title,
               {
-                color: props.primary ? theme.primaryColor : theme.txtColor,
+                color: props.primaryBg
+                  ? theme.txtColorOnPrimaryColor
+                  : props.primary
+                  ? theme.primaryColor
+                  : theme.txtColor,
               },
             ]}
           >
@@ -76,7 +89,11 @@ export const Row = (props: Props) => {
               style={[
                 styles.subtitle,
                 {
-                  color: props.primary ? theme.primaryColor : theme.txtColor,
+                  color: props.primaryBg
+                    ? theme.txtColorOnPrimaryColor
+                    : props.primary
+                    ? theme.primaryColor
+                    : theme.txtColor,
                 },
               ]}
             >
@@ -102,8 +119,13 @@ export const Row = (props: Props) => {
           </View>
           {props.isEnabled !== undefined && (
             <Switch
-              trackColor={{ false: 'gray', true: theme.primaryColor }}
-              thumbColor={'white'}
+              trackColor={{
+                false: 'gray',
+                true: props.primaryBg
+                  ? theme.txtColorOnPrimaryColor
+                  : theme.primaryColor,
+              }}
+              thumbColor={props.primaryBg ? theme.primaryColor : 'white'}
               onValueChange={props.onEnabledChange}
               value={props.isEnabled}
               style={styles.switch}
@@ -115,7 +137,13 @@ export const Row = (props: Props) => {
               <Icon
                 name="chevron-right"
                 size={15}
-                color={props.primary ? theme.primaryColor : theme.txtColor}
+                color={
+                  props.primaryBg
+                    ? theme.txtColorOnPrimaryColor
+                    : props.primary
+                    ? theme.primaryColor
+                    : theme.txtColor
+                }
                 solid={true}
               />
             </View>
