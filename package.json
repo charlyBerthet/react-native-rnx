@@ -87,7 +87,7 @@
   },
   "peerDependencies": {
     "@crowdlinker/react-native-pager": "^0.2.3",
-    "@gorhom/bottom-sheet": "~4.4.7",
+    "@gorhom/bottom-sheet": "4.5.1",
     "@react-native-async-storage/async-storage": "^1.15.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^6.0.9",
@@ -188,7 +188,7 @@
     ]
   },
   "dependencies": {
-    "@gorhom/bottom-sheet": "~4.4.7",
+    "@gorhom/bottom-sheet": "4.5.1",
     "react-native-linear-gradient": "^2.5.6"
   }
 }
