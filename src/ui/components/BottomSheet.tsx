@@ -130,14 +130,28 @@ export const BottomSheet = () => {
             hideRef.current = ref.close;
             setActionsSheetRef({
               show: (props) => {
+                console.log(
+                  '[RNX][BOTTOM_SHEET] show element:',
+                  !!props.element,
+                  'hideHandle',
+                  props.hideHandle,
+                  'snapPoints',
+                  props.snapPoints,
+                  'disableInternalScrollView',
+                  props.disableInternalScrollView,
+                  'disableScrollToClose',
+                  props.disableScrollToClose
+                );
                 ref.expand();
                 show(props);
               },
               showOptions: (props) => {
+                console.log('[RNX][BOTTOM_SHEET] showOptions');
                 ref.expand();
                 showOptions(props);
               },
               hide: () => {
+                console.log('[RNX][BOTTOM_SHEET] hide');
                 hide();
               },
             });
