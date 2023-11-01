@@ -100,6 +100,43 @@ export const BottomSheet = () => {
     }
   }, [isVisible, hide, disableScrollToClose]);
 
+  const _updateBottomSheetRef = useCallback(
+    (ref: RNBottomSheet | undefined | null) => {
+      console.log('[RNX][BOTTOM_SHEET] ref updated');
+      bottomSheetRef.current = ref || undefined;
+      if (ref) {
+        setActionsSheetRef({
+          show: (props) => {
+            console.log(
+              '[RNX][BOTTOM_SHEET] show element:',
+              !!props.element,
+              'hideHandle',
+              props.hideHandle,
+              'snapPoints',
+              props.snapPoints,
+              'disableInternalScrollView',
+              props.disableInternalScrollView,
+              'disableScrollToClose',
+              props.disableScrollToClose
+            );
+            ref.expand();
+            show(props);
+          },
+          showOptions: (props) => {
+            console.log('[RNX][BOTTOM_SHEET] showOptions');
+            ref.expand();
+            showOptions(props);
+          },
+          hide: () => {
+            console.log('[RNX][BOTTOM_SHEET] actionsSheetRef call hide');
+            hide();
+          },
+        });
+      }
+    },
+    [hide, show, showOptions]
+  );
+
   return (
     <>
       {isVisible && (
@@ -128,39 +165,7 @@ export const BottomSheet = () => {
             ? styles.sheetOptionsHandleStyle
             : undefined
         }
-        ref={(ref) => {
-          if (ref) {
-            console.log('[RNX][BOTTOM_SHEET] ref updated');
-            bottomSheetRef.current = ref;
-            setActionsSheetRef({
-              show: (props) => {
-                console.log(
-                  '[RNX][BOTTOM_SHEET] show element:',
-                  !!props.element,
-                  'hideHandle',
-                  props.hideHandle,
-                  'snapPoints',
-                  props.snapPoints,
-                  'disableInternalScrollView',
-                  props.disableInternalScrollView,
-                  'disableScrollToClose',
-                  props.disableScrollToClose
-                );
-                ref.expand();
-                show(props);
-              },
-              showOptions: (props) => {
-                console.log('[RNX][BOTTOM_SHEET] showOptions');
-                ref.expand();
-                showOptions(props);
-              },
-              hide: () => {
-                console.log('[RNX][BOTTOM_SHEET] actionsSheetRef call hide');
-                hide();
-              },
-            });
-          }
-        }}
+        ref={_updateBottomSheetRef}
         index={-1}
         snapPoints={
           sheetProps?.snapPoints || sheetOptionsProps?.snapPoints || snapPoints
