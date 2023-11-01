@@ -62,6 +62,7 @@ export const BottomSheet = () => {
   }, []);
 
   const onHidden = useCallback(() => {
+    console.log('[RNX][BOTTOM_SHEET] onHidden');
     if (sheetProps && sheetProps.onHide) {
       sheetProps.onHide();
     }
@@ -71,6 +72,7 @@ export const BottomSheet = () => {
   }, [sheetProps]);
 
   const hide = useCallback(() => {
+    console.log('[RNX][BOTTOM_SHEET] hide');
     if (hideRef.current) {
       hideRef.current();
     }
@@ -151,7 +153,7 @@ export const BottomSheet = () => {
                 showOptions(props);
               },
               hide: () => {
-                console.log('[RNX][BOTTOM_SHEET] hide');
+                console.log('[RNX][BOTTOM_SHEET] actionsSheetRef call hide');
                 hide();
               },
             });
