@@ -75,9 +75,10 @@ export const BottomSheet = () => {
     console.log('[RNX][BOTTOM_SHEET] hide');
     if (hideRef.current) {
       hideRef.current();
+    } else {
+      console.log('[RNX][BOTTOM_SHEET] hide abort, missing hideRef');
     }
-    onHidden();
-  }, [onHidden]);
+  }, []);
 
   // Handle back button
   const backHandlerRef = useRef<NativeEventSubscription>();
