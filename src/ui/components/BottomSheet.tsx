@@ -42,7 +42,7 @@ export const BottomSheet = () => {
     setSheetOptionsProps,
   ] = useState<BottomSheetOptionsProps>();
   const [sheetProps, setSheetProps] = useState<BottomSheetProps>();
-  const hideRef = useRef<() => void>();
+  const bottomSheetRef = useRef<RNBottomSheet>();
   const disableInternalScrollView =
     sheetProps?.disableInternalScrollView ||
     sheetOptionsProps?.disableInternalScrollView;
@@ -73,8 +73,8 @@ export const BottomSheet = () => {
 
   const hide = useCallback(() => {
     console.log('[RNX][BOTTOM_SHEET] hide');
-    if (hideRef.current) {
-      hideRef.current();
+    if (bottomSheetRef.current) {
+      bottomSheetRef.current.close();
     } else {
       console.log('[RNX][BOTTOM_SHEET] hide abort, missing hideRef');
     }
@@ -130,7 +130,7 @@ export const BottomSheet = () => {
         }
         ref={(ref) => {
           if (ref) {
-            hideRef.current = ref.close;
+            bottomSheetRef.current = ref;
             setActionsSheetRef({
               show: (props) => {
                 console.log(
