@@ -17,53 +17,63 @@ interface Props {
 export const Stack = (props: Props) => {
   const theme = useTheme();
   const { localize } = useLocalization();
-  return (
-    <_Stack.Navigator
-      initialRouteName={props.initial}
-      screenOptions={{
-        headerTintColor: theme.txtColor,
-        headerTitleStyle: {
-          fontWeight: '900',
-          fontSize: 15,
-        },
-        headerStyle: {
-          backgroundColor: theme.bgColor,
-          shadowRadius: 0,
-          shadowOffset: {
-            height: 0,
-            width: 0,
+  return React.useMemo(() => {
+    console.log('[RNX][RENDER] Stack');
+    return (
+      <_Stack.Navigator
+        initialRouteName={props.initial}
+        screenOptions={{
+          headerTintColor: theme.txtColor,
+          headerTitleStyle: {
+            fontWeight: '900',
+            fontSize: 15,
           },
-        },
-        headerBackTitleStyle: {
-          color: theme.primaryColor,
-          fontSize: 14,
-          fontWeight: '500',
-        },
-        headerBackImage: () => (
-          <Icon
-            style={styles.backBtnIcon}
-            name={'chevron-left'}
-            size={21}
-            color={theme.primaryColor}
+          headerStyle: {
+            backgroundColor: theme.bgColor,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0,
+              width: 0,
+            },
+          },
+          headerBackTitleStyle: {
+            color: theme.primaryColor,
+            fontSize: 14,
+            fontWeight: '500',
+          },
+          headerBackImage: () => (
+            <Icon
+              style={styles.backBtnIcon}
+              name={'chevron-left'}
+              size={21}
+              color={theme.primaryColor}
+            />
+          ),
+          headerBackTitle: localize('global.back'),
+          headerTitle: '',
+        }}
+      >
+        {props.screens.map((s) => (
+          <_Stack.Screen
+            key={s.name}
+            name={s.name}
+            component={s.component}
+            options={{
+              headerShown: true,
+              headerBackTitle: localize('global.back'),
+            }}
           />
-        ),
-        headerBackTitle: localize('global.back'),
-        headerTitle: '',
-      }}
-    >
-      {props.screens.map((s) => (
-        <_Stack.Screen
-          key={s.name}
-          name={s.name}
-          component={s.component}
-          options={{
-            headerShown: true,
-            headerBackTitle: localize('global.back'),
-          }}
-        />
-      ))}
-    </_Stack.Navigator>
-  );
+        ))}
+      </_Stack.Navigator>
+    );
+  }, [
+    localize,
+    props.initial,
+    props.screens,
+    theme.bgColor,
+    theme.primaryColor,
+    theme.txtColor,
+  ]);
 };
 
 const styles = StyleSheet.create({
