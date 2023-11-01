@@ -11,7 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
 import useTheme from '../../theme/hooks/useTheme';
-// import { BottomSheet } from '../../ui/components/BottomSheet';
+import { BottomSheet } from '../../ui/components/BottomSheet';
 
 const Tab = createBottomTabNavigator();
 
@@ -122,7 +122,7 @@ export const Router = (props: Props) => {
         </NavigationContainer>
       </View>
       {props.extraBottomView}
-      {/* <BottomSheet /> */}
+      <BottomSheet />
     </>
   );
 };
