@@ -130,6 +130,7 @@ export const BottomSheet = () => {
         }
         ref={(ref) => {
           if (ref) {
+            console.log('[RNX][BOTTOM_SHEET] ref updated');
             bottomSheetRef.current = ref;
             setActionsSheetRef({
               show: (props) => {
