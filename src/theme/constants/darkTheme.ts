@@ -14,6 +14,10 @@ const darkTheme: Theme = {
   borderColor: '#666',
   destructiveColor: '#ed0b0b',
   premiumColor: '#c19d55',
+  menuBgColor: '#000',
+  menuButtonColor: '#1B1B1F',
+  menuDividerColor: '#3A3A3F',
+  bottomSheetHandleColor: '#444',
 };
 
 export default darkTheme;

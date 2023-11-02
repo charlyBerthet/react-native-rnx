@@ -14,6 +14,10 @@ const lightTheme: Theme = {
   borderColor: '#ddd',
   destructiveColor: '#ed0b0b',
   premiumColor: '#c19d55',
+  menuBgColor: '#EDEDF1',
+  menuButtonColor: '#FFFFFF',
+  menuDividerColor: '#CCC',
+  bottomSheetHandleColor: '#444',
 };
 
 export default lightTheme;

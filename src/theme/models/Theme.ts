@@ -12,4 +12,8 @@ export interface Theme {
   borderColor: string;
   destructiveColor: string;
   premiumColor: string;
+  menuBgColor: string;
+  menuButtonColor: string;
+  menuDividerColor: string;
+  bottomSheetHandleColor: string;
 }
