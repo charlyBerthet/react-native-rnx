@@ -177,10 +177,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   rootBorderTop: {
-    borderTopWidth: 0.5,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
   rootBorderBottom: {
-    borderBottomWidth: 0.5,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   txtWrapper: {
     flex: 1,
