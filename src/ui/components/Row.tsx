@@ -225,7 +225,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   leftIcon: {
-    opacity: 0.75,
     minWidth: 20,
   },
   switch: {
