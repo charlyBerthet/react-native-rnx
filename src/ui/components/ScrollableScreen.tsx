@@ -88,8 +88,8 @@ export const ScrollableScreen = (props: Props) => {
         height: props.headerLowDown ? 110 : undefined,
       },
       headerTitleStyle: {
-        fontWeight: '900',
-        fontSize: 15,
+        fontWeight: '700',
+        fontSize: 14,
         paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
       headerLeft:
@@ -128,6 +128,7 @@ export const ScrollableScreen = (props: Props) => {
                 {props.headerRightButtons!.map((btnProps, idx) => (
                   <Link
                     key={idx}
+                    titleStyle={styles.rightBtnTxt}
                     style={[
                       props.headerLowDown && styles.headerButtonLowDown,
                       btnProps.paddingLeft !== undefined && {
@@ -235,4 +236,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   headerButtonCompact: {},
+  rightBtnTxt: {
+    fontWeight: '700',
+    fontSize: 15,
+  },
 });

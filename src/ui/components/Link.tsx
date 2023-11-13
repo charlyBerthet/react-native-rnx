@@ -6,7 +6,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   StyleProp,
-  ViewStyle,
+  TextStyle,
 } from 'react-native';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
@@ -23,7 +23,7 @@ interface Props extends CommonViewProps {
   txtColor?: string;
   disabled?: boolean;
   isLoading?: boolean;
-  titleStyle?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
+  titleStyle?: StyleProp<TextStyle> | StyleProp<TextStyle>[];
 }
 
 export const Link = (props: Props) => {
