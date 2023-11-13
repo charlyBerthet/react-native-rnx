@@ -238,6 +238,5 @@ const styles = StyleSheet.create({
   headerButtonCompact: {},
   rightBtnTxt: {
     fontWeight: '700',
-    fontSize: 15,
   },
 });
