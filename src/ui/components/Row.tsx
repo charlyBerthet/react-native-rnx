@@ -13,6 +13,7 @@ export interface RowModel {
   onPress?: () => void;
   onLongPress?: () => void;
   icon?: string;
+  iconElement?: JSX.Element;
   isEnabled?: boolean;
   onEnabledChange?: (isEnabled: boolean) => void;
   rightArrow?: boolean;
@@ -66,21 +67,27 @@ export const Row = (props: Props) => {
         activeOpacity={props.onPress ? 0.8 : 1}
         ref={_setRef}
       >
-        {!!props.icon && (
-          <Icon
-            name={props.icon}
-            size={16}
-            color={
-              props.primaryBg
-                ? theme.txtColorOnPrimaryColor
-                : props.primary
-                ? theme.primaryColor
-                : theme.txtColor
-            }
-            solid={true}
-            style={styles.leftIcon}
-          />
+        {(!!props.icon || !!props.iconElement) && (
+          <View style={styles.leftIconContainer}>
+            {!!props.icon && (
+              <Icon
+                name={props.icon}
+                size={16}
+                color={
+                  props.primaryBg
+                    ? theme.txtColorOnPrimaryColor
+                    : props.primary
+                    ? theme.primaryColor
+                    : theme.txtColor
+                }
+                solid={true}
+                style={styles.leftIcon}
+              />
+            )}
+            {!!props.iconElement && props.iconElement}
+          </View>
         )}
+
         <View style={styles.txtWrapper}>
           <Text
             style={[
@@ -211,13 +218,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  leftIcon: {
-    opacity: 0.75,
+  leftIconContainer: {
     marginRight: 15,
     marginLeft: 5,
-    minWidth: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  leftIcon: {
+    opacity: 0.75,
+    minWidth: 20,
   },
   switch: {
     marginLeft: 5,
