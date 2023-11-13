@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   leftIconContainer: {
-    marginRight: 15,
+    marginRight: 12,
     marginLeft: 5,
     alignItems: 'center',
     justifyContent: 'center',
