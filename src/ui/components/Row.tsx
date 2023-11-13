@@ -175,7 +175,7 @@ export const Row = (props: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    paddingVertical: 7,
+    paddingVertical: 6,
     paddingHorizontal: 10,
   },
   subRoot: {
@@ -193,8 +193,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 15,
+    fontWeight: '400',
   },
   subtitle: {
     marginTop: 3,
@@ -234,6 +234,6 @@ const styles = StyleSheet.create({
   },
   rightArrow: {
     marginLeft: 10,
-    opacity: 0.75,
+    opacity: 0.6,
   },
 });
