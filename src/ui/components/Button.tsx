@@ -28,6 +28,7 @@ interface Props extends CommonViewProps {
   bgColor?: string;
   titleFontSize?: number;
   rightElem?: JSX.Element;
+  disabledDoNotChangeOpacity?: boolean;
 }
 
 export const Button = (props: Props) => {
@@ -41,7 +42,9 @@ export const Button = (props: Props) => {
       style={[
         styles.container,
         props.full && styles.containerFull,
-        props.disabled && styles.containerDisabled,
+        props.disabled &&
+          !props.disabledDoNotChangeOpacity &&
+          styles.containerDisabled,
         btnType === 'normal' && { backgroundColor: mainColors.bg },
         btnType === 'outline' && { borderColor: mainColors.bg },
         btnType === 'outline' && styles.containerOutline,
