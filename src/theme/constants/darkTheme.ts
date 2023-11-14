@@ -14,6 +14,7 @@ const darkTheme: Theme = {
   borderColor: '#666',
   destructiveColor: '#ed0b0b',
   premiumColor: '#c19d55',
+  premiumBgColor: '#e0b55e',
   premiumTxtColor: '#7f6531',
   menuBgColor: '#000',
   menuButtonColor: '#1B1B1F',
