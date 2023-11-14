@@ -94,8 +94,6 @@ export const Link = (props: Props) => {
           {props.title}
         </Text>
       )}
-      {props.IconElem && <Text>test</Text>}
-      {true && <Text>test2</Text>}
       {props.isLoading ? (
         <ActivityIndicator
           style={[styles.icon, props.title ? styles.iconLeftMargin : undefined]}
@@ -120,25 +118,22 @@ export const Link = (props: Props) => {
       ) : (
         !!props.IconElem &&
         props.iconLeft !== true && (
-          <>
-            <Text>test</Text>
-            <props.IconElem
-              width={16}
-              height={16}
-              style={[
-                {
-                  color:
-                    props.txtColor ||
-                    (props.defaultTxtColor
-                      ? theme.txtColor
-                      : props.destructive
-                      ? theme.destructiveColor
-                      : mainColors.txt),
-                },
-                props.title ? styles.iconLeftMargin : undefined,
-              ]}
-            />
-          </>
+          <props.IconElem
+            width={16}
+            height={16}
+            style={[
+              {
+                color:
+                  props.txtColor ||
+                  (props.defaultTxtColor
+                    ? theme.txtColor
+                    : props.destructive
+                    ? theme.destructiveColor
+                    : mainColors.txt),
+              },
+              props.title ? styles.iconLeftMargin : undefined,
+            ]}
+          />
         )
       )}
     </TouchableOpacity>
