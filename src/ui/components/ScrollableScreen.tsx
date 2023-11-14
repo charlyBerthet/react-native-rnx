@@ -27,6 +27,7 @@ interface Props {
   headerRightButtons?: {
     title?: string;
     icon?: string;
+    iconElem?: (props: any) => void;
     iconSolid?: boolean;
     navigateTo?: string;
     onPress?: () => void;

@@ -14,6 +14,7 @@ import type CommonViewProps from '../models/CommonViewProps';
 interface Props extends CommonViewProps {
   title?: string;
   icon?: string;
+  IconElem?: (props: any) => JSX.Element;
   iconSolid?: boolean;
   iconLeft?: boolean;
   onPress?: () => void;
@@ -35,7 +36,7 @@ export const Link = (props: Props) => {
       style={[styles.container, props.disabled && styles.disabled, props.style]}
       disabled={props.disabled}
     >
-      {!!props.icon && props.iconLeft === true && (
+      {!!props.icon && props.iconLeft === true ? (
         <Icon
           name={props.icon}
           size={16}
@@ -53,6 +54,26 @@ export const Link = (props: Props) => {
             props.title ? styles.iconRightMargin : undefined,
           ]}
         />
+      ) : (
+        !!props.IconElem &&
+        props.iconLeft === true && (
+          <props.IconElem
+            width={16}
+            height={16}
+            style={[
+              {
+                color:
+                  props.txtColor ||
+                  (props.defaultTxtColor
+                    ? theme.txtColor
+                    : props.destructive
+                    ? theme.destructiveColor
+                    : mainColors.txt),
+              },
+              props.title ? styles.iconRightMargin : undefined,
+            ]}
+          />
+        )
       )}
       {!!props.title && (
         <Text
@@ -79,23 +100,37 @@ export const Link = (props: Props) => {
           size="small"
           color={theme.txtColor}
         />
+      ) : !!props.icon && props.iconLeft !== true ? (
+        <Icon
+          name={props.icon}
+          size={16}
+          color={
+            props.txtColor ||
+            (props.defaultTxtColor
+              ? theme.txtColor
+              : props.destructive
+              ? theme.destructiveColor
+              : mainColors.txt)
+          }
+          solid={props.iconSolid === false ? false : true}
+          style={[styles.icon, props.title ? styles.iconLeftMargin : undefined]}
+        />
       ) : (
-        !!props.icon &&
+        !!props.IconElem &&
         props.iconLeft !== true && (
-          <Icon
-            name={props.icon}
-            size={16}
-            color={
-              props.txtColor ||
-              (props.defaultTxtColor
-                ? theme.txtColor
-                : props.destructive
-                ? theme.destructiveColor
-                : mainColors.txt)
-            }
-            solid={props.iconSolid === false ? false : true}
+          <props.IconElem
+            width={16}
+            height={16}
             style={[
-              styles.icon,
+              {
+                color:
+                  props.txtColor ||
+                  (props.defaultTxtColor
+                    ? theme.txtColor
+                    : props.destructive
+                    ? theme.destructiveColor
+                    : mainColors.txt),
+              },
               props.title ? styles.iconLeftMargin : undefined,
             ]}
           />
