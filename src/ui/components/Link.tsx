@@ -162,16 +162,16 @@ const styles = StyleSheet.create({
     marginRight: -8,
   },
   iconElemLeftMargin: {
-    marginLeft: 4,
-    marginRight: -8,
+    marginLeft: 5,
+    marginRight: -7,
   },
   iconRightMargin: {
     marginRight: 3,
     marginLeft: -5,
   },
   iconElemRightMargin: {
-    marginRight: 4,
-    marginLeft: -5,
+    marginRight: 5,
+    marginLeft: -4,
   },
   icon: {
     paddingHorizontal: 4,
