@@ -14,6 +14,7 @@ const lightTheme: Theme = {
   borderColor: '#ddd',
   destructiveColor: '#ed0b0b',
   premiumColor: '#c19d55',
+  premiumTxtColor: '#7f6531',
   menuBgColor: '#EDEDF1',
   menuButtonColor: '#FFFFFF',
   menuDividerColor: '#CCC',
