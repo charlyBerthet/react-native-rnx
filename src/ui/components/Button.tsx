@@ -29,6 +29,7 @@ interface Props extends CommonViewProps {
   titleFontSize?: number;
   rightElem?: JSX.Element;
   disabledDoNotChangeOpacity?: boolean;
+  activeOpacity?: number;
 }
 
 export const Button = (props: Props) => {
@@ -39,6 +40,7 @@ export const Button = (props: Props) => {
     <TouchableOpacity
       disabled={props.disabled}
       onPress={props.onPress}
+      activeOpacity={props.activeOpacity}
       style={[
         styles.container,
         props.full && styles.containerFull,
