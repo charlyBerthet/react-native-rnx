@@ -58,8 +58,8 @@ export const Link = (props: Props) => {
         !!props.IconElem &&
         props.iconLeft === true && (
           <props.IconElem
-            width={16}
-            height={16}
+            width={15}
+            height={15}
             style={[
               {
                 color:
@@ -70,7 +70,7 @@ export const Link = (props: Props) => {
                     ? theme.destructiveColor
                     : mainColors.txt),
               },
-              props.title ? styles.iconRightMargin : undefined,
+              props.title ? styles.iconElemRightMargin : undefined,
             ]}
           />
         )
@@ -119,8 +119,8 @@ export const Link = (props: Props) => {
         !!props.IconElem &&
         props.iconLeft !== true && (
           <props.IconElem
-            width={16}
-            height={16}
+            width={15}
+            height={15}
             style={[
               {
                 color:
@@ -131,7 +131,7 @@ export const Link = (props: Props) => {
                     ? theme.destructiveColor
                     : mainColors.txt),
               },
-              props.title ? styles.iconLeftMargin : undefined,
+              props.title ? styles.iconElemLeftMargin : undefined,
             ]}
           />
         )
@@ -161,8 +161,16 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: -8,
   },
+  iconElemLeftMargin: {
+    marginLeft: 4,
+    marginRight: -8,
+  },
   iconRightMargin: {
     marginRight: 3,
+    marginLeft: -5,
+  },
+  iconElemRightMargin: {
+    marginRight: 4,
     marginLeft: -5,
   },
   icon: {
