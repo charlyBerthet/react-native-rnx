@@ -118,22 +118,25 @@ export const Link = (props: Props) => {
       ) : (
         !!props.IconElem &&
         props.iconLeft !== true && (
-          <props.IconElem
-            width={16}
-            height={16}
-            style={[
-              {
-                color:
-                  props.txtColor ||
-                  (props.defaultTxtColor
-                    ? theme.txtColor
-                    : props.destructive
-                    ? theme.destructiveColor
-                    : mainColors.txt),
-              },
-              props.title ? styles.iconLeftMargin : undefined,
-            ]}
-          />
+          <>
+            <Text>test</Text>
+            <props.IconElem
+              width={16}
+              height={16}
+              style={[
+                {
+                  color:
+                    props.txtColor ||
+                    (props.defaultTxtColor
+                      ? theme.txtColor
+                      : props.destructive
+                      ? theme.destructiveColor
+                      : mainColors.txt),
+                },
+                props.title ? styles.iconLeftMargin : undefined,
+              ]}
+            />
+          </>
         )
       )}
     </TouchableOpacity>
