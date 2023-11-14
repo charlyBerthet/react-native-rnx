@@ -94,6 +94,7 @@ export const Link = (props: Props) => {
           {props.title}
         </Text>
       )}
+      {props.IconElem && <props.IconElem width={20} height={20} />}
       {props.isLoading ? (
         <ActivityIndicator
           style={[styles.icon, props.title ? styles.iconLeftMargin : undefined]}
