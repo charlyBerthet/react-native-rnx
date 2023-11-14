@@ -27,7 +27,7 @@ interface Props {
   headerRightButtons?: {
     title?: string;
     icon?: string;
-    iconElem?: (props: any) => void;
+    IconElem?: (props: any) => JSX.Element;
     iconSolid?: boolean;
     navigateTo?: string;
     onPress?: () => void;
@@ -140,6 +140,7 @@ export const ScrollableScreen = (props: Props) => {
                       },
                     ]}
                     title={btnProps.title}
+                    IconElem={btnProps.IconElem}
                     icon={btnProps.icon}
                     iconSolid={btnProps.iconSolid}
                     onPress={() => {
