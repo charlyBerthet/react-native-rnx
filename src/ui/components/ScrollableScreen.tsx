@@ -70,6 +70,7 @@ interface Props {
     | 'never'
     | 'handled'
     | undefined;
+  scrollViewStyle?: ViewStyle;
 }
 
 const LOW_DOWN_MARGIN_TOP = 35;
@@ -208,7 +209,7 @@ export const ScrollableScreen = (props: Props) => {
       ref={(ref) =>
         props.scrollViewRef ? props.scrollViewRef(ref || undefined) : null
       }
-      style={[props.flexOne && styles.rootFlexOne]}
+      style={[props.flexOne && styles.rootFlexOne, props.scrollViewStyle]}
     >
       {view}
     </ScrollView>
