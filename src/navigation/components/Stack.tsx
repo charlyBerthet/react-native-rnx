@@ -58,13 +58,10 @@ export const Stack = (props: Props) => {
             key={s.name}
             name={s.name}
             component={s.component}
-            options={
-              {
-                headerShown: true,
-                headerBackTitle: localize('global.back'),
-                presentation: s.presentation,
-              } as any
-            }
+            options={{
+              headerShown: true,
+              headerBackTitle: localize('global.back'),
+            }}
           />
         ))}
       </_Stack.Navigator>
