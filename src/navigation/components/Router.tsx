@@ -33,8 +33,8 @@ interface Props {
   modals?: Screen[];
 }
 
-function MainContent(_props: any) {
-  console.log('RNX Router props', _props);
+function MainContent(props: any) {
+  console.log('RNX Router props', props);
   return <View />;
   // const props = _props.route.params.props;
   // const theme = useTheme();
