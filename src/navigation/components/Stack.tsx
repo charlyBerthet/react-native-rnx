@@ -62,6 +62,7 @@ export const Stack = (props: Props) => {
               headerShown: s.headerShown === false ? false : true,
               headerBackTitle: localize('global.back'),
               presentation: s.presentation,
+              gestureDirection: s.gestureDirection,
             }}
           />
         ))}
