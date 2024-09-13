@@ -33,8 +33,9 @@ interface Props {
   modals?: Screen[];
 }
 
-function MainContent(route: any) {
-  const props = route.params.props;
+function MainContent(_props: any) {
+  console.log('RNX Router props', _props);
+  const props = _props.route.params.props;
   const theme = useTheme();
   const { bottom: bottomSafeArea } = useSafeAreaInsets();
 
