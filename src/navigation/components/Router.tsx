@@ -46,7 +46,7 @@ export const Router = (props: Props) => {
   );
 
   return React.useMemo(() => {
-    console.log('[RNX][RENDER] Router');
+    console.log('[RNX][RENDER] Router modales:', props.modals?.length || 0);
     return (
       <>
         <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
