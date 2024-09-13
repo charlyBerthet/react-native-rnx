@@ -1,6 +1,6 @@
 {
   "name": "react-native-rnx",
-  "version": "0.4.36",
+  "version": "0.4.37",
   "description": "BerthX libs",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -29,7 +29,8 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "release1": "git add . && git commit -am 'fix(some): fix some bugs' && git push origin master"
+    "release1": "git add . && git commit -am 'fix(some): fix some bugs' && git push origin master",
+    "bump": "git add . && git commit -am 'bump version' && git push origin master"
   },
   "keywords": [
     "react-native",
