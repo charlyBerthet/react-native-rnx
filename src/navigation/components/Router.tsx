@@ -143,7 +143,9 @@ export const Router = (props: Props) => {
                 )}
               />
               {!!props.modals && (
-                <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+                <RootStack.Group
+                  screenOptions={{ presentation: 'modal', headerShown: false }}
+                >
                   {props.modals.map((modal) => (
                     <RootStack.Screen
                       key={modal.name}
