@@ -136,10 +136,10 @@ export const Router = (props: Props) => {
             }}
           >
             <RootStack.Navigator>
-              <RootStack.Screen
+              {/* <RootStack.Screen
                 name="main"
                 component={(navProps: any) => <View></View>}
-              />
+              /> */}
               {!!props.modals && (
                 <RootStack.Group screenOptions={{ presentation: 'modal' }}>
                   {props.modals.map((modal) => (
