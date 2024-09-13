@@ -33,7 +33,8 @@ interface Props {
   modals?: Screen[];
 }
 
-function MainContent(props: Props) {
+function MainContent(route: any) {
+  const props = route.params.props;
   const theme = useTheme();
   const { bottom: bottomSafeArea } = useSafeAreaInsets();
 
@@ -138,9 +139,8 @@ export const Router = (props: Props) => {
             <RootStack.Navigator>
               <RootStack.Screen
                 name="main"
-                component={(navProps: any) => (
-                  <MainContent {...props} {...navProps} />
-                )}
+                component={MainContent}
+                initialParams={{ props }}
               />
               {!!props.modals && (
                 <RootStack.Group
