@@ -3,4 +3,5 @@ export default interface Screen {
   component: React.ComponentType<any>;
   title?: string;
   presentation?: 'modal' | 'transparentModal' | 'card' | undefined;
+  headerShown?: boolean;
 }

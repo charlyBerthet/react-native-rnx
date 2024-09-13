@@ -59,7 +59,7 @@ export const Stack = (props: Props) => {
             name={s.name}
             component={s.component}
             options={{
-              headerShown: true,
+              headerShown: s.headerShown === false ? false : true,
               headerBackTitle: localize('global.back'),
               presentation: s.presentation,
             }}
