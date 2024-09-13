@@ -12,8 +12,10 @@ import type Screen from '../models/Screen';
 import { Stack } from './Stack';
 import useTheme from '../../theme/hooks/useTheme';
 import { BottomSheet } from '../../ui/components/BottomSheet';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
+const RootStack = createStackNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
@@ -63,71 +65,87 @@ export const Router = (props: Props) => {
               },
             }}
           >
-            {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
-              <Tab.Navigator
-                screenOptions={(_tabNavProps) => {
-                  const routeName = getFocusedRouteNameFromRoute(
-                    _tabNavProps.route
-                  );
-                  console.log(
-                    'Router.focusedRouteName',
-                    routeName,
-                    'initial for this tab',
-                    props.tabs[_tabNavProps.route.name].initial
-                  );
-                  return {
-                    headerShown: false,
-                    tabBarIcon: ({ color }) => {
-                      return (
-                        <Icon
-                          name={props.tabs[_tabNavProps.route.name].iconName}
-                          size={21}
-                          color={color}
-                          solid={true}
-                        />
+            <RootStack.Navigator>
+              <RootStack.Group>
+                {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
+                  <Tab.Navigator
+                    screenOptions={(_tabNavProps) => {
+                      const routeName = getFocusedRouteNameFromRoute(
+                        _tabNavProps.route
                       );
-                    },
-                    tabBarShowLabel: props.hideTabLabels ? false : true,
-                    tabBarActiveTintColor: theme.txtColor,
-                    tabBarInactiveTintColor: 'gray',
-                    tabBarStyle: {
-                      display:
-                        !routeName ||
-                        routeName ===
-                          props.tabs[_tabNavProps.route.name].initial
-                          ? 'flex'
-                          : 'none',
-                      marginBottom: props.extraBottomView
-                        ? -bottomSafeArea
-                        : undefined,
-                      shadowColor: 'transparent',
-                    },
-                  };
-                }}
-              >
-                {tabs.map((s) => (
-                  <Tab.Screen
-                    key={s.name}
-                    name={s.name}
-                    options={{
-                      title: s.title || '',
-                      tabBarButton: s.customButton,
+                      console.log(
+                        'Router.focusedRouteName',
+                        routeName,
+                        'initial for this tab',
+                        props.tabs[_tabNavProps.route.name].initial
+                      );
+                      return {
+                        headerShown: false,
+                        tabBarIcon: ({ color }) => {
+                          return (
+                            <Icon
+                              name={
+                                props.tabs[_tabNavProps.route.name].iconName
+                              }
+                              size={21}
+                              color={color}
+                              solid={true}
+                            />
+                          );
+                        },
+                        tabBarShowLabel: props.hideTabLabels ? false : true,
+                        tabBarActiveTintColor: theme.txtColor,
+                        tabBarInactiveTintColor: 'gray',
+                        tabBarStyle: {
+                          display:
+                            !routeName ||
+                            routeName ===
+                              props.tabs[_tabNavProps.route.name].initial
+                              ? 'flex'
+                              : 'none',
+                          marginBottom: props.extraBottomView
+                            ? -bottomSafeArea
+                            : undefined,
+                          shadowColor: 'transparent',
+                        },
+                      };
                     }}
                   >
-                    {(stackProps) => (
-                      <Stack
-                        {...stackProps}
-                        screens={s.screens}
-                        initial={s.initial}
-                      />
-                    )}
-                  </Tab.Screen>
-                ))}
-              </Tab.Navigator>
-            ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
-              <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
-            ) : undefined}
-            {!!props.modals && <Stack screens={props.modals} />}
+                    {tabs.map((s) => (
+                      <Tab.Screen
+                        key={s.name}
+                        name={s.name}
+                        options={{
+                          title: s.title || '',
+                          tabBarButton: s.customButton,
+                        }}
+                      >
+                        {(stackProps) => (
+                          <Stack
+                            {...stackProps}
+                            screens={s.screens}
+                            initial={s.initial}
+                          />
+                        )}
+                      </Tab.Screen>
+                    ))}
+                  </Tab.Navigator>
+                ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
+                  <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
+                ) : undefined}
+              </RootStack.Group>
+              {!!props.modals && (
+                <RootStack.Group screenOptions={{ presentation: 'modal' }}>
+                  {props.modals.map((modal) => (
+                    <RootStack.Screen
+                      key={modal.name}
+                      name={modal.name}
+                      component={modal.component}
+                    />
+                  ))}
+                </RootStack.Group>
+              )}
+            </RootStack.Navigator>
           </NavigationContainer>
         </View>
         {props.extraBottomView}
