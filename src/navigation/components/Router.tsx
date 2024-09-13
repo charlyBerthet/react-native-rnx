@@ -34,7 +34,7 @@ interface Props {
 }
 
 function MainContent({ navigation }: any) {
-  console.log('RNX Router props', navigation);
+  console.log('RNX MainContent', navigation);
   return <View />;
   // const props = _props.route.params.props;
   // const theme = useTheme();
