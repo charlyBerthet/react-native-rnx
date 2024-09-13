@@ -87,7 +87,7 @@ function MainContent(props: Props) {
             };
           }}
         >
-          {tabs.map((s) => (
+          {/* {tabs.map((s) => (
             <Tab.Screen
               key={s.name}
               name={s.name}
@@ -104,7 +104,7 @@ function MainContent(props: Props) {
                 />
               )}
             </Tab.Screen>
-          ))}
+          ))} */}
         </Tab.Navigator>
       ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
         <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
