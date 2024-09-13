@@ -28,6 +28,7 @@ interface Props {
       customButton?: () => JSX.Element;
     };
   };
+  modals?: Screen[];
 }
 
 export const Router = (props: Props) => {
@@ -126,6 +127,7 @@ export const Router = (props: Props) => {
             ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
               <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
             ) : undefined}
+            {!!props.modals && <Stack screens={props.modals} />}
           </NavigationContainer>
         </View>
         {props.extraBottomView}
@@ -137,6 +139,7 @@ export const Router = (props: Props) => {
     isDarkTheme,
     props.extraBottomView,
     props.hideTabLabels,
+    props.modals,
     props.tabs,
     tabs,
     theme.bgColor,
