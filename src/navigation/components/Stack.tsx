@@ -61,6 +61,7 @@ export const Stack = (props: Props) => {
             options={{
               headerShown: true,
               headerBackTitle: localize('global.back'),
+              presentation: s.presentation,
             }}
           />
         ))}
