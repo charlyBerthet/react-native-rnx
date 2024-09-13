@@ -36,84 +36,84 @@ interface Props {
 function MainContent(_props: any) {
   console.log('RNX Router props', _props);
   return <View />;
-  const props = _props.route.params.props;
-  const theme = useTheme();
-  const { bottom: bottomSafeArea } = useSafeAreaInsets();
+  // const props = _props.route.params.props;
+  // const theme = useTheme();
+  // const { bottom: bottomSafeArea } = useSafeAreaInsets();
 
-  const tabs = React.useMemo(
-    () =>
-      Object.keys(props.tabs).map((name) => ({
-        name,
-        ...props.tabs[name],
-      })),
-    [props.tabs]
-  );
+  // const tabs = React.useMemo(
+  //   () =>
+  //     Object.keys(props.tabs).map((name) => ({
+  //       name,
+  //       ...props.tabs[name],
+  //     })),
+  //   [props.tabs]
+  // );
 
-  return (
-    <>
-      {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
-        <Tab.Navigator
-          screenOptions={(_tabNavProps) => {
-            const routeName = getFocusedRouteNameFromRoute(_tabNavProps.route);
-            console.log(
-              'Router.focusedRouteName',
-              routeName,
-              'initial for this tab',
-              props.tabs[_tabNavProps.route.name].initial
-            );
-            return {
-              headerShown: false,
-              tabBarIcon: ({ color }) => {
-                return (
-                  <Icon
-                    name={props.tabs[_tabNavProps.route.name].iconName}
-                    size={21}
-                    color={color}
-                    solid={true}
-                  />
-                );
-              },
-              tabBarShowLabel: props.hideTabLabels ? false : true,
-              tabBarActiveTintColor: theme.txtColor,
-              tabBarInactiveTintColor: 'gray',
-              tabBarStyle: {
-                display:
-                  !routeName ||
-                  routeName === props.tabs[_tabNavProps.route.name].initial
-                    ? 'flex'
-                    : 'none',
-                marginBottom: props.extraBottomView
-                  ? -bottomSafeArea
-                  : undefined,
-                shadowColor: 'transparent',
-              },
-            };
-          }}
-        >
-          {tabs.map((s) => (
-            <Tab.Screen
-              key={s.name}
-              name={s.name}
-              options={{
-                title: s.title || '',
-                tabBarButton: s.customButton,
-              }}
-            >
-              {(stackProps) => (
-                <Stack
-                  {...stackProps}
-                  screens={s.screens}
-                  initial={s.initial}
-                />
-              )}
-            </Tab.Screen>
-          ))}
-        </Tab.Navigator>
-      ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
-        <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
-      ) : undefined}
-    </>
-  );
+  // return (
+  //   <>
+  //     {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
+  //       <Tab.Navigator
+  //         screenOptions={(_tabNavProps) => {
+  //           const routeName = getFocusedRouteNameFromRoute(_tabNavProps.route);
+  //           console.log(
+  //             'Router.focusedRouteName',
+  //             routeName,
+  //             'initial for this tab',
+  //             props.tabs[_tabNavProps.route.name].initial
+  //           );
+  //           return {
+  //             headerShown: false,
+  //             tabBarIcon: ({ color }) => {
+  //               return (
+  //                 <Icon
+  //                   name={props.tabs[_tabNavProps.route.name].iconName}
+  //                   size={21}
+  //                   color={color}
+  //                   solid={true}
+  //                 />
+  //               );
+  //             },
+  //             tabBarShowLabel: props.hideTabLabels ? false : true,
+  //             tabBarActiveTintColor: theme.txtColor,
+  //             tabBarInactiveTintColor: 'gray',
+  //             tabBarStyle: {
+  //               display:
+  //                 !routeName ||
+  //                 routeName === props.tabs[_tabNavProps.route.name].initial
+  //                   ? 'flex'
+  //                   : 'none',
+  //               marginBottom: props.extraBottomView
+  //                 ? -bottomSafeArea
+  //                 : undefined,
+  //               shadowColor: 'transparent',
+  //             },
+  //           };
+  //         }}
+  //       >
+  //         {tabs.map((s) => (
+  //           <Tab.Screen
+  //             key={s.name}
+  //             name={s.name}
+  //             options={{
+  //               title: s.title || '',
+  //               tabBarButton: s.customButton,
+  //             }}
+  //           >
+  //             {(stackProps) => (
+  //               <Stack
+  //                 {...stackProps}
+  //                 screens={s.screens}
+  //                 initial={s.initial}
+  //               />
+  //             )}
+  //           </Tab.Screen>
+  //         ))}
+  //       </Tab.Navigator>
+  //     ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
+  //       <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
+  //     ) : undefined}
+  //   </>
+  // );
 }
 
 export const Router = (props: Props) => {
