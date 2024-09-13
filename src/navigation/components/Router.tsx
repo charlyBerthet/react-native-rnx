@@ -35,6 +35,7 @@ interface Props {
 
 function MainContent(_props: any) {
   console.log('RNX Router props', _props);
+  return <View />;
   const props = _props.route.params.props;
   const theme = useTheme();
   const { bottom: bottomSafeArea } = useSafeAreaInsets();
