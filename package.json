@@ -28,7 +28,7 @@
     "example": "yarn --cwd example",
     "pods": "cd example && pod-install --quiet",
     "bootstrap": "yarn example && yarn && yarn pods",
-    "release1": "git add . && git commit -am 'fix(some): fix some bugs' && git push origin master",
+    "release1": "git add . && git commit -am 'fix(some): fix some bugs' && npm version patch && git push origin master --tags && npm publish",
     "bump": "git add . && git commit -am 'bump version' && git push origin master"
   },
   "keywords": [
