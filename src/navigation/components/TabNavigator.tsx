@@ -1,15 +1,11 @@
 import * as React from 'react';
-import {
-  ParamListBase,
-  RouteProp,
-  getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import { ParamListBase, RouteProp } from '@react-navigation/native';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import { Tab } from '../models/Screen';
-import { Stack, useTheme } from 'react-native-rnx';
+import { Stack } from 'react-native-rnx';
 import { TabBar } from './TabBar';
 
 const TabNav = createBottomTabNavigator();
@@ -27,8 +23,6 @@ export function TabNavigator({
   extraBottomView,
   extraBottomViewHiddenForScreenNames,
 }: Props) {
-  const theme = useTheme();
-
   const tabs = React.useMemo(
     () =>
       Object.keys(tabsByScreenName).map((name) => ({
@@ -43,29 +37,12 @@ export function TabNavigator({
       route: RouteProp<ParamListBase, string>;
       navigation: any;
     }): BottomTabNavigationOptions => {
-      const routeName = getFocusedRouteNameFromRoute(_tabNavProps.route);
-      console.log(
-        'RNX Router.focusedRouteName',
-        routeName,
-        'initial for this tab',
-        tabsByScreenName[_tabNavProps.route.name].initial
-      );
       return {
         headerShown: false,
         tabBarShowLabel: hideTabLabels ? false : true,
-        tabBarActiveTintColor: theme.txtColor,
-        tabBarInactiveTintColor: 'gray',
-        tabBarStyle: {
-          display:
-            !routeName ||
-            routeName === tabsByScreenName[_tabNavProps.route.name].initial
-              ? 'flex'
-              : 'none',
-          shadowColor: 'transparent',
-        },
       };
     },
-    [hideTabLabels, tabsByScreenName, theme.txtColor]
+    [hideTabLabels]
   );
 
   return (

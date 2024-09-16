@@ -11,6 +11,7 @@ import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
+import { useTheme } from 'react-native-rnx';
 
 type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
@@ -31,12 +32,10 @@ export function TabBarButton({
   navigation,
   tabs,
 }: Props) {
+  const theme = useTheme();
   const { options } = descriptors[route.key];
   const isFocused = state.index === index;
-  const color =
-    (isFocused
-      ? options.tabBarActiveTintColor
-      : options.tabBarInactiveTintColor) || '#000';
+  const color = (isFocused ? theme.txtColor : 'gray') || '#000';
 
   const onPress = React.useCallback(() => {
     const event = navigation.emit({
