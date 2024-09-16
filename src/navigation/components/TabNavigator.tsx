@@ -21,11 +21,7 @@ interface Props {
   extraBottomView?: JSX.Element;
 }
 
-export function TabNavigator({
-  tabs: tabsByScreenName,
-  hideTabLabels,
-  extraBottomView,
-}: Props) {
+export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   const theme = useTheme();
 
   const tabs = React.useMemo(
