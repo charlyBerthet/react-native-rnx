@@ -23,7 +23,7 @@ export function TabBar(
             state.routes[state.index].state!!.index!!
           ].name;
 
-    const isCurrentRouteTabBar = !!tabs[state.routes[state.index].name];
+    const isCurrentRouteTabBar = !!currentRouteName && !!tabs[currentRouteName];
 
     const isExtraBottomViewHidden =
       !!extraBottomViewHiddenForScreenNames &&
