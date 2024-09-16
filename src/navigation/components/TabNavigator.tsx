@@ -9,7 +9,6 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Tab } from '../models/Screen';
 import { Stack, useTheme } from 'react-native-rnx';
 
@@ -17,17 +16,11 @@ const TabNav = createBottomTabNavigator();
 
 interface Props {
   tabs: { [name: string]: Tab };
-  hasExtraBottomView?: boolean;
   hideTabLabels?: boolean;
 }
 
-export function TabNavigator({
-  tabs: tabsByScreenName,
-  hasExtraBottomView,
-  hideTabLabels,
-}: Props) {
+export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   const theme = useTheme();
-  const { bottom: bottomSafeArea } = useSafeAreaInsets();
 
   const tabs = React.useMemo(
     () =>
@@ -71,18 +64,11 @@ export function TabNavigator({
             routeName === tabsByScreenName[_tabNavProps.route.name].initial
               ? 'flex'
               : 'none',
-          marginBottom: hasExtraBottomView ? -bottomSafeArea : undefined,
           shadowColor: 'transparent',
         },
       };
     },
-    [
-      bottomSafeArea,
-      hasExtraBottomView,
-      hideTabLabels,
-      tabsByScreenName,
-      theme.txtColor,
-    ]
+    [hideTabLabels, tabsByScreenName, theme.txtColor]
   );
 
   return (

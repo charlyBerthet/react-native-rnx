@@ -7,6 +7,7 @@ import useTheme from '../../theme/hooks/useTheme';
 import { BottomSheet } from '../../ui/components/BottomSheet';
 import { Tab } from '../models/Screen';
 import { TabNavigator } from './TabNavigator';
+import { ExtraBottomView } from './ExtraBottomView';
 
 interface Props {
   hideTabLabels?: boolean;
@@ -32,10 +33,6 @@ export const Router = (props: Props) => {
     return;
   }, [props.tabs]);
 
-  const extraBottomViewElement = React.useMemo(() => {
-    return props.extraBottomView;
-  }, [props.extraBottomView]);
-
   const navigationContainerTheme = React.useMemo<Theme>(
     () => ({
       dark: isDarkTheme,
@@ -60,14 +57,17 @@ export const Router = (props: Props) => {
             {tabsCount > 1 ? ( // Multiple tabs: show bottom bar
               <TabNavigator
                 tabs={props.tabs}
-                hasExtraBottomView={!!extraBottomViewElement}
                 hideTabLabels={props.hideTabLabels}
               />
             ) : tabsCount === 1 && firstTab ? ( // One tab: don't show bottom bar
               <Stack screens={firstTab.screens} initial={firstTab.initial} />
             ) : undefined}
+            <ExtraBottomView
+              hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
+            >
+              {props.extraBottomView}
+            </ExtraBottomView>
           </NavigationContainer>
-          {extraBottomViewElement}
         </View>
         <BottomSheet />
       </>
@@ -78,7 +78,8 @@ export const Router = (props: Props) => {
     tabsCount,
     props.tabs,
     props.hideTabLabels,
-    extraBottomViewElement,
+    props.extraBottomViewHiddenForScreenNames,
+    props.extraBottomView,
     firstTab,
   ]);
 };
