@@ -8,9 +8,10 @@ import {
   TabNavigationState,
 } from '@react-navigation/native';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
@@ -57,10 +58,10 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
-  // if (options.tabBarButton) {
-  //   const Button = options.tabBarButton as () => JSX.Element;
-  //   return <Button />;
-  // }
+  if (options.tabBarButton) {
+    const Button = options.tabBarButton as () => JSX.Element;
+    return <Button />;
+  }
   return (
     <TouchableOpacity
       accessibilityRole="button"
@@ -70,33 +71,41 @@ export function TabBarButton({
       onPress={onPress}
       onLongPress={onLongPress}
       style={styles.button}
+      activeOpacity={0.8}
     >
-      <Icon
-        name={tabs[route.name].iconName}
-        size={21}
-        color={color}
-        solid={true}
-      />
-      {options.tabBarShowLabel !== false && (
-        <Text style={[styles.label, { color }]}>
-          {options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name}
-        </Text>
-      )}
+      <SafeAreaView edges={['bottom', 'right', 'left']}>
+        <View style={styles.contentContainer}>
+          {!!tabs[route.name].iconName && (
+            <Icon
+              name={tabs[route.name].iconName}
+              size={21}
+              color={color}
+              solid={true}
+            />
+          )}
+          {options.tabBarShowLabel !== false && (
+            <Text style={[styles.label, { color }]}>
+              {options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                ? options.title
+                : route.name}
+            </Text>
+          )}
+        </View>
+      </SafeAreaView>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  root: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   button: {
     flex: 1,
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 48,
   },
   label: {
     color: '#222',
