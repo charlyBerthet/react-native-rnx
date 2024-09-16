@@ -77,7 +77,7 @@ export function TabBarButton({
           name={tabs[route.name].iconName}
           size={21}
           color={color}
-          solid={isFocused}
+          solid={true}
         />
       )}
       {options.tabBarShowLabel !== false && (
