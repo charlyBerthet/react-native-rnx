@@ -7,7 +7,6 @@ import useTheme from '../../theme/hooks/useTheme';
 import { BottomSheet } from '../../ui/components/BottomSheet';
 import { Tab } from '../models/Screen';
 import { TabNavigator } from './TabNavigator';
-import { ExtraBottomView } from './ExtraBottomView';
 
 interface Props {
   hideTabLabels?: boolean;
@@ -48,17 +47,6 @@ export const Router = (props: Props) => {
     [isDarkTheme, theme.bgColor, theme.primaryColor, theme.txtColor]
   );
 
-  const extraBottomView = React.useMemo(
-    () => (
-      <ExtraBottomView
-        hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
-      >
-        {props.extraBottomView}
-      </ExtraBottomView>
-    ),
-    [props.extraBottomView, props.extraBottomViewHiddenForScreenNames]
-  );
-
   return React.useMemo(() => {
     console.log('[RNX][RENDER] Router');
     return (
@@ -69,7 +57,10 @@ export const Router = (props: Props) => {
               <TabNavigator
                 tabs={props.tabs}
                 hideTabLabels={props.hideTabLabels}
-                extraBottomView={extraBottomView}
+                extraBottomView={props.extraBottomView}
+                extraBottomViewHiddenForScreenNames={
+                  props.extraBottomViewHiddenForScreenNames
+                }
               />
             ) : tabsCount === 1 && firstTab ? ( // One tab: don't show bottom bar
               <Stack screens={firstTab.screens} initial={firstTab.initial} />
@@ -80,7 +71,8 @@ export const Router = (props: Props) => {
       </>
     );
   }, [
-    extraBottomView,
+    props.extraBottomViewHiddenForScreenNames,
+    props.extraBottomView,
     theme.bgColor,
     navigationContainerTheme,
     tabsCount,

@@ -19,6 +19,7 @@ interface Props {
   tabs: { [name: string]: Tab };
   hideTabLabels?: boolean;
   extraBottomView?: JSX.Element;
+  extraBottomViewHiddenForScreenNames?: string[];
 }
 
 export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
