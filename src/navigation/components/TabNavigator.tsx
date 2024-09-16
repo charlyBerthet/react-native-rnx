@@ -17,9 +17,14 @@ const TabNav = createBottomTabNavigator();
 interface Props {
   tabs: { [name: string]: Tab };
   hideTabLabels?: boolean;
+  extraBottomView?: JSX.Element;
 }
 
-export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
+export function TabNavigator({
+  tabs: tabsByScreenName,
+  hideTabLabels,
+  extraBottomView,
+}: Props) {
   const theme = useTheme();
 
   const tabs = React.useMemo(
@@ -87,6 +92,7 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
           )}
         </TabNav.Screen>
       ))}
+      {extraBottomView}
     </TabNav.Navigator>
   );
 }

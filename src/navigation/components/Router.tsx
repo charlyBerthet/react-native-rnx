@@ -48,6 +48,17 @@ export const Router = (props: Props) => {
     [isDarkTheme, theme.bgColor, theme.primaryColor, theme.txtColor]
   );
 
+  const extraBottomView = React.useMemo(
+    () => (
+      <ExtraBottomView
+        hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
+      >
+        {props.extraBottomView}
+      </ExtraBottomView>
+    ),
+    [props.extraBottomView, props.extraBottomViewHiddenForScreenNames]
+  );
+
   return React.useMemo(() => {
     console.log('[RNX][RENDER] Router');
     return (
@@ -58,28 +69,23 @@ export const Router = (props: Props) => {
               <TabNavigator
                 tabs={props.tabs}
                 hideTabLabels={props.hideTabLabels}
+                extraBottomView={extraBottomView}
               />
             ) : tabsCount === 1 && firstTab ? ( // One tab: don't show bottom bar
               <Stack screens={firstTab.screens} initial={firstTab.initial} />
             ) : undefined}
-            <ExtraBottomView
-              hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
-            >
-              {props.extraBottomView}
-            </ExtraBottomView>
           </NavigationContainer>
         </View>
         <BottomSheet />
       </>
     );
   }, [
+    extraBottomView,
     theme.bgColor,
     navigationContainerTheme,
     tabsCount,
     props.tabs,
     props.hideTabLabels,
-    props.extraBottomViewHiddenForScreenNames,
-    props.extraBottomView,
     firstTab,
   ]);
 };
