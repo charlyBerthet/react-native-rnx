@@ -17,7 +17,7 @@ const TabNav = createBottomTabNavigator();
 interface Props {
   tabs: { [name: string]: Tab };
   hideTabLabels?: boolean;
-  extraBottomView?: React.ReactFragment;
+  extraBottomView?: JSX.Element;
 }
 
 export function TabNavigator({
@@ -92,7 +92,7 @@ export function TabNavigator({
           )}
         </TabNav.Screen>
       ))}
-      {extraBottomView}
+      <TabNav.Group>{extraBottomView}</TabNav.Group>
     </TabNav.Navigator>
   );
 }
