@@ -9,17 +9,16 @@ interface Props extends BottomTabBarProps {}
 
 export function TabBar(tabs: { [name: string]: Tab }) {
   return function ({ state, descriptors, navigation }: Props) {
-    console.log('TESTa', state.routes);
-    console.log('TESTb', state.index);
-    if (state.routes[state.index].state) {
-      const _state = state.routes[state.index].state;
-      if (_state) {
-        const index = _state.index;
-        if (index) {
-          console.log('TESTc', _state.routes[index].name);
-        }
-      }
-    }
+    const currentRouteName =
+      !state.routes[state.index].state ||
+      !state.routes[state.index].state!!.index
+        ? state.routes[state.index].name
+        : state.routes[state.index].state!!.routes[
+            state.routes[state.index].state!!.index!!
+          ].name;
+
+    console.log('TESTTT>>>>', currentRouteName);
+
     return (
       <View style={styles.root}>
         <SafeAreaView edges={['bottom', 'right', 'left']}>
@@ -46,6 +45,5 @@ const styles = StyleSheet.create({
   root: {},
   contentContainer: {
     flexDirection: 'row',
-    backgroundColor: 'red',
   },
 });
