@@ -9,15 +9,18 @@ interface Props extends BottomTabBarProps {}
 
 export function TabBar(tabs: { [name: string]: Tab }) {
   return function ({ state, descriptors, navigation }: Props) {
-    console.log('TEST', navigation.getState().routes);
-    console.log('TEST', navigation.getState().index);
-    console.log(
-      'TEST',
-      navigation.getState().routes[navigation.getState().index].state!!.routes[
-        navigation.getState().routes[navigation.getState().index].state!!
-          .index!!
-      ].name
-    );
+    console.log('TESTa', navigation.getState().routes);
+    console.log('TESTb', navigation.getState().index);
+    if (navigation.getState().routes[navigation.getState().index].state) {
+      const _state = navigation.getState().routes[navigation.getState().index]
+        .state;
+      if (_state) {
+        const index = _state.index;
+        if (index) {
+          console.log('TESTc', _state.routes[index].name);
+        }
+      }
+    }
     return (
       <View style={styles.root}>
         <SafeAreaView edges={['bottom', 'right', 'left']}>
