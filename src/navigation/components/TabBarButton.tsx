@@ -92,7 +92,8 @@ export function TabBarButton({
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
     flex: 1,
