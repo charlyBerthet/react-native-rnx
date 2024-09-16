@@ -9,8 +9,8 @@ interface Props extends BottomTabBarProps {}
 
 export function TabBar(tabs: { [name: string]: Tab }) {
   return function ({ state, descriptors, navigation }: Props) {
-    console.log('TESTa', navigation.getState().routes);
-    console.log('TESTb', navigation.getState().index);
+    console.log('TESTa', state.routes);
+    console.log('TESTb', state.index);
     if (state.routes[state.index].state) {
       const _state = state.routes[state.index].state;
       if (_state) {
