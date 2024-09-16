@@ -49,15 +49,16 @@ export const Router = (props: Props) => {
   );
 
   const extraBottomView = React.useMemo(
-    () => (
-      <React.Fragment>
-        <ExtraBottomView
-          hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
-        >
-          {props.extraBottomView}
-        </ExtraBottomView>
-      </React.Fragment>
-    ),
+    () =>
+      props.extraBottomView ? (
+        <React.Fragment>
+          <ExtraBottomView
+            hiddenForScreenNames={props.extraBottomViewHiddenForScreenNames}
+          >
+            {props.extraBottomView}
+          </ExtraBottomView>
+        </React.Fragment>
+      ) : undefined,
     [props.extraBottomView, props.extraBottomViewHiddenForScreenNames]
   );
 

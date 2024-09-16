@@ -17,7 +17,7 @@ const TabNav = createBottomTabNavigator();
 interface Props {
   tabs: { [name: string]: Tab };
   hideTabLabels?: boolean;
-  extraBottomView?: JSX.Element;
+  extraBottomView?: React.ReactFragment;
 }
 
 export function TabNavigator({
