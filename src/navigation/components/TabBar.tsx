@@ -11,7 +11,10 @@ export function TabBar(tabs: { [name: string]: Tab }) {
   return function ({ state, descriptors, navigation }: Props) {
     console.log('TESTa', navigation.getState().routes);
     console.log('TESTb', navigation.getState().index);
-    if (navigation.getState().routes[navigation.getState().index].state) {
+    if (
+      navigation.getState() &&
+      navigation.getState().routes[navigation.getState().index].state
+    ) {
       const _state = navigation.getState().routes[navigation.getState().index]
         .state;
       if (_state) {
