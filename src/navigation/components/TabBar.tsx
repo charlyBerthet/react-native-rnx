@@ -24,6 +24,7 @@ export function TabBar(
           ].name;
 
     const isCurrentRouteTabBar = !!currentRouteName && !!tabs[currentRouteName];
+    const isTabBarVisible = !!isCurrentRouteTabBar;
 
     const isExtraBottomViewHidden =
       !!extraBottomViewHiddenForScreenNames &&
@@ -31,11 +32,16 @@ export function TabBar(
 
     return (
       <View style={styles.root}>
-        <SafeAreaView edges={['bottom', 'right', 'left']}>
+        <SafeAreaView
+          edges={['bottom', 'right', 'left']}
+          style={
+            isExtraBottomViewHidden && !isTabBarVisible && styles.safeAreaHidden
+          }
+        >
           <View
             style={[
               styles.tabBarContentContainer,
-              !isCurrentRouteTabBar && styles.tabBarContentContainerHidden,
+              !isTabBarVisible && styles.tabBarContentContainerHidden,
             ]}
           >
             {state.routes.map((route, index) => (
@@ -65,6 +71,9 @@ export function TabBar(
 
 const styles = StyleSheet.create({
   root: {},
+  safeAreaHidden: {
+    display: 'none',
+  },
   tabBarContentContainer: {
     flexDirection: 'row',
     shadowColor: 'transparent',
