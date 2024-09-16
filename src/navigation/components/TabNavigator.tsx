@@ -5,6 +5,7 @@ import {
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import {
+  BottomTabBar,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
@@ -77,7 +78,10 @@ export function TabNavigator({
   );
 
   return (
-    <TabNav.Navigator screenOptions={buildTabNavigatorScreenOptions}>
+    <TabNav.Navigator
+      screenOptions={buildTabNavigatorScreenOptions}
+      tabBar={BottomTabBar}
+    >
       {tabs.map((s) => (
         <TabNav.Screen
           key={s.name}
@@ -92,7 +96,7 @@ export function TabNavigator({
           )}
         </TabNav.Screen>
       ))}
-      <TabNav.Group>{extraBottomView}</TabNav.Group>
+      {/* <TabNav.Group>{extraBottomView}</TabNav.Group> */}
     </TabNav.Navigator>
   );
 }
