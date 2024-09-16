@@ -5,13 +5,13 @@ import {
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import {
-  BottomTabBar,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
 import { Stack, useTheme } from 'react-native-rnx';
+import { View } from 'react-native';
 
 const TabNav = createBottomTabNavigator();
 
@@ -76,7 +76,9 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={BottomTabBar}
+      tabBar={() => {
+        return <View />;
+      }}
     >
       {tabs.map((s) => (
         <TabNav.Screen
