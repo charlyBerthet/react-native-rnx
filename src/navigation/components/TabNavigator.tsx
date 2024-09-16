@@ -8,7 +8,6 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
 import { Stack, useTheme } from 'react-native-rnx';
 import { TabBar } from './TabBar';
@@ -48,16 +47,6 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
       );
       return {
         headerShown: false,
-        tabBarIcon: ({ color, size }) => {
-          return (
-            <Icon
-              name={tabsByScreenName[_tabNavProps.route.name].iconName}
-              size={size}
-              color={color}
-              solid={true}
-            />
-          );
-        },
         tabBarShowLabel: hideTabLabels ? false : true,
         tabBarActiveTintColor: theme.txtColor,
         tabBarInactiveTintColor: 'gray',
@@ -77,7 +66,7 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={TabBar}
+      tabBar={TabBar(tabsByScreenName)}
     >
       {tabs.map((s) => (
         <TabNav.Screen

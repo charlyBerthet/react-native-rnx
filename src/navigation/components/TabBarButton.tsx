@@ -9,6 +9,8 @@ import {
 } from '@react-navigation/native';
 import * as React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Tab } from '../models/Screen';
 
 type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
@@ -18,6 +20,7 @@ interface Props {
   descriptors: BottomTabDescriptorMap;
   state: TabNavigationState<ParamListBase>;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
+  tabs: { [name: string]: Tab };
 }
 
 export function TabBarButton({
@@ -26,6 +29,7 @@ export function TabBarButton({
   descriptors,
   state,
   navigation,
+  tabs,
 }: Props) {
   const { options } = descriptors[route.key];
   const isFocused = state.index === index;
@@ -53,13 +57,6 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
-  const Icon =
-    (options.tabBarIcon as (props: {
-      focused: boolean;
-      color: string;
-      size: number;
-    }) => JSX.Element) || null;
-
   // if (options.tabBarButton) {
   //   const Button = options.tabBarButton as () => JSX.Element;
   //   return <Button />;
@@ -74,7 +71,12 @@ export function TabBarButton({
       onLongPress={onLongPress}
       style={styles.button}
     >
-      {!!Icon && <Icon focused={isFocused} color={color} size={21} />}
+      <Icon
+        name={tabs[route.name].iconName}
+        size={21}
+        color={color}
+        solid={true}
+      />
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, { color }]}>
           {options.tabBarLabel !== undefined
