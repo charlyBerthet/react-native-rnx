@@ -49,10 +49,10 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
-  if (options.tabBarButton) {
-    const Button = options.tabBarButton as () => JSX.Element;
-    return <Button />;
-  }
+  // if (options.tabBarButton) {
+  //   const Button = options.tabBarButton as () => JSX.Element;
+  //   return <Button />;
+  // }
   return (
     <TouchableOpacity
       accessibilityRole="button"
