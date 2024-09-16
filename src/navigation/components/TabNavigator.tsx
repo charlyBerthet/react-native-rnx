@@ -45,8 +45,6 @@ export function TabNavigator({
     [hideTabLabels]
   );
 
-  console.log('TESTTTTTTTTTTTAAAAA');
-
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
