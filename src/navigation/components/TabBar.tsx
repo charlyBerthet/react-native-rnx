@@ -23,17 +23,21 @@ export function TabBar(
             state.routes[state.index].state!!.index!!
           ].name;
 
-    const isExtraBottomViewVisible =
-      !!extraBottomView &&
-      !(
-        !!extraBottomViewHiddenForScreenNames &&
-        extraBottomViewHiddenForScreenNames.includes(currentRouteName)
-      );
+    const isCurrentRouteTabBar = !!tabs[state.routes[state.index].name];
+
+    const isExtraBottomViewHidden =
+      !!extraBottomViewHiddenForScreenNames &&
+      extraBottomViewHiddenForScreenNames.includes(currentRouteName);
 
     return (
       <View style={styles.root}>
         <SafeAreaView edges={['bottom', 'right', 'left']}>
-          <View style={styles.contentContainer}>
+          <View
+            style={[
+              styles.tabBarContentContainer,
+              !isCurrentRouteTabBar && styles.tabBarContentContainerHidden,
+            ]}
+          >
             {state.routes.map((route, index) => (
               <TabBarButton
                 route={route}
@@ -46,7 +50,13 @@ export function TabBar(
               />
             ))}
           </View>
-          {isExtraBottomViewVisible && extraBottomView}
+          {!!extraBottomView && (
+            <View
+              style={isExtraBottomViewHidden && styles.extraBottomViewHidden}
+            >
+              {extraBottomView}
+            </View>
+          )}
         </SafeAreaView>
       </View>
     );
@@ -55,7 +65,14 @@ export function TabBar(
 
 const styles = StyleSheet.create({
   root: {},
-  contentContainer: {
+  tabBarContentContainer: {
     flexDirection: 'row',
+    shadowColor: 'transparent',
+  },
+  tabBarContentContainerHidden: {
+    display: 'none',
+  },
+  extraBottomViewHidden: {
+    display: 'none',
   },
 });
