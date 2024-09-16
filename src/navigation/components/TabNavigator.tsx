@@ -63,14 +63,10 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
     [hideTabLabels, tabsByScreenName, theme.txtColor]
   );
 
-  const _TabBar = React.useCallback(() => TabBar(tabsByScreenName), [
-    tabsByScreenName,
-  ]);
-
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={_TabBar}
+      tabBar={TabBar(tabsByScreenName)}
     >
       {tabs.map((s) => (
         <TabNav.Screen
