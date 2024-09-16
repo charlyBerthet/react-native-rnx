@@ -22,7 +22,7 @@ export function ExtraBottomView({ children }: Props) {
         },
       ]}
     >
-      children
+      {children}
     </View>
   );
 }
