@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
 import { Stack, useTheme } from 'react-native-rnx';
-import { View } from 'react-native';
+import { TabBar } from './TabBar';
 
 const TabNav = createBottomTabNavigator();
 
@@ -77,9 +77,7 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={() => {
-        return <View />;
-      }}
+      tabBar={TabBar}
     >
       {tabs.map((s) => (
         <TabNav.Screen

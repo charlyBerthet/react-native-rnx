@@ -49,6 +49,10 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
+  if (options.tabBarButton) {
+    const button = !!options.tabBarButton && options.tabBarButton({} as any);
+    return button ? <button /> : null;
+  }
   return (
     <TouchableOpacity
       accessibilityRole="button"
@@ -59,6 +63,7 @@ export function TabBarButton({
       onLongPress={onLongPress}
       style={styles.button}
     >
+      {options.tabBarIcon}
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, isFocused && styles.labelFocused]}>
           {options.tabBarLabel !== undefined
