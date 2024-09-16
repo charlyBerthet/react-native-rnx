@@ -2,9 +2,6 @@
   "name": "react-native-rnx",
   "version": "0.5.19",
   "description": "BerthX libs",
-  "main": "lib/commonjs/index",
-  "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
   "react-native": "src/index",
   "source": "src/index",
   "files": [
