@@ -1,4 +1,4 @@
-import { GestureDirection } from '@react-navigation/stack/lib/typescript/src/types';
+import type { GestureDirection } from '@react-navigation/stack/lib/typescript/src/types';
 
 export default interface Screen {
   name: string;

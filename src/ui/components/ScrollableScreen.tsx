@@ -106,7 +106,9 @@ export const ScrollableScreen = (props: Props) => {
                 iconSolid={props.headerLeftButton!!.iconSolid}
                 onPress={() => {
                   if (props.headerLeftButton!!.navigateTo) {
-                    navigation.navigate(props.headerLeftButton!!.navigateTo);
+                    navigation.navigate(
+                      props.headerLeftButton!!.navigateTo as never
+                    );
                   }
                   if (props.headerLeftButton!!.onPress) {
                     props.headerLeftButton!!.onPress();
@@ -146,7 +148,7 @@ export const ScrollableScreen = (props: Props) => {
                     iconSolid={btnProps.iconSolid}
                     onPress={() => {
                       if (btnProps.navigateTo) {
-                        navigation.navigate(btnProps.navigateTo);
+                        navigation.navigate(btnProps.navigateTo as never);
                       }
                       if (btnProps.onPress) {
                         btnProps.onPress();
