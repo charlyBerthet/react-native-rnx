@@ -8,3 +8,12 @@ export default interface Screen {
   headerShown?: boolean;
   gestureDirection?: GestureDirection;
 }
+
+export interface Tab {
+  screens: Screen[];
+  initial: string;
+  title?: string;
+  iconName: string;
+  iconSize?: number;
+  customButton?: () => JSX.Element;
+}
