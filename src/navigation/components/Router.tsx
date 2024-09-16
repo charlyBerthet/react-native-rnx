@@ -66,8 +66,8 @@ export const Router = (props: Props) => {
             ) : tabsCount === 1 && firstTab ? ( // One tab: don't show bottom bar
               <Stack screens={firstTab.screens} initial={firstTab.initial} />
             ) : undefined}
-            {extraBottomViewElement}
           </NavigationContainer>
+          {extraBottomViewElement}
         </View>
         <BottomSheet />
       </>
