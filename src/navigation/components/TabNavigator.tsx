@@ -48,11 +48,11 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
       );
       return {
         headerShown: false,
-        tabBarIcon: ({ color }) => {
+        tabBarIcon: ({ color, size }) => {
           return (
             <Icon
               name={tabsByScreenName[_tabNavProps.route.name].iconName}
-              size={21}
+              size={size}
               color={color}
               solid={true}
             />

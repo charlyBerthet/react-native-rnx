@@ -29,6 +29,10 @@ export function TabBarButton({
 }: Props) {
   const { options } = descriptors[route.key];
   const isFocused = state.index === index;
+  const color =
+    (isFocused
+      ? options.tabBarActiveTintColor
+      : options.tabBarInactiveTintColor) || '#000';
 
   const onPress = React.useCallback(() => {
     const event = navigation.emit({
@@ -49,6 +53,13 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
+  const Icon =
+    (options.tabBarIcon as (props: {
+      focused: boolean;
+      color: string;
+      size: number;
+    }) => JSX.Element) || null;
+
   // if (options.tabBarButton) {
   //   const Button = options.tabBarButton as () => JSX.Element;
   //   return <Button />;
@@ -63,9 +74,9 @@ export function TabBarButton({
       onLongPress={onLongPress}
       style={styles.button}
     >
-      {options.tabBarIcon}
+      {!!Icon && <Icon focused={isFocused} color={color} size={21} />}
       {options.tabBarShowLabel !== false && (
-        <Text style={[styles.label, isFocused && styles.labelFocused]}>
+        <Text style={[styles.label, { color }]}>
           {options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
@@ -86,8 +97,5 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#222',
-  },
-  labelFocused: {
-    color: '#673ab7',
   },
 });
