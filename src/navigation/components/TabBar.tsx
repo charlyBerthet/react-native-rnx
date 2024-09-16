@@ -13,7 +13,10 @@ export function TabBar(tabs: { [name: string]: Tab }) {
     console.log('TEST', navigation.getState().index);
     console.log(
       'TEST',
-      navigation.getState().routes[navigation.getState().index].name
+      navigation.getState().routes[navigation.getState().index].state!!.routes[
+        navigation.getState().routes[navigation.getState().index].state!!
+          .index!!
+      ].name
     );
     return (
       <View style={styles.root}>
@@ -41,5 +44,6 @@ const styles = StyleSheet.create({
   root: {},
   contentContainer: {
     flexDirection: 'row',
+    backgroundColor: 'red',
   },
 });
