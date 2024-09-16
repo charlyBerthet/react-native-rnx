@@ -21,7 +21,12 @@ interface Props {
   extraBottomViewHiddenForScreenNames?: string[];
 }
 
-export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
+export function TabNavigator({
+  tabs: tabsByScreenName,
+  hideTabLabels,
+  extraBottomView,
+  extraBottomViewHiddenForScreenNames,
+}: Props) {
   const theme = useTheme();
 
   const tabs = React.useMemo(
@@ -66,7 +71,11 @@ export function TabNavigator({ tabs: tabsByScreenName, hideTabLabels }: Props) {
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={TabBar(tabsByScreenName)}
+      tabBar={TabBar(
+        tabsByScreenName,
+        extraBottomView,
+        extraBottomViewHiddenForScreenNames
+      )}
     >
       {tabs.map((s) => (
         <TabNav.Screen

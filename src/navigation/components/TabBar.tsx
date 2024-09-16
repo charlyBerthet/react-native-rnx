@@ -7,7 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface Props extends BottomTabBarProps {}
 
-export function TabBar(tabs: { [name: string]: Tab }) {
+export function TabBar(
+  tabs: {
+    [name: string]: Tab;
+  },
+  extraBottomView?: JSX.Element,
+  extraBottomViewHiddenForScreenNames?: string[]
+) {
   return function ({ state, descriptors, navigation }: Props) {
     const currentRouteName =
       !state.routes[state.index].state ||
@@ -17,7 +23,12 @@ export function TabBar(tabs: { [name: string]: Tab }) {
             state.routes[state.index].state!!.index!!
           ].name;
 
-    console.log('TESTTT>>>>', currentRouteName);
+    const isExtraBottomViewVisible =
+      !!extraBottomView &&
+      !(
+        !!extraBottomViewHiddenForScreenNames &&
+        extraBottomViewHiddenForScreenNames.includes(currentRouteName)
+      );
 
     return (
       <View style={styles.root}>
@@ -35,6 +46,7 @@ export function TabBar(tabs: { [name: string]: Tab }) {
               />
             ))}
           </View>
+          {isExtraBottomViewVisible && extraBottomView}
         </SafeAreaView>
       </View>
     );
