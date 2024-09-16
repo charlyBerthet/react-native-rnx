@@ -45,6 +45,8 @@ export function TabNavigator({
     [hideTabLabels]
   );
 
+  console.log('TESTTTTTTTTTTTAAAAA');
+
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
@@ -68,7 +70,6 @@ export function TabNavigator({
           )}
         </TabNav.Screen>
       ))}
-      {/* <TabNav.Group>{extraBottomView}</TabNav.Group> */}
     </TabNav.Navigator>
   );
 }

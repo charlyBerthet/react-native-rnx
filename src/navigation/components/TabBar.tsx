@@ -14,7 +14,9 @@ export function TabBar(
   extraBottomView?: JSX.Element,
   extraBottomViewHiddenForScreenNames?: string[]
 ) {
+  console.log('TESTTTTTTTTTTTBBBBBBB');
   return function ({ state, descriptors, navigation }: Props) {
+    console.log('TESTTTTTTTTTTTCCCCCCC');
     const currentRouteName =
       !state.routes[state.index].state ||
       !state.routes[state.index].state!!.index
