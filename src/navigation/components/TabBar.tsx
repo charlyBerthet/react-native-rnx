@@ -4,6 +4,9 @@ import { StyleSheet, View } from 'react-native';
 import { TabBarButton } from './TabBarButton';
 import { Tab } from '../models/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { ParamListBase, TabNavigationState } from '@react-navigation/native';
+
+type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
 interface Props extends BottomTabBarProps {
   tabs: {
@@ -21,19 +24,50 @@ function TabBar({
   extraBottomView,
   extraBottomViewHiddenForScreenNames,
 }: Props) {
-  const currentRouteName =
-    !state.routes[state.index].state || !state.routes[state.index].state!!.index
+  const currentRouteName = React.useMemo(() => {
+    return !state.routes[state.index].state ||
+      !state.routes[state.index].state!!.index
       ? state.routes[state.index].name
       : state.routes[state.index].state!!.routes[
           state.routes[state.index].state!!.index!!
         ].name;
+  }, [state.index, state.routes]);
 
   const isCurrentRouteTabBar = !!currentRouteName && !!tabs[currentRouteName];
   const isTabBarVisible = !!isCurrentRouteTabBar;
 
-  const isExtraBottomViewHidden =
-    !!extraBottomViewHiddenForScreenNames &&
-    extraBottomViewHiddenForScreenNames.includes(currentRouteName);
+  const isExtraBottomViewHidden = React.useMemo(
+    () =>
+      !!extraBottomViewHiddenForScreenNames &&
+      extraBottomViewHiddenForScreenNames.includes(currentRouteName),
+    [currentRouteName, extraBottomViewHiddenForScreenNames]
+  );
+
+  const renderTabItem = React.useCallback(
+    (route: NavigationRoute, index: number) => {
+      const CustomButton = tabs[route.name].customButton;
+      if (CustomButton) {
+        return (
+          <CustomButton
+            navigation={navigation}
+            key={route.key + '--' + index}
+          />
+        );
+      }
+      return (
+        <TabBarButton
+          route={route}
+          index={index}
+          key={route.key + '--' + index}
+          descriptors={descriptors}
+          state={state}
+          navigation={navigation}
+          tabs={tabs}
+        />
+      );
+    },
+    [descriptors, navigation, state, tabs]
+  );
 
   return (
     <View style={styles.root}>
@@ -49,28 +83,7 @@ function TabBar({
             !isTabBarVisible && styles.tabBarContentContainerHidden,
           ]}
         >
-          {state.routes.map((route, index) => {
-            const CustomButton = tabs[route.name].customButton;
-            if (CustomButton) {
-              return (
-                <CustomButton
-                  navigation={navigation}
-                  key={route.key + '--' + index}
-                />
-              );
-            }
-            return (
-              <TabBarButton
-                route={route}
-                index={index}
-                key={route.key + '--' + index}
-                descriptors={descriptors}
-                state={state}
-                navigation={navigation}
-                tabs={tabs}
-              />
-            );
-          })}
+          {state.routes.map(renderTabItem)}
         </View>
         {!!extraBottomView && (
           <View style={isExtraBottomViewHidden && styles.extraBottomViewHidden}>
