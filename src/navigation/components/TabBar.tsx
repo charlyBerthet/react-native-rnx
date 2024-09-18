@@ -45,8 +45,9 @@ export function TabBar(
             ]}
           >
             {state.routes.map((route, index) => {
-              if (tabs[route.name].customButton) {
-                return tabs[route.name].customButton;
+              const CustomButton = tabs[route.name].customButton;
+              if (CustomButton) {
+                return <CustomButton navigation={navigation} />;
               }
               return (
                 <TabBarButton
