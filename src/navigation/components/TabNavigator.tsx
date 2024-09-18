@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import { Tab } from '../models/Screen';
 import { Stack } from 'react-native-rnx';
-import { TabBar } from './TabBar';
+import { TabBarWithParams } from './TabBar';
 
 const TabNav = createBottomTabNavigator();
 
@@ -48,7 +48,7 @@ export function TabNavigator({
   return (
     <TabNav.Navigator
       screenOptions={buildTabNavigatorScreenOptions}
-      tabBar={TabBar(
+      tabBar={TabBarWithParams(
         tabsByScreenName,
         extraBottomView,
         extraBottomViewHiddenForScreenNames
