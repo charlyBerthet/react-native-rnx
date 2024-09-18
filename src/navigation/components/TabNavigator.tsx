@@ -60,7 +60,6 @@ export function TabNavigator({
           name={s.name}
           options={{
             title: s.title || '',
-            tabBarButton: s.customButton,
           }}
         >
           {(stackProps) => (

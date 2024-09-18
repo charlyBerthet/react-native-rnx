@@ -44,17 +44,22 @@ export function TabBar(
               !isTabBarVisible && styles.tabBarContentContainerHidden,
             ]}
           >
-            {state.routes.map((route, index) => (
-              <TabBarButton
-                route={route}
-                index={index}
-                key={route.key + '--' + index}
-                descriptors={descriptors}
-                state={state}
-                navigation={navigation}
-                tabs={tabs}
-              />
-            ))}
+            {state.routes.map((route, index) => {
+              if (tabs[route.name].customButton) {
+                return tabs[route.name].customButton;
+              }
+              return (
+                <TabBarButton
+                  route={route}
+                  index={index}
+                  key={route.key + '--' + index}
+                  descriptors={descriptors}
+                  state={state}
+                  navigation={navigation}
+                  tabs={tabs}
+                />
+              );
+            })}
           </View>
           {!!extraBottomView && (
             <View
