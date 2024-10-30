@@ -90,8 +90,6 @@ export const ScrollableScreen = (props: Props) => {
         height: props.headerLowDown ? 110 : undefined,
       },
       headerTitleStyle: {
-        fontWeight: '700',
-        fontSize: 14,
         paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
       },
       headerLeft:

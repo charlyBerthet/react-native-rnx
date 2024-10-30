@@ -25,8 +25,8 @@ export const Stack = (props: Props) => {
         screenOptions={{
           headerTintColor: theme.txtColor,
           headerTitleStyle: {
-            fontWeight: '900',
-            fontSize: 15,
+            fontWeight: '700',
+            fontSize: 14,
           },
           headerStyle: {
             backgroundColor: theme.bgColor,
