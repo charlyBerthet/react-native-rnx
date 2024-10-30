@@ -89,9 +89,9 @@ export const ScrollableScreen = (props: Props) => {
       headerStyle: {
         height: props.headerLowDown ? 110 : undefined,
       },
-      headerTitleStyle: {
-        paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
-      },
+      // headerTitleStyle: {
+      //   paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
+      // },
       headerLeft:
         props.headerLeftElement ||
         (props.headerLeftButton
