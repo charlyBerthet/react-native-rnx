@@ -33,7 +33,7 @@ export const Stack = (props: Props) => {
             },
           },
           headerTitleStyle: {
-            fontWeight: '700',
+            fontWeight: '500',
             fontSize: 17,
           },
           headerBackTitleStyle: {
