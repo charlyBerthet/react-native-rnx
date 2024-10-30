@@ -14,6 +14,7 @@ interface Props extends BottomTabBarProps {
   };
   extraBottomView?: JSX.Element;
   extraBottomViewHiddenForScreenNames?: string[];
+  extraViews?: React.ReactNode;
 }
 
 function TabBar({
@@ -23,6 +24,7 @@ function TabBar({
   tabs,
   extraBottomView,
   extraBottomViewHiddenForScreenNames,
+  extraViews,
 }: Props) {
   const currentRouteName = React.useMemo(() => {
     return !state.routes[state.index].state ||
@@ -91,6 +93,7 @@ function TabBar({
           </View>
         )}
       </SafeAreaView>
+      {extraViews}
     </View>
   );
 }
@@ -100,7 +103,8 @@ export function TabBarWithParams(
     [name: string]: Tab;
   },
   extraBottomView?: JSX.Element,
-  extraBottomViewHiddenForScreenNames?: string[]
+  extraBottomViewHiddenForScreenNames?: string[],
+  extraViews?: React.ReactNode
 ) {
   return (props: BottomTabBarProps) => (
     <TabBar
@@ -108,6 +112,7 @@ export function TabBarWithParams(
       tabs={tabs}
       extraBottomView={extraBottomView}
       extraBottomViewHiddenForScreenNames={extraBottomViewHiddenForScreenNames}
+      extraViews={extraViews}
     />
   );
 }

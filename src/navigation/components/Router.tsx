@@ -12,6 +12,7 @@ interface Props {
   hideTabLabels?: boolean;
   extraBottomView?: JSX.Element;
   extraBottomViewHiddenForScreenNames?: string[];
+  extraViews?: React.ReactNode;
   tabs: {
     [name: string]: Tab;
   };
@@ -61,6 +62,7 @@ export const Router = (props: Props) => {
                 extraBottomViewHiddenForScreenNames={
                   props.extraBottomViewHiddenForScreenNames
                 }
+                extraViews={props.extraViews}
               />
             ) : tabsCount === 1 && firstTab ? ( // One tab: don't show bottom bar
               <Stack screens={firstTab.screens} initial={firstTab.initial} />
@@ -73,6 +75,7 @@ export const Router = (props: Props) => {
   }, [
     props.extraBottomViewHiddenForScreenNames,
     props.extraBottomView,
+    props.extraViews,
     theme.bgColor,
     navigationContainerTheme,
     tabsCount,
