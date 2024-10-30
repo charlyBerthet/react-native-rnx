@@ -37,20 +37,17 @@ export const Stack = (props: Props) => {
             fontSize: 17,
           },
           headerBackTitleStyle: {
-            color: theme.primaryColor,
-            fontSize: 14,
-            fontWeight: '500',
+            display: 'none',
           },
           headerBackImage: () => (
             <Icon
               style={styles.backBtnIcon}
               name={'chevron-left'}
               size={21}
-              color={theme.primaryColor}
+              color={theme.txtColor}
             />
           ),
-          headerBackTitle: localize('global.back'),
-          headerTitle: '',
+          headerTitle: '', // Default empty instead of screen name
         }}
       >
         {props.screens.map((s) => (
