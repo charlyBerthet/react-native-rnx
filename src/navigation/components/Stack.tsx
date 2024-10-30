@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from 'react-native-vector-icons/Octicons';
 
 import useTheme from '../../theme/hooks/useTheme';
 import type Screen from '../models/Screen';
@@ -33,8 +33,8 @@ export const Stack = (props: Props) => {
             },
           },
           headerTitleStyle: {
-            fontWeight: '600',
-            fontSize: 17,
+            fontWeight: '700',
+            fontSize: 16,
           },
           headerBackTitleStyle: {
             display: 'none',
@@ -42,7 +42,7 @@ export const Stack = (props: Props) => {
           headerBackImage: () => (
             <Icon
               style={styles.backBtnIcon}
-              name={'left'}
+              name={'chevron-left'}
               size={21}
               color={theme.txtColor}
             />
@@ -66,14 +66,7 @@ export const Stack = (props: Props) => {
         ))}
       </_Stack.Navigator>
     );
-  }, [
-    localize,
-    props.initial,
-    props.screens,
-    theme.bgColor,
-    theme.primaryColor,
-    theme.txtColor,
-  ]);
+  }, [localize, props.initial, props.screens, theme.bgColor, theme.txtColor]);
 };
 
 const styles = StyleSheet.create({
