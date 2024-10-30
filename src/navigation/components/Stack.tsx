@@ -24,10 +24,6 @@ export const Stack = (props: Props) => {
         initialRouteName={props.initial}
         screenOptions={{
           headerTintColor: theme.txtColor,
-          headerTitleStyle: {
-            fontWeight: '700',
-            fontSize: 25,
-          },
           headerStyle: {
             backgroundColor: theme.bgColor,
             shadowRadius: 0,
@@ -35,6 +31,10 @@ export const Stack = (props: Props) => {
               height: 0,
               width: 0,
             },
+          },
+          headerTitleStyle: {
+            fontWeight: '700',
+            fontSize: 17,
           },
           headerBackTitleStyle: {
             color: theme.primaryColor,

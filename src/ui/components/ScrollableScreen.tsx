@@ -57,7 +57,6 @@ interface Props {
   headerRightElement?: () => JSX.Element;
   headerLeftElement?: () => JSX.Element;
   headerBackground?: (props: { style: StyleProp<ViewStyle> }) => JSX.Element;
-  headerLowDown?: boolean;
   scrollViewRef?: (ref: ScrollView | undefined) => void;
   forceTitleInHeader?: boolean;
   noScroll?: boolean;
@@ -73,8 +72,6 @@ interface Props {
   scrollViewStyle?: ViewStyle;
 }
 
-const LOW_DOWN_MARGIN_TOP = 35;
-
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
   const [isTitleVisibleInHeader, setIsTitleVisibleInHeader] = useState(false);
@@ -86,18 +83,11 @@ export const ScrollableScreen = (props: Props) => {
         forceTitleInHeader || isTitleVisibleInHeader
           ? props.titleElement || props.title
           : '',
-      headerStyle: {
-        height: props.headerLowDown ? 110 : undefined,
-      },
-      // headerTitleStyle: {
-      //   paddingTop: props.headerLowDown ? LOW_DOWN_MARGIN_TOP : undefined,
-      // },
       headerLeft:
         props.headerLeftElement ||
         (props.headerLeftButton
           ? () => (
               <Link
-                style={[props.headerLowDown && styles.headerButtonLowDown]}
                 title={props.headerLeftButton!!.title || ''}
                 icon={props.headerLeftButton!!.icon}
                 iconLeft={props.headerLeftButton!!.iconLeft}
@@ -132,7 +122,6 @@ export const ScrollableScreen = (props: Props) => {
                     key={idx}
                     titleStyle={styles.rightBtnTxt}
                     style={[
-                      props.headerLowDown && styles.headerButtonLowDown,
                       btnProps.paddingLeft !== undefined && {
                         paddingLeft: btnProps.paddingLeft,
                       },
@@ -171,7 +160,6 @@ export const ScrollableScreen = (props: Props) => {
     props.headerRightButtons,
     props.headerLeftButton,
     props.headerBackground,
-    props.headerLowDown,
     forceTitleInHeader,
     props.titleElement,
     props.headerLeftElement,
@@ -231,9 +219,6 @@ const styles = StyleSheet.create({
   },
   rootFlexOne: {
     flex: 1,
-  },
-  headerButtonLowDown: {
-    marginTop: LOW_DOWN_MARGIN_TOP,
   },
   headerBtns: {
     flexDirection: 'row',
