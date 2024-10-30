@@ -43,7 +43,7 @@ export const Stack = (props: Props) => {
             <Icon
               style={styles.backBtnIcon}
               name={'chevron-left'}
-              size={21}
+              size={28}
               color={theme.txtColor}
             />
           ),
