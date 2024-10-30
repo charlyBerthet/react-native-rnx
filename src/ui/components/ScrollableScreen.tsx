@@ -43,6 +43,7 @@ interface Props {
   headerLeftButton?: {
     title?: string;
     icon?: string;
+    IconElem?: (props: any) => JSX.Element;
     iconLeft?: boolean;
     iconSolid?: boolean;
     navigateTo?: string;
@@ -89,6 +90,7 @@ export const ScrollableScreen = (props: Props) => {
           ? () => (
               <Link
                 title={props.headerLeftButton!!.title || ''}
+                IconElem={props.headerLeftButton!!.IconElem}
                 icon={props.headerLeftButton!!.icon}
                 iconLeft={props.headerLeftButton!!.iconLeft}
                 iconSolid={props.headerLeftButton!!.iconSolid}
