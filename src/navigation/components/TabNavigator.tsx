@@ -15,7 +15,7 @@ interface Props {
   hideTabLabels?: boolean;
   extraBottomView?: JSX.Element;
   extraBottomViewHiddenForScreenNames?: string[];
-  extraViews?: React.ReactNode;
+  ExtraProvider?: (props: { children: JSX.Element }) => JSX.Element;
 }
 
 export function TabNavigator({
@@ -23,7 +23,7 @@ export function TabNavigator({
   hideTabLabels,
   extraBottomView,
   extraBottomViewHiddenForScreenNames,
-  extraViews,
+  ExtraProvider,
 }: Props) {
   const tabs = React.useMemo(
     () =>
@@ -54,7 +54,7 @@ export function TabNavigator({
         tabsByScreenName,
         extraBottomView,
         extraBottomViewHiddenForScreenNames,
-        extraViews
+        ExtraProvider
       )}
     >
       {tabs.map((s) => (

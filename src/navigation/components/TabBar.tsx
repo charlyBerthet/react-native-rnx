@@ -14,7 +14,7 @@ interface Props extends BottomTabBarProps {
   };
   extraBottomView?: JSX.Element;
   extraBottomViewHiddenForScreenNames?: string[];
-  extraViews?: React.ReactNode;
+  ExtraProvider?: (props: { children: JSX.Element }) => JSX.Element;
 }
 
 function TabBar({
@@ -24,7 +24,7 @@ function TabBar({
   tabs,
   extraBottomView,
   extraBottomViewHiddenForScreenNames,
-  extraViews,
+  ExtraProvider: OptExtraProvider,
 }: Props) {
   const currentRouteName = React.useMemo(() => {
     return !state.routes[state.index].state ||
@@ -71,30 +71,35 @@ function TabBar({
     [descriptors, navigation, state, tabs]
   );
 
+  const ExtraProvider = OptExtraProvider || View;
+
   return (
-    <View style={styles.root}>
-      <SafeAreaView
-        edges={['bottom', 'right', 'left']}
-        style={
-          isExtraBottomViewHidden && !isTabBarVisible && styles.safeAreaHidden
-        }
-      >
-        <View
-          style={[
-            styles.tabBarContentContainer,
-            !isTabBarVisible && styles.tabBarContentContainerHidden,
-          ]}
+    <ExtraProvider>
+      <View style={styles.root}>
+        <SafeAreaView
+          edges={['bottom', 'right', 'left']}
+          style={
+            isExtraBottomViewHidden && !isTabBarVisible && styles.safeAreaHidden
+          }
         >
-          {state.routes.map(renderTabItem)}
-        </View>
-        {!!extraBottomView && (
-          <View style={isExtraBottomViewHidden && styles.extraBottomViewHidden}>
-            {extraBottomView}
+          <View
+            style={[
+              styles.tabBarContentContainer,
+              !isTabBarVisible && styles.tabBarContentContainerHidden,
+            ]}
+          >
+            {state.routes.map(renderTabItem)}
           </View>
-        )}
-      </SafeAreaView>
-      {extraViews}
-    </View>
+          {!!extraBottomView && (
+            <View
+              style={isExtraBottomViewHidden && styles.extraBottomViewHidden}
+            >
+              {extraBottomView}
+            </View>
+          )}
+        </SafeAreaView>
+      </View>
+    </ExtraProvider>
   );
 }
 
@@ -104,7 +109,7 @@ export function TabBarWithParams(
   },
   extraBottomView?: JSX.Element,
   extraBottomViewHiddenForScreenNames?: string[],
-  extraViews?: React.ReactNode
+  ExtraProvider?: (props: { children: JSX.Element }) => JSX.Element
 ) {
   return (props: BottomTabBarProps) => (
     <TabBar
@@ -112,7 +117,7 @@ export function TabBarWithParams(
       tabs={tabs}
       extraBottomView={extraBottomView}
       extraBottomViewHiddenForScreenNames={extraBottomViewHiddenForScreenNames}
-      extraViews={extraViews}
+      ExtraProvider={ExtraProvider}
     />
   );
 }
