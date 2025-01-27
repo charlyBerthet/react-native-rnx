@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet, useColorScheme } from 'react-native';
+import { View, StyleSheet, useColorScheme, AsyncStorage } from 'react-native';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
@@ -25,97 +25,119 @@ interface Props {
       iconSize?: number;
     };
   };
+  Onboarding?: (props: { onOnboardingPassed: () => void }) => JSX.Element;
 }
 
 export const Router = (props: Props) => {
   const theme = useTheme();
   const isDarkTheme = useColorScheme() === 'dark';
+  const hasOnboarding = !!props.Onboarding;
+  const [wasOnboardingPassed, setWasOnboardingPassed] = React.useState(
+    !hasOnboarding || false
+  );
 
-  const tabs = Object.keys(props.tabs).map((name) => ({
-    name,
-    ...props.tabs[name],
-  }));
+  const tabs = React.useMemo(() => {
+    return Object.keys(props.tabs).map((name) => ({
+      name,
+      ...props.tabs[name],
+    }));
+  }, [props.tabs]);
+
+  React.useLayoutEffect(() => {
+    AsyncStorage.getItem('wasOnboardingPassed').then((wasOnboardingPassedStr) =>
+      setWasOnboardingPassed(wasOnboardingPassedStr === 'true' ? true : false)
+    );
+  });
+
+  const onOnboardingPassed = React.useCallback(() => {
+    setWasOnboardingPassed(true);
+    AsyncStorage.setItem('wasOnboardingPassed', 'true');
+  }, []);
 
   return (
     <>
-      <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
-        <NavigationContainer
-          theme={{
-            dark: isDarkTheme,
-            colors: {
-              primary: theme.primaryColor,
-              background: theme.bgColor,
-              card: theme.bgColor,
-              text: theme.txtColor,
-              border: theme.bgColor,
-              notification: theme.txtColor,
-            },
-          }}
-        >
-          {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
-            <Tab.Navigator
-              screenOptions={(_tabNavProps) => {
-                const routeName = getFocusedRouteNameFromRoute(
-                  _tabNavProps.route
-                );
-                console.log(
-                  'Router.focusedRouteName',
-                  routeName,
-                  'initial for this tab',
-                  props.tabs[_tabNavProps.route.name].initial
-                );
-                return {
-                  headerShown: false,
-                  tabBarIcon: ({ color }) => {
-                    return (
-                      <Icon
-                        name={props.tabs[_tabNavProps.route.name].iconName}
-                        size={21}
-                        color={color}
-                        solid={true}
-                      />
-                    );
-                  },
-                  tabBarShowLabel: props.hideTabLabels ? false : true,
-                  tabBarActiveTintColor: theme.primaryColor,
-                  tabBarInactiveTintColor: 'gray',
-                  tabBarStyle: [
-                    {
-                      display:
-                        !routeName ||
-                        routeName ===
-                          props.tabs[_tabNavProps.route.name].initial
-                          ? 'flex'
-                          : 'none',
+      {!!props.Onboarding && !wasOnboardingPassed ? (
+        <props.Onboarding onOnboardingPassed={onOnboardingPassed} />
+      ) : (
+        <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
+          <NavigationContainer
+            theme={{
+              dark: isDarkTheme,
+              colors: {
+                primary: theme.primaryColor,
+                background: theme.bgColor,
+                card: theme.bgColor,
+                text: theme.txtColor,
+                border: theme.bgColor,
+                notification: theme.txtColor,
+              },
+            }}
+          >
+            {tabs.length > 1 ? ( // Multiple tabs: show bottom bar
+              <Tab.Navigator
+                screenOptions={(_tabNavProps) => {
+                  const routeName = getFocusedRouteNameFromRoute(
+                    _tabNavProps.route
+                  );
+                  console.log(
+                    'Router.focusedRouteName',
+                    routeName,
+                    'initial for this tab',
+                    props.tabs[_tabNavProps.route.name].initial
+                  );
+                  return {
+                    headerShown: false,
+                    tabBarIcon: ({ color }) => {
+                      return (
+                        <Icon
+                          name={props.tabs[_tabNavProps.route.name].iconName}
+                          size={21}
+                          color={color}
+                          solid={true}
+                        />
+                      );
                     },
-                    null,
-                  ],
-                };
-              }}
-            >
-              {tabs.map((s) => (
-                <Tab.Screen
-                  key={s.name}
-                  name={s.name}
-                  options={{
-                    title: s.title || '',
-                  }}
-                >
-                  {(stackProps) => (
-                    <Stack
-                      {...stackProps}
-                      screens={s.screens}
-                      initial={s.initial}
-                    />
-                  )}
-                </Tab.Screen>
-              ))}
-            </Tab.Navigator>
-          ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
-            <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
-          ) : undefined}
-        </NavigationContainer>
-      </View>
+                    tabBarShowLabel: props.hideTabLabels ? false : true,
+                    tabBarActiveTintColor: theme.primaryColor,
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarStyle: [
+                      {
+                        display:
+                          !routeName ||
+                          routeName ===
+                            props.tabs[_tabNavProps.route.name].initial
+                            ? 'flex'
+                            : 'none',
+                      },
+                      null,
+                    ],
+                  };
+                }}
+              >
+                {tabs.map((s) => (
+                  <Tab.Screen
+                    key={s.name}
+                    name={s.name}
+                    options={{
+                      title: s.title || '',
+                    }}
+                  >
+                    {(stackProps) => (
+                      <Stack
+                        {...stackProps}
+                        screens={s.screens}
+                        initial={s.initial}
+                      />
+                    )}
+                  </Tab.Screen>
+                ))}
+              </Tab.Navigator>
+            ) : tabs.length === 1 ? ( // One tab: don't show bottom bar
+              <Stack screens={tabs[0].screens} initial={tabs[0].initial} />
+            ) : undefined}
+          </NavigationContainer>
+        </View>
+      )}
       <BottomSheet />
     </>
   );
