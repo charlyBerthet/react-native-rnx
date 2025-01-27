@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
 import { setActionsSheetRef } from '../hooks/useBottomSheet';
 import {
   BottomSheetOptionsProps,
@@ -20,6 +20,9 @@ export interface BottomSheetProps {
   disableScrollToClose?: boolean;
   hideHandle?: boolean;
   disableInternalScrollView?: boolean;
+  rootStyle?:
+    | (ViewStyle | undefined | false)
+    | (ViewStyle | undefined | false)[];
 }
 
 export const BottomSheet = () => {
@@ -74,9 +77,10 @@ export const BottomSheet = () => {
       )}
 
       <RNBottomSheet
-        backgroundStyle={
-          sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined
-        }
+        backgroundStyle={[
+          sheetOptionsProps ? styles.sheetOptionsBgStyle : undefined,
+          sheetProps?.rootStyle,
+        ]}
         handleStyle={
           sheetOptionsProps || disableScrollToClose || hideHandle
             ? styles.sheetOptionsHandleStyle
