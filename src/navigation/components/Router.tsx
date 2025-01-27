@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, StyleSheet, useColorScheme, AsyncStorage } from 'react-native';
+import { View, StyleSheet, useColorScheme } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
