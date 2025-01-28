@@ -25,7 +25,7 @@ interface Props {
       iconSize?: number;
     };
   };
-  Onboarding?: () => JSX.Element;
+  Onboarding?: JSX.Element;
 }
 
 export const Router = (props: Props) => {
