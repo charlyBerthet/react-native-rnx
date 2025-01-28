@@ -7,14 +7,18 @@ import { UpgradeViewSheet } from './UpgradeView';
 export const useUpgrade = () => {
   const sheet = useBottomSheet();
 
-  const upgrade = useCallback(() => {
-    const height = Dimensions.get('window').height - 50;
-    sheet.show({
-      snapPoints: [height],
-      hideHandle: true,
-      element: UpgradeViewSheet,
-    });
-  }, [sheet]);
+  const upgrade = useCallback(
+    (onHide?: () => void) => {
+      const height = Dimensions.get('window').height - 50;
+      sheet.show({
+        snapPoints: [height],
+        hideHandle: true,
+        element: UpgradeViewSheet,
+        onHide: onHide,
+      });
+    },
+    [sheet]
+  );
 
   return upgrade;
 };
