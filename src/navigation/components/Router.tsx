@@ -119,7 +119,7 @@ export const Router = (props: Props) => {
           ) : undefined}
         </NavigationContainer>
       </View>
-      {props.Onboarding && <props.Onboarding />}
+      {!!props.Onboarding && props.Onboarding}
       <BottomSheet />
     </>
   );
