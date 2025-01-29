@@ -103,18 +103,21 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
           setIsLoadingPurchase(false);
           _success();
         } else {
-          requestPurchase(selectedIap.id).then((_hasPurchase) => {
-            setIsPremium(_hasPurchase);
-            setIsLoadingPurchase(false);
-            if (_hasPurchase) {
-              _success();
-            } else {
-              Alert.alert(
-                localize('iap.purchaseerrortitle'),
-                localize('iap.purchaseerrormsg')
-              );
-            }
-          });
+          requestPurchase(selectedIap.id)
+            .then((_hasPurchase) => {
+              setIsPremium(_hasPurchase);
+              if (_hasPurchase) {
+                _success();
+              } else {
+                Alert.alert(
+                  localize('iap.purchaseerrortitle'),
+                  localize('iap.purchaseerrormsg')
+                );
+              }
+            })
+            .finally(() => {
+              setIsLoadingPurchase(false);
+            });
         }
       });
     }
