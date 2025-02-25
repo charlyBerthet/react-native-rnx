@@ -58,7 +58,7 @@ interface Props {
   rootNoMargin?: boolean;
 }
 
-const LOW_DOWN_MARGIN_TOP = 25;
+const LOW_DOWN_MARGIN_TOP = 22;
 
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
