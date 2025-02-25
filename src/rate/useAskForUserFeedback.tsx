@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { Alert, Linking, Platform } from 'react-native';
 import Rate from 'react-native-rate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback } from 'react';
@@ -54,20 +54,32 @@ export const useAskForUserFeedback = () => {
                           {
                             text: localize('global.letsgo'),
                             onPress: () => {
-                              Rate.rate(
-                                {
-                                  AppleAppID: appleAppId,
-                                  GooglePackageName: googlePackageName,
-                                  preferInApp: false,
-                                },
-                                () => {
-                                  setTimeout(
-                                    () => setHasRatedTheApp(true),
-                                    10000
+                              switch (Platform.OS) {
+                                case 'ios': {
+                                  Linking.openURL(
+                                    `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${appleAppId}?action=write-review`
                                   );
-                                  resolve(true);
+                                  break;
                                 }
-                              );
+                                case 'macos': {
+                                  Linking.openURL(
+                                    `https://apps.apple.com/app/apple-store/id${appleAppId}?action=write-review`
+                                  );
+                                  break;
+                                }
+                                default: {
+                                  Rate.rate(
+                                    {
+                                      AppleAppID: appleAppId,
+                                      GooglePackageName: googlePackageName,
+                                      preferInApp: false,
+                                    },
+                                    () => {}
+                                  );
+                                }
+                              }
+                              setTimeout(() => setHasRatedTheApp(true), 10000);
+                              resolve(true);
                             },
                           },
                         ]
