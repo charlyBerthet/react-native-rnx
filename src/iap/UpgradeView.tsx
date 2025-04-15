@@ -235,12 +235,6 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
             )}
           </TouchableOpacity>
 
-          <Link
-            style={styles.skip}
-            title={localize('iap.skip')}
-            onPress={_close}
-          />
-
           <Text style={styles.disclaimer}>{localize('iap.disclaimer')}</Text>
           <View style={styles.policies}>
             <Link title={localize('iap.terms')} onPress={_openTerms} />
@@ -399,7 +393,7 @@ const styles = StyleSheet.create({
   rowPricePerMonth: {
     fontWeight: '700',
     fontSize: 13,
-    opacity: 0.7,
+    opacity: 0.65,
     marginLeft: 5,
   },
   rowFreeTrial: {
@@ -430,16 +424,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 15,
   },
-  skip: {
-    marginTop: 10,
-    transform: [{ scale: 0.9 }],
-  },
   disclaimer: {
     paddingHorizontal: 20,
     textAlign: 'justify',
     fontSize: 11,
     marginTop: 10,
     marginBottom: 5,
+    opacity: 0.7,
   },
   policies: {
     flexDirection: 'row',
