@@ -385,11 +385,11 @@ const styles = StyleSheet.create({
   },
   rowTitle: {
     fontWeight: '800',
-    fontSize: 16,
+    fontSize: 17,
   },
   rowSubTitle: {
     fontWeight: '600',
-    fontSize: 14,
+    fontSize: 13,
   },
   rowPricePerMonth: {
     fontWeight: '500',
@@ -400,7 +400,7 @@ const styles = StyleSheet.create({
   rowFreeTrial: {
     fontSize: 13,
     fontWeight: '600',
-    marginBottom: 3,
+    marginBottom: 2,
   },
   btnMain: {
     flexDirection: 'row',
