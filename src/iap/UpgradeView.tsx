@@ -461,7 +461,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     color: 'white',
     fontWeight: '900',
-    fontSize: 22,
+    fontSize: 26,
     marginBottom: 7,
   },
   featuresTxt: {
