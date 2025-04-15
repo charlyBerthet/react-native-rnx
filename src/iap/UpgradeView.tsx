@@ -371,6 +371,7 @@ const styles = StyleSheet.create({
   },
   rowSubTitleContainer: {
     flexDirection: 'row',
+    marginTop: 2,
   },
   check: {
     borderWidth: 2,
@@ -387,18 +388,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   rowSubTitle: {
-    fontWeight: '700',
+    fontWeight: '600',
     fontSize: 14,
   },
   rowPricePerMonth: {
-    fontWeight: '700',
+    fontWeight: '500',
     fontSize: 13,
-    opacity: 0.65,
-    marginLeft: 5,
+    opacity: 0.6,
+    marginLeft: 4,
   },
   rowFreeTrial: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '600',
+    marginBottom: 3,
   },
   btnMain: {
     flexDirection: 'row',
