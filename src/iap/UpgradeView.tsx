@@ -288,32 +288,6 @@ const SubscribeRow = (props: {
         )}
       </View>
       <View style={styles.rowContent}>
-        <View style={styles.rowTitleContainer}>
-          <Text style={styles.rowTitle}>
-            {localize(
-              'iap.' + (iap.durationMonth === 1 ? 'monthly' : 'yearly')
-            )}
-          </Text>
-          <Text style={styles.rowSubTitle}>
-            {localize('iap.rowTitle', {
-              price: iap.localizedPrice,
-              duration:
-                iap.durationMonth === 12
-                  ? localize('iap.rowTitleYear')
-                  : localize('iap.rowTitleMonth'),
-            })}
-          </Text>
-          {iap.durationMonth !== 1 && (
-            <Text style={styles.rowPricePerMonth}>
-              {localize('iap.rowPricePerMonth', {
-                price: `${getCurrency(iap.localizedPrice)}${(
-                  iap.price / iap.durationMonth
-                ).toFixed(2)}`,
-              })}
-            </Text>
-          )}
-        </View>
-
         {!!iap.freeTrialDaysDuration && (
           <Text
             style={[
@@ -328,6 +302,37 @@ const SubscribeRow = (props: {
             })}
           </Text>
         )}
+        <Text style={styles.rowTitle}>
+          {localize('iap.' + (iap.durationMonth === 1 ? 'monthly' : 'yearly'))}
+        </Text>
+        <View style={styles.rowSubTitleContainer}>
+          <Text style={styles.rowSubTitle}>
+            {localize('iap.rowTitle', {
+              price: iap.localizedPrice,
+              duration:
+                iap.durationMonth === 12
+                  ? localize(
+                      'iap.rowTitleYear' +
+                        (iap.freeTrialDaysDuration ? '_trial' : '')
+                    )
+                  : localize(
+                      'iap.rowTitleMonth' +
+                        (iap.freeTrialDaysDuration ? '_trial' : '')
+                    ),
+            })}
+          </Text>
+          {iap.durationMonth !== 1 && (
+            <Text style={styles.rowPricePerMonth}>
+              {localize('iap.rowPricePerMonth', {
+                price: `${getCurrency(iap.localizedPrice)}${(
+                  iap.price / iap.durationMonth
+                )
+                  .toFixed(2)
+                  .trim()}`,
+              })}
+            </Text>
+          )}
+        </View>
       </View>
 
       {!!iap.freeTrialDaysDuration && props.isActive && (
@@ -382,7 +387,7 @@ const styles = StyleSheet.create({
   rowContent: {
     flex: 1,
   },
-  rowTitleContainer: {
+  rowSubTitleContainer: {
     flexDirection: 'row',
   },
   check: {
@@ -396,8 +401,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   rowTitle: {
-    fontWeight: '900',
-    fontSize: 14,
+    fontWeight: '800',
+    fontSize: 16,
   },
   rowSubTitle: {
     fontWeight: '700',
@@ -410,8 +415,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   rowFreeTrial: {
-    fontWeight: '900',
-    fontSize: 10,
+    fontSize: 12,
   },
   btnMain: {
     flexDirection: 'row',
@@ -476,8 +480,8 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     color: 'white',
     fontWeight: '900',
-    fontSize: 18,
-    marginBottom: 5,
+    fontSize: 22,
+    marginBottom: 7,
   },
   featuresTxt: {
     shadowColor: '#000',
@@ -523,7 +527,8 @@ const styles = StyleSheet.create({
   },
   topnavBtnTxt: {
     color: 'white',
-    fontWeight: '900',
+    fontWeight: '700',
+    fontSize: 14,
   },
   topnavLeft: {
     position: 'absolute',
