@@ -223,18 +223,6 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
               >
                 {localize('iap.btnMain')}
               </Text>
-              {selectedIap?.freeTrialDaysDuration && (
-                <Text
-                  style={[
-                    styles.btnMainSubtitle,
-                    { color: theme.txtColorOnPrimaryColor },
-                  ]}
-                >
-                  {localize('iap.autodeductAfter', {
-                    x: selectedIap.freeTrialDaysDuration,
-                  })}
-                </Text>
-              )}
             </View>
             {isLoadingPurchase ? (
               <ActivityIndicator
@@ -302,6 +290,11 @@ const SubscribeRow = (props: {
       <View style={styles.rowContent}>
         <View style={styles.rowTitleContainer}>
           <Text style={styles.rowTitle}>
+            {localize(
+              'iap.' + (iap.durationMonth === 1 ? 'monthly' : 'yearly')
+            )}
+          </Text>
+          <Text style={styles.rowSubTitle}>
             {localize('iap.rowTitle', {
               price: iap.localizedPrice,
               duration:
@@ -406,6 +399,10 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize: 14,
   },
+  rowSubTitle: {
+    fontWeight: '700',
+    fontSize: 14,
+  },
   rowPricePerMonth: {
     fontWeight: '700',
     fontSize: 13,
@@ -479,7 +476,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     color: 'white',
     fontWeight: '900',
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 5,
   },
   featuresTxt: {
@@ -522,6 +519,7 @@ const styles = StyleSheet.create({
   topnavBtn: {
     paddingHorizontal: 20,
     paddingVertical: 5,
+    opacity: 0.7,
   },
   topnavBtnTxt: {
     color: 'white',
