@@ -427,16 +427,17 @@ const styles = StyleSheet.create({
   disclaimer: {
     paddingHorizontal: 20,
     textAlign: 'justify',
-    fontSize: 11,
-    marginTop: 10,
-    marginBottom: 5,
-    opacity: 0.7,
+    fontSize: 10,
+    marginTop: 15,
+    marginBottom: 10,
+    opacity: 0.6,
   },
   policies: {
     flexDirection: 'row',
     justifyContent: 'center',
     paddingHorizontal: 20,
     transform: [{ scale: 0.8 }],
+    marginBottom: 5,
   },
   featuresBackdrop: {
     position: 'absolute',
