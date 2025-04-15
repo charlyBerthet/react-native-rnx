@@ -50,15 +50,16 @@ const Component: React.FC<Props> = ({ screenHeight, onCancel, onContinue }) => {
       const usableList = list.filter(
         (l) => l.durationMonth === 1 || l.durationMonth === 12
       );
-      setIapList(
-        usableList.sort((a, b) =>
-          a.freeTrialDaysDuration && !b.freeTrialDaysDuration
-            ? 1
-            : !a.freeTrialDaysDuration && b.freeTrialDaysDuration
-            ? -1
-            : a.price - b.price
-        )
+      const subWithFreeTrial = usableList.filter(
+        (s) => !!s.freeTrialDaysDuration
       );
+      const subWithoutFreeTrial = usableList.filter(
+        (s) => !s.freeTrialDaysDuration
+      );
+      setIapList([
+        ...subWithFreeTrial.sort((a, b) => a.price - b.price),
+        ...subWithoutFreeTrial.sort((a, b) => a.price - b.price),
+      ]);
       setSelectedIap(
         usableList.find((p) => !!p.freeTrialDaysDuration) || usableList[0]
       );
@@ -492,7 +493,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: '700',
     fontSize: 14,
-    lineHeight: 25,
+    lineHeight: 22,
     marginLeft: 5,
   },
   topnav: {
