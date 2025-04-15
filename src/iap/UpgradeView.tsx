@@ -307,37 +307,29 @@ const SubscribeRow = (props: {
         </Text>
         <View style={styles.rowSubTitleContainer}>
           <Text style={styles.rowSubTitle}>
-            {localize('iap.rowTitle', {
-              price: iap.localizedPrice,
-              duration:
-                iap.durationMonth === 12
-                  ? localize(
-                      'iap.rowTitleYear' +
-                        (iap.freeTrialDaysDuration ? '_trial' : '')
-                    )
-                  : localize(
-                      'iap.rowTitleMonth' +
-                        (iap.freeTrialDaysDuration ? '_trial' : '')
-                    ),
-            })}
+            {localize(
+              'iap.rowTitle' + (iap.freeTrialDaysDuration ? '_trial' : ''),
+              {
+                price: iap.localizedPrice,
+                duration:
+                  iap.durationMonth === 12
+                    ? localize('iap.rowTitleYear').toLocaleLowerCase()
+                    : localize('iap.rowTitleMonth').toLocaleLowerCase(),
+              }
+            )}
           </Text>
           {iap.durationMonth !== 1 && (
             <Text style={styles.rowPricePerMonth}>
               {localize('iap.rowPricePerMonth', {
-                price: `${getCurrency(iap.localizedPrice)}${(
-                  iap.price / iap.durationMonth
-                )
-                  .toFixed(2)
-                  .trim()}`,
+                price: `${iap.localizedPrice.replace(
+                  /\d*[,.]?\d*/,
+                  (iap.price / iap.durationMonth).toFixed(2)
+                )}`,
               })}
             </Text>
           )}
         </View>
       </View>
-
-      {!!iap.freeTrialDaysDuration && props.isActive && (
-        <Icon name="star" solid color="#efbb00" size={22} />
-      )}
     </TouchableOpacity>
   );
 };
@@ -416,6 +408,7 @@ const styles = StyleSheet.create({
   },
   rowFreeTrial: {
     fontSize: 12,
+    fontWeight: '600',
   },
   btnMain: {
     flexDirection: 'row',
