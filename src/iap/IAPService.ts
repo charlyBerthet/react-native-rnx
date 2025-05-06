@@ -51,9 +51,11 @@ export const hasPurchasedPremium = async () => {
   try {
     const purchases = await RNIap.getAvailablePurchases();
     console.log('hasPurchasedPremium purchases.length', purchases.length);
-    return !!purchases.find(
+    const product = purchases.find(
       (p) => PREMIUM_PRODUCT_LIST.filter((p2) => p.productId === p2.id).length
     );
+    console.log('[RNX] hasPurchasedPremium product found:', product);
+    return !!product;
   } catch (e) {
     console.log('restore error', e);
     return Promise.reject();
