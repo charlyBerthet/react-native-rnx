@@ -40,6 +40,21 @@ export const Router = (props: Props) => {
   }, [props.tabs]);
 
   console.log('[RNX] render router');
+  React.useEffect(() => {
+    console.log('[RNX] router tabs changed');
+  }, [tabs]);
+  React.useEffect(() => {
+    console.log('[RNX] router isDarkTheme changed');
+  }, [isDarkTheme]);
+  React.useEffect(() => {
+    console.log('[RNX] router theme changed');
+  }, [theme]);
+  React.useEffect(() => {
+    console.log('[RNX] router props changed');
+  }, [props]);
+  React.useEffect(() => {
+    console.log('[RNX] router props.Onboarding changed');
+  }, [props.Onboarding]);
 
   return (
     <>
