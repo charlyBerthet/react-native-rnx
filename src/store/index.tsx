@@ -99,6 +99,9 @@ export function createStateProvider<T extends BaseStore>(
       });
     }, []);
 
+    console.log(
+      '[RNX] render StateProvider, thus force rerender childrens (eg: router)'
+    );
     return (
       <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
     );
