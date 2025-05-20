@@ -4,10 +4,8 @@ import React, {
   Dispatch,
   useContext,
   useEffect,
-  useState,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SplashScreen from './SplashScreen';
 
 interface StateProviderProps {
   children: JSX.Element | JSX.Element[];
@@ -65,7 +63,6 @@ export function createStateProvider<T extends BaseStore>(
   Store = createContext(initialContext);
 
   const StateProvider = ({ children }: StateProviderProps) => {
-    const [isInit, setIsInit] = useState(false);
     const [state, dispatch] = useReducer(
       (accState: T, action: { type: string; value: any }) => {
         // console.log('[RNX][StateProvider.dispatch] --> action', action);
@@ -99,14 +96,11 @@ export function createStateProvider<T extends BaseStore>(
       _getFromStorage().then((savedState) => {
         dispatch({ type: '__initStateFromStorage__', value: savedState });
         console.log('[RNX] createStateProvider init');
-        setIsInit(true);
       });
     }, []);
 
     return (
-      <Store.Provider value={{ state, dispatch }}>
-        {isInit ? children : <SplashScreen />}
-      </Store.Provider>
+      <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
     );
   };
 
