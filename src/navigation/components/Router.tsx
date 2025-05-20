@@ -39,6 +39,8 @@ export const Router = (props: Props) => {
     }));
   }, [props.tabs]);
 
+  console.log('[RNX] render router');
+
   return (
     <>
       <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
