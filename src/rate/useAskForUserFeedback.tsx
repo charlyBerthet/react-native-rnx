@@ -32,6 +32,7 @@ export const useAskForUserFeedback = () => {
         ) {
           setTimeout(
             () => {
+              console.log('[RNX] askForUserFeedback, forceRate:', forceRate);
               Alert.alert(
                 localize('rate.feelingTitle'),
                 localize('rate.feelingSubtitle'),
