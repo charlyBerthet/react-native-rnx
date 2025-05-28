@@ -3,12 +3,14 @@ import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 import type { CardModel } from '../models/CardModel';
+import { useIsPremium } from 'react-native-rnx';
 
 interface Props extends CommonViewProps, CardModel {}
 
 export const Card = (props: Props) => {
   const theme = useTheme();
   const mainColors = useMainColors(props.secondaryColor);
+  const { isPremium } = useIsPremium();
   return (
     <TouchableOpacity
       onPress={props.onPrimaryButtonPress}
@@ -55,6 +57,12 @@ export const Card = (props: Props) => {
             >
               {props.secondaryButtonLabel}
             </Text>
+            {props.isPremiumRequired && !isPremium && (
+              <Image
+                source={require('@assets/images/premium-gold.png')}
+                style={styles.premiumIcon}
+              />
+            )}
           </TouchableOpacity>
         </View>
       </View>
@@ -121,5 +129,12 @@ const styles = StyleSheet.create({
     height: 85,
     marginLeft: 10,
     marginRight: -5,
+  },
+  premiumIcon: {
+    position: 'absolute',
+    right: -5,
+    top: -2,
+    width: 12,
+    height: 12,
   },
 });
