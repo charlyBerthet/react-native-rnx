@@ -2,7 +2,7 @@ import type Theme from '../models/Theme';
 
 const lightTheme: Theme = {
   bgColor: '#fff',
-  txtColor: '#444',
+  txtColor: '#000',
   placeholderColor: '#888',
   primaryTxtColor: '#055640',
   primaryColor: '#0D8060',
