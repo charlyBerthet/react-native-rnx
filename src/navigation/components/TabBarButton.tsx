@@ -44,7 +44,6 @@ export function TabBarButton({
   navigation,
   tabs,
   Icon,
-  iconSize,
 }: Props) {
   const theme = useTheme();
   const { options } = descriptors[route.key];
