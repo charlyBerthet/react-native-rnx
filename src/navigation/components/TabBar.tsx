@@ -65,6 +65,7 @@ function TabBar({
           state={state}
           navigation={navigation}
           tabs={tabs}
+          content={tabs[route.name].content}
         />
       );
     },

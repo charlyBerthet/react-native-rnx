@@ -1,6 +1,7 @@
 import { BottomTabNavigationEventMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import { NavigationHelpers, ParamListBase } from '@react-navigation/native';
 import type { GestureDirection } from '@react-navigation/stack/lib/typescript/src/types';
+import { ReactNode } from 'react';
 
 export default interface Screen {
   name: string;
@@ -17,6 +18,7 @@ export interface Tab {
   title?: string;
   iconName: string;
   iconSize?: number;
+  content?: ReactNode;
   customButton?: (props: {
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
   }) => JSX.Element;

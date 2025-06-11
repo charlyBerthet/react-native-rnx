@@ -22,6 +22,7 @@ interface Props {
   state: TabNavigationState<ParamListBase>;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
   tabs: { [name: string]: Tab };
+  content?: React.ReactNode;
 }
 
 export function TabBarButton({
@@ -31,6 +32,7 @@ export function TabBarButton({
   state,
   navigation,
   tabs,
+  content,
 }: Props) {
   const theme = useTheme();
   const { options } = descriptors[route.key];
@@ -84,6 +86,7 @@ export function TabBarButton({
             : route.name}
         </Text>
       )}
+      {content}
     </TouchableOpacity>
   );
 }
