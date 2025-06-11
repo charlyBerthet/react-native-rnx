@@ -44,6 +44,7 @@ export function TabBarButton({
   navigation,
   tabs,
   Icon,
+  iconSize,
 }: Props) {
   const theme = useTheme();
   const { options } = descriptors[route.key];
@@ -89,7 +90,11 @@ export function TabBarButton({
         />
       )}
       {!!Icon && (
-        <Icon width={21} height={21} style={[{ color: theme.txtColor }]} />
+        <Icon
+          width={iconSize || 21}
+          height={iconSize || 21}
+          style={[{ color: theme.txtColor }]}
+        />
       )}
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, { color }]}>
