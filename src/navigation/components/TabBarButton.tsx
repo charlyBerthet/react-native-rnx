@@ -90,11 +90,7 @@ export function TabBarButton({
         />
       )}
       {!!Icon && (
-        <Icon
-          width={iconSize || 21}
-          height={iconSize || 21}
-          style={[{ color }]}
-        />
+        <Icon width={21} height={21} style={[{ color: theme.txtColor }]} />
       )}
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, { color }]}>
