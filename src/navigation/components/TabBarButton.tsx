@@ -8,7 +8,13 @@ import {
   TabNavigationState,
 } from '@react-navigation/native';
 import * as React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import {
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+} from 'react-native';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import { Tab } from '../models/Screen';
 import { useTheme } from 'react-native-rnx';
@@ -22,7 +28,12 @@ interface Props {
   state: TabNavigationState<ParamListBase>;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
   tabs: { [name: string]: Tab };
-  Icon?: (props: { isFocused: boolean; color: string }) => JSX.Element;
+  Icon?: (props: {
+    style: StyleProp<TextStyle>;
+    width: number;
+    height: number;
+  }) => JSX.Element;
+  iconSize?: number;
 }
 
 export function TabBarButton({
@@ -33,6 +44,7 @@ export function TabBarButton({
   navigation,
   tabs,
   Icon,
+  iconSize,
 }: Props) {
   const theme = useTheme();
   const { options } = descriptors[route.key];
@@ -77,7 +89,13 @@ export function TabBarButton({
           solid={true}
         />
       )}
-      {!!Icon && <Icon isFocused={isFocused} color={color} />}
+      {!!Icon && (
+        <Icon
+          width={iconSize || 21}
+          height={iconSize || 21}
+          style={[{ color }]}
+        />
+      )}
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, { color }]}>
           {options.tabBarLabel !== undefined
