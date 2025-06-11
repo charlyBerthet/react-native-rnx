@@ -66,6 +66,7 @@ function TabBar({
           navigation={navigation}
           tabs={tabs}
           Icon={tabs[route.name].Icon}
+          IconActive={tabs[route.name].IconActive}
           iconSize={tabs[route.name].iconSize}
         />
       );

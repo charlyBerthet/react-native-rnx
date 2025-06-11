@@ -23,6 +23,11 @@ export interface Tab {
     width: number;
     height: number;
   }) => JSX.Element;
+  IconActive?: (props: {
+    style: StyleProp<TextStyle>;
+    width: number;
+    height: number;
+  }) => JSX.Element;
   customButton?: (props: {
     navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
   }) => JSX.Element;

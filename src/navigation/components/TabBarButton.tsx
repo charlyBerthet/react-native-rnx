@@ -33,6 +33,11 @@ interface Props {
     width: number;
     height: number;
   }) => JSX.Element;
+  IconActive?: (props: {
+    style: StyleProp<TextStyle>;
+    width: number;
+    height: number;
+  }) => JSX.Element;
   iconSize?: number;
 }
 
@@ -44,6 +49,7 @@ export function TabBarButton({
   navigation,
   tabs,
   Icon,
+  IconActive,
   iconSize,
 }: Props) {
   const theme = useTheme();
@@ -70,6 +76,8 @@ export function TabBarButton({
     });
   }, [navigation, route.key]);
 
+  const _iconSize = iconSize || 21;
+
   return (
     <TouchableOpacity
       accessibilityRole="button"
@@ -84,18 +92,25 @@ export function TabBarButton({
       {!!tabs[route.name].iconName && (
         <FAIcon
           name={tabs[route.name].iconName}
-          size={21}
+          size={_iconSize}
           color={color}
           solid={true}
         />
       )}
-      {!!Icon && (
-        <Icon
-          width={iconSize || 21}
-          height={iconSize || 21}
-          style={[{ color: theme.txtColor }]}
-        />
-      )}
+      {!!Icon &&
+        (isFocused && IconActive ? (
+          <IconActive
+            width={_iconSize}
+            height={_iconSize}
+            style={[{ color: theme.txtColor }]}
+          />
+        ) : (
+          <Icon
+            width={_iconSize}
+            height={_iconSize}
+            style={[{ color: theme.txtColor }]}
+          />
+        ))}
       {options.tabBarShowLabel !== false && (
         <Text style={[styles.label, { color }]}>
           {options.tabBarLabel !== undefined
