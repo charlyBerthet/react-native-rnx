@@ -5,7 +5,7 @@ import { TabBarButton } from './TabBarButton';
 import { Tab } from '../models/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ParamListBase, TabNavigationState } from '@react-navigation/native';
-import { useTheme } from 'src/theme';
+import { useTheme } from 'react-native-rnx';
 
 type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
