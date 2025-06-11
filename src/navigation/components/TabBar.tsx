@@ -65,7 +65,7 @@ function TabBar({
           state={state}
           navigation={navigation}
           tabs={tabs}
-          content={tabs[route.name].content}
+          Icon={tabs[route.name].Icon}
         />
       );
     },
