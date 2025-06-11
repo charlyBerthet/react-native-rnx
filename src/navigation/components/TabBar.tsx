@@ -5,6 +5,7 @@ import { TabBarButton } from './TabBarButton';
 import { Tab } from '../models/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ParamListBase, TabNavigationState } from '@react-navigation/native';
+import { useTheme } from 'src/theme';
 
 type NavigationRoute = TabNavigationState<ParamListBase>['routes'][0];
 
@@ -34,6 +35,7 @@ function TabBar({
           state.routes[state.index].state!!.index!!
         ].name;
   }, [state.index, state.routes]);
+  const theme = useTheme();
 
   const isCurrentRouteTabBar = !!currentRouteName && !!tabs[currentRouteName];
   const isTabBarVisible = !!isCurrentRouteTabBar;
@@ -88,6 +90,7 @@ function TabBar({
           <View
             style={[
               styles.tabBarContentContainer,
+              { borderTopColor: theme.borderColor },
               !isTabBarVisible && styles.tabBarContentContainerHidden,
             ]}
           >
@@ -133,6 +136,7 @@ const styles = StyleSheet.create({
   tabBarContentContainer: {
     flexDirection: 'row',
     shadowColor: 'transparent',
+    borderTopWidth: 1,
   },
   tabBarContentContainerHidden: {
     display: 'none',
