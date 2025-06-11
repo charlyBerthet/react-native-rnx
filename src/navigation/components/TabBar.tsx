@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   tabBarContentContainer: {
     flexDirection: 'row',
     shadowColor: 'transparent',
-    borderTopWidth: 1,
+    borderTopWidth: StyleSheet.hairlineWidth,
   },
   tabBarContentContainerHidden: {
     display: 'none',
