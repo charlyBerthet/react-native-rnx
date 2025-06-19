@@ -64,6 +64,7 @@ interface Props {
   noFlex?: boolean;
   flexOne?: boolean;
   rootNoMargin?: boolean;
+  headerStyle?: ViewStyle;
   keyboardShouldPersistTaps?:
     | boolean
     | 'always'
@@ -80,6 +81,7 @@ export const ScrollableScreen = (props: Props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerStyle: props.headerStyle,
       headerTitle:
         forceTitleInHeader || isTitleVisibleInHeader
           ? props.titleElement || props.title
@@ -166,6 +168,7 @@ export const ScrollableScreen = (props: Props) => {
     props.titleElement,
     props.headerLeftElement,
     props.headerRightElement,
+    props.headerStyle,
   ]);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
