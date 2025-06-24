@@ -1,4 +1,4 @@
-import type { ImageSourcePropType } from 'react-native';
+import type { ImageSourcePropType, StyleProp, ViewStyle } from 'react-native';
 
 export interface CardModel {
   title: string;
@@ -12,4 +12,5 @@ export interface CardModel {
   secondaryColor?: boolean;
   onLongPress?: () => void;
   isPremiumRequired?: boolean;
+  style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
 }
