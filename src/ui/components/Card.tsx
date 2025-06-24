@@ -13,7 +13,7 @@ export const Card = (props: Props) => {
   const { isPremium } = useIsPremium();
   return (
     <TouchableOpacity
-      onPress={props.onPrimaryButtonPress}
+      onPress={props.onSecondaryButtonPress}
       onLongPress={props.onLongPress}
       style={[
         styles.root,
