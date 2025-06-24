@@ -25,26 +25,23 @@ export const Card = (props: Props) => {
       activeOpacity={0.9}
     >
       <View style={styles.mainContainer}>
-        <Text style={[styles.title, { color: theme.txtColorOnPrimaryColor }]}>
+        <Text style={[styles.title, { color: theme.txtColor }]}>
           {props.title}
         </Text>
-        <Text style={[styles.detail, { color: theme.txtColorOnPrimaryColor }]}>
+        <Text style={[styles.detail, { color: theme.txtColor }]}>
           {props.detail}
         </Text>
-        <Text
-          style={[styles.subdetail, { color: theme.txtColorOnPrimaryColor }]}
-        >
+        <Text style={[styles.subdetail, { color: theme.txtColor }]}>
           {props.subdetail}
         </Text>
         <View style={styles.btns}>
           <TouchableOpacity
             onPress={props.onPrimaryButtonPress}
-            style={[
-              styles.btn,
-              { backgroundColor: theme.txtColorOnPrimaryColor },
-            ]}
+            style={[styles.btn, { backgroundColor: theme.primaryColor }]}
           >
-            <Text style={[styles.btnLabel, { color: mainColors.bg }]}>
+            <Text
+              style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
+            >
               {props.primaryButtonLabel}
             </Text>
           </TouchableOpacity>
@@ -52,9 +49,7 @@ export const Card = (props: Props) => {
             onPress={props.onSecondaryButtonPress}
             style={[styles.btn, styles.btnRight]}
           >
-            <Text
-              style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
-            >
+            <Text style={[styles.btnLabel, { color: theme.primaryTxtColor }]}>
               {props.secondaryButtonLabel}
             </Text>
             {props.isPremiumRequired && !isPremium && (
