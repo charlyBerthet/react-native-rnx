@@ -35,6 +35,7 @@ interface Props {
     disabled?: boolean;
     isLoading?: boolean;
     defaultTxtColor?: boolean;
+    defaultTxtColorCode?: string;
     paddingRight?: number;
     paddingLeft?: number;
   }[];
@@ -131,6 +132,7 @@ export const ScrollableScreen = (props: Props) => {
                       }
                     }}
                     defaultTxtColor={btnProps.defaultTxtColor}
+                    defaultTxtColorCode={btnProps.defaultTxtColorCode}
                     destructive={btnProps.destructive}
                     secondary={btnProps.secondary}
                     disabled={btnProps.disabled}

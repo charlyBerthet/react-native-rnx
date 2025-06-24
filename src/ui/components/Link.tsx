@@ -17,6 +17,7 @@ interface Props extends CommonViewProps {
   secondary?: boolean;
   destructive?: boolean;
   defaultTxtColor?: boolean;
+  defaultTxtColorCode?: string;
   disabled?: boolean;
   isLoading?: boolean;
 }
@@ -42,11 +43,12 @@ export const Link = (props: Props) => {
             name={props.icon}
             size={16}
             color={
-              props.defaultTxtColor
+              props.defaultTxtColorCode ||
+              (props.defaultTxtColor
                 ? theme.txtColor
                 : props.destructive
                 ? theme.destructiveColor
-                : mainColors.txt
+                : mainColors.txt)
             }
             solid={props.iconSolid === false ? false : true}
             style={styles.icon}
@@ -58,11 +60,13 @@ export const Link = (props: Props) => {
           style={[
             styles.title,
             {
-              color: props.defaultTxtColor
-                ? theme.txtColor
-                : props.destructive
-                ? theme.destructiveColor
-                : mainColors.txt,
+              color:
+                props.defaultTxtColorCode ||
+                (props.defaultTxtColor
+                  ? theme.txtColor
+                  : props.destructive
+                  ? theme.destructiveColor
+                  : mainColors.txt),
             },
           ]}
         >
