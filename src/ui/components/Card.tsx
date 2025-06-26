@@ -44,6 +44,12 @@ export const Card = (props: Props) => {
             >
               {props.primaryButtonLabel}
             </Text>
+            {props.isPremiumRequired && !isPremium && (
+              <Image
+                source={require('@assets/images/premium-gold.png')}
+                style={styles.premiumIcon}
+              />
+            )}
           </TouchableOpacity>
           <TouchableOpacity
             onPress={props.onSecondaryButtonPress}
@@ -52,12 +58,6 @@ export const Card = (props: Props) => {
             <Text style={[styles.btnLabel, { color: theme.primaryTxtColor }]}>
               {props.secondaryButtonLabel}
             </Text>
-            {props.isPremiumRequired && !isPremium && (
-              <Image
-                source={require('@assets/images/premium-gold.png')}
-                style={styles.premiumIcon}
-              />
-            )}
           </TouchableOpacity>
         </View>
       </View>
