@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   premiumIcon: {
     position: 'absolute',
     right: -5,
-    top: -4,
+    top: -7,
     width: 12,
     height: 12,
   },
