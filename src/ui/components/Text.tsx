@@ -8,6 +8,7 @@ interface Props extends CommonTextProps {
   children: string | (string | JSX.Element)[] | JSX.Element;
   primary?: boolean;
   secondary?: boolean;
+  // Number of lines
   numberOfLines?: number;
 }
 
