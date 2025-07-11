@@ -8,6 +8,7 @@ interface Props extends CommonTextProps {
   children: string | (string | JSX.Element)[] | JSX.Element;
   primary?: boolean;
   secondary?: boolean;
+  numberOfLines?: number;
 }
 
 export const Text = (props: Props) => {
@@ -21,6 +22,7 @@ export const Text = (props: Props) => {
         { color: shouldUseMain ? mainColors.txt : theme.txtColor },
         props.style,
       ]}
+      numberOfLines={props.numberOfLines}
     >
       {props.children}
     </RNText>
