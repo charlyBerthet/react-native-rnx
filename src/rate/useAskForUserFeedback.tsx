@@ -46,13 +46,13 @@ export const useAskForUserFeedback = () => {
                           localize('rate.reportFeedbackSubtitle'),
                           [
                             {
-                              text: localize('global.no'),
+                              text: localize('global.cancel'),
                               onPress: () => {
                                 resolve('abort');
                               },
                             },
                             {
-                              text: localize('global.yes'),
+                              text: localize('global.continue'),
                               onPress: () => {
                                 resolve('open_feedback');
                               },
