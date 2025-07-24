@@ -14,88 +14,112 @@ export const useAskForUserFeedback = () => {
       forceRate?: boolean,
       googlePackageName?: string
     ) => {
-      return new Promise(async (resolve) => {
-        const openCount = forceRate
-          ? 1
-          : parseInt((await AsyncStorage.getItem('openCount')) || '0', 10);
+      return new Promise<'rated' | 'open_feedback' | 'abort'>(
+        async (resolve) => {
+          const openCount = forceRate
+            ? 1
+            : parseInt((await AsyncStorage.getItem('openCount')) || '0', 10);
 
-        if (!forceRate) {
-          AsyncStorage.setItem('openCount', openCount + 1 + '');
-        }
+          if (!forceRate) {
+            AsyncStorage.setItem('openCount', openCount + 1 + '');
+          }
 
-        if (
-          openCount === 1 ||
-          openCount === 30 ||
-          openCount === 90 ||
-          openCount === 200 ||
-          openCount === 400
-        ) {
-          setTimeout(
-            () => {
-              console.log('[RNX] askForUserFeedback, forceRate:', forceRate);
-              Alert.alert(
-                localize('rate.feelingTitle'),
-                localize('rate.feelingSubtitle'),
-                [
-                  {
-                    text: localize('global.no'),
-                    onPress: () => resolve(false),
-                  },
-                  {
-                    text: localize('global.yes'),
-                    onPress: () => {
-                      Alert.alert(
-                        localize('rate.askRateTitle'),
-                        localize('rate.askRateSubtitle'),
-                        [
-                          {
-                            text: localize('global.cancel'),
-                            onPress: () => resolve(false),
-                          },
-                          {
-                            text: localize('global.letsgo'),
-                            onPress: () => {
-                              switch (Platform.OS) {
-                                case 'ios': {
-                                  Linking.openURL(
-                                    `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${appleAppId}?action=write-review`
-                                  );
-                                  break;
-                                }
-                                case 'macos': {
-                                  Linking.openURL(
-                                    `https://apps.apple.com/app/apple-store/id${appleAppId}?action=write-review`
-                                  );
-                                  break;
-                                }
-                                default: {
-                                  Rate.rate(
-                                    {
-                                      AppleAppID: appleAppId,
-                                      GooglePackageName: googlePackageName,
-                                      preferInApp: false,
-                                    },
-                                    () => {}
-                                  );
-                                }
-                              }
-                              setTimeout(() => setHasRatedTheApp(true), 10000);
-                              resolve(true);
+          if (
+            openCount === 1 ||
+            openCount === 30 ||
+            openCount === 90 ||
+            openCount === 200 ||
+            openCount === 400
+          ) {
+            setTimeout(
+              () => {
+                console.log('[RNX] askForUserFeedback, forceRate:', forceRate);
+                Alert.alert(
+                  localize('rate.feelingTitle'),
+                  localize('rate.feelingSubtitle'),
+                  [
+                    {
+                      text: localize('global.no'),
+                      onPress: () => {
+                        Alert.alert(
+                          localize('rate.reportFeedbackTitle'),
+                          localize('rate.reportFeedbackSubtitle'),
+                          [
+                            {
+                              text: localize('global.no'),
+                              onPress: () => {
+                                resolve('abort');
+                              },
                             },
-                          },
-                        ]
-                      );
+                            {
+                              text: localize('global.yes'),
+                              onPress: () => {
+                                resolve('open_feedback');
+                              },
+                            },
+                          ]
+                        );
+                      },
                     },
-                  },
-                ]
-              );
-            },
-            forceRate ? 1 : 2000
-          );
-        } else {
-          resolve(false);
+                    {
+                      text: localize('global.yes'),
+                      onPress: () => {
+                        Alert.alert(
+                          localize('rate.askRateTitle'),
+                          localize('rate.askRateSubtitle'),
+                          [
+                            {
+                              text: localize('global.cancel'),
+                              onPress: () => resolve('abort'),
+                            },
+                            {
+                              text: localize('global.letsgo'),
+                              onPress: () => {
+                                switch (Platform.OS) {
+                                  case 'ios': {
+                                    Linking.openURL(
+                                      `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${appleAppId}?action=write-review`
+                                    );
+                                    break;
+                                  }
+                                  case 'macos': {
+                                    Linking.openURL(
+                                      `https://apps.apple.com/app/apple-store/id${appleAppId}?action=write-review`
+                                    );
+                                    break;
+                                  }
+                                  default: {
+                                    Rate.rate(
+                                      {
+                                        AppleAppID: appleAppId,
+                                        GooglePackageName: googlePackageName,
+                                        preferInApp: false,
+                                      },
+                                      () => {}
+                                    );
+                                  }
+                                }
+                                setTimeout(
+                                  () => setHasRatedTheApp(true),
+                                  10000
+                                );
+                                resolve('rated');
+                              },
+                            },
+                          ]
+                        );
+                      },
+                    },
+                  ]
+                );
+              },
+              forceRate ? 1 : 2000
+            );
+          } else {
+            resolve('abort');
+          }
         }
-      });
+      );
     },
     [localize, setHasRatedTheApp]
   );
