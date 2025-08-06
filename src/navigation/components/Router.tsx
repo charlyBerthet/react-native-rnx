@@ -30,12 +30,12 @@ interface Props {
         style: StyleProp<TextStyle>;
         width: number;
         height: number;
-      }) => JSX.Element;
+      }) => JSX.Element | null;
       ActiveIcon: (props: {
         style: StyleProp<TextStyle>;
         width: number;
         height: number;
-      }) => JSX.Element;
+      }) => JSX.Element | null;
       iconSize?: number;
     };
   };
