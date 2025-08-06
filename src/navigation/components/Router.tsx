@@ -1,11 +1,16 @@
 import * as React from 'react';
-import { View, StyleSheet, useColorScheme } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  useColorScheme,
+  TextStyle,
+  StyleProp,
+} from 'react-native';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import type Screen from '../models/Screen';
 import { Stack } from './Stack';
@@ -21,7 +26,16 @@ interface Props {
       screens: Screen[];
       initial: string;
       title?: string;
-      iconName: string;
+      Icon: (props: {
+        style: StyleProp<TextStyle>;
+        width: number;
+        height: number;
+      }) => JSX.Element;
+      ActiveIcon: (props: {
+        style: StyleProp<TextStyle>;
+        width: number;
+        height: number;
+      }) => JSX.Element;
       iconSize?: number;
     };
   };
@@ -74,13 +88,35 @@ export const Router = (props: Props) => {
                 );
                 return {
                   headerShown: false,
-                  tabBarIcon: ({ color }) => {
-                    return (
-                      <Icon
-                        name={props.tabs[_tabNavProps.route.name].iconName}
-                        size={21}
-                        color={color}
-                        solid={true}
+                  tabBarIcon: ({ focused }) => {
+                    const TabIcon = props.tabs[_tabNavProps.route.name].Icon;
+                    const TabActiveIcon =
+                      props.tabs[_tabNavProps.route.name].ActiveIcon;
+                    const iconSize =
+                      props.tabs[_tabNavProps.route.name].iconSize || 21;
+                    return focused ? (
+                      <TabIcon
+                        width={iconSize}
+                        height={iconSize}
+                        style={[
+                          {
+                            color: focused
+                              ? theme.primaryColor
+                              : theme.txtColor,
+                          },
+                        ]}
+                      />
+                    ) : (
+                      <TabActiveIcon
+                        width={iconSize}
+                        height={iconSize}
+                        style={[
+                          {
+                            color: focused
+                              ? theme.primaryColor
+                              : theme.txtColor,
+                          },
+                        ]}
                       />
                     );
                   },
