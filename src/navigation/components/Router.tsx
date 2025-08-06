@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBarLabelStyle: {
-    fontSize: 13,
+    fontSize: 18,
     fontWeight: '500',
   },
 });
