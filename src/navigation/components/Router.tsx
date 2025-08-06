@@ -95,7 +95,7 @@ export const Router = (props: Props) => {
                     const iconSize =
                       props.tabs[_tabNavProps.route.name].iconSize || 21;
                     return focused ? (
-                      <TabIcon
+                      <TabActiveIcon
                         width={iconSize}
                         height={iconSize}
                         style={[
@@ -107,7 +107,7 @@ export const Router = (props: Props) => {
                         ]}
                       />
                     ) : (
-                      <TabActiveIcon
+                      <TabIcon
                         width={iconSize}
                         height={iconSize}
                         style={[
@@ -122,7 +122,8 @@ export const Router = (props: Props) => {
                   },
                   tabBarShowLabel: props.hideTabLabels ? false : true,
                   tabBarActiveTintColor: theme.primaryColor,
-                  tabBarInactiveTintColor: 'gray',
+                  tabBarInactiveTintColor: theme.txtColor,
+                  tabBarLabelStyle: styles.tabBarLabelStyle,
                   tabBarStyle: [
                     {
                       display:
@@ -169,5 +170,9 @@ export const Router = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+  },
+  tabBarLabelStyle: {
+    fontSize: 13,
+    fontWeight: '500',
   },
 });
