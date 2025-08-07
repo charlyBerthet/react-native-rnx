@@ -101,9 +101,7 @@ export const Router = (props: Props) => {
                         height={iconSize}
                         style={[
                           {
-                            color: focused
-                              ? theme.primaryColor
-                              : theme.txtColor,
+                            color: theme.primaryColor,
                           },
                         ]}
                       />
@@ -113,10 +111,9 @@ export const Router = (props: Props) => {
                         height={iconSize}
                         style={[
                           {
-                            color: focused
-                              ? theme.primaryColor
-                              : theme.txtColor,
+                            color: theme.txtColor,
                           },
+                          styles.notFocused,
                         ]}
                       />
                     );
@@ -134,6 +131,7 @@ export const Router = (props: Props) => {
                               ? theme.primaryTxtColor
                               : theme.txtColor,
                           },
+                          !focused && styles.notFocused,
                         ]}
                       >
                         {props.tabs[_tabNavProps.route.name].title}
@@ -190,6 +188,9 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 12,
     fontWeight: '500',
-    backgroundColor: 'red',
+    marginTop: -2,
+  },
+  notFocused: {
+    opacity: 0.7,
   },
 });
