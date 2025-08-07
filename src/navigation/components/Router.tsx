@@ -113,7 +113,7 @@ export const Router = (props: Props) => {
                           {
                             color: theme.txtColor,
                           },
-                          styles.notFocused,
+                          styles.notFocusedIcon,
                         ]}
                       />
                     );
@@ -188,7 +188,10 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 12,
     fontWeight: '500',
-    marginTop: -2,
+    marginTop: -4,
+  },
+  notFocusedIcon: {
+    opacity: 0.8,
   },
   notFocused: {
     opacity: 0.7,
