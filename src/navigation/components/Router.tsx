@@ -5,6 +5,7 @@ import {
   useColorScheme,
   TextStyle,
   StyleProp,
+  Text,
 } from 'react-native';
 import {
   NavigationContainer,
@@ -123,7 +124,13 @@ export const Router = (props: Props) => {
                   tabBarShowLabel: props.hideTabLabels ? false : true,
                   tabBarActiveTintColor: theme.primaryColor,
                   tabBarInactiveTintColor: theme.txtColor,
-                  tabBarLabelStyle: styles.tabBarLabelStyle,
+                  tabBarLabel: ({ color }) => {
+                    return (
+                      <Text style={[styles.tabBarLabelStyle, { color: color }]}>
+                        {props.tabs[_tabNavProps.route.name].title}
+                      </Text>
+                    );
+                  },
                   tabBarStyle: [
                     {
                       display:
@@ -172,7 +179,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBarLabelStyle: {
-    fontSize: 18,
-    fontWeight: '700',
+    fontSize: 14,
+    fontWeight: '500',
   },
 });
