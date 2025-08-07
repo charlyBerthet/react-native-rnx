@@ -94,14 +94,14 @@ export const Router = (props: Props) => {
                     const TabActiveIcon =
                       props.tabs[_tabNavProps.route.name].ActiveIcon;
                     const iconSize =
-                      props.tabs[_tabNavProps.route.name].iconSize || 21;
+                      props.tabs[_tabNavProps.route.name].iconSize || 22;
                     return focused ? (
                       <TabActiveIcon
                         width={iconSize}
                         height={iconSize}
                         style={[
                           {
-                            color: theme.primaryColor,
+                            color: theme.txtColor,
                           },
                         ]}
                       />
@@ -127,9 +127,7 @@ export const Router = (props: Props) => {
                         style={[
                           styles.tabBarLabelStyle,
                           {
-                            color: focused
-                              ? theme.primaryTxtColor
-                              : theme.txtColor,
+                            color: theme.txtColor,
                           },
                           !focused && styles.notFocused,
                         ]}
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 11,
     fontWeight: '500',
-    marginTop: -24,
+    marginTop: -15,
   },
   notFocusedIcon: {
     opacity: 0.7,
