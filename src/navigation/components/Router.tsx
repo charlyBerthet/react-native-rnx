@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 12,
     fontWeight: '500',
-    marginTop: -4,
+    marginTop: -24,
   },
   notFocusedIcon: {
     opacity: 0.8,
