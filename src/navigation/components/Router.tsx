@@ -190,5 +190,6 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 12,
     fontWeight: '500',
+    backgroundColor: 'red',
   },
 });
