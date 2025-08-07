@@ -124,9 +124,18 @@ export const Router = (props: Props) => {
                   tabBarShowLabel: props.hideTabLabels ? false : true,
                   tabBarActiveTintColor: theme.primaryColor,
                   tabBarInactiveTintColor: theme.txtColor,
-                  tabBarLabel: ({ color }) => {
+                  tabBarLabel: ({ focused }) => {
                     return (
-                      <Text style={[styles.tabBarLabelStyle, { color: color }]}>
+                      <Text
+                        style={[
+                          styles.tabBarLabelStyle,
+                          {
+                            color: focused
+                              ? theme.primaryTxtColor
+                              : theme.txtColor,
+                          },
+                        ]}
+                      >
                         {props.tabs[_tabNavProps.route.name].title}
                       </Text>
                     );
@@ -179,7 +188,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBarLabelStyle: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
 });
