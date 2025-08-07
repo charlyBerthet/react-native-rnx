@@ -137,9 +137,7 @@ export const Router = (props: Props) => {
                     );
                   },
                   tabBarStyle: [
-                    styles.tabBar,
                     {
-                      borderTopColor: theme.borderColor,
                       display:
                         !routeName ||
                         routeName ===
@@ -184,9 +182,6 @@ export const Router = (props: Props) => {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-  },
-  tabBar: {
-    borderTopWidth: StyleSheet.hairlineWidth,
   },
   tabBarLabelStyle: {
     fontSize: 11,
