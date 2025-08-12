@@ -6,6 +6,8 @@ import {
   TextStyle,
   StyleProp,
   Text,
+  Dimensions,
+  Platform,
 } from 'react-native';
 import {
   NavigationContainer,
@@ -42,6 +44,14 @@ interface Props {
   };
   Onboarding?: JSX.Element;
 }
+
+const { height, width } = Dimensions.get('window');
+const aspectRatio = height / width;
+
+const isTablet =
+  (Platform.OS === 'ios' || Platform.OS === 'android') &&
+  Math.min(width, height) >= 600 &&
+  aspectRatio <= 1.6;
 
 export const Router = (props: Props) => {
   const theme = useTheme();
@@ -126,6 +136,7 @@ export const Router = (props: Props) => {
                       <Text
                         style={[
                           styles.tabBarLabelStyle,
+                          isTablet && styles.tabBarLabelStyleTablet,
                           {
                             color: theme.txtColor,
                           },
@@ -186,7 +197,11 @@ const styles = StyleSheet.create({
   tabBarLabelStyle: {
     fontSize: 11,
     fontWeight: '500',
+    marginTop: -4,
+  },
+  tabBarLabelStyleTablet: {
     marginTop: 0,
+    marginLeft: 25,
   },
   notFocusedIcon: {
     opacity: 0.7,
