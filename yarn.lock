@@ -7919,11 +7919,6 @@ react-native-gesture-handler@^1.10.3:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
-react-native-iap@^12.2.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-12.2.0.tgz#46ce1bb127beb2202e6ba7ce0c5f1609aed06665"
-  integrity sha512-FTwR7YVgBxJUrKv3N+RdHAXIycTaioKWppJhioyN4aJFNljx6HQcr0pvlZsQZeaEf3OEbs8rDEEkAz7RMdj8fA==
-
 react-native-linear-gradient@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
