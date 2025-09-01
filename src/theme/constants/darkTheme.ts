@@ -12,6 +12,8 @@ const darkTheme: Theme = {
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#666',
   destructiveColor: '#ed0b0b',
+  cardBgColor: '#0A0A0A',
+  cardColor: '#171717',
 };
 
 export default darkTheme;

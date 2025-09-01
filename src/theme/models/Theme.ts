@@ -10,4 +10,6 @@ export default interface Theme {
   txtColorOnPrimaryColor: string;
   borderColor: string;
   destructiveColor: string;
+  cardBgColor: string;
+  cardColor: string;
 }

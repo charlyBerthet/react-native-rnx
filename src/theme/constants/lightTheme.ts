@@ -12,6 +12,8 @@ const lightTheme: Theme = {
   txtColorOnPrimaryColor: '#fff',
   borderColor: '#ddd',
   destructiveColor: '#ed0b0b',
+  cardBgColor: '#F4F4F4',
+  cardColor: '#FFFFFF',
 };
 
 export default lightTheme;
