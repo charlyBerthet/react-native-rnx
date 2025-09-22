@@ -12,4 +12,5 @@ export default interface Theme {
   destructiveColor: string;
   cardBgColor: string;
   cardColor: string;
+  bottomSheetBgColor: string;
 }

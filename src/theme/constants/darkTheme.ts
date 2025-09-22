@@ -14,6 +14,7 @@ const darkTheme: Theme = {
   destructiveColor: '#ed0b0b',
   cardBgColor: '#0A0A0A',
   cardColor: '#171717',
+  bottomSheetBgColor: '#222222',
 };
 
 export default darkTheme;

@@ -14,6 +14,7 @@ const lightTheme: Theme = {
   destructiveColor: '#ed0b0b',
   cardBgColor: '#F4F4F4',
   cardColor: '#FFFFFF',
+  bottomSheetBgColor: '#FFFFFF',
 };
 
 export default lightTheme;
