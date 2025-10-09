@@ -1,18 +1,18 @@
-import React, { useLayoutEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import React, { useLayoutEffect, useState } from 'react';
 import {
-  View,
-  ScrollView,
-  StyleSheet,
-  NativeSyntheticEvent,
   NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
   StyleProp,
+  StyleSheet,
+  View,
   ViewStyle,
 } from 'react-native';
 
-import { Title } from './Title';
-import { Subtitle } from './Subtitle';
 import { Link } from './Link';
+import { Subtitle } from './Subtitle';
+import { Title } from './Title';
 
 interface Props {
   children:
@@ -59,7 +59,7 @@ interface Props {
   rootNoMargin?: boolean;
 }
 
-const LOW_DOWN_MARGIN_TOP = 22;
+const LOW_DOWN_MARGIN_TOP = 25;
 
 export const ScrollableScreen = (props: Props) => {
   const navigation = useNavigation();
@@ -73,7 +73,7 @@ export const ScrollableScreen = (props: Props) => {
           ? props.titleElement || props.title
           : '',
       headerStyle: {
-        height: props.headerLowDown ? 110 : undefined,
+        height: props.headerLowDown ? 118 : undefined,
       },
       headerTitleStyle: {
         fontWeight: '900',
