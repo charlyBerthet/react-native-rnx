@@ -1,17 +1,18 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
-  useReducer,
   createContext,
   Dispatch,
   useContext,
   useEffect,
+  useReducer,
 } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface StateProviderProps {
   children: JSX.Element | JSX.Element[];
 }
 
 let Store: React.Context<any>;
+let currentState: BaseStore | undefined;
 
 interface BaseStore {
   isPremium?: boolean;
@@ -60,6 +61,7 @@ export function createStateProvider<T extends BaseStore>(
     state: initial,
     dispatch: () => {},
   };
+  currentState = initial;
   Store = createContext(initialContext);
 
   const StateProvider = ({ children }: StateProviderProps) => {
@@ -83,6 +85,7 @@ export function createStateProvider<T extends BaseStore>(
           ...reducer({ ...accState, ...partialUpdate }, action),
         };
         _setToStorage(newState);
+        currentState = newState;
         // console.log(
         //   '[RNX][StateProvider.dispatch] <-- stateAfter',
         //   JSON.stringify(newState)
@@ -125,4 +128,14 @@ export function useGlobalState<T extends BaseStore>() {
   };
 
   return { globalState: state as T, dispatch: _dispatch, setGlobalState };
+}
+
+export function getCurrentState<T extends BaseStore>() {
+  if (!Store) {
+    throw 'Please initialize Store first using createStateProvider';
+  }
+  if (!currentState) {
+    throw 'Current state is not yet available. Make sure the provider has been rendered.';
+  }
+  return currentState as T;
 }
