@@ -24,7 +24,7 @@ export const hoursDiff = (
 ) => {
   const durationMs = toDate - fromDate;
   const hours = durationMs / (1000 * 60 * 60);
-  return notRounded ? hours : Math.floor(hours);
+  return notRounded ? hours : Math.round(hours);
 };
 
 export const daysDiff = (
