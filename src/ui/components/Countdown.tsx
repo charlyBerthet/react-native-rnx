@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import { useTheme, useMainColors } from '../../theme';
+import { useMainColors, useTheme } from '../../theme';
+import { daysDiff, hoursDiff, stringifyTimeMS } from '../../utils';
 import type CommonViewProps from '../models/CommonViewProps';
 import { Text } from './Text';
-import { stringifyTimeMS, hoursDiff, daysDiff } from '../../utils';
 
 interface Props extends CommonViewProps {
   startsAt: number;
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '500',
     opacity: 0.7,
-    marginTop: 2,
-    marginBottom: -25,
+    marginTop: 5,
+    marginBottom: -28,
   },
 });
