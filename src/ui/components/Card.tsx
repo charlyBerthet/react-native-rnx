@@ -1,9 +1,9 @@
 import React from 'react';
-import { Text, StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { useMainColors, useTheme } from '../../theme';
-import type CommonViewProps from '../models/CommonViewProps';
-import type { CardModel } from '../models/CardModel';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useIsPremium } from 'react-native-rnx';
+import { useMainColors, useTheme } from '../../theme';
+import type { CardModel } from '../models/CardModel';
+import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps, CardModel {}
 
@@ -44,12 +44,14 @@ export const Card = (props: Props) => {
             >
               {props.primaryButtonLabel}
             </Text>
-            {props.isPremiumRequired && !isPremium && (
-              <Image
-                source={require('@assets/images/premium-gold.png')}
-                style={styles.premiumIcon}
-              />
-            )}
+            {props.isPremiumRequired &&
+              !isPremium &&
+              (props.premiumElement || (
+                <Image
+                  source={require('@assets/images/premium-gold.png')}
+                  style={styles.premiumIcon}
+                />
+              ))}
           </TouchableOpacity>
           <TouchableOpacity
             onPress={props.onSecondaryButtonPress}

@@ -13,4 +13,5 @@ export interface CardModel {
   onLongPress?: () => void;
   isPremiumRequired?: boolean;
   style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
+  premiumElement?: React.ReactNode;
 }
