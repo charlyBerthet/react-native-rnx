@@ -1,9 +1,8 @@
-import { getLightColor } from 'lib/typescript';
 import { useColorScheme } from 'react-native';
-import { getDarkTheme } from '../constants/theme';
+import { getDarkTheme, getLightTheme } from '../constants/theme';
 
 export const useTheme = () => {
-  return useColorScheme() === 'dark' ? getDarkTheme() : getLightColor();
+  return useColorScheme() === 'dark' ? getDarkTheme() : getLightTheme();
 };
 
 export default useTheme;
