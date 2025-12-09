@@ -1,13 +1,14 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  View,
   ActivityIndicator,
+  StyleSheet,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { useTheme, useMainColors } from '../../theme';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
 interface Props extends CommonViewProps {
@@ -24,6 +25,8 @@ interface Props extends CommonViewProps {
   secondary?: boolean;
   isLoading?: boolean;
   noElevation?: boolean;
+  titleStyle?: TextStyle;
+  subtitleStyle?: TextStyle;
 }
 
 export const Button = (props: Props) => {
@@ -70,6 +73,7 @@ export const Button = (props: Props) => {
                     ? theme.txtColorOnPrimaryColor
                     : mainColors.txt,
               },
+              props.titleStyle,
             ]}
           >
             {props.title}
@@ -85,6 +89,7 @@ export const Button = (props: Props) => {
                     ? theme.txtColorOnPrimaryColor
                     : mainColors.txt,
               },
+              props.subtitleStyle,
             ]}
           >
             {props.subtitle}
