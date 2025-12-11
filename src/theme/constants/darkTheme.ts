@@ -3,6 +3,8 @@ import type Theme from '../models/Theme';
 const darkTheme: Theme = {
   bgColor: '#000',
   txtColor: '#fff',
+  txtGrayedOutColor: '#666',
+  inputBgColor: '#151515',
   placeholderColor: '#AAA',
   primaryTxtColor: '#149e77',
   primaryColor: '#0D8060',
