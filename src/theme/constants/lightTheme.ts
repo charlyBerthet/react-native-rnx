@@ -3,7 +3,6 @@ import type Theme from '../models/Theme';
 const lightTheme: Theme = {
   bgColor: '#fff',
   txtColor: '#000',
-  txtGrayedOutColor: '#888',
   inputBgColor: '#eee',
   placeholderColor: '#888',
   primaryTxtColor: '#055640',

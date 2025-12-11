@@ -1,7 +1,6 @@
 export default interface Theme {
   bgColor: string;
   txtColor: string;
-  txtGrayedOutColor: string;
   inputBgColor: string;
   placeholderColor: string;
   primaryColor: string;
