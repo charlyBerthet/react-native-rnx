@@ -35,7 +35,12 @@ export const Card = (props: Props) => {
           {props.subdetail}
         </Text>
         {props.hideActionButtons !== true && (
-          <View style={styles.btns}>
+          <View
+            style={[
+              styles.btns,
+              props.hidePrimaryActionButton === true && styles.btnsNoMarginTop,
+            ]}
+          >
             {props.hidePrimaryActionButton !== true && (
               <TouchableOpacity
                 onPress={props.onPrimaryButtonPress}
@@ -120,6 +125,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 3,
     marginBottom: -3,
+  },
+
+  btnsNoMarginTop: {
+    marginTop: -3,
   },
   btn: {
     paddingVertical: 6,
