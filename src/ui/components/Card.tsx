@@ -61,7 +61,12 @@ export const Card = (props: Props) => {
             )}
             <TouchableOpacity
               onPress={props.onSecondaryButtonPress}
-              style={[styles.btn, styles.btnRight]}
+              style={[
+                styles.btn,
+                styles.btnRight,
+                props.hidePrimaryActionButton === true &&
+                  styles.btnNoPaddingHorizontal,
+              ]}
             >
               <Text style={[styles.btnLabel, { color: theme.primaryTxtColor }]}>
                 {props.secondaryButtonLabel}
@@ -120,6 +125,9 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 25,
     borderRadius: 4,
+  },
+  btnNoPaddingHorizontal: {
+    paddingHorizontal: 0,
   },
   btnRight: {
     paddingRight: 5,
