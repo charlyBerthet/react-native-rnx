@@ -14,4 +14,5 @@ export interface CardModel {
   isPremiumRequired?: boolean;
   style?: StyleProp<ViewStyle> | StyleProp<ViewStyle>[];
   premiumElement?: React.ReactNode;
+  hideActionButtons?: boolean;
 }

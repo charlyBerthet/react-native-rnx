@@ -34,34 +34,39 @@ export const Card = (props: Props) => {
         <Text style={[styles.subdetail, { color: theme.txtColor }]}>
           {props.subdetail}
         </Text>
-        <View style={styles.btns}>
-          <TouchableOpacity
-            onPress={props.onPrimaryButtonPress}
-            style={[styles.btn, { backgroundColor: theme.primaryColor }]}
-          >
-            <Text
-              style={[styles.btnLabel, { color: theme.txtColorOnPrimaryColor }]}
+        {props.hideActionButtons !== true && (
+          <View style={styles.btns}>
+            <TouchableOpacity
+              onPress={props.onPrimaryButtonPress}
+              style={[styles.btn, { backgroundColor: theme.primaryColor }]}
             >
-              {props.primaryButtonLabel}
-            </Text>
-            {props.isPremiumRequired &&
-              !isPremium &&
-              (props.premiumElement || (
-                <Image
-                  source={require('@assets/images/premium-gold.png')}
-                  style={styles.premiumIcon}
-                />
-              ))}
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={props.onSecondaryButtonPress}
-            style={[styles.btn, styles.btnRight]}
-          >
-            <Text style={[styles.btnLabel, { color: theme.primaryTxtColor }]}>
-              {props.secondaryButtonLabel}
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={[
+                  styles.btnLabel,
+                  { color: theme.txtColorOnPrimaryColor },
+                ]}
+              >
+                {props.primaryButtonLabel}
+              </Text>
+              {props.isPremiumRequired &&
+                !isPremium &&
+                (props.premiumElement || (
+                  <Image
+                    source={require('@assets/images/premium-gold.png')}
+                    style={styles.premiumIcon}
+                  />
+                ))}
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={props.onSecondaryButtonPress}
+              style={[styles.btn, styles.btnRight]}
+            >
+              <Text style={[styles.btnLabel, { color: theme.primaryTxtColor }]}>
+                {props.secondaryButtonLabel}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
       <Image source={props.image} style={styles.image} resizeMode="contain" />
     </TouchableOpacity>
