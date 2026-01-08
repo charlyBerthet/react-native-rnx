@@ -36,27 +36,29 @@ export const Card = (props: Props) => {
         </Text>
         {props.hideActionButtons !== true && (
           <View style={styles.btns}>
-            <TouchableOpacity
-              onPress={props.onPrimaryButtonPress}
-              style={[styles.btn, { backgroundColor: theme.primaryColor }]}
-            >
-              <Text
-                style={[
-                  styles.btnLabel,
-                  { color: theme.txtColorOnPrimaryColor },
-                ]}
+            {props.hidePrimaryActionButton !== true && (
+              <TouchableOpacity
+                onPress={props.onPrimaryButtonPress}
+                style={[styles.btn, { backgroundColor: theme.primaryColor }]}
               >
-                {props.primaryButtonLabel}
-              </Text>
-              {props.isPremiumRequired &&
-                !isPremium &&
-                (props.premiumElement || (
-                  <Image
-                    source={require('@assets/images/premium-gold.png')}
-                    style={styles.premiumIcon}
-                  />
-                ))}
-            </TouchableOpacity>
+                <Text
+                  style={[
+                    styles.btnLabel,
+                    { color: theme.txtColorOnPrimaryColor },
+                  ]}
+                >
+                  {props.primaryButtonLabel}
+                </Text>
+                {props.isPremiumRequired &&
+                  !isPremium &&
+                  (props.premiumElement || (
+                    <Image
+                      source={require('@assets/images/premium-gold.png')}
+                      style={styles.premiumIcon}
+                    />
+                  ))}
+              </TouchableOpacity>
+            )}
             <TouchableOpacity
               onPress={props.onSecondaryButtonPress}
               style={[styles.btn, styles.btnRight]}
