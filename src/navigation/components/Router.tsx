@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import type { NavigationContainerRef } from '@react-navigation/native';
 import {
   NavigationContainer,
-  NavigationContainerRef,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
 import * as React from 'react';
