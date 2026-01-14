@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import type { NavigationContainerRef } from '@react-navigation/native';
 import {
   NavigationContainer,
   getFocusedRouteNameFromRoute,
@@ -25,9 +24,7 @@ const Tab = createBottomTabNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
-  navigationRef?: React.RefObject<
-    NavigationContainerRef<ReactNavigation.RootParamList>
-  >;
+  navigationRef?: React.RefObject<any>;
   tabs: {
     [name: string]: {
       screens: Screen[];
