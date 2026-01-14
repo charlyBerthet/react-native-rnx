@@ -1,29 +1,31 @@
-import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  useColorScheme,
-  TextStyle,
-  StyleProp,
-  Text,
-  Dimensions,
-  Platform,
-} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   NavigationContainer,
+  NavigationContainerRef,
   getFocusedRouteNameFromRoute,
 } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import * as React from 'react';
+import {
+  Dimensions,
+  Platform,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  useColorScheme,
+} from 'react-native';
 
-import type Screen from '../models/Screen';
-import { Stack } from './Stack';
 import useTheme from '../../theme/hooks/useTheme';
 import { BottomSheet } from '../../ui/components/BottomSheet';
+import type Screen from '../models/Screen';
+import { Stack } from './Stack';
 
 const Tab = createBottomTabNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
+  navigationRef?: React.RefObject<NavigationContainerRef<any>>;
   tabs: {
     [name: string]: {
       screens: Screen[];
@@ -73,6 +75,7 @@ export const Router = (props: Props) => {
     <>
       <View style={[styles.root, { backgroundColor: theme.bgColor }]}>
         <NavigationContainer
+          ref={props.navigationRef}
           theme={{
             dark: isDarkTheme,
             colors: {
