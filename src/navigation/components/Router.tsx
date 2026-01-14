@@ -25,7 +25,9 @@ const Tab = createBottomTabNavigator();
 
 interface Props {
   hideTabLabels?: boolean;
-  navigationRef?: React.RefObject<NavigationContainerRef<any>>;
+  navigationRef?: React.RefObject<
+    NavigationContainerRef<ReactNavigation.RootParamList>
+  >;
   tabs: {
     [name: string]: {
       screens: Screen[];
