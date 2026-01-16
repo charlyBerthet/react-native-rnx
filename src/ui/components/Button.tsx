@@ -27,6 +27,7 @@ interface Props extends CommonViewProps {
   noElevation?: boolean;
   titleStyle?: TextStyle;
   subtitleStyle?: TextStyle;
+  titleMaxFontSizeMultiplier?: number | null;
 }
 
 export const Button = (props: Props) => {
@@ -63,6 +64,7 @@ export const Button = (props: Props) => {
       <View style={styles.titleWrapper}>
         {!!props.title && (
           <Text
+            maxFontSizeMultiplier={props.titleMaxFontSizeMultiplier}
             style={[
               styles.title,
               props.small && styles.titleSmall,
