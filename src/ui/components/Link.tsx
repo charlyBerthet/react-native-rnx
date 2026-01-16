@@ -1,11 +1,11 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
   ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useMainColors, useTheme } from '../../theme';
 import type CommonViewProps from '../models/CommonViewProps';
 
@@ -20,6 +20,7 @@ interface Props extends CommonViewProps {
   defaultTxtColorCode?: string;
   disabled?: boolean;
   isLoading?: boolean;
+  maxFontSizeMultiplier?: number | null | undefined;
 }
 
 export const Link = (props: Props) => {
@@ -57,6 +58,7 @@ export const Link = (props: Props) => {
       )}
       {!!props.title && (
         <Text
+          maxFontSizeMultiplier={props.maxFontSizeMultiplier}
           style={[
             styles.title,
             {
