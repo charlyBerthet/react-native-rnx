@@ -83,6 +83,7 @@ export const Button = (props: Props) => {
         )}
         {props.subtitle && (
           <Text
+            maxFontSizeMultiplier={props.titleMaxFontSizeMultiplier}
             style={[
               styles.subtitle,
               {
